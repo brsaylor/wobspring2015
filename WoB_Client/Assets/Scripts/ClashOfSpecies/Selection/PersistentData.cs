@@ -4,27 +4,23 @@ using System.Collections.Generic;
 
 public class PersistentData : MonoBehaviour {
 	private class UnitData {
-		string name;
-		string type;
-		int hp;
+		public string Name { get; set; }
+		public string Type { get; set; }
+		public int Hp { get; set; }
 	}
 
 	private class Defender {
-		string enemyName;
-		string enemyTerrain;
+		public string Name { get; set; }
+		public string Terrain { get; set; }
 
 	}
 
 	private class Attacker {
-
+		public string Name {get; set; } 
 	}
 
-	string enemyName;
-	string enemyTerrain;
-	ArrayList enemyUnitNames;
-	int[] enemyUnitBiomass;
-	ArrayList unitNames;
-	int[] unitBiomass;
+	Defender defenderInfo;
+	Attacker attackerInfo;
 
 	void Awake() {
 		DontDestroyOnLoad (this);
@@ -32,14 +28,15 @@ public class PersistentData : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		//set the user_id or username
+		//attackerInfo.Name = ;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
+	/*
 	public bool addUnit(string name) {
 		if (unitNames.Count == 5) {
 			print ("Only 5 unique species allowed");
@@ -47,6 +44,6 @@ public class PersistentData : MonoBehaviour {
 		}
 		unitNames.Add (name);
 		return true;
-	}
+	}*/
 
 }
