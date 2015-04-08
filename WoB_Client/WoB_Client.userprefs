@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClashOfSpecies\Selection\CreateScrollList.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClashOfSpecies\Main\MainController.cs">
     <Files>
-      <File FileName="Assets\Scripts\ClashOfSpecies\Selection\SampleToggle.cs" Line="9" Column="24" />
-      <File FileName="Assets\Scripts\ClashOfSpecies\Selection\ToggleGroupControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ClashOfSpecies\Selection\CreateScrollList.cs" Line="31" Column="22" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\PersistentData.cs" Line="35" Column="26" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" Line="84" Column="5" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\SampleToggle.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

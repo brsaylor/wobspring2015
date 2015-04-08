@@ -11,12 +11,12 @@ public class PlayerElement {
 	public bool isSelected;
 }
 
-public class CreateScrollList : MonoBehaviour {
+public class MainController : MonoBehaviour {
 	public GameObject sampleToggle;
 	public List<PlayerElement> playerList;
 	public Transform contentPanel;
-	string selectedPlayer;
-	string defendingTerrain;
+	string selectedPlayer = "";
+	string defendingTerrain = "";
     ToggleGroup toggleGroup = null;
 
 	void Awake() {
@@ -26,6 +26,12 @@ public class CreateScrollList : MonoBehaviour {
 	void Start () {
         toggleGroup = GameObject.FindGameObjectWithTag("ContentPanel").GetComponent<ToggleGroup>();
 		PopulateScrollView ();
+	}
+
+	void Update() {
+		if (defendingTerrain == "") {
+
+		}
 	}
 
 	//protocol does this
@@ -51,7 +57,30 @@ public class CreateScrollList : MonoBehaviour {
 	public void ToggleAction(SampleToggle toggle, bool state) {
 		selectedPlayer = state ? toggle.name : "";
 		defendingTerrain = state ? toggle.terrain : "";
-		Debug.Log (selectedPlayer);
-		Debug.Log (defendingTerrain);
+		//Debug.Log (selectedPlayer);
+		//Debug.Log (defendingTerrain);
+	}
+
+	public void EditDefense() {
+
+	}
+
+	public void AttackPlayer() {
+		if (selectedPlayer != "") {
+			PersistentData atkData = GameObject.Find("Attack Data").GetComponent<PersistentData>();
+			atkData.SetDefenderData(selectedPlayer, defendingTerrain);
+			Debug.Log(atkData.getDefenderName());
+			Debug.Log(atkData.getDefenderTerrain());
+		}
+	}
+
+	public void ReturnToLobby() {
+		GameObject go = GameObject.Find ("Attack Data");
+
+		if (go != null) {
+			Destroy(go);
+		}
+
+		//Game.LoadScene ("Lobby");
 	}
 }
