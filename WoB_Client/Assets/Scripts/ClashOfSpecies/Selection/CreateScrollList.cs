@@ -16,14 +16,15 @@ public class CreateScrollList : MonoBehaviour {
 	public List<PlayerElement> playerList;
 	public Transform contentPanel;
 	string selectedPlayer;
-	bool isSelected;
+	string defendingTerrain;
+    ToggleGroup toggleGroup = null;
 
 	void Awake() {
 	//	playerList = PopulatePlayerList ();
 	}
 
 	void Start () {
-		isSelected = true;
+        toggleGroup = GameObject.FindGameObjectWithTag("ContentPanel").GetComponent<ToggleGroup>();
 		PopulateScrollView ();
 	}
 
@@ -38,15 +39,19 @@ public class CreateScrollList : MonoBehaviour {
 			GameObject newToggle = Instantiate(sampleToggle) as GameObject;
 			SampleToggle toggle = newToggle.GetComponent<SampleToggle>();
 			toggle.label.text = playerElement.name;
+			toggle.name = playerElement.name;
 			toggle.terrain = playerElement.terrain;
 			toggle.toggle.isOn = playerElement.isSelected;
-			toggle.toggle.onValueChanged.AddListener(delegate {ToggleAction(playerElement.name);});
+			toggle.toggle.onValueChanged.AddListener((value) => ToggleAction(toggle, value));
+			toggle.toggle.group = toggleGroup;
 			newToggle.transform.SetParent(contentPanel);
 		}
 	}
 
-	public void ToggleAction(string s) {
-		Debug.Log (s);
-
+	public void ToggleAction(SampleToggle toggle, bool state) {
+		selectedPlayer = state ? toggle.name : "";
+		defendingTerrain = state ? toggle.terrain : "";
+		Debug.Log (selectedPlayer);
+		Debug.Log (defendingTerrain);
 	}
 }

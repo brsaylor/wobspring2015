@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\ClashOfSpecies\Selection\CreateScrollList.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Selection\PersistentData.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Selection\SampleToggle.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Selection\ToggleGroupControl.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\NavMeshAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAttributes.cs" />
