@@ -9,7 +9,6 @@ public class PlayerElement {
 	public string name;
 	public string terrain;
 	public bool isSelected;
-	public Toggle.ToggleEvent toggleEvent;
 }
 
 public class CreateScrollList : MonoBehaviour {
@@ -18,7 +17,6 @@ public class CreateScrollList : MonoBehaviour {
 	public Transform contentPanel;
 	string selectedPlayer;
 	bool isSelected;
-	public ToggleGroup listGroup;
 
 	void Awake() {
 	//	playerList = PopulatePlayerList ();
@@ -39,17 +37,16 @@ public class CreateScrollList : MonoBehaviour {
 		foreach (var playerElement in playerList) {
 			GameObject newToggle = Instantiate(sampleToggle) as GameObject;
 			SampleToggle toggle = newToggle.GetComponent<SampleToggle>();
-			Toggle info = newToggle.GetComponent<Toggle>();
 			toggle.label.text = playerElement.name;
 			toggle.terrain = playerElement.terrain;
-			info.isOn = playerElement.isSelected;
+			toggle.toggle.isOn = playerElement.isSelected;
+			toggle.toggle.onValueChanged.AddListener(delegate {ToggleAction(playerElement.name);});
 			newToggle.transform.SetParent(contentPanel);
 		}
 	}
 
 	public void ToggleAction(string s) {
 		Debug.Log (s);
-		Debug.Log ("TOGGLED");
 
 	}
 }
