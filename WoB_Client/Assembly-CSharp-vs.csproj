@@ -53,9 +53,9 @@
      <Compile Include="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Camera\CameraControl.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Camera\Spawner.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\ClashList.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Main\PersistentData.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\PreviewController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Main\SampleToggle.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\NavMeshAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" />

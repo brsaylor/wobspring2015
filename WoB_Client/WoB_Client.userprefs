@@ -2,10 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClashOfSpecies\Main\MainController.cs">
     <Files>
-      <File FileName="Assets\Scripts\ClashOfSpecies\Main\PersistentData.cs" Line="35" Column="26" />
-      <File FileName="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" Line="84" Column="5" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\PersistentData.cs" Line="155" Column="34" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" Line="76" Column="69" />
       <File FileName="Assets\Scripts\ClashOfSpecies\Main\SampleToggle.cs" Line="1" Column="1" />
       <File FileName="Assets\Game.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\PreviewController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -18,6 +18,8 @@ public class MainController : MonoBehaviour {
 	string selectedPlayer = "";
 	string defendingTerrain = "";
     ToggleGroup toggleGroup = null;
+	PreviewController pctrl;
+
 
 	void Awake() {
 	//	playerList = PopulatePlayerList ();
@@ -25,12 +27,18 @@ public class MainController : MonoBehaviour {
 
 	void Start () {
         toggleGroup = GameObject.FindGameObjectWithTag("ContentPanel").GetComponent<ToggleGroup>();
+		pctrl = gameObject.GetComponent<PreviewController> ();
 		PopulateScrollView ();
 	}
 
 	void Update() {
-		if (defendingTerrain == "") {
+		if (defendingTerrain != "") {
+			pctrl.display = Resources.Load ("Images/Acacia"/* + defendingTerrain*/) as Image;
 
+			pctrl.text.enabled = false;
+		} else {
+			pctrl.display = null;
+			pctrl.text.enabled = true;
 		}
 	}
 
@@ -61,16 +69,27 @@ public class MainController : MonoBehaviour {
 		//Debug.Log (defendingTerrain);
 	}
 
+	//load the defense shop scene
 	public void EditDefense() {
+		PersistentData persistentData = GameObject.Find("Persistent Data").GetComponent<PersistentData>();
+		persistentData.SetSceneType ("defense");
+		persistentData.SetDefenderId (persistentData.GetCurrentPlayer ());
 
+		Application.LoadLevel ("ClashShop");
 	}
 
 	public void AttackPlayer() {
 		if (selectedPlayer != "") {
-			PersistentData atkData = GameObject.Find("Attack Data").GetComponent<PersistentData>();
-			atkData.SetDefenderData(selectedPlayer, defendingTerrain);
-			Debug.Log(atkData.getDefenderName());
-			Debug.Log(atkData.getDefenderTerrain());
+			PersistentData persistentData = GameObject.Find("Persistent Data").GetComponent<PersistentData>();
+			persistentData.SetSceneType("offense");
+			persistentData.SetDefenderId(selectedPlayer);
+			persistentData.SetDefenderTerrain(defendingTerrain);
+			//Debug.Log(atkData.getDefenderName());
+			//Debug.Log(atkData.getDefenderTerrain());
+
+			persistentData.SetAttackerId(persistentData.GetCurrentPlayer());
+
+			Application.LoadLevel ("ClashShop");
 		}
 	}
 
@@ -81,6 +100,6 @@ public class MainController : MonoBehaviour {
 			Destroy(go);
 		}
 
-		//Game.LoadScene ("Lobby");
+		//Application.LoadScene ("Lobby");	//lobby scene
 	}
 }
