@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs">
+    <Files>
+      <File FileName="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs" Line="32" Column="5" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Camera\Spawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Unit\UnitAttributes.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ClashOfSpecies\Main\PersistentData.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Network/NetworkCode.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Network/Protocol/clash_of_species/ClashDefenseSetupProtocol.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Network/NetworkCode.cs" Line="70" Column="54" />
+      <File FileName="Assets/Scripts/Network/NetworkProtocolTable.cs" Line="49" Column="55" />
+>>>>>>> c6ca27ae916f86b1f773352ba19367a8f9d9ba3f
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

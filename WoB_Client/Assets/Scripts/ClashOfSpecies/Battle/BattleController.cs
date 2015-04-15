@@ -35,6 +35,7 @@ public class BattleController : MonoBehaviour {
 	GameObject CreateUnit() {
 
 		GameObject go = null ;
+		return null;
 	}
 
 	public bool IsEnemyDefeated() {
@@ -76,7 +77,7 @@ public class BattleController : MonoBehaviour {
 	}
 
 	public bool IsGameOver() {
-		return((IsAllUnitsDeployed () && IsAllyDefeated) || IsEnemyDefeated ());
+		return((IsAllUnitsDeployed () && IsAllyDefeated()) || IsEnemyDefeated ());
 	}
 
 	public void AddAllAllies() {

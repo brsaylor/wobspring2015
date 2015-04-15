@@ -12,13 +12,14 @@ public class PlayerElement {
 }
 
 public class MainController : MonoBehaviour {
-	public GameObject sampleToggle;
+	public GameObject playerToggle;
 	public List<PlayerElement> playerList;
 	public Transform contentPanel;
 	string selectedPlayer = "";
 	string defendingTerrain = "";
     ToggleGroup toggleGroup = null;
 	PreviewController pctrl;
+	GameObject required_object;
 
 
 	void Awake() {
@@ -26,6 +27,10 @@ public class MainController : MonoBehaviour {
 	}
 
 	void Start () {
+		required_object = GameObject.Find ("PersistentObject");
+		if (required_object == null) {
+			//instantiate the persistent object
+		}
         toggleGroup = GameObject.FindGameObjectWithTag("ContentPanel").GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<PreviewController> ();
 		PopulateScrollView ();
@@ -50,8 +55,8 @@ public class MainController : MonoBehaviour {
 
 	void PopulateScrollView() {
 		foreach (var playerElement in playerList) {
-			GameObject newToggle = Instantiate(sampleToggle) as GameObject;
-			SampleToggle toggle = newToggle.GetComponent<SampleToggle>();
+			GameObject newToggle = Instantiate(playerToggle) as GameObject;
+			PlayerToggle toggle = newToggle.GetComponent<PlayerToggle>();
 			toggle.label.text = playerElement.name;
 			toggle.name = playerElement.name;
 			toggle.terrain = playerElement.terrain;
@@ -62,7 +67,7 @@ public class MainController : MonoBehaviour {
 		}
 	}
 
-	public void ToggleAction(SampleToggle toggle, bool state) {
+	public void ToggleAction(PlayerToggle toggle, bool state) {
 		selectedPlayer = state ? toggle.name : "";
 		defendingTerrain = state ? toggle.terrain : "";
 		//Debug.Log (selectedPlayer);
