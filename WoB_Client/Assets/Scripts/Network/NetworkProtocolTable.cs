@@ -39,6 +39,14 @@ public class NetworkProtocolTable {
 		Add(NetworkCode.CONVERGE_HINT, "ConvergeHint");
 		Add(NetworkCode.CONVERGE_HINT_COUNT, "ConvergeHintCount");
 		Add(NetworkCode.CONVERGE_NEW_ATTEMPT_SCORE, "ConvergeNewAttemptScore");
+
+		Add(NetworkCode.CLASH_ENTRY, "ClashEntry");
+		Add(NetworkCode.CLASH_SPECIES_LIST, "ClashSpeciesList");
+		Add(NetworkCode.CLASH_DEFENSE_SETUP, "ClashDefenseSetup");
+		Add(NetworkCode.CLASH_PLAYER_LIST, "ClashPlayerList");
+		Add(NetworkCode.CLASH_PLAYER_VIEW, "ClashPlayerView");
+		Add(NetworkCode.CLASH_INITIATE_BATTLE, "ClashInitiateBattle");
+		Add(NetworkCode.CLASH_END_BATTLE, "ClashEndBattle");
 	}
 	
 	public static void Add(short protocol_id, string name) {

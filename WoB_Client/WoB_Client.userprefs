@@ -1,6 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Network/NetworkCode.cs">
     <Files>
       <File FileName="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs" Line="32" Column="5" />
       <File FileName="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" Line="1" Column="1" />
@@ -8,6 +10,9 @@
       <File FileName="Assets\Scripts\ClashOfSpecies\Unit\UnitAttributes.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ClashOfSpecies\Main\PersistentData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Network/Protocol/clash_of_species/ClashDefenseSetupProtocol.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Network/NetworkCode.cs" Line="70" Column="54" />
+      <File FileName="Assets/Scripts/Network/NetworkProtocolTable.cs" Line="49" Column="55" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
