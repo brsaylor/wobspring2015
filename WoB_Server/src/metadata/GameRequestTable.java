@@ -64,6 +64,14 @@ public class GameRequestTable {
         add(NetworkCode.CONVERGE_HINT, "convergegame.RequestConvergeHint");
         add(NetworkCode.CONVERGE_HINT_COUNT, "convergegame.RequestConvergeHintCount");
         add(NetworkCode.CONVERGE_NEW_ATTEMPT_SCORE, "convergegame.RequestConvergeNewAttemptScore");
+        
+        add(NetworkCode.CLASH_ENTRY, "clashgame.RequestClashEntry");
+        add(NetworkCode.CLASH_SPECIES_LIST, "clashgame.RequestClashSpeciesList");
+        add(NetworkCode.CLASH_DEFENSE_SETUP, "clashgame.RequestClashDefenseSetup");
+        add(NetworkCode.CLASH_PLAYER_LIST, "clashgame.RequestClashPlayerList");
+        add(NetworkCode.CLASH_PLAYER_VIEW, "clashgame.RequestClashPlayerView");
+        add(NetworkCode.CLASH_INITIATE_BATTLE, "clashgame.RequestClashInitiateBattle");
+        add(NetworkCode.CLASH_END_BATTLE, "clashgame.RequestClashEndBattle");
 
         Log.println("Done!");
     }
