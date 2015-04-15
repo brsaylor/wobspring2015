@@ -33,7 +33,7 @@ public class MainController : MonoBehaviour {
 
 	void Update() {
 		if (defendingTerrain != "") {
-			pctrl.display = Resources.Load ("Images/Acacia"/* + defendingTerrain*/) as Image;
+			//pctrl.display = Resources.Load ("Images\\Acacia"/* + defendingTerrain*/, typeof(Image));
 
 			pctrl.text.enabled = false;
 		} else {

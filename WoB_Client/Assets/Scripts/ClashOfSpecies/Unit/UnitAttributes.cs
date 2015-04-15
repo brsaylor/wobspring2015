@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class UnitAttributes : MonoBehaviour {
+	public string name;
 	public int unitHP;
 	public int unitAttack;
 	public string animalType; // carnivore, herbivore, omnivore, plant
@@ -22,6 +23,14 @@ public class UnitAttributes : MonoBehaviour {
 
 	void TakeDamage(int damage) {
 		unitHP -= damage;
+	}
+
+	public string GetName() {
+		return name;
+	}
+
+	public void SetName(string name) {
+		this.name = name;
 	}
 
 	public int GetUnitHP() {

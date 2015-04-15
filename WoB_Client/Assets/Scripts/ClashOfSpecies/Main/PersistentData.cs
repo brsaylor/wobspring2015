@@ -8,6 +8,7 @@ public class UnitData {
 	public string type;
 	public int hp;
 	public Vector3 location;
+	public bool isDeployed;
 
 	public string ToString() {
 		return "species_id: " + species_id + " Type: " + type + " Biomass: " + hp;
@@ -93,6 +94,7 @@ public class PersistentData : MonoBehaviour {
 		ud.species_id = species_id;
 		ud.type = type;
 		ud.hp = hp;
+		ud.isDeployed = false;
 
 		if (type == "offense")
 			this.attackerInfo.offense.Add (ud);
@@ -109,10 +111,6 @@ public class PersistentData : MonoBehaviour {
 			return -1;
 	}
 
-	public bool RemoveFromUnitList(string id) {
-		return this.defenderInfo.defense.Remove (new UnitData(){species_id = id});
-	}
-	
 	/******************************/
 
 	public string GetDefenderId() {
