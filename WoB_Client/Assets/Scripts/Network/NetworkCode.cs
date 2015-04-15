@@ -60,4 +60,12 @@
 	public static readonly short CONVERGE_HINT = 150;
 	public static readonly short CONVERGE_HINT_COUNT = 151;
 	public static readonly short CONVERGE_NEW_ATTEMPT_SCORE = 152;
+
+	public static readonly short CLASH_ENTRY = 153;
+	public static readonly short CLASH_SPECIES_LIST = 154;
+	public static readonly short CLASH_DEFENSE_SETUP = 155;
+	public static readonly short CLASH_PLAYER_LIST = 156;
+	public static readonly short CLASH_PLAYER_VIEW = 157;
+	public static readonly short CLASH_INITIATE_BATTLE = 158;
+	public static readonly short CLASH_END_BATTLE = 159;
 }
