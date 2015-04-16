@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ClashOfSpecies\Main\MainController.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\UnityGUIExamples-master\Tabs\Assets\Editor\TabControlInspector.cs">
     <Files>
-      <File FileName="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" Line="60" Column="1" />
-      <File FileName="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ClashOfSpecies\Main\PlayerToggle.cs" Line="5" Column="20" />
+      <File FileName="..\..\UnityGUIExamples-master\Tabs\Assets\TabControl.cs" Line="43" Column="10" />
+      <File FileName="..\..\UnityGUIExamples-master\Tabs\Assets\Editor\TabControlInspector.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

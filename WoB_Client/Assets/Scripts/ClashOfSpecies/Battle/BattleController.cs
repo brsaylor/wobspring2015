@@ -11,7 +11,7 @@ public class BattleController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		required_object = GameObject.Find ("PersistentObject");
+		required_object = GameObject.Find ("Persistent Object");
 		if (required_object != null) {
 			data = required_object.GetComponent ("AttackingData") as PersistentData;
 
