@@ -5,9 +5,9 @@
  */
 package net.response.clashgame;
 
+import java.util.ArrayList;
 import metadata.NetworkCode;
 import net.response.GameResponse;
-import static net.response.ResponseLogin.SUCCESS;
 import util.GamePacket;
 
 /**
@@ -15,10 +15,21 @@ import util.GamePacket;
  * @author lev
  */
 public class ResponseClashEntry extends GameResponse{
-    boolean isNewClashPlayer;
+    private boolean isNewClashPlayer;
+    private ArrayList<BattleElementData> defenseList;
+    private int defenseTerrainID;
+
+    public void setDefenseTerrainID(int defenseTerrainID) {
+        this.defenseTerrainID = defenseTerrainID;
+    }
 
     public void setNewClashPlayer(boolean isNewClashPlayer) {
         this.isNewClashPlayer = isNewClashPlayer;
+        this.defenseList = new ArrayList<>();
+    }
+    
+    public void addNewDefenseSpecies(BattleElementData data){
+        defenseList.add(data);
     }
     
     //TODO: when ClashSetup class implemented, pass it to the
@@ -31,8 +42,23 @@ public class ResponseClashEntry extends GameResponse{
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
         packet.addBoolean(isNewClashPlayer);
+        if(!isNewClashPlayer){
+            packet.addInt32(defenseTerrainID);
+            packet.addInt32(defenseList.size());
+            for(BattleElementData d : defenseList){
+                packet.addInt32(d.speciesID);
+                packet.addFloat(d.x);
+                packet.addFloat(d.y);
+            }
+        }
 
         return packet.getBytes();
     }
-    
+}
+
+//probably temporary, so we can get the protocol to work
+class BattleElementData{
+    public int speciesID;
+    public float x;
+    public float y;
 }
