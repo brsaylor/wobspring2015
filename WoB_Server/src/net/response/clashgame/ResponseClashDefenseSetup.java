@@ -15,6 +15,12 @@ import util.GamePacket;
  */
 public class ResponseClashDefenseSetup extends GameResponse{
 
+    private boolean validSetup;
+
+    public void setValidSetup(boolean validSetup) {
+        this.validSetup = validSetup;
+    }
+    
     public ResponseClashDefenseSetup(){
         response_id = NetworkCode.CLASH_DEFENSE_SETUP;
     }
@@ -22,6 +28,7 @@ public class ResponseClashDefenseSetup extends GameResponse{
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
+        packet.addBoolean(validSetup);
         return packet.getBytes();
     }
     

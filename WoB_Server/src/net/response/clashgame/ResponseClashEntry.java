@@ -5,6 +5,7 @@
  */
 package net.response.clashgame;
 
+import clashofspecies.BattleElementData;
 import java.util.ArrayList;
 import metadata.NetworkCode;
 import net.response.GameResponse;
@@ -56,9 +57,3 @@ public class ResponseClashEntry extends GameResponse{
     }
 }
 
-//probably temporary, so we can get the protocol to work
-class BattleElementData{
-    public int speciesID;
-    public float x;
-    public float y;
-}
