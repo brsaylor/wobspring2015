@@ -4,14 +4,15 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class UnitData {
-	public string species_id;
-	public string type;
+	public string species_name;
+	public int species_id;
+	public string prefabName; //carnivore, herbi, omni, plant1, plant2, etc
 	public int hp;
 	public Vector3 location;
 	public bool isDeployed;
 
 	public string ToString() {
-		return "species_id: " + species_id + " Type: " + type + " Biomass: " + hp;
+		return "species_id: " + species_id + " Prefab: " + prefabName + " Biomass: " + hp;
 	}
 
 	public bool Equals(UnitData other) {

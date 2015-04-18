@@ -120,6 +120,13 @@
      <Compile Include="Assets\Scripts\Network\NetworkRequest.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkResponse.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ChartProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashDefenseSetupProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashEndBattleProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashEntryProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashInitiateBattleProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashPlayerListProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashPlayerViewProtocol.cs" />
+     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashSpeciesListProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ClientProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ConvergeEcosystemsProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ConvergeHintCountProtocol.cs" />
@@ -180,7 +187,7 @@
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.Sqlite">
- <HintPath>C:/Users/Ben/Documents/SFSU/831 Multiplayer Game Development/git/wobspring2015/WoB_Client/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ <HintPath>C:/Users/Azusa/Desktop/wobspring2015/WoB_Client/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
