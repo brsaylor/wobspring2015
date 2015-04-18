@@ -29,8 +29,7 @@ public class MainController : MonoBehaviour {
 	void Start () {
 		required_object = GameObject.Find ("Persistent Object");
 		if (required_object == null) {
-			//instantiate the persistent object
-			print ("NULL");
+			Application.LoadLevel ("ClashSplash");
 		}
         toggleGroup = GameObject.FindGameObjectWithTag("ContentPanel").GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<PreviewController> ();

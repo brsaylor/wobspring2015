@@ -3,9 +3,10 @@ using System.Collections;
 
 public class UnitAttributes : MonoBehaviour {
 	public string name;
+	public int id;
 	public int unitHP;
 	public int unitAttack;
-	public string animalType; // carnivore, herbivore, omnivore, plant
+	public string prefabName; // carnivore, herbivore, omnivore, plant
 	public float moveSpeed;
 	public float attackRange; //distance apart from target to attack
 	public float attackSpeed; //attacking interval 1 attack per attackSpeed seconds
@@ -73,11 +74,11 @@ public class UnitAttributes : MonoBehaviour {
 		this.attackSpeed = attSpeed;
 	}
 
-	public string GetAnimalType() {
-		return this.animalType;
+	public string GetPrefabName() {
+		return this.prefabName;
 	}
 
-	public void SetAnimalType(string s) {
-		this.animalType = s;
+	public void SetPrefabName(string s) {
+		this.prefabName = s;
 	}
 }
