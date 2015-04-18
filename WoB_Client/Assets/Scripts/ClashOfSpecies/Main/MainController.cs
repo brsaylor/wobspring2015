@@ -23,7 +23,7 @@ public class MainController : MonoBehaviour {
 
 
 	void Awake() {
-	//	playerList = PopulatePlayerList ();
+		//	playerList = RetrievePlayerList ();
 	}
 
 	void Start () {
@@ -37,19 +37,21 @@ public class MainController : MonoBehaviour {
 	}
 
 	void Update() {
+/*
 		if (defendingTerrain != "") {
-			//pctrl.display = Resources.Load ("Images\\Acacia"/* + defendingTerrain*/, typeof(Image));
+			//pctrl.display = Resources.Load ("Images\\Acacia" + defendingTerrain, typeof(Image));
 
 			pctrl.text.enabled = false;
 		} else {
 			pctrl.display = null;
 			pctrl.text.enabled = true;
 		}
+	*/
 	}
 
 	//protocol does this
 	//gets only the player name and terrain name from the valid defense table
-	List<PlayerElement> PopulatePlayerList() {
+	List<PlayerElement> RetrievePlayerList() {
 		return new List<PlayerElement>();
 	}
 
@@ -70,6 +72,8 @@ public class MainController : MonoBehaviour {
 	public void ToggleAction(PlayerToggle toggle, bool state) {
 		selectedPlayer = state ? toggle.name : "";
 		defendingTerrain = state ? toggle.terrain : "";
+		pctrl.text.enabled = !state;
+		//pctrl.display = state ? Resources.Load("", typeof(Sprite)) : null;
 		//Debug.Log (selectedPlayer);
 		//Debug.Log (defendingTerrain);
 	}
