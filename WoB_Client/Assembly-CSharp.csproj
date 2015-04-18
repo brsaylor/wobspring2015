@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SpeciesButton.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\TabControl.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\TerrianButton.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\SplashController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\NavMeshAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAttributes.cs" />
@@ -120,13 +121,6 @@
      <Compile Include="Assets\Scripts\Network\NetworkRequest.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkResponse.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ChartProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashDefenseSetupProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashEndBattleProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashEntryProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashInitiateBattleProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashPlayerListProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashPlayerViewProtocol.cs" />
-     <Compile Include="Assets\Scripts\Network\Protocol\ClashOfSpecies\ClashSpeciesListProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ClientProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ConvergeEcosystemsProtocol.cs" />
      <Compile Include="Assets\Scripts\Network\Protocol\ConvergeHintCountProtocol.cs" />

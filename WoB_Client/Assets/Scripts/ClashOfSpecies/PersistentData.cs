@@ -60,6 +60,7 @@ public class Attacker {
 
 public class PersistentData : MonoBehaviour {
 	public string current_player;
+	public int player_id;
 	public string type;	//is data for offense setup scene or defense setup scene
 	public Defender defenderInfo;
 	public Attacker attackerInfo;
@@ -82,6 +83,14 @@ public class PersistentData : MonoBehaviour {
 		current_player = s;
 	}
 
+	public int GetPlayerId() {
+		return player_id;
+	}
+	
+	public void SetPlayerId(int i) {
+		player_id = i;
+	}
+
 	public string GetSceneType() {
 		return type;
 	}
@@ -90,10 +99,11 @@ public class PersistentData : MonoBehaviour {
 		type = s;
 	}
 
-	public void AddToUnitList(string species_id, string type, int hp) {
+	public void AddToUnitList(string species_name, int species_id, string prefabName, int hp) {
 		UnitData ud = new UnitData ();
+		ud.species_name = species_name;
 		ud.species_id = species_id;
-		ud.type = type;
+		ud.prefabName = prefabName;
 		ud.hp = hp;
 		ud.isDeployed = false;
 
