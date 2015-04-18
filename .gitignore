@@ -1,5 +1,6 @@
 .DS_Store
 */nbproject/
+.svn/
 
 # =============== #
 # Unity generated #
@@ -32,3 +33,4 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
+/*.class

@@ -1,9 +1,11 @@
 package clashofspecies;
 
+import java.sql.Timestamp;
+
 public interface BattleAction {
   public int playerId;
-  public LocalTime when();
-  public Object data();
+  public Timestamp when;
+  public 
+
   public String toString();
-  public void execute(attackConfig, defenseConfig);
 }
