@@ -1,6 +1,7 @@
 .DS_Store
 */nbproject/
-.svn/
+WoB_Server/.svn/
+WoB_Client/.svn/
 
 # Exclude files with login credentials
 WoB_Server/conf/db.conf*
