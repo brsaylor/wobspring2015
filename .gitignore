@@ -2,6 +2,10 @@
 */nbproject/
 .svn/
 
+# Exclude files with login credentials
+WoB_Server/conf/db.conf*
+WoB_Server/src/simulation/config/webserviceLogin.properties 
+
 # =============== #
 # Unity generated #
 # =============== #
