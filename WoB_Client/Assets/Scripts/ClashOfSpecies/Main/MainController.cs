@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class PlayerElement {
+	public int id;
 	public string name;
 	public string terrain;
 	public bool isSelected;
@@ -28,9 +29,9 @@ public class MainController : MonoBehaviour {
 
 	void Start () {
 		required_object = GameObject.Find ("Persistent Object");
-		if (required_object == null) {
+/*		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
-		}
+		}*/
         toggleGroup = GameObject.FindGameObjectWithTag("ContentPanel").GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<PreviewController> ();
 		PopulateScrollView ();
@@ -60,7 +61,8 @@ public class MainController : MonoBehaviour {
 			GameObject newToggle = Instantiate(playerToggle) as GameObject;
 			PlayerToggle toggle = newToggle.GetComponent<PlayerToggle>();
 			toggle.label.text = playerElement.name;
-			toggle.name = playerElement.name;
+			toggle.player_name = playerElement.name;
+			toggle.player_id = playerElement.id;
 			toggle.terrain = playerElement.terrain;
 			toggle.toggle.isOn = playerElement.isSelected;
 			toggle.toggle.onValueChanged.AddListener((value) => ToggleAction(toggle, value));
@@ -82,7 +84,7 @@ public class MainController : MonoBehaviour {
 	public void EditDefense() {
 		PersistentData persistentData = GameObject.Find("Persistent Data").GetComponent<PersistentData>();
 		persistentData.SetSceneType ("defense");
-		persistentData.SetDefenderId (persistentData.GetCurrentPlayer ());
+		persistentData.SetDefenderId (persistentData.GetPlayerId ());
 
 		Application.LoadLevel ("ClashShop");
 	}
@@ -91,12 +93,13 @@ public class MainController : MonoBehaviour {
 		if (selectedPlayer != "") {
 			PersistentData persistentData = GameObject.Find("Persistent Data").GetComponent<PersistentData>();
 			persistentData.SetSceneType("offense");
-			persistentData.SetDefenderId(selectedPlayer);
+			persistentData.SetDefenderName(selectedPlayer);
 			persistentData.SetDefenderTerrain(defendingTerrain);
 			//Debug.Log(atkData.getDefenderName());
 			//Debug.Log(atkData.getDefenderTerrain());
 
-			persistentData.SetAttackerId(persistentData.GetCurrentPlayer());
+			persistentData.SetAttackerName(persistentData.GetPlayerName());
+			persistentData.SetAttackerId(persistentData.GetPlayerId());
 
 			Application.LoadLevel ("ClashShop");
 		}

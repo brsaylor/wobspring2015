@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class UnitAttributes : MonoBehaviour {
-	public string name;
+	public string unit_name;
 	public int id;
 	public int unitHP;
 	public int unitAttack;
@@ -27,11 +27,11 @@ public class UnitAttributes : MonoBehaviour {
 	}
 
 	public string GetName() {
-		return name;
+		return unit_name;
 	}
 
-	public void SetName(string name) {
-		this.name = name;
+	public void SetName(string unit_name) {
+		this.unit_name = unit_name;
 	}
 
 	public int GetUnitHP() {
