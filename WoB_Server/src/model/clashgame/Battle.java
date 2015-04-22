@@ -1,4 +1,4 @@
-package model;
+package model.clashgame;
 
 import java.sql.Date;
 

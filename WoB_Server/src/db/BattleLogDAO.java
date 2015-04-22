@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 // Other Imports
-import model.BattleLog;
+import model.clashgame.BattleLog;
 import util.Log;
 
 /**

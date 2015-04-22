@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 // Other Imports
-import model.Battle;
+import model.clashgame.Battle;
 import util.Log;
 
 /**

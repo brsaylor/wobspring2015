@@ -21,7 +21,7 @@ import util.Log;
 public class RequestClashDefenseSetup extends GameRequest{
 
     private int setupTerrainID;
-    private ArrayList<BattleElementData> defenseList = new ArrayList<>();
+    private ArrayList<BattleElementData> defenseList = new ArrayList<BattleElementData>();
 
     
     @Override
