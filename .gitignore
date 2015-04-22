@@ -45,3 +45,4 @@ WoB_Server/.idea/workspace.xml
 /nbproject/private/
 /build/
 /WoB_Server/build/
+*.csproj
