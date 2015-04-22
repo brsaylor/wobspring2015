@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 // Other Imports
 
-import model.DefenceConfig;
+import model.clashgame.DefenceConfig;
 import util.Log;
 
 /**

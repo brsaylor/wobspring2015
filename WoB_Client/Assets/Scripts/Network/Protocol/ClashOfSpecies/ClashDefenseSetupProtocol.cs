@@ -9,7 +9,7 @@ public class ClashDefenseSetupProtocol {
 		request.AddInt32(terrainID);
 		request.AddInt32(setup.Count);
 		foreach(UnitData ud in setup){
-			request.AddInt32(ud.species_id as int);
+			request.AddInt32(ud.species_id);
 			request.AddFloat(ud.location.x);
 			request.AddFloat(ud.location.y);
 		}

@@ -5,11 +5,16 @@
  */
 package net.response.clashgame;
 
-import clashofspecies.BattleElementData;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javafx.util.Pair;
 import metadata.NetworkCode;
 import net.response.GameResponse;
 import util.GamePacket;
+import util.Vector2;
+
 
 /**
  *
@@ -17,7 +22,7 @@ import util.GamePacket;
  */
 public class ResponseClashEntry extends GameResponse{
     private boolean isNewClashPlayer;
-    private ArrayList<BattleElementData> defenseList;
+    private HashMap<Integer, Vector2<Float>> configMap;
     private int defenseTerrainID;
 
     public void setDefenseTerrainID(int defenseTerrainID) {
@@ -26,17 +31,18 @@ public class ResponseClashEntry extends GameResponse{
 
     public void setNewClashPlayer(boolean isNewClashPlayer) {
         this.isNewClashPlayer = isNewClashPlayer;
-        this.defenseList = new ArrayList<>();
+
     }
     
-    public void addNewDefenseSpecies(BattleElementData data){
-        defenseList.add(data);
+    public void addNewSpecies(int speciesId, Vector2<Float> position){
+        this.configMap.put(speciesId, position);
     }
     
     //TODO: when ClashSetup class implemented, pass it to the
     //constructor as well
     public ResponseClashEntry(){
-        response_id = NetworkCode.CLASH_ENTRY;
+        this.response_id = NetworkCode.CLASH_ENTRY;
+        this.configMap = new HashMap<Integer, Vector2<Float>>();
     }
 
     @Override
@@ -45,14 +51,13 @@ public class ResponseClashEntry extends GameResponse{
         packet.addBoolean(isNewClashPlayer);
         if(!isNewClashPlayer){
             packet.addInt32(defenseTerrainID);
-            packet.addInt32(defenseList.size());
-            for(BattleElementData d : defenseList){
-                packet.addInt32(d.speciesID);
-                packet.addFloat(d.x);
-                packet.addFloat(d.y);
+            packet.addInt32(configMap.size());
+            for(Map.Entry<Integer, Vector2<Float>> d : configMap.entrySet()){
+                packet.addInt32(d.getKey());
+                packet.addFloat(d.getValue().getX());
+                packet.addFloat(d.getValue().getY());
             }
         }
-
         return packet.getBytes();
     }
 }

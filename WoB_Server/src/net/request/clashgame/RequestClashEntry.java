@@ -34,6 +34,8 @@ public class RequestClashEntry extends GameRequest{
             isNewClashPlayer = false;
         }*/
         
+        
+        
         ResponseClashEntry response = new ResponseClashEntry();
         response.setNewClashPlayer(isNewClashPlayer);
         if(!isNewClashPlayer){
