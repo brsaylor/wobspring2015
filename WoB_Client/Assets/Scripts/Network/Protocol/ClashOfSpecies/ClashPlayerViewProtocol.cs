@@ -23,7 +23,7 @@ public class ClashPlayerViewProtocol {
 			float y = DataReader.ReadFloat(dataStream);
 
 			UnitData unit = new UnitData();
-			unit.species_id = "" + species; //weird, but UnitData expects string type
+			unit.species_id = species; //weird, but UnitData expects string type
 			unit.location = new Vector3(x, y, 0); //
 			response.defenseSpecies.Add(unit);
 		}

@@ -27,7 +27,7 @@ public class ClashEntryProtocol {
 				float y = DataReader.ReadFloat(dataStream);
 
 				UnitData unit = new UnitData();
-				unit.species_id = "" + species_id; //weird, but UnitData expects string type
+				unit.species_id = species_id;
 				unit.location = new Vector3(x, y, 0); //
 				response.config.Add(unit);
 			}
