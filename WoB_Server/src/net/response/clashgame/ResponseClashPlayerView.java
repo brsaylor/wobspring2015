@@ -5,12 +5,15 @@
  */
 package net.response.clashgame;
 
-import clashofspecies.BattleElementData;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import metadata.NetworkCode;
 import model.Player;
 import net.response.GameResponse;
 import util.GamePacket;
+import util.Vector2;
 
 /**
  *
@@ -20,6 +23,12 @@ public class ResponseClashPlayerView extends GameResponse{
 
     private int defenseConfigID;
     private int terrainID;
+    private HashMap<Integer, Vector2<Float>> configMap;
+
+    public ResponseClashPlayerView(){
+        response_id = NetworkCode.CLASH_PLAYER_VIEW;
+        configMap = new HashMap<Integer, Vector2<Float>>();
+    }
 
     public void setDefenseConfigID(int defenseConfigID) {
         this.defenseConfigID = defenseConfigID;
@@ -28,37 +37,23 @@ public class ResponseClashPlayerView extends GameResponse{
     public void setTerrainID(int terrainID) {
         this.terrainID = terrainID;
     }
-    private ArrayList<BattleElementData> defenseList;
-    
-    /*
-    private Player player;
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }//*/
-    
-    public void addNewDefenseSpecies(BattleElementData data){
-        defenseList.add(data);
+    public void addNewDefenseSpecies(int speciesId, Vector2<Float> position){
+        configMap.put(speciesId, position);
     }
-    
-    public ResponseClashPlayerView(){
-        response_id = NetworkCode.CLASH_PLAYER_VIEW;
-        defenseList = new ArrayList<BattleElementData>();
-    }
-    
+
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
         //packet.addInt32(player.getID());
         packet.addInt32(defenseConfigID);
         packet.addInt32(terrainID);
-        packet.addInt32(defenseList.size());
-        for(BattleElementData bed : defenseList){
-            packet.addInt32(bed.speciesID);
-            packet.addFloat(bed.x);
-            packet.addFloat(bed.y);
+        packet.addInt32(configMap.size());
+        for(Map.Entry<Integer, Vector2<Float>> bed : configMap.entrySet()) {
+            packet.addInt32(bed.getKey());
+            packet.addFloat(bed.getValue().getX());
+            packet.addFloat(bed.getValue().getY());
         }
-        
         return packet.getBytes();
     }
     

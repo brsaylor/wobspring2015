@@ -27,6 +27,7 @@ obj/
 *.user
 *.unityproj
 *.booproj
+WoB_Server/.idea/
 
 # ============ #
 # OS generated #
@@ -39,3 +40,4 @@ obj/
 ehthumbs.db
 Thumbs.db
 /*.class
+*.class
