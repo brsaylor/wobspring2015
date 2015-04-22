@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [Serializable]
-public class TabControlEntry {
+public class ClashTabControlEntry {
 	[SerializeField]
 	private GameObject panel = null;
 	public GameObject Panel { get { return panel; } }
@@ -15,13 +15,13 @@ public class TabControlEntry {
 	public Button Tab { get { return tab; } }
 }
 
-public class TabControl : MonoBehaviour {
+public class ClashTabControl : MonoBehaviour {
 	[SerializeField]
-	private List<TabControlEntry> entries = null;
+	private List<ClashTabControlEntry> entries = null;
 
 	// Use this for initialization
 	void Start () {
-		foreach (TabControlEntry entry in entries) {
+		foreach (ClashTabControlEntry entry in entries) {
 			AddButtonListener(entry);
 		}
 		
@@ -30,16 +30,16 @@ public class TabControl : MonoBehaviour {
 		}
 	}
 
-	public void AddEntry(TabControlEntry entry) {
+	public void AddEntry(ClashTabControlEntry entry) {
 		entries.Add(entry);
 	}
 	
-	private void AddButtonListener(TabControlEntry entry) {
+	private void AddButtonListener(ClashTabControlEntry entry) {
 		entry.Tab.onClick.AddListener(() => SelectTab(entry));
 	}
 
-	private void SelectTab(TabControlEntry selectedEntry) {
-		foreach (TabControlEntry entry in entries) {
+	private void SelectTab(ClashTabControlEntry selectedEntry) {
+		foreach (ClashTabControlEntry entry in entries) {
 			bool isSelected = entry == selectedEntry;
 			
 			entry.Tab.interactable = !isSelected;

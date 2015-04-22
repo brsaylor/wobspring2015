@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitAI : MonoBehaviour {
-	UnitAttributes attr;
-	NavMeshAI ai;
+public class ClashUnitAI : MonoBehaviour {
+	ClashUnitAttributes attr;
+	ClashNavMeshAI ai;
 	public float enemyDistance;
 	public GameObject enemy;
 	bool attacking;
@@ -12,8 +12,8 @@ public class UnitAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		attr = GetComponent<UnitAttributes> () as UnitAttributes;
-		ai = GetComponent<NavMeshAI> () as NavMeshAI;
+		attr = GetComponent<ClashUnitAttributes> () as ClashUnitAttributes;
+		ai = GetComponent<ClashNavMeshAI> () as ClashNavMeshAI;
 		attacking = false;
 		hasEnemy = true;
 	}
@@ -29,7 +29,7 @@ public class UnitAI : MonoBehaviour {
 					attacking = true;
 				}
 			}
-			if(enemy.GetComponent<UnitAttributes>().GetUnitHP() <= 0) {
+			if(enemy.GetComponent<ClashUnitAttributes>().GetUnitHP() <= 0) {
 				Destroy(enemy);
 				ai.SetTarget(null);
 				enemy = null;

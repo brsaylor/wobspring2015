@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class UnitData {
+public class ClashUnitData {
 	public string species_name;
 	public int species_id;
 	public string prefabName; //carnivore, herbi, omni, plant1, plant2, etc
@@ -15,7 +15,7 @@ public class UnitData {
 		return "species_id: " + species_id + " Prefab: " + prefabName + " Biomass: " + hp;
 	}
 
-	public bool Equals(UnitData other) {
+	public bool Equals(ClashUnitData other) {
 		if (other == null)
 			return false;
 		return(this.species_id.Equals (other.species_id));
@@ -23,18 +23,18 @@ public class UnitData {
 }
 
 [System.Serializable]
-public class Defender {
+public class ClashDefender {
 	public string player_name;
 	public int player_id;
 	public string terrain;
-	public List<UnitData> defense;
+	public List<ClashUnitData> defense;
 }
 
 [System.Serializable]
-public class Attacker {
+public class ClashAttacker {
 	public string player_name;
 	public int player_id;
-	public List<UnitData> offense;
+	public List<ClashUnitData> offense;
 }
 
 /***************************
@@ -60,12 +60,12 @@ public class Attacker {
 	 **/
 
 
-public class PersistentData : MonoBehaviour {
+public class ClashPersistentData : MonoBehaviour {
 	public string player_name;	//player username
 	public int player_id;
 	public string type;	//is data for offense setup scene or defense setup scene
-	public Defender defenderInfo;
-	public Attacker attackerInfo;
+	public ClashDefender defenderInfo;
+	public ClashAttacker attackerInfo;
 
 	void Awake() {
 		DontDestroyOnLoad (this);
@@ -73,8 +73,8 @@ public class PersistentData : MonoBehaviour {
 	}
 
 	void Start() {
-		defenderInfo.defense = new List<UnitData> ();
-		attackerInfo.offense = new List<UnitData> ();
+		defenderInfo.defense = new List<ClashUnitData> ();
+		attackerInfo.offense = new List<ClashUnitData> ();
 	}
 
 	public string GetPlayerName() {
@@ -101,7 +101,7 @@ public class PersistentData : MonoBehaviour {
 		type = s;
 	}
 
-	public List<UnitData> GetList() {
+	public List<ClashUnitData> GetList() {
 		if (type == "offense")
 			return this.attackerInfo.offense;
 		else if (type == "defense")
@@ -111,7 +111,7 @@ public class PersistentData : MonoBehaviour {
 	}
 
 	public void AddToUnitList(string species_name, int species_id, string prefabName, int hp) {
-		UnitData ud = new UnitData ();
+		ClashUnitData ud = new ClashUnitData ();
 		ud.species_name = species_name;
 		ud.species_id = species_id;
 		ud.prefabName = prefabName;
@@ -195,10 +195,10 @@ public class PersistentData : MonoBehaviour {
 	public void ClearAllData() {
 		defenderInfo = null;
 		attackerInfo = null;
-		defenderInfo = new Defender ();
-		attackerInfo = new Attacker ();
-		defenderInfo.defense = defenderInfo.defense ?? new List<UnitData> ();
-		attackerInfo.offense = attackerInfo.offense ?? new List<UnitData> ();
+		defenderInfo = new ClashDefender ();
+		attackerInfo = new ClashAttacker ();
+		defenderInfo.defense = defenderInfo.defense ?? new List<ClashUnitData> ();
+		attackerInfo.offense = attackerInfo.offense ?? new List<ClashUnitData> ();
 	}
 
 }

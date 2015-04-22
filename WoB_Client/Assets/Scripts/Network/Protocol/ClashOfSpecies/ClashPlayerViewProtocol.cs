@@ -24,7 +24,7 @@ public class ClashPlayerViewProtocol {
 			float x = DataReader.ReadFloat(dataStream);
 			float y = DataReader.ReadFloat(dataStream);
 
-			UnitData unit = new UnitData();
+			ClashUnitData unit = new ClashUnitData();
 			unit.species_id = species; //weird, but UnitData expects string type
 			unit.location = new Vector3(x, y, 0); //
 			response.defenseSpecies.Add(unit);
@@ -39,10 +39,10 @@ public class ResponseClashPlayerView : NetworkResponse {
 	//public Player player { get; set; }
 	public int DefenseConfigID {get; set;}
 	public int TerrainID {get; set;}
-	public List<UnitData> defenseSpecies {get; set;}
+	public List<ClashUnitData> defenseSpecies {get; set;}
 
 	public ResponseClashPlayerView() {
 		protocol_id = NetworkCode.CLASH_PLAYER_VIEW;
-		defenseSpecies = new List<UnitData>();
+		defenseSpecies = new List<ClashUnitData>();
 	}
 }

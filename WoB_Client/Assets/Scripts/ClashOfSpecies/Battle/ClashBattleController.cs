@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BattleController : MonoBehaviour {
+public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
-	PersistentData data;
+	ClashPersistentData data;
 	List<Transform> enemyList;
 	List<Transform> allyList;
 	GameObject t;
@@ -13,7 +13,7 @@ public class BattleController : MonoBehaviour {
 	void Start () {
 		required_object = GameObject.Find ("Persistent Object");
 		if (required_object != null) {
-			data = required_object.GetComponent ("AttackingData") as PersistentData;
+			data = required_object.GetComponent ("AttackingData") as ClashPersistentData;
 
 			t = Instantiate(Resources.Load("Terrains/" + data.defenderInfo.terrain, typeof(GameObject))) as GameObject;
 
@@ -54,7 +54,7 @@ public class BattleController : MonoBehaviour {
 	}
 
 	public bool IsAllUnitsDeployed() {
-		foreach (UnitData ud in data.attackerInfo.offense) {
+		foreach (ClashUnitData ud in data.attackerInfo.offense) {
 			if (!ud.isDeployed) {
 				return false;
 			}
@@ -85,7 +85,7 @@ public class BattleController : MonoBehaviour {
 	}
 
 	public void InstantiateEnemyUnits() {
-		foreach (UnitData ud in data.defenderInfo.defense) {
+		foreach (ClashUnitData ud in data.defenderInfo.defense) {
 
 		}
 	}

@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ShopButtonController : MonoBehaviour {
+public class ClashShopButtonController : MonoBehaviour {
 	GameObject required_object;
-	PersistentData pd;
+	ClashPersistentData pd;
 	public Button cancel;
 	public Text cancelLabel;
 	public Button accept;
@@ -15,14 +15,14 @@ public class ShopButtonController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		required_object = GameObject.Find ("Persistent Object");
-		pd = required_object.GetComponent<PersistentData> ();
+		pd = required_object.GetComponent<ClashPersistentData> ();
 		/*	//ShopController.cs handles this; not needed here
 		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
 		}
 		*/
 	
-		if (1 == 0 /*pd.GetSceneType () == "defense"*/) {
+		if (pd.GetSceneType () == "defense") {
 			cancelLabel.text = "Return to Lobby\n(Cancel)";
 			cancel.onClick.AddListener (() => BackToLobby ());
 			acceptLabel.text = "Place Defense\n(Continue)";
@@ -55,7 +55,7 @@ public class ShopButtonController : MonoBehaviour {
 		if (pd.GetSceneType () == "defense") {
 			if (selectedUnits.childCount > 0) {
 				foreach (Transform child in selectedUnits) {
-					SelectedUnit su = child.gameObject.GetComponent<SelectedUnit> ();
+					ClashSelectedUnit su = child.gameObject.GetComponent<ClashSelectedUnit> ();
 					//pd.AddToUnitList (species_name, species_id, prefabName, hp);
 					int hp;
 					int.TryParse(su.input.text, out hp);
@@ -64,16 +64,18 @@ public class ShopButtonController : MonoBehaviour {
 			} 
 			if (selectedTerrain.childCount > 0) {
 				foreach (Transform child in selectedTerrain) {
-					SelectedTerrain st = child.gameObject.GetComponent<SelectedTerrain> ();
+					ClashSelectedTerrain st = child.gameObject.GetComponent<ClashSelectedTerrain> ();
 					pd.SetDefenderTerrain (st.prefab_name);
 				}
 			}
 			if(pd.GetTeamSize() > 0 && pd.GetDefenderTerrain() != "")
 				Application.LoadLevel ("ClashDefense");
+			else
+				Debug.Log("Need at least one unit and terrain to move on");
 		} else if (pd.GetSceneType () == "offense") {
 			if (selectedUnits.childCount > 0) {
 				foreach (Transform child in selectedUnits) {
-					SelectedUnit su = child.gameObject.GetComponent<SelectedUnit> ();
+					ClashSelectedUnit su = child.gameObject.GetComponent<ClashSelectedUnit> ();
 					int hp;
 					int.TryParse(su.input.text, out hp);
 					//pd.AddToUnitList (species_name, species_id, prefabName, hp);

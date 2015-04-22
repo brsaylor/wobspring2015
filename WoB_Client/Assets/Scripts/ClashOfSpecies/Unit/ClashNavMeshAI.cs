@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NavMeshAI : MonoBehaviour {
+public class ClashNavMeshAI : MonoBehaviour {
 	public GameObject target;
 
 	// Use this for initialization

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ShopElementPrefab : MonoBehaviour {
+public class ClashShopElementPrefab : MonoBehaviour {
 	public Button preview;
 	public Button add;
 	public Image image;

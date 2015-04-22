@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UnitAttributes : MonoBehaviour {
+public class ClashUnitAttributes : MonoBehaviour {
 	public string unit_name;
 	public int id;
 	public int unitHP;

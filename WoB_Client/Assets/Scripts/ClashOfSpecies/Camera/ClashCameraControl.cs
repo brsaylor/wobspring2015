@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CameraControl : MonoBehaviour {
+public class ClashCameraControl : MonoBehaviour {
 	public float speed = 5.0f;
 	const float defaultCameraHeight = 20.0f;
 	const float defaultFOV = 75.0f;

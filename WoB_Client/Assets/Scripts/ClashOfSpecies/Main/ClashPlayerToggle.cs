@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerToggle : MonoBehaviour {
+public class ClashPlayerToggle : MonoBehaviour {
 	public Toggle toggle;
 	public Text label;
 	public string player_name;

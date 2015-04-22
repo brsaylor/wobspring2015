@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -50,28 +50,25 @@
      <Compile Include="Assets\Scripts\AI.cs" />
      <Compile Include="Assets\Scripts\AnimalAI.cs" />
      <Compile Include="Assets\Scripts\Camera\BasicCamera.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Battle\BattleController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Camera\CameraControl.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Camera\Spawner.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\MainController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\PlayerToggle.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\PreviewController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\PersistentData.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\AnimalShow.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\AnimalTabButton.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SelectedElement.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SelectedTerrain.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SelectedUnit.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ShopButtonController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ShopController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ShopElementPrefab.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SpeciesButton.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\TabControl.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\TerrianButton.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\SplashController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\NavMeshAI.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAttributes.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Battle\ClashBattleController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Camera\ClashCameraControl.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Camera\ClashSpawner.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\ClashPersistentData.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\ClashSplashController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Defense\ClashDefenseController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Defense\ClashUnitButton.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\ClashMainController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\ClashPlayerToggle.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Main\ClashPreviewController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ClashSelectedTerrain.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ClashSelectedUnit.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ClashShopButtonController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ClashShopController.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ClashShopElementPrefab.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ClashTabControl.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\ClashNavMeshAI.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\ClashUnitAI.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\ClashUnitAttributes.cs" />
      <Compile Include="Assets\Scripts\Clock.cs" />
      <Compile Include="Assets\Scripts\Constants.cs" />
      <Compile Include="Assets\Scripts\Containers\Account.cs" />
@@ -190,10 +187,10 @@
      <Compile Include="Assets\Scripts\World\Zone.cs" />
      <Compile Include="Assets\Scripts\WorldMenu.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.Sqlite">
- <HintPath>C:/Users/Omar/Documents/GitHub/wobspring2015/WoB_Client/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ <HintPath>C:/Users/Azusa/Desktop/wobspring2015/WoB_Client/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

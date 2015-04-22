@@ -2,11 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class SelectedElement : MonoBehaviour {
+public class ClashSelectedTerrain : MonoBehaviour {
 	public Image image;
-	public InputField input;
 	public Text label;
 	public Button remove;
-	public string name;
+	public string prefab_name;
 	public int id;
 }
