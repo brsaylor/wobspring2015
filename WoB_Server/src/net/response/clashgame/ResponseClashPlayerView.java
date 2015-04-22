@@ -5,12 +5,11 @@
  */
 package net.response.clashgame;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import metadata.NetworkCode;
-import model.Player;
 import net.response.GameResponse;
 import util.GamePacket;
 import util.Vector2;
@@ -45,7 +44,6 @@ public class ResponseClashPlayerView extends GameResponse{
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
-        //packet.addInt32(player.getID());
         packet.addInt32(defenseConfigID);
         packet.addInt32(terrainID);
         packet.addInt32(configMap.size());
