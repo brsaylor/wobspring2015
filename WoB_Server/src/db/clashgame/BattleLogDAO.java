@@ -1,4 +1,4 @@
-package db;
+package db.clashgame;
 
 // Java Imports
 import java.sql.Connection;
@@ -29,9 +29,9 @@ public final class BattleLogDAO {
     									, String TeamFlag) {
 BattleLog battle_log = null;
 
-String query = "INSERT INTO `battle_log` "
-			+ "(  `battle_id` "
-			+ " , `species_id` "
+String query = "INSERT INTO `clash_battle_log` "
+			+ "(  `clash_battle_id` "
+			+ " , `clash_species_id` "
 			+ " , `team_flag` )"
 			+ "VALUES "
 			+ "(  ? , ? , ? )" ;
@@ -70,10 +70,10 @@ public static BattleLog getBattleLog(int battle_id) {
     	BattleLog battle_log = null;
 
         String query = "SELECT "
-        			 + "   `battle_id`"
-        			 + " , `species_id` "
+        			 + "   `clash_battle_id`"
+        			 + " , `clash_species_id` "
         			 + " , `team_flag`"
-        			 + "FROM `battle_log` WHERE `battle_id` = ? limit 1";
+        			 + "FROM `clash_battle_log` WHERE `battle_id` = ? limit 1";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -88,8 +88,8 @@ public static BattleLog getBattleLog(int battle_id) {
 
             if (rs.next()) {
                 battle_log = new BattleLog();
-                battle_log.setBattle_id(rs.getInt("battle_id"));
-                battle_log.setSpecies_id(rs.getInt("species_id"));
+                battle_log.setBattle_id(rs.getInt("clash_battle_id"));
+                battle_log.setSpecies_id(rs.getInt("clash_species_id"));
                 battle_log.setTeam_flag(rs.getString("team_flag"));
                
             }
