@@ -1,4 +1,4 @@
-package db;
+package db.clashgame;
 
 // Java Imports
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import model.clashgame.AttackConfig;
 import util.Log;
 
 /**
- * Table(s) Required: attack_config
+ * Table(s) Required: clash_attack_config
  *
  * The AccountDAO class hold methods that can execute a variety of different
  * queries for very specific purposes.
@@ -22,9 +22,9 @@ import util.Log;
  * @author Abhijit
  */
 
-public final class AttackConfigDOA {
+public final class AttackConfigDAO {
 
-    private AttackConfigDOA() {
+    private AttackConfigDAO() {
     
     }
 
@@ -49,7 +49,7 @@ public final class AttackConfigDOA {
      												, int terrain_id) {
         AttackConfig AC = null;
 
-        String query = "INSERT INTO `attack_config` "
+        String query = "INSERT INTO `clash_attack_config` "
         						+ "(  `species_1`, `species_1_loc_x`, 'species_1_loc_y`"
         						+ " , `species_2`, `species_2_loc_x`, 'species_2_loc_y`"
         						+ " , `species_3`, `species_3_loc_x`, 'species_3_loc_y`"
@@ -136,14 +136,14 @@ public static AttackConfig getConfig(int player_id) {
     	AttackConfig AC = null;
 
         String query = "SELECT "
-        			+ "   `attack_config_id` "
+        			+ "   `clash_attack_config_id` "
         			+ " , `species_1`, `species_1_loc_x`, 'species_1_loc_y` "
         			+ " , `species_2`, `species_2_loc_x`, 'species_2_loc_y`"
         			+ " , `species_3`, `species_3_loc_x`, 'species_3_loc_y`"
         			+ " , `species_4`, `species_4_loc_x`, 'species_4_loc_y`"
         			+ " , `species_5`, `species_5_loc_x`, 'species_5_loc_y`"
         			+ " , `player_id`, `terrain_id` "
-        			+ "FROM `attack_config` WHERE `player_id` = ? limit 1";
+        			+ "FROM `clash_attack_config` WHERE `player_id` = ? limit 1";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -160,7 +160,7 @@ public static AttackConfig getConfig(int player_id) {
             	
                 AC = new AttackConfig();
                 
-                AC.setAttack_config_id(rs.getInt("attack_config_id"));
+                AC.setAttack_config_id(rs.getInt("clash_attack_config_id"));
                 AC.setPlayer_id(rs.getInt("player_id"));
                 AC.setTerrain_id(rs.getInt("terrain_id"));
                 

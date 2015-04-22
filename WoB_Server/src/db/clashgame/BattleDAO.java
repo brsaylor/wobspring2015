@@ -1,4 +1,4 @@
-package db;
+package db.clashgame;
 
 // Java Imports
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import model.clashgame.Battle;
 import util.Log;
 
 /**
- * Table(s) Required: battle
+ * Table(s) Required: clash_battle
  *
  * The BattleDAO class hold methods that can execute a variety of different
  * queries for very specific purposes.
@@ -32,8 +32,8 @@ public final class BattleDAO {
 Battle battle = null;
 
 String query = "INSERT INTO `battle` "
-			+ "(  `attack_config_id` "
-			+ " , `defence_config_id` "
+			+ "(  `clash_attack_config_id` "
+			+ " , `clash_defense_config_id` "
 			+ " , `battle_start`"
 			+ " , `battle_outcome` )"
 			+ "VALUES "
@@ -77,12 +77,12 @@ public static Battle getBattle(int battle_id) {
     	Battle battle = null;
 
         String query = "SELECT "
-        			+ "	`battle_id`"
-        			+ " , `attack_config_id` "
-        			+ "	, `defence_config_id`"
+        			+ "	`clash_battle_id`"
+        			+ " , `clash_attack_config_id` "
+        			+ "	, `clash_defense_config_id`"
         			+ " , `battle_start`"
         			+ " , `battle_outcome"
-        			+ "FROM `battle` WHERE `battle_id` = ? limit 1";
+        			+ "FROM `clash_battle` WHERE `battle_id` = ? limit 1";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -97,9 +97,9 @@ public static Battle getBattle(int battle_id) {
 
             if (rs.next()) {
                 battle = new Battle();
-                battle.setAttack_config_id(rs.getInt("attack_config_id"));
-                battle.setDefence_config_id(rs.getInt("defence_config_id"));
-                battle.setBattle_id(rs.getInt("battle_id"));
+                battle.setAttack_config_id(rs.getInt("clash_attack_config_id"));
+                battle.setDefence_config_id(rs.getInt("clash_defense_config_id"));
+                battle.setBattle_id(rs.getInt("clash_battle_id"));
                 battle.setBattle_start(rs.getDate("battle_start"));
                 battle.setBattle_outcome(rs.getString("battle_outcome"));
             }

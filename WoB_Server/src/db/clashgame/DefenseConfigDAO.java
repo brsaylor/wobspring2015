@@ -1,4 +1,4 @@
-package db;
+package db.clashgame;
 
 // Java Imports
 import java.sql.Connection;
@@ -47,7 +47,7 @@ public final class DefenceConfigDAO {
          												, int terrain_id) {
             DefenceConfig DC = null;
 
-            String query = "INSERT INTO `defence_config` "
+            String query = "INSERT INTO `clash_defense_config` "
             						+ "(  `species_1`, `species_1_loc_x`, 'species_1_loc_y`"
             						+ " , `species_2`, `species_2_loc_x`, 'species_2_loc_y`"
             						+ " , `species_3`, `species_3_loc_x`, 'species_3_loc_y`"
@@ -135,14 +135,14 @@ public final class DefenceConfigDAO {
     	DefenceConfig DC = null;
 
         String query = "SELECT "
-        			+ "    defence_config_id "
+        			+ "    clash_defense_config_id "
         			+ " , `species_1`, `species_1_loc_x`, 'species_1_loc_y` "
         			+ " , `species_2`, `species_2_loc_x`, 'species_2_loc_y`"
         			+ " , `species_3`, `species_3_loc_x`, 'species_3_loc_y`"
         			+ " , `species_4`, `species_4_loc_x`, 'species_4_loc_y`"
         			+ " , `species_5`, `species_5_loc_x`, 'species_5_loc_y`"
         			+ " , `player_id`, `terrain_id`"
-        			+ "FROM `defence_config` WHERE `player_id` = ? limit 1";
+        			+ "FROM `clash_defense_config` WHERE `player_id` = ? limit 1";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -159,7 +159,7 @@ public final class DefenceConfigDAO {
             	
                 DC = new DefenceConfig();
                 
-                DC.setDefence_config_id(rs.getInt("defence_config_id"));
+                DC.setDefence_config_id(rs.getInt("clash_defense_config_id"));
                 DC.setPlayer_id(rs.getInt("player_id"));
                 DC.setTerrain_id(rs.getInt("terrain_id"));
                 
