@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+using UnityEngine;
+
 public class ClashPlayerViewProtocol {
 	
 	public static NetworkRequest Prepare(int player_id) {

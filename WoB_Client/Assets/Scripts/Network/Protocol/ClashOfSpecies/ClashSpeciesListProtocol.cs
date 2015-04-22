@@ -15,7 +15,7 @@ public class ClashSpeciesListProtocol{
 		//Ugly code. Better idea to have ClashSpeciesListProtocol subclass
 		//SpeciesListProtocol, but that requires refactoring, splitting up 
 		//puttin parse code into helper method
-		ResponseSpeciesList sl = SpeciesListProtocol.Parse(dataStream);
+		ResponseSpeciesList sl = (ResponseSpeciesList) SpeciesListProtocol.Parse(dataStream);
 		ResponseClashSpeciesList response = new ResponseClashSpeciesList();
 		response.speciesList = sl.speciesList;
 		return response;
