@@ -63,14 +63,6 @@ public class NetworkCode {
     
     public final static short PLAYER_SELECT = 145;
 
-    public final static short CONVERGE_ECOSYSTEMS = 146;
-    public final static short CONVERGE_NEW_ATTEMPT = 147;
-    public final static short CONVERGE_PRIOR_ATTEMPT = 148;
-    public final static short CONVERGE_PRIOR_ATTEMPT_COUNT = 149;
-    public final static short CONVERGE_HINT = 150;
-    public final static short CONVERGE_HINT_COUNT = 151;
-    public final static short CONVERGE_NEW_ATTEMPT_SCORE = 152;
-    
     public final static short CLASH_ENTRY = 153;
     public final static short CLASH_SPECIES_LIST = 154;
     public final static short CLASH_DEFENSE_SETUP = 155;
