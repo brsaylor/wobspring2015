@@ -24,7 +24,7 @@ public class RequestClashInitiateBattle extends GameRequest{
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         playerToAttack = DataReader.readInt(dataInput);
-        attackConfig = new ArrayList<>();
+        attackConfig = new ArrayList<Integer>();
         int count = DataReader.readInt(dataInput);
         for(int i = 0; i < count; i++){
             attackConfig.add(DataReader.readInt(dataInput));

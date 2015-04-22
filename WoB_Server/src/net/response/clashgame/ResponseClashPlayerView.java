@@ -43,7 +43,7 @@ public class ResponseClashPlayerView extends GameResponse{
     
     public ResponseClashPlayerView(){
         response_id = NetworkCode.CLASH_PLAYER_VIEW;
-        defenseList = new ArrayList<>();
+        defenseList = new ArrayList<BattleElementData>();
     }
     
     @Override
