@@ -14,13 +14,19 @@ public class ClashPlayerViewProtocol {
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashPlayerView response = new ResponseClashPlayerView();
 
-		int player_id = DataReader.ReadInt(dataStream);
-		
-		Player player = new Player(player_id);
+		response.DefenseConfigID = DataReader.ReadInt(dataStream);
+		response.TerrainID = DataReader.ReadInt(dataStream);
+		int count = DataReader.ReadInt(dataStream);
+		for(int i = 0; i < count; i++){
+			int species = DataReader.ReadInt(dataStream);
+			float x = DataReader.ReadFloat(dataStream);
+			float y = DataReader.ReadFloat(dataStream);
 
-		//other player data will go in here later
-
-		response.player = player;
+			UnitData unit = new UnitData();
+			unit.species_id = "" + species; //weird, but UnitData expects string type
+			unit.location = new Vector3(x, y, 0); //
+			response.defenseSpecies.Add(unit);
+		}
 
 		return response;
 	}
@@ -28,9 +34,13 @@ public class ClashPlayerViewProtocol {
 
 public class ResponseClashPlayerView : NetworkResponse {
 
-	public Player player { get; set; }
+	//public Player player { get; set; }
+	public int DefenseConfigID {get; set;}
+	public int TerrainID {get; set;}
+	public List<UnitData> defenseSpecies {get; set;}
 
 	public ResponseClashPlayerView() {
 		protocol_id = NetworkCode.CLASH_PLAYER_VIEW;
+		defenseSpecies = new List<UnitData>();
 	}
 }

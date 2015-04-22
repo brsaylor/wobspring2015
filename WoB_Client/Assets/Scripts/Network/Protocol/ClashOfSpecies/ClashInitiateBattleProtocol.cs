@@ -4,9 +4,13 @@ using System.IO;
 
 public class ClashInitiateBattleProtocol {
 	
-	public static NetworkRequest Prepare(int otherPlayerID) {
+	public static NetworkRequest Prepare(int otherPlayerID, List<int> species) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_INITIATE_BATTLE);
 		request.AddInt32(otherPlayerID);
+		request.AddInt32(species.Count);
+		foreach(int s in species){
+			request.AddInt32(s);
+		}
 		
 		return request;
 	}
