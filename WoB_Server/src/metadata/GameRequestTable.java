@@ -56,15 +56,8 @@ public class GameRequestTable {
         add(NetworkCode.ZONE_LIST, "world.RequestZoneList");
         add(NetworkCode.ZONE, "world.RequestZone");
         add(NetworkCode.ZONE_UPDATE, "world.RequestZoneUpdate");
+
         //Convergence Game
-        add(NetworkCode.CONVERGE_ECOSYSTEMS, "convergegame.RequestConvergeEcosystems");
-        add(NetworkCode.CONVERGE_NEW_ATTEMPT, "convergegame.RequestConvergeNewAttempt");
-        add(NetworkCode.CONVERGE_PRIOR_ATTEMPT, "convergegame.RequestConvergePriorAttempt");
-        add(NetworkCode.CONVERGE_PRIOR_ATTEMPT_COUNT, "convergegame.RequestConvergePriorAttemptCount");
-        add(NetworkCode.CONVERGE_HINT, "convergegame.RequestConvergeHint");
-        add(NetworkCode.CONVERGE_HINT_COUNT, "convergegame.RequestConvergeHintCount");
-        add(NetworkCode.CONVERGE_NEW_ATTEMPT_SCORE, "convergegame.RequestConvergeNewAttemptScore");
-        
         add(NetworkCode.CLASH_ENTRY, "clashgame.RequestClashEntry");
         add(NetworkCode.CLASH_SPECIES_LIST, "clashgame.RequestClashSpeciesList");
         add(NetworkCode.CLASH_DEFENSE_SETUP, "clashgame.RequestClashDefenseSetup");
