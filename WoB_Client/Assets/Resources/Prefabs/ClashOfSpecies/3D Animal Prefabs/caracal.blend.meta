@@ -1,0 +1,109 @@
+fileFormatVersion: 2
+guid: e9fa60a46b50e44daacc0c47517e1cfb
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: //RootNode
+    100004: head
+    100006: leg1_Fr
+    100008: leg1_Fr_001
+    100010: leg2_Fr
+    100012: leg2_Fr_001
+    100014: leg3_Bk
+    100016: leg3_Bk_001
+    100018: leg3_Fr
+    100020: leg3_Fr_001
+    100022: leg_Bk
+    100024: leg_Bk_001
+    100026: leg_Bk_002
+    100028: leg_Bk_003
+    100030: lionbody
+    100032: Master
+    100034: spine1_Fr
+    100036: spine2_Bk
+    100038: tail1
+    100040: tail2
+    400000: Armature
+    400002: //RootNode
+    400004: head
+    400006: leg1_Fr
+    400008: leg1_Fr_001
+    400010: leg2_Fr
+    400012: leg2_Fr_001
+    400014: leg3_Bk
+    400016: leg3_Bk_001
+    400018: leg3_Fr
+    400020: leg3_Fr_001
+    400022: leg_Bk
+    400024: leg_Bk_001
+    400026: leg_Bk_002
+    400028: leg_Bk_003
+    400030: lionbody
+    400032: Master
+    400034: spine1_Fr
+    400036: spine2_Bk
+    400038: tail1
+    400040: tail2
+    4300000: lionbody
+    7400000: Default Take
+    7400002: attack
+    7400004: die
+    7400006: eat
+    7400008: walk
+    9500000: //RootNode
+    13700000: lionbody
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
