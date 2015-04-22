@@ -57,12 +57,13 @@
      <Compile Include="Assets\Scripts\ClashOfSpecies\Main\PlayerToggle.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Main\PreviewController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\PersistentData.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\AnimalShow.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\AnimalTabButton.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SelectedTerrain.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SelectedUnit.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ShopButtonController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ShopController.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\SpeciesButton.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\ShopElementPrefab.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\TabControl.cs" />
-     <Compile Include="Assets\Scripts\ClashOfSpecies\Shop\TerrianButton.cs" />
+     <Compile Include="Assets\Scripts\ClashOfSpecies\SplashController.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\NavMeshAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAI.cs" />
      <Compile Include="Assets\Scripts\ClashOfSpecies\Unit\UnitAttributes.cs" />
@@ -180,7 +181,7 @@
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.Sqlite">
- <HintPath>C:/Users/Ben/Documents/SFSU/831 Multiplayer Game Development/git/wobspring2015/WoB_Client/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ <HintPath>C:/Users/Azusa/Desktop/wobspring2015/WoB_Client/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

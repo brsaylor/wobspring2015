@@ -20,7 +20,7 @@ public class BattleController : MonoBehaviour {
 
 
 		} else {
-			Application.LoadLevel("ClashMain");
+			Application.LoadLevel ("ClashSplash");
 			Debug.Log("Required Data not found");
 		}
 	}

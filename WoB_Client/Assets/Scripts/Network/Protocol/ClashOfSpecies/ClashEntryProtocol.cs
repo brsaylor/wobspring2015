@@ -41,7 +41,7 @@ public class ResponseClashEntry : NetworkResponse {
 
 	public bool firstTime {get; set;}
 	public int terrainID {get; set;}
-	public List<UnitData> config {get;}
+	public List<UnitData> config {get; set;}
 
 	public ResponseClashEntry() {
 		protocol_id = NetworkCode.CLASH_ENTRY;

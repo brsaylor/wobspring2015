@@ -4,14 +4,15 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class UnitData {
-	public string species_id;
-	public string type;
+	public string species_name;
+	public int species_id;
+	public string prefabName; //carnivore, herbi, omni, plant1, plant2, etc
 	public int hp;
 	public Vector3 location;
 	public bool isDeployed;
 
-	public string ToString() {
-		return "species_id: " + species_id + " Type: " + type + " Biomass: " + hp;
+	public override string ToString() {
+		return "species_id: " + species_id + " Prefab: " + prefabName + " Biomass: " + hp;
 	}
 
 	public bool Equals(UnitData other) {
@@ -23,14 +24,16 @@ public class UnitData {
 
 [System.Serializable]
 public class Defender {
-	public string player_id;
+	public string player_name;
+	public int player_id;
 	public string terrain;
 	public List<UnitData> defense;
 }
 
 [System.Serializable]
 public class Attacker {
-	public string player_id;
+	public string player_name;
+	public int player_id;
 	public List<UnitData> offense;
 }
 
@@ -58,7 +61,8 @@ public class Attacker {
 
 
 public class PersistentData : MonoBehaviour {
-	public string current_player;
+	public string player_name;	//player username
+	public int player_id;
 	public string type;	//is data for offense setup scene or defense setup scene
 	public Defender defenderInfo;
 	public Attacker attackerInfo;
@@ -73,12 +77,20 @@ public class PersistentData : MonoBehaviour {
 		attackerInfo.offense = new List<UnitData> ();
 	}
 
-	public string GetCurrentPlayer() {
-		return current_player;
+	public string GetPlayerName() {
+		return player_name;
 	}
 
-	public void SetCurrentPlayer(string s) {
-		current_player = s;
+	public void SetPlayerName(string s) {
+		player_name = s;
+	}
+
+	public int GetPlayerId() {
+		return player_id;
+	}
+	
+	public void SetPlayerId(int i) {
+		player_id = i;
 	}
 
 	public string GetSceneType() {
@@ -89,10 +101,20 @@ public class PersistentData : MonoBehaviour {
 		type = s;
 	}
 
-	public void AddToUnitList(string species_id, string type, int hp) {
+	public List<UnitData> GetList() {
+		if (type == "offense")
+			return this.attackerInfo.offense;
+		else if (type == "defense")
+			return this.defenderInfo.defense;
+		else
+			return null;
+	}
+
+	public void AddToUnitList(string species_name, int species_id, string prefabName, int hp) {
 		UnitData ud = new UnitData ();
+		ud.species_name = species_name;
 		ud.species_id = species_id;
-		ud.type = type;
+		ud.prefabName = prefabName;
 		ud.hp = hp;
 		ud.isDeployed = false;
 
@@ -113,11 +135,19 @@ public class PersistentData : MonoBehaviour {
 
 	/******************************/
 
-	public string GetDefenderId() {
+	public string GetDefenderName() {
+		return this.defenderInfo.player_name;
+	}
+
+	public void SetDefenderName(string s) {
+		this.defenderInfo.player_name = s;
+	}
+
+	public int GetDefenderId() {
 		return this.defenderInfo.player_id;
 	}
 
-	public void SetDefenderId(string player_id) {
+	public void SetDefenderId(int player_id) {
 		this.defenderInfo.player_id = player_id;
 	}
 
@@ -130,23 +160,33 @@ public class PersistentData : MonoBehaviour {
 	}
 
 	public void ClearDefenderData() {
-		this.defenderInfo.player_id = "";
+		this.defenderInfo.player_id = 0;
+		this.defenderInfo.player_name = "";
 		this.defenderInfo.terrain = "";
 		this.defenderInfo.defense.Clear();
 	}
 
 	/*****************************/
 
-	public string GetAttackerId() {
+	public string GetAttackerName() {
+		return this.attackerInfo.player_name;
+	}
+	
+	public void SetAttackerName(string s) {
+		this.attackerInfo.player_name = s;
+	}
+
+	public int GetAttackerId() {
 		return this.attackerInfo.player_id;
 	}
 
-	public void SetAttackerId(string player_id) {
+	public void SetAttackerId(int player_id) {
 		this.attackerInfo.player_id = player_id;
 	}
 	
 	public void ClearAttackerData() {
-		this.attackerInfo.player_id = "";
+		this.attackerInfo.player_id = 0;
+		this.attackerInfo.player_name = "";
 		this.attackerInfo.offense.Clear ();
 	}
 
