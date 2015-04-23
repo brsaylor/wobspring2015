@@ -7,7 +7,6 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.request.GameRequest;

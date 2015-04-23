@@ -10,6 +10,7 @@ import java.sql.Statement;
 // Other Imports
 import model.clashgame.BattleLog;
 import util.Log;
+import db.GameDB;
 
 /**
  * Table(s) Required: battle_log

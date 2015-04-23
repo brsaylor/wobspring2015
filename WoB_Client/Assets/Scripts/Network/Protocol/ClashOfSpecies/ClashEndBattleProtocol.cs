@@ -23,4 +23,6 @@ public class ResponseClashEndBattle : NetworkResponse {
 	public ResponseClashEndBattle() {
 		protocol_id = NetworkCode.CLASH_END_BATTLE;
 	}
+
+
 }

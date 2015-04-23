@@ -11,6 +11,7 @@ import java.sql.Statement;
 // Other Imports
 import model.clashgame.Battle;
 import util.Log;
+import db.GameDB;
 
 /**
  * Table(s) Required: clash_battle
