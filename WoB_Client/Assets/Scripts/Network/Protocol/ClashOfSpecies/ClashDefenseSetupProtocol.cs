@@ -1,17 +1,18 @@
 using System;
+using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 
 public class ClashDefenseSetupProtocol {
 	
-	public static NetworkRequest Prepare(int terrainID, List<ClashUnitData> setup) {
+	public static NetworkRequest Prepare(int terrainID, Dictionary<int, Vector2> config) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_DEFENSE_SETUP);
 		request.AddInt32(terrainID);
-		request.AddInt32(setup.Count);
-		foreach(ClashUnitData ud in setup){
-			request.AddInt32(ud.species_id);
-			request.AddFloat(ud.location.x);
-			request.AddFloat(ud.location.y);
+		request.AddInt32(config.Count);
+		foreach(var pair in config){
+			request.AddInt32(pair.Key);
+			request.AddFloat(pair.Value.x);
+			request.AddFloat(pair.Value.y);
 		}
 		return request;
 	}
