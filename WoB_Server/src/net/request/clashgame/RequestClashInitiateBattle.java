@@ -7,6 +7,7 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashInitiateBattle;
 import util.DataReader;
@@ -18,10 +19,16 @@ import util.DataReader;
 public class RequestClashInitiateBattle extends GameRequest{
 
     private int playerToAttack;
+    private ArrayList<Integer> attackConfig;
     
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         playerToAttack = DataReader.readInt(dataInput);
+        attackConfig = new ArrayList<Integer>();
+        int count = DataReader.readInt(dataInput);
+        for(int i = 0; i < count; i++){
+            attackConfig.add(DataReader.readInt(dataInput));
+        }
     }
 
     @Override

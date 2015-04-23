@@ -7,9 +7,13 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+
+import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashEntry;
 import util.DataReader;
+import db.clashgame.DefenseConfigDAO;
+import util.Vector2;
 
 /**
  *
@@ -17,7 +21,7 @@ import util.DataReader;
  */
 public class RequestClashEntry extends GameRequest{
     private int playerID;
-    boolean isNewClashPlayer = true;
+    boolean isNewClashPlayer;
 
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
@@ -26,18 +30,47 @@ public class RequestClashEntry extends GameRequest{
 
     @Override
     public void process() throws Exception {
-        //need to query db for current defense setup
-        //something like
-        /*
-        ClashSetup cs = client.getPlayer().getClashSetup();
-        if(cs != null){
+        DefenseConfig defense = DefenseConfigDAO.getConfig(playerID);
+        if(defense == null){
+            isNewClashPlayer = true;
+        }else{
             isNewClashPlayer = false;
-        }*/
+        }
+
         
         ResponseClashEntry response = new ResponseClashEntry();
         response.setNewClashPlayer(isNewClashPlayer);
         if(!isNewClashPlayer){
             //add existing defense setup
+            if(defense.getSpecies_1() != 0){
+                response.addNewSpecies(defense.getSpecies_1(),
+                        new Vector2<Float>(defense.getSpecies_1_loc_x(),
+                        defense.getSpecies_1_loc_y()));
+            }
+
+            if(defense.getSpecies_2() != 0){
+                response.addNewSpecies(defense.getSpecies_2(),
+                        new Vector2<Float>(defense.getSpecies_2_loc_x(),
+                                defense.getSpecies_2_loc_y()));
+            }
+
+            if(defense.getSpecies_3() != 0){
+                response.addNewSpecies(defense.getSpecies_3(),
+                        new Vector2<Float>(defense.getSpecies_3_loc_x(),
+                                defense.getSpecies_3_loc_y()));
+            }
+
+            if(defense.getSpecies_4() != 0){
+                response.addNewSpecies(defense.getSpecies_4(),
+                        new Vector2<Float>(defense.getSpecies_4_loc_x(),
+                                defense.getSpecies_4_loc_y()));
+            }
+
+            if(defense.getSpecies_5() != 0){
+                response.addNewSpecies(defense.getSpecies_5(),
+                        new Vector2<Float>(defense.getSpecies_5_loc_x(),
+                                defense.getSpecies_5_loc_y()));
+            }
         }
         client.add(response);        
     }

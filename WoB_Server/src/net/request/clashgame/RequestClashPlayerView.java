@@ -32,7 +32,7 @@ public class RequestClashPlayerView extends GameRequest{
 
         ResponseClashPlayerView response = new ResponseClashPlayerView();
         if (player != null) {
-            response.setPlayer(player);
+            //TODO: fetch appropriate data
         }
         
         client.add(response);

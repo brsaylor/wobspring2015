@@ -17,7 +17,6 @@ import net.response.clashgame.ResponseClashSpeciesList;
  */
 public class RequestClashSpeciesList extends GameRequest{
         
-
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
     }
@@ -28,7 +27,6 @@ public class RequestClashSpeciesList extends GameRequest{
         ResponseClashSpeciesList response = new ResponseClashSpeciesList();
         response.setSpeciesList(ShopDAO.getItems("level:0,99"));
         client.add(response);
-        
     }
     
 }

@@ -1,3 +1,4 @@
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,8 +27,8 @@ public class ClashEntryProtocol {
 				float x = DataReader.ReadFloat(dataStream);
 				float y = DataReader.ReadFloat(dataStream);
 
-				UnitData unit = new UnitData();
-				unit.species_id = "" + species_id; //weird, but UnitData expects string type
+				ClashUnitData unit = new ClashUnitData();
+				unit.species_id = species_id;
 				unit.location = new Vector3(x, y, 0); //
 				response.config.Add(unit);
 			}
@@ -41,10 +42,10 @@ public class ResponseClashEntry : NetworkResponse {
 
 	public bool firstTime {get; set;}
 	public int terrainID {get; set;}
-	public List<UnitData> config {get; set;}
+	public List<ClashUnitData> config {get; set;}
 
 	public ResponseClashEntry() {
 		protocol_id = NetworkCode.CLASH_ENTRY;
-		config = new List<UnitData>();
+		config = new List<ClashUnitData>();
 	}
 }

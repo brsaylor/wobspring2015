@@ -16,7 +16,7 @@ public class ClashPlayerListProtocol{
 
 		ResponseClashPlayerList response = new ResponseClashPlayerList();
 
-		ResponsePlayers pl = PlayersProtocol.Parse(dataStream);
+		ResponsePlayers pl = (ResponsePlayers) PlayersProtocol.Parse(dataStream);
 		response.playerList = pl.playerList;
 
 		return response;

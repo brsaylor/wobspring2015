@@ -27,6 +27,7 @@ obj/
 *.user
 *.unityproj
 *.booproj
+WoB_Server/.idea/
 
 # ============ #
 # OS generated #
@@ -39,3 +40,15 @@ obj/
 ehthumbs.db
 Thumbs.db
 /*.class
+*.class
+WoB_Server/.idea/workspace.xml
+/nbproject/private/
+/build/
+/WoB_Server/build/
+<<<<<<< HEAD
+*.sln
+=======
+*.csproj
+>>>>>>> 5cd44735cd917a8a8c0a6c6028d52ec2e6f80e3a
+WoB_Server/.idea/workspace.xml
+*.sln
