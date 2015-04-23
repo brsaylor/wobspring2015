@@ -24,9 +24,10 @@ public class RequestClashPlayerList extends GameRequest{
     @Override
     public void process() throws Exception {
         ResponseClashPlayerList response = new ResponseClashPlayerList();
-        
+
+
         //need to identify the clash players
-        response.setPlayers(GameServer.getInstance().getActivePlayers());
+        //response.setPlayers(GameServer.getInstance().getActivePlayers());
         
         client.add(response);
     }
