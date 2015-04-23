@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import db.GameDB;
-
-
+import java.util.ArrayList;
+import java.util.Date;
 
 // Other Imports
 import model.clashgame.AttackConfig;
@@ -20,108 +20,60 @@ import util.Log;
  * The AccountDAO class hold methods that can execute a variety of different
  * queries for very specific purposes.
  *
- * @author Abhijit
+ * @author Abhijit, Ben
  */
 
 public final class AttackConfigDAO {
 
     private AttackConfigDAO() {
-    
     }
-
     
-    
-    public static AttackConfig createAttackConfig(	  int species_1
-    												, int species_1_loc_x
-    												, int species_1_loc_y
-     												, int species_2
-     												, int species_2_loc_x
-     												, int species_2_loc_y
-     												, int species_3
-     												, int species_3_loc_x
-     												, int species_3_loc_y
-     												, int species_4
-     												, int species_4_loc_x
-     												, int species_4_loc_y
-     												, int species_5
-     												, int species_5_loc_x
-     												, int species_5_loc_y
-     												, int player_id
-     												, int terrain_id) {
+    public static AttackConfig createAttackConfig(int playerId, int terrainId,
+            ArrayList<Integer> speciesList) {
+        
         AttackConfig AC = null;
 
         String query = "INSERT INTO `clash_attack_config` "
-        						+ "(  `species_1`, `species_1_loc_x`, 'species_1_loc_y`"
-        						+ " , `species_2`, `species_2_loc_x`, 'species_2_loc_y`"
-        						+ " , `species_3`, `species_3_loc_x`, 'species_3_loc_y`"
-        						+ " , `species_4`, `species_4_loc_x`, 'species_4_loc_y`"
-        						+ " , `species_5`, `species_5_loc_x`, 'species_5_loc_y`"
-        						+ " , `player_id`, `terrain_id`) "
-        						+ "VALUES "
-        						+ "(  ? , ? , ?"
-        						+ "  ,? , ? , ?"
-        						+ "  ,? , ? , ?"
-        						+ "  ,? , ? , ?"
-        						+ "  ,? , ? , ?"
-        						+ "  ,? ,?)";
+                + "(player_id, terrain_id, "
+                + " species_1, species_2, species_3, species_4, species_5,"
+                + " date_created) "
+                + "VALUES "
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        
+        Date dateCreated = new java.util.Date();
 
         try {
             con = GameDB.getConnection();
+            
             pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, species_1);
-            pstmt.setInt(2, species_1_loc_x);
-            pstmt.setInt(3, species_1_loc_y);
+            pstmt.setInt(1, playerId);
+            pstmt.setInt(2, terrainId);
             
-            pstmt.setInt(4, species_2);
-            pstmt.setInt(5, species_2_loc_x);
-            pstmt.setInt(6, species_2_loc_y);
+            pstmt.setInt(3, speciesList.get(0));
+            pstmt.setInt(4, speciesList.get(1));
+            pstmt.setInt(5, speciesList.get(2));
+            pstmt.setInt(6, speciesList.get(3));
+            pstmt.setInt(7, speciesList.get(4));
             
-            pstmt.setInt(7, species_3);
-            pstmt.setInt(8, species_3_loc_x);
-            pstmt.setInt(9, species_3_loc_y);
-            
-            pstmt.setInt(10, species_4);
-            pstmt.setInt(11, species_4_loc_x);
-            pstmt.setInt(12, species_4_loc_y);
-            
-            pstmt.setInt(13, species_5);
-            pstmt.setInt(14, species_5_loc_x);
-            pstmt.setInt(15, species_5_loc_y);
-            
-
-            pstmt.setInt(16, player_id);
-            pstmt.setInt(17, terrain_id);
+            pstmt.setDate(8, new java.sql.Date(dateCreated.getTime()));
             
             pstmt.executeUpdate();
 
             rs = pstmt.getGeneratedKeys();
 
             if (rs.next()) {
-                int attack_config_id = rs.getInt(1);
-                AC = new AttackConfig(  attack_config_id
-                			, species_1
-                			, species_1_loc_x
-                			, species_1_loc_y
-							, species_2
-							, species_2_loc_x
-							, species_2_loc_y
-							, species_3
-							, species_3_loc_x
-							, species_3_loc_y
-							, species_4
-							, species_4_loc_x
-							, species_4_loc_y
-							, species_5
-							, species_5_loc_x
-							, species_5_loc_y
-							, player_id
-							, terrain_id                		
-                			);
+                AC = new AttackConfig();
+                AC.attackConfigId = rs.getInt(1);
+                AC.dateCreated = dateCreated;
+                AC.playerId = playerId;
+                AC.terrainId = terrainId;
+                AC.speciesList = speciesList;
             }
+            
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
         } finally {
@@ -131,20 +83,19 @@ public final class AttackConfigDAO {
         return AC;
     }
 
-    
-public static AttackConfig getConfig(int player_id) {
+public static AttackConfig getConfig(int playerId) {
         
     	AttackConfig AC = null;
 
         String query = "SELECT "
         			+ "   `clash_attack_config_id` "
-        			+ " , `species_1`, `species_1_loc_x`, 'species_1_loc_y` "
-        			+ " , `species_2`, `species_2_loc_x`, 'species_2_loc_y`"
-        			+ " , `species_3`, `species_3_loc_x`, 'species_3_loc_y`"
-        			+ " , `species_4`, `species_4_loc_x`, 'species_4_loc_y`"
-        			+ " , `species_5`, `species_5_loc_x`, 'species_5_loc_y`"
-        			+ " , `player_id`, `terrain_id` "
-        			+ "FROM `clash_attack_config` WHERE `player_id` = ? limit 1";
+        			+ " , `species_1`, "
+        			+ " , `species_2`, "
+        			+ " , `species_3`, "
+        			+ " , `species_4`, "
+        			+ " , `species_5`, "
+        			+ " , `player_id`, `terrain_id`, date_created "
+        			+ "FROM `clash_attack_config` WHERE `player_id` = ? order by date_created desc limit 1";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -153,37 +104,24 @@ public static AttackConfig getConfig(int player_id) {
         try {
             con = GameDB.getConnection();
             pstmt = con.prepareStatement(query);
-            pstmt.setInt(1, player_id);
+            pstmt.setInt(1, playerId);
            
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
             	
                 AC = new AttackConfig();
+                AC.attackConfigId = rs.getInt("clash_attack_config_id");
+                AC.playerId = rs.getInt("player_id");
+                AC.terrainId = rs.getInt("terrain_id");
+                AC.dateCreated = rs.getDate("date_created");
                 
-                AC.setAttack_config_id(rs.getInt("clash_attack_config_id"));
-                AC.setPlayer_id(rs.getInt("player_id"));
-                AC.setTerrain_id(rs.getInt("terrain_id"));
-                
-                AC.setSpecies_1(rs.getInt("species_1"));
-                AC.setSpecies_1_loc_x(rs.getInt("species_1_loc_x"));
-                AC.setSpecies_1_loc_y(rs.getInt("species_1_loc_y"));
-                
-                AC.setSpecies_2(rs.getInt("species_2"));
-                AC.setSpecies_2_loc_x(rs.getInt("species_2_loc_x"));
-                AC.setSpecies_2_loc_y(rs.getInt("species_2_loc_y"));
-                
-                AC.setSpecies_3(rs.getInt("species_3"));
-                AC.setSpecies_3_loc_x(rs.getInt("species_3_loc_x"));
-                AC.setSpecies_3_loc_y(rs.getInt("species_3_loc_y"));
-                
-                AC.setSpecies_4(rs.getInt("species_4"));
-                AC.setSpecies_4_loc_x(rs.getInt("species_4_loc_x"));
-                AC.setSpecies_4_loc_y(rs.getInt("species_4_loc_y"));
-                
-                AC.setSpecies_5(rs.getInt("species_5"));
-                AC.setSpecies_5_loc_x(rs.getInt("species_5_loc_x"));
-                AC.setSpecies_5_loc_y(rs.getInt("species_5_loc_y"));
+                AC.speciesList = new ArrayList();
+                AC.speciesList.add(rs.getInt("species_1"));
+                AC.speciesList.add(rs.getInt("species_2"));
+                AC.speciesList.add(rs.getInt("species_3"));
+                AC.speciesList.add(rs.getInt("species_4"));
+                AC.speciesList.add(rs.getInt("species_5"));
             }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
