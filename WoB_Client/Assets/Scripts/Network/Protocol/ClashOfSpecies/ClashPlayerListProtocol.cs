@@ -6,7 +6,6 @@ public class ClashPlayerListProtocol{
 	
 	public static NetworkRequest Prepare() {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_PLAYER_LIST);
-		
 		return request;
 	}
 	

@@ -51,7 +51,7 @@ public class NetworkManager : MonoBehaviour {
 
 		counter++;
 		if (counter == interval) {
-			Debug.Log ("checking response buffer... (+50)");
+			// Debug.Log ("checking response buffer... (+50)");
 			counter = 0;
 		}
 		foreach (NetworkResponse args in cManager.Read()) {

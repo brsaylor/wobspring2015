@@ -4,25 +4,28 @@ using System.Collections.Generic;
 
 public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
+
 	ClashPersistentData data;
 	List<Transform> enemyList;
 	List<Transform> allyList;
+
 	GameObject t;
+	string terrain_prefab;
+	public GameObject terrain;
 
 	// Use this for initialization
 	void Start () {
 		required_object = GameObject.Find ("Persistent Object");
+
 		if (required_object != null) {
 			data = required_object.GetComponent ("AttackingData") as ClashPersistentData;
 
-			t = Instantiate(Resources.Load("Terrains/" + data.defenderInfo.terrain, typeof(GameObject))) as GameObject;
 
-
-
-		} else {
-			Application.LoadLevel ("ClashSplash");
-			Debug.Log("Required Data not found");
 		}
+		//data = required_object.GetComponent<PersistentData> ();
+		//enemyList = data.GetDefenseTeam ();
+		//allyList = data.GetAttackTeam ();
+		SpawnTe ("Te The DryLands");//data.GetDefenderTerrain ());
 	}
 	
 	// Update is called once per frame
@@ -85,8 +88,20 @@ public class ClashBattleController : MonoBehaviour {
 	}
 
 	public void InstantiateEnemyUnits() {
+
 		foreach (ClashUnitData ud in data.defenderInfo.defense) {
+
+			Instantiate(Resources.Load("Prefabs/ClashOfSpecies/Unit/"+ud.prefabName,typeof(GameObject)), ud.location, Quaternion.identity);
 
 		}
 	}
+	void SpawnTe ( string p)
+	{
+		
+		Instantiate (Resources.Load ("Prefabs/ClashOfSpecies/Terrains/" + p, typeof(GameObject)), new Vector3 (0, 0, 0), Quaternion.identity);
+		
+	}
+
+
+
 }
