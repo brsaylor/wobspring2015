@@ -16,27 +16,22 @@ public class Splash : MonoBehaviour {
 	
 	void Awake() {
 		mainObject = GameObject.Find("MainObject");
-		NetworkManager.Send(ClashEntryProtocol.Prepare(1), (response) => {
-			var x = response as ResponseClashEntry;;
-			Debug.Log(x.firstTime);
-		});
+		StartCoroutine("RunTests");
 		//mainObject.GetComponent<MessageQueue>().AddCallback(Constants.SMSG_AUTH, ResponseLogin);
 	}
 
-	void RunClashEntry(int id) {
-		NetworkManager.Send(ClashEntryProtocol.Prepare(id), (response) => {
-			var x = response as ResponseClashEntry;
-			Debug.Log(x.firstTime);
-			RunClashSpeciesList();
-		});
+	IEnumerable RunTests() {
+		Execute(ClashEntryProtocol.Prepare(1));
+		yield return null;
+
+		Execute(ClashSpeciesListProtocol.Prepare());
+		yield return null;
+	
 	}
 
-	void RunClashSpeciesList() {
-		NetworkManager.Send(ClashSpeciesListProtocol.Prepare(), (response) => {
-			var res = response as ResponseClashSpeciesList;
-			foreach (var x in res.speciesList) {
-				Debug.Log(x);
-			}
+	void Execute(NetworkRequest req) {
+		NetworkManager.Send(req, (response) => {
+			Debug.Log(response);
 		});
 	}
 	
