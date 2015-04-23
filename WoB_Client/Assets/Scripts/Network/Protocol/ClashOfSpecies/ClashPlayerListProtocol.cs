@@ -6,7 +6,6 @@ public class ClashPlayerListProtocol{
 	
 	public static NetworkRequest Prepare() {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_PLAYER_LIST);
-		
 		return request;
 	}
 	
@@ -18,7 +17,6 @@ public class ClashPlayerListProtocol{
 
 		ResponsePlayers pl = (ResponsePlayers) PlayersProtocol.Parse(dataStream);
 		response.playerList = pl.playerList;
-
 		return response;
 	}
 }
