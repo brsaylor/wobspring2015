@@ -5,24 +5,24 @@ package model.clashgame;
 * @author Abhijit
 */
 
-public class DefenceConfig {
+public class DefenseConfig {
 
     private int defence_config_id;
     private int species_1;
-    private int species_1_loc_x;
-    private int species_1_loc_y;
+    private float species_1_loc_x;
+    private float species_1_loc_y;
     private int species_2;
-    private int species_2_loc_x;
-    private int species_2_loc_y;
+    private float species_2_loc_x;
+    private float species_2_loc_y;
     private int species_3;
-    private int species_3_loc_x;
-    private int species_3_loc_y;
+    private float species_3_loc_x;
+    private float species_3_loc_y;
     private int species_4;
-    private int species_4_loc_x;
-    private int species_4_loc_y;
+    private float species_4_loc_x;
+    private float species_4_loc_y;
     private int species_5;
-    private int species_5_loc_x;
-    private int species_5_loc_y;
+    private float species_5_loc_x;
+    private float species_5_loc_y;
     private int player_id;
     private int terrain_id;
     /* 
@@ -49,12 +49,12 @@ public class DefenceConfig {
 	 * @param player_id
 	 * @param terrain_id
 	 */
-	public DefenceConfig(int defence_config_id, 
-			int species_1, int species_1_loc_x, int species_1_loc_y, 
-			int species_2, int species_2_loc_x, int species_2_loc_y, 
-			int species_3, int species_3_loc_x, int species_3_loc_y, 
-			int species_4, int species_4_loc_x, int species_4_loc_y, 
-			int species_5, int species_5_loc_x, int species_5_loc_y, 
+	public DefenseConfig(int defence_config_id, 
+			int species_1, float species_1_loc_x, float species_1_loc_y,
+			int species_2, float species_2_loc_x, float species_2_loc_y,
+			int species_3, float species_3_loc_x, float species_3_loc_y,
+			int species_4, float species_4_loc_x, float species_4_loc_y,
+			int species_5, float species_5_loc_x, float species_5_loc_y,
 			int player_id, int terrain_id) {
 		super();
 		this.defence_config_id = defence_config_id;
@@ -77,8 +77,34 @@ public class DefenceConfig {
 		this.terrain_id = terrain_id;
 	}    
 
-	public DefenceConfig() {
+	public DefenseConfig() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public void addSpecies(int _id, float x, float y){
+		if(species_1 == 0){
+			species_1 = _id;
+			species_1_loc_x = x;
+			species_1_loc_y = y;
+		}else if(species_2 == 0){
+			species_2 = _id;
+			species_2_loc_x = x;
+			species_2_loc_y = y;
+		}if(species_3 == 0){
+			species_3 = _id;
+			species_3_loc_x = x;
+			species_3_loc_y = y;
+		}if(species_4 == 0){
+			species_4 = _id;
+			species_4_loc_x = x;
+			species_4_loc_y = y;
+		}if(species_5 == 0){
+			species_5 = _id;
+			species_5_loc_x = x;
+			species_5_loc_y = y;
+		}else{
+			//can't add anymore
+		}
 	}
 
 	/**
@@ -89,7 +115,7 @@ public class DefenceConfig {
 	}
 
 	/**
-	 * @param attack_config_id the attack_config_id to set
+	 * @param defence_config_id the attack_config_id to set
 	 */
 	public final void setDefence_config_id(int defence_config_id) {
 		this.defence_config_id = defence_config_id;
@@ -112,28 +138,28 @@ public class DefenceConfig {
 	/**
 	 * @return the species_1_loc_x
 	 */
-	public final int getSpecies_1_loc_x() {
+	public final float getSpecies_1_loc_x() {
 		return species_1_loc_x;
 	}
 
 	/**
 	 * @param species_1_loc_x the species_1_loc_x to set
 	 */
-	public final void setSpecies_1_loc_x(int species_1_loc_x) {
+	public final void setSpecies_1_loc_x(float species_1_loc_x) {
 		this.species_1_loc_x = species_1_loc_x;
 	}
 
 	/**
 	 * @return the species_1_loc_y
 	 */
-	public final int getSpecies_1_loc_y() {
+	public final float getSpecies_1_loc_y() {
 		return species_1_loc_y;
 	}
 
 	/**
 	 * @param species_1_loc_y the species_1_loc_y to set
 	 */
-	public final void setSpecies_1_loc_y(int species_1_loc_y) {
+	public final void setSpecies_1_loc_y(float species_1_loc_y) {
 		this.species_1_loc_y = species_1_loc_y;
 	}
 
@@ -154,28 +180,28 @@ public class DefenceConfig {
 	/**
 	 * @return the species_2_loc_x
 	 */
-	public final int getSpecies_2_loc_x() {
+	public final float getSpecies_2_loc_x() {
 		return species_2_loc_x;
 	}
 
 	/**
 	 * @param species_2_loc_x the species_2_loc_x to set
 	 */
-	public final void setSpecies_2_loc_x(int species_2_loc_x) {
+	public final void setSpecies_2_loc_x(float species_2_loc_x) {
 		this.species_2_loc_x = species_2_loc_x;
 	}
 
 	/**
 	 * @return the species_2_loc_y
 	 */
-	public final int getSpecies_2_loc_y() {
+	public final float getSpecies_2_loc_y() {
 		return species_2_loc_y;
 	}
 
 	/**
 	 * @param species_2_loc_y the species_2_loc_y to set
 	 */
-	public final void setSpecies_2_loc_y(int species_2_loc_y) {
+	public final void setSpecies_2_loc_y(float species_2_loc_y) {
 		this.species_2_loc_y = species_2_loc_y;
 	}
 
@@ -196,28 +222,28 @@ public class DefenceConfig {
 	/**
 	 * @return the species_3_loc_x
 	 */
-	public final int getSpecies_3_loc_x() {
+	public final float getSpecies_3_loc_x() {
 		return species_3_loc_x;
 	}
 
 	/**
 	 * @param species_3_loc_x the species_3_loc_x to set
 	 */
-	public final void setSpecies_3_loc_x(int species_3_loc_x) {
+	public final void setSpecies_3_loc_x(float species_3_loc_x) {
 		this.species_3_loc_x = species_3_loc_x;
 	}
 
 	/**
 	 * @return the species_3_loc_y
 	 */
-	public final int getSpecies_3_loc_y() {
+	public final float getSpecies_3_loc_y() {
 		return species_3_loc_y;
 	}
 
 	/**
 	 * @param species_3_loc_y the species_3_loc_y to set
 	 */
-	public final void setSpecies_3_loc_y(int species_3_loc_y) {
+	public final void setSpecies_3_loc_y(float species_3_loc_y) {
 		this.species_3_loc_y = species_3_loc_y;
 	}
 
@@ -238,28 +264,28 @@ public class DefenceConfig {
 	/**
 	 * @return the species_4_loc_x
 	 */
-	public final int getSpecies_4_loc_x() {
+	public final float getSpecies_4_loc_x() {
 		return species_4_loc_x;
 	}
 
 	/**
 	 * @param species_4_loc_x the species_4_loc_x to set
 	 */
-	public final void setSpecies_4_loc_x(int species_4_loc_x) {
+	public final void setSpecies_4_loc_x(float species_4_loc_x) {
 		this.species_4_loc_x = species_4_loc_x;
 	}
 
 	/**
 	 * @return the species_4_loc_y
 	 */
-	public final int getSpecies_4_loc_y() {
+	public final float getSpecies_4_loc_y() {
 		return species_4_loc_y;
 	}
 
 	/**
 	 * @param species_4_loc_y the species_4_loc_y to set
 	 */
-	public final void setSpecies_4_loc_y(int species_4_loc_y) {
+	public final void setSpecies_4_loc_y(float species_4_loc_y) {
 		this.species_4_loc_y = species_4_loc_y;
 	}
 
@@ -280,28 +306,28 @@ public class DefenceConfig {
 	/**
 	 * @return the species_5_loc_x
 	 */
-	public final int getSpecies_5_loc_x() {
+	public final float getSpecies_5_loc_x() {
 		return species_5_loc_x;
 	}
 
 	/**
 	 * @param species_5_loc_x the species_5_loc_x to set
 	 */
-	public final void setSpecies_5_loc_x(int species_5_loc_x) {
+	public final void setSpecies_5_loc_x(float species_5_loc_x) {
 		this.species_5_loc_x = species_5_loc_x;
 	}
 
 	/**
 	 * @return the species_5_loc_y
 	 */
-	public final int getSpecies_5_loc_y() {
+	public final float getSpecies_5_loc_y() {
 		return species_5_loc_y;
 	}
 
 	/**
 	 * @param species_5_loc_y the species_5_loc_y to set
 	 */
-	public final void setSpecies_5_loc_y(int species_5_loc_y) {
+	public final void setSpecies_5_loc_y(float species_5_loc_y) {
 		this.species_5_loc_y = species_5_loc_y;
 	}
 
