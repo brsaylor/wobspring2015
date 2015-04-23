@@ -4,11 +4,7 @@ using System.Collections.Generic;
 
 public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
-
 	ClashPersistentData data;
-	List<Transform> enemyList;
-	List<Transform> allyList;
-
 	GameObject t;
 	string terrain_prefab;
 	public GameObject terrain;
@@ -22,9 +18,7 @@ public class ClashBattleController : MonoBehaviour {
 
 
 		}
-		//data = required_object.GetComponent<PersistentData> ();
-		//enemyList = data.GetDefenseTeam ();
-		//allyList = data.GetAttackTeam ();
+
 		SpawnTe ("Te The DryLands");//data.GetDefenderTerrain ());
 	}
 	
@@ -90,8 +84,8 @@ public class ClashBattleController : MonoBehaviour {
 	public void InstantiateEnemyUnits() {
 
 		foreach (ClashUnitData ud in data.defenderInfo.defense) {
-
-			Instantiate(Resources.Load("Prefabs/ClashOfSpecies/Unit/"+ud.prefabName,typeof(GameObject)), ud.location, Quaternion.identity);
+			if(ud.prefab_id == 0) 
+			Instantiate(Resources.Load("Prefabs/ClashOfSpecies/Unit/Carnivore",typeof(GameObject)), ud.location, Quaternion.identity);
 
 		}
 	}

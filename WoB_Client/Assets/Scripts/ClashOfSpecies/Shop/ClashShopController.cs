@@ -7,7 +7,13 @@ using System.Collections.Generic;
 public class ClashShopElement {
 	public string name;
 	public int id;
-	public string prefab;
+	public int prefab_id;
+
+	public ClashShopElement(string n, int i,  int j) {
+		this.name = n;
+		this.id = i;
+		this.prefab_id = j;
+	}
 }
 
 public class ClashShopController : MonoBehaviour {
@@ -24,11 +30,7 @@ public class ClashShopController : MonoBehaviour {
 	public GameObject shopElementPrefab;
 	public GameObject selectedUnitPrefab;
 	public GameObject selectedTerrainPrefab;
-	public List<ClashShopElement> terrainList;
-	public List<ClashShopElement> carnivoreList;
-	public List<ClashShopElement> herbivoreList;
-	public List<ClashShopElement> omnivoreList;
-	public List<ClashShopElement> plantList;
+	List<ClashShopElement> carnivoreList;
 
 	void Awake() {
 		Screen.SetResolution (800, 600, true);
@@ -38,31 +40,28 @@ public class ClashShopController : MonoBehaviour {
 		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
 		}
-
-		/*	//------Protocol gets the list from server------
-		terrainList = RetrieveList ();
-		carnivoreList = RetrieveList ();
-		herbivoreList = RetrieveList ();
-		omnivoreList = RetrieveList ();
-		plantList = RetrieveList ();
-		*/
 	}
 
 	// Use this for initialization
 	void Start () {
 		pd = required_object.GetComponent<ClashPersistentData> ();
-		if (pd.GetSceneType() == "defense") {
+		if (pd.type == "defense") {
 			pd.SetDefenderName (pd.GetPlayerName ());
 			pd.SetDefenderId (pd.GetPlayerId ());
-			PopulateTerrainPanel (terrainList, terrainPanel);
+			PopulateTerrainPanel (pd.terrain_list, terrainPanel);
 		} else {
 			terrainTab.SetActive(false);
 			selectedTerrain.gameObject.SetActive(false);
 		}
+
+		carnivoreList = new List<ClashShopElement> ();
+		carnivoreList.Add (new ClashShopElement ("Unit1", 0, 0));
 		PopulateUnitPanel (carnivoreList, carnivorePanel);
+		/*
 		PopulateUnitPanel (herbivoreList, herbivorePanel);
 		PopulateUnitPanel (omnivoreList, omnivorePanel);
 		PopulateUnitPanel (plantList, plantPanel);
+		*/
 	}
 
 	// Update is called once per frame
@@ -84,7 +83,7 @@ public class ClashShopController : MonoBehaviour {
 			e.label.text = shopElement.name;	//species name for display
 			e.name = shopElement.name;			//species name
 			e.id = shopElement.id;				//species id
-			e.prefab = shopElement.prefab;		//prefab name
+			e.prefab_id = shopElement.prefab_id;		//prefab id
 			//e.image = ;						//set sprite
 			e.preview.onClick.AddListener(() => DisplayPreview(e));
 			e.add.onClick.AddListener(() => AddToSelectedUnits(e));
@@ -92,30 +91,30 @@ public class ClashShopController : MonoBehaviour {
 		}
 	}
 
-	void PopulateTerrainPanel(List<ClashShopElement> list, Transform panel) {
-		foreach (var shopElement in list) {
+	void PopulateTerrainPanel(List<GameObject> list, Transform panel) {
+		int id = 0;
+		foreach (var go in list) {
 			GameObject element = Instantiate(shopElementPrefab) as GameObject;
 			ClashShopElementPrefab e = element.GetComponent<ClashShopElementPrefab>();
-			e.label.text = shopElement.name;	//terrain name for display
-			e.item_name = shopElement.name;		//terrain name
-			e.id = shopElement.id;				//terrain id
-			e.prefab = shopElement.prefab;		//prefab name
+			e.label.text = go.name;	//terrain name for display
+			e.item_name = go.name;		//terrain name
+			e.prefab_id = id;		//prefab id
 			//e.image = ;						//set sprite
 			e.add.onClick.AddListener(() => AddToSelectedTerrain(e));
 			element.transform.SetParent(panel);
+			id++;
 		}
 	}
 
 	void AddToSelectedUnits(ClashShopElementPrefab se) {
-		if (selectedUnits.childCount < 5) {
-			GameObject selected = Instantiate (selectedUnitPrefab) as GameObject;
-			ClashSelectedUnit e = selected.GetComponent<ClashSelectedUnit> ();
+		GameObject selected = Instantiate (selectedUnitPrefab) as GameObject;
+		ClashSelectedUnit e = selected.GetComponent<ClashSelectedUnit> ();
+
+		if (selectedUnits.childCount < 5 && !CheckIfUnitExists(se.id)) {
 			e.label.text = se.label.text;	//species name
-			e.prefab_name = se.prefab;		//prefab name
-			e.id = se.id;					//species id
+			e.prefab_id = se.prefab_id;		//prefab name
+			e.species_id = se.id;					//species id
 			//e.image =;
-			e.input.characterValidation = InputField.CharacterValidation.Integer;
-			//e.input.onValidateInput();
 			e.remove.onClick.AddListener (() => RemoveFromSelected (selected));
 			selected.transform.SetParent (selectedUnits);
 		} else {
@@ -128,14 +127,22 @@ public class ClashShopController : MonoBehaviour {
 			GameObject selected = Instantiate (selectedTerrainPrefab) as GameObject;
 			ClashSelectedTerrain e = selected.GetComponent<ClashSelectedTerrain> ();
 			e.label.text = se.label.text;
-			e.prefab_name = se.prefab;
-			e.id = se.id;
+			e.terrain_id = se.prefab_id;
 			//e.image = ;
 			e.remove.onClick.AddListener (() => RemoveFromSelected (selected));
 			selected.transform.SetParent (selectedTerrain);
 		} else {
 			DisplayErrorMessage("Only 1 terrain can be chosen");
 		}
+	}
+
+	bool CheckIfUnitExists(int unit_id) {
+		foreach (Transform child in selectedUnits) {
+			if(child.gameObject.GetComponent<ClashSelectedUnit>().species_id == unit_id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void DisplayPreview(ClashShopElementPrefab se) {

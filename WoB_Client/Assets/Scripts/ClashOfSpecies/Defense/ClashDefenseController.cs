@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,9 +7,10 @@ public class ClashDefenseController : MonoBehaviour {
 	GameObject required_object;
 	ClashPersistentData pd;
 	string terrain_prefab;
-	List<ClashUnitData> units;
 	public Transform unit_display;
-	public GameObject unit_display_button;
+	public ToggleGroup toggleGroup = null;
+	public GameObject unit_display_toggle;
+	ClashDefenseToggle selected;
 
 	void Awake() {
 		required_object = GameObject.Find ("Persistent Object");
@@ -20,11 +22,11 @@ public class ClashDefenseController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentData> () as ClashPersistentData;
-		terrain_prefab = pd.defenderInfo.terrain;
-		units = pd.defenderInfo.defense;
 
-		Instantiate (Resources.Load ("Prefabs\\ClashOfSpecies\\Terrain\\" + terrain_prefab, typeof(GameObject)));
+		pd = required_object.GetComponent<ClashPersistentData> ();
+		toggleGroup = unit_display.GetComponent<ToggleGroup>();
+
+		Instantiate (pd.terrain_list[pd.defenderInfo.terrain_id], new Vector3(0,0,0), Quaternion.identity);
 
 		PopulateUnitDisplay ();
 	}
@@ -35,16 +37,21 @@ public class ClashDefenseController : MonoBehaviour {
 	}
 
 	void PopulateUnitDisplay() {
-		foreach (ClashUnitData ud in units) {
-			GameObject element = Instantiate(unit_display_button) as GameObject;
-			ClashUnitButton cub = element.GetComponent<ClashUnitButton>();
-			//cub.unit_image = ;
-			cub.self.onClick.AddListener(() => SelectUnit(cub));
-			cub.transform.SetParent(unit_display);
+		int i = 0;
+		foreach (ClashUnitData ud in pd.defenderInfo.defense) {
+			GameObject element = Instantiate(unit_display_toggle) as GameObject;
+			ClashDefenseToggle cdt = element.GetComponent<ClashDefenseToggle>();
+			cdt.list_index = i;
+			//cdt.unit_image = ;
+			//cdt.toggle.onValueChanged.AddListener((value) => SelectUnit(cdt));
+			cdt.toggle.group = toggleGroup;
+			cdt.transform.SetParent(unit_display);
+			i++;
 		}
 	}
 
-	void SelectUnit(ClashUnitButton cub) {
-		cub.self.interactable = false;
+	void SelectUnit(ClashDefenseToggle cdt) {
+		selected = cdt;
 	}
+	
 }

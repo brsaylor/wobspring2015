@@ -15,14 +15,14 @@ public class ClashShopButtonController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		required_object = GameObject.Find ("Persistent Object");
-		pd = required_object.GetComponent<ClashPersistentData> ();
 		/*	//ShopController.cs handles this; not needed here
 		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
 		}
 		*/
-	
-		if (pd.GetSceneType () == "defense") {
+		pd = required_object.GetComponent<ClashPersistentData> ();
+
+		if (pd.type == "defense") {
 			cancelLabel.text = "Return to Lobby\n(Cancel)";
 			cancel.onClick.AddListener (() => BackToLobby ());
 			acceptLabel.text = "Place Defense\n(Continue)";
@@ -52,38 +52,28 @@ public class ClashShopButtonController : MonoBehaviour {
 	void GoToClashBattle() {
 		//get all children gameObject in Canvas->SelectedUnits
 		//put the data from those children gameObjects into the persistent data
-		if (pd.GetSceneType () == "defense") {
-			if (selectedUnits.childCount > 0) {
+		if (pd.type == "defense") {
+			if (selectedUnits.childCount > 0 && selectedTerrain.childCount > 0) {
 				foreach (Transform child in selectedUnits) {
 					ClashSelectedUnit su = child.gameObject.GetComponent<ClashSelectedUnit> ();
-					//pd.AddToUnitList (species_name, species_id, prefabName, hp);
-					int hp;
-					int.TryParse(su.input.text, out hp);
-					pd.AddToUnitList (su.label.text, su.id, su.prefab_name, hp);
+					//pd.AddToUnitList (species_name, species_id, prefabName);
+					pd.AddToUnitList (su.label.text, su.species_id, su.prefab_id);
 				}
-			} 
-			if (selectedTerrain.childCount > 0) {
 				foreach (Transform child in selectedTerrain) {
 					ClashSelectedTerrain st = child.gameObject.GetComponent<ClashSelectedTerrain> ();
-					pd.SetDefenderTerrain (st.prefab_name);
+					pd.SetDefenderTerrain (st.terrain_id);
 				}
-			}
-			if(pd.GetTeamSize() > 0 && pd.GetDefenderTerrain() != "")
 				Application.LoadLevel ("ClashDefense");
-			else
+			} else
 				Debug.Log("Need at least one unit and terrain to move on");
-		} else if (pd.GetSceneType () == "offense") {
+		} else if (pd.type == "offense") {
 			if (selectedUnits.childCount > 0) {
 				foreach (Transform child in selectedUnits) {
 					ClashSelectedUnit su = child.gameObject.GetComponent<ClashSelectedUnit> ();
-					int hp;
-					int.TryParse(su.input.text, out hp);
-					//pd.AddToUnitList (species_name, species_id, prefabName, hp);
-					pd.AddToUnitList (su.label.text, su.id, su.prefab_name, hp);
+					pd.AddToUnitList (su.label.text, su.species_id, su.prefab_id);
 				}
-			}
-			if(pd.GetTeamSize() > 0 && pd.GetDefenderTerrain() != "")
 				Application.LoadLevel ("ClashBattle");
+			}
 		}
 	}
 }

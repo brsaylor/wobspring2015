@@ -60,7 +60,7 @@ public class ClashAttacker {
 	 **/
 
 
-public class ClashPersistentData : MonoBehaviour {
+public class ClashPersistentUserData : MonoBehaviour {
 	[SerializeField]
 	private string player_name;	//player username
 

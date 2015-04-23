@@ -4,9 +4,8 @@ using System.Collections;
 
 public class ClashSelectedUnit : MonoBehaviour {
 	public Image image;
-	public InputField input;
 	public Text label;
 	public Button remove;
-	public string prefab_name;
-	public int id;
+	public int prefab_id;
+	public int species_id;
 }
