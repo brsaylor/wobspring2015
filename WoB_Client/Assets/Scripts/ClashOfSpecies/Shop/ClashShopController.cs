@@ -18,7 +18,7 @@ public class ClashShopElement {
 
 public class ClashShopController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentUserData pd;
+	ClashPersistentData pd;
 	public Transform terrainPanel;
 	public Transform carnivorePanel;
 	public Transform herbivorePanel;
@@ -44,7 +44,7 @@ public class ClashShopController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentUserData> ();
+		pd = required_object.GetComponent<ClashPersistentData> ();
 		if (pd.type == "defense") {
 			pd.SetDefenderName (pd.GetPlayerName ());
 			pd.SetDefenderId (pd.GetPlayerId ());

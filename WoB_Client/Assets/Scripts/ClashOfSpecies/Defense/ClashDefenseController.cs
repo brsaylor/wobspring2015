@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ClashDefenseController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentUserData pd;
+	ClashPersistentData pd;
 	string terrain_prefab;
 	public Transform unit_display;
 	public ToggleGroup toggleGroup = null;
@@ -23,7 +23,7 @@ public class ClashDefenseController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		pd = required_object.GetComponent<ClashPersistentUserData> () as ClashPersistentUserData;
+		pd = required_object.GetComponent<ClashPersistentData> ();
 		toggleGroup = unit_display.GetComponent<ToggleGroup>();
 
 		Instantiate (pd.terrain_list[pd.defenderInfo.terrain_id], new Vector3(0,0,0), Quaternion.identity);

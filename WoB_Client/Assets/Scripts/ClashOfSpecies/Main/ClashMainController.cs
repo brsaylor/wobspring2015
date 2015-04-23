@@ -20,7 +20,7 @@ public class ClashMainController : MonoBehaviour {
     ToggleGroup toggleGroup = null;
 	ClashPreviewController pctrl;
 	GameObject required_object;
-	ClashPersistentUserData pd;
+	ClashPersistentData pd;
 
 
 	void Awake() {
@@ -33,7 +33,7 @@ public class ClashMainController : MonoBehaviour {
 	}
 
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentUserData> () as ClashPersistentUserData;
+		pd = required_object.GetComponent<ClashPersistentData> ();
         toggleGroup = contentPanel.GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<ClashPreviewController> ();
 		PopulateScrollView ();

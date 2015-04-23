@@ -7,7 +7,7 @@ using System.Collections;
 public class ClashDefenseSpawner : MonoBehaviour {
 	public ClashDefenseController cdc;
 	GameObject required_object;
-	ClashPersistentUserData pd;
+	ClashPersistentData pd;
 
 	void Awake() {
 		required_object = GameObject.Find ("Persistent Object");
@@ -19,7 +19,7 @@ public class ClashDefenseSpawner : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentUserData> () as ClashPersistentUserData;
+		pd = required_object.GetComponent<ClashPersistentData> ();
 		//Debug.Log (EventSystem.current.IsPointerOverGameObject ());
 	}
 

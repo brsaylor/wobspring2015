@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentUserData data;
+	ClashPersistentData data;
 	GameObject t;
 	string terrain_prefab;
 	public GameObject terrain;
@@ -14,7 +14,7 @@ public class ClashBattleController : MonoBehaviour {
 		required_object = GameObject.Find ("Persistent Object");
 
 		if (required_object != null) {
-			data = required_object.GetComponent ("AttackingData") as ClashPersistentUserData;
+			data = required_object.GetComponent ("AttackingData") as ClashPersistentData;
 
 
 		}

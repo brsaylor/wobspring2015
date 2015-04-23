@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ClashSplashController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentUserData pd;
+	ClashPersistentData pd;
 
 	void Awake() {
 		Screen.SetResolution (800, 600, true);
@@ -16,7 +16,7 @@ public class ClashSplashController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentUserData> ();
+		pd = required_object.GetComponent<ClashPersistentData> ();
 		pd.SetPlayerName ("Player Name");
 		pd.SetPlayerId (3);
 

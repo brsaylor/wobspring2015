@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ClashShopButtonController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentUserData pd;
+	ClashPersistentData pd;
 	public Button cancel;
 	public Text cancelLabel;
 	public Button accept;
@@ -20,7 +20,7 @@ public class ClashShopButtonController : MonoBehaviour {
 			Application.LoadLevel ("ClashSplash");
 		}
 		*/
-		pd = required_object.GetComponent<ClashPersistentUserData> ();
+		pd = required_object.GetComponent<ClashPersistentData> ();
 
 		if (pd.type == "defense") {
 			cancelLabel.text = "Return to Lobby\n(Cancel)";
