@@ -22,6 +22,23 @@ public class Splash : MonoBehaviour {
 		});
 		//mainObject.GetComponent<MessageQueue>().AddCallback(Constants.SMSG_AUTH, ResponseLogin);
 	}
+
+	void RunClashEntry(int id) {
+		NetworkManager.Send(ClashEntryProtocol.Prepare(id), (response) => {
+			var x = response as ResponseClashEntry;
+			Debug.Log(x.firstTime);
+			RunClashSpeciesList();
+		});
+	}
+
+	void RunClashSpeciesList() {
+		NetworkManager.Send(ClashSpeciesListProtocol.Prepare(), (response) => {
+			var res = response as ResponseClashSpeciesList;
+			foreach (var x in res.speciesList) {
+				Debug.Log(x);
+			}
+		});
+	}
 	
 	// Use this for initialization
 	void Start() {
