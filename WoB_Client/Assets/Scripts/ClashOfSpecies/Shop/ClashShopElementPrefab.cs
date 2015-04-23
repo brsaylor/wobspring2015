@@ -9,5 +9,5 @@ public class ClashShopElementPrefab : MonoBehaviour {
 	public Text label;
 	public string item_name;
 	public int id;
-	public string prefab;
+	public int prefab_id;
 }

@@ -6,13 +6,13 @@ using System.Collections.Generic;
 public class ClashUnitData {
 	public string species_name;
 	public int species_id;
-	public string prefabName; //carnivore, herbi, omni, plant1, plant2, etc
-	public int hp;
+	public int prefab_id; //carnivore, herbi, omni, plant1, plant2, etc (type)
+	public int hp, attack, attackSpeed, movementSpeed;
 	public Vector3 location;
 	public bool isDeployed;
 
 	public override string ToString() {
-		return "species_id: " + species_id + " Prefab: " + prefabName + " Biomass: " + hp;
+		return "species_id: " + species_id + " Prefab: " + prefab_id + " Biomass: " + hp;
 	}
 
 	public bool Equals(ClashUnitData other) {
@@ -26,7 +26,7 @@ public class ClashUnitData {
 public class ClashDefender {
 	public string player_name;
 	public int player_id;
-	public string terrain;
+	public int terrain_id;
 	public List<ClashUnitData> defense;
 }
 
@@ -60,12 +60,20 @@ public class ClashAttacker {
 	 **/
 
 
-public class ClashPersistentData : MonoBehaviour {
-	public string player_name;	//player username
-	public int player_id;
-	public string type;	//is data for offense setup scene or defense setup scene
+public class ClashPersistentUserData : MonoBehaviour {
+	[SerializeField]
+	private string player_name;	//player username
+
+	[SerializeField]
+	private int player_id;
+
 	public ClashDefender defenderInfo;
 	public ClashAttacker attackerInfo;
+	public List<ClashUnitData> species_list;
+	public List<GameObject> terrain_list;
+
+	public string type;	//is data for offense setup scene or defense setup scene
+
 
 	void Awake() {
 		DontDestroyOnLoad (this);
@@ -78,11 +86,11 @@ public class ClashPersistentData : MonoBehaviour {
 	}
 
 	public string GetPlayerName() {
-		return player_name;
+		return this.player_name;
 	}
 
 	public void SetPlayerName(string s) {
-		player_name = s;
+		this.player_name = s;
 	}
 
 	public int GetPlayerId() {
@@ -91,14 +99,6 @@ public class ClashPersistentData : MonoBehaviour {
 	
 	public void SetPlayerId(int i) {
 		player_id = i;
-	}
-
-	public string GetSceneType() {
-		return type;
-	}
-	
-	public void SetSceneType(string s) {
-		type = s;
 	}
 
 	public List<ClashUnitData> GetList() {
@@ -110,12 +110,11 @@ public class ClashPersistentData : MonoBehaviour {
 			return null;
 	}
 
-	public void AddToUnitList(string species_name, int species_id, string prefabName, int hp) {
+	public void AddToUnitList(string species_name, int species_id, int prefab_id) {
 		ClashUnitData ud = new ClashUnitData ();
 		ud.species_name = species_name;
 		ud.species_id = species_id;
-		ud.prefabName = prefabName;
-		ud.hp = hp;
+		ud.prefab_id = prefab_id;
 		ud.isDeployed = false;
 
 		if (type == "offense")
@@ -151,12 +150,12 @@ public class ClashPersistentData : MonoBehaviour {
 		this.defenderInfo.player_id = player_id;
 	}
 
-	public string GetDefenderTerrain() {
-		return this.defenderInfo.terrain;
+	public GameObject GetDefenderTerrain(int terrain_id) {
+		return terrain_list[terrain_id];
 	}
 
-	public void SetDefenderTerrain(string terrain) {
-		this.defenderInfo.terrain = terrain;
+	public void SetDefenderTerrain(int terrain_id) {
+		this.defenderInfo.terrain_id = terrain_id;
 	}
 
 	public List<ClashUnitData> GetDefenseTeam(){
@@ -166,7 +165,7 @@ public class ClashPersistentData : MonoBehaviour {
 	public void ClearDefenderData() {
 		this.defenderInfo.player_id = 0;
 		this.defenderInfo.player_name = "";
-		this.defenderInfo.terrain = "";
+		this.defenderInfo.terrain_id = -1;
 		this.defenderInfo.defense.Clear();
 	}
 

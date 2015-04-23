@@ -7,5 +7,5 @@ public class ClashPlayerToggle : MonoBehaviour {
 	public Text label;
 	public string player_name;
 	public int player_id;
-	public string terrain;
+	public int terrain_id;
 }

@@ -6,6 +6,6 @@ public class ClashSelectedTerrain : MonoBehaviour {
 	public Image image;
 	public Text label;
 	public Button remove;
-	public string prefab_name;
+	public int terrain_id;
 	public int id;
 }

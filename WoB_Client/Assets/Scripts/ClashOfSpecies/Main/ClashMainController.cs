@@ -8,7 +8,6 @@ using System.Collections.Generic;
 public class ClashPlayerElement {
 	public int id;
 	public string name;
-	public string terrain;
 	public bool isSelected;
 }
 
@@ -17,11 +16,11 @@ public class ClashMainController : MonoBehaviour {
 	public List<ClashPlayerElement> playerList;
 	public Transform contentPanel;
 	string selectedPlayer = "";
-	string defendingTerrain = "";
+	int defendingTerrain = -1;
     ToggleGroup toggleGroup = null;
 	ClashPreviewController pctrl;
 	GameObject required_object;
-	ClashPersistentData pd;
+	ClashPersistentUserData pd;
 
 
 	void Awake() {
@@ -34,23 +33,14 @@ public class ClashMainController : MonoBehaviour {
 	}
 
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentData> () as ClashPersistentData;
+		pd = required_object.GetComponent<ClashPersistentUserData> () as ClashPersistentUserData;
         toggleGroup = contentPanel.GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<ClashPreviewController> ();
 		PopulateScrollView ();
 	}
 
 	void Update() {
-/*
-		if (defendingTerrain != "") {
-			//pctrl.display = Resources.Load ("Images\\Acacia" + defendingTerrain, typeof(Image));
 
-			pctrl.text.enabled = false;
-		} else {
-			pctrl.display = null;
-			pctrl.text.enabled = true;
-		}
-	*/
 	}
 
 	//protocol does this
@@ -66,7 +56,6 @@ public class ClashMainController : MonoBehaviour {
 			toggle.label.text = playerElement.name;
 			toggle.player_name = playerElement.name;
 			toggle.player_id = playerElement.id;
-			toggle.terrain = playerElement.terrain;
 			toggle.toggle.isOn = playerElement.isSelected;
 			toggle.toggle.onValueChanged.AddListener((value) => ToggleAction(toggle, value));
 			toggle.toggle.group = toggleGroup;
@@ -76,7 +65,7 @@ public class ClashMainController : MonoBehaviour {
 
 	public void ToggleAction(ClashPlayerToggle toggle, bool state) {
 		selectedPlayer = state ? toggle.name : "";
-		defendingTerrain = state ? toggle.terrain : "";
+		defendingTerrain = state ? toggle.terrain_id : -1;
 		pctrl.text.enabled = !state;
 		//pctrl.display = state ? Resources.Load("", typeof(Sprite)) : null;
 		//Debug.Log (selectedPlayer);
@@ -85,7 +74,7 @@ public class ClashMainController : MonoBehaviour {
 
 	//load the defense shop scene
 	public void EditDefense() {
-		pd.SetSceneType ("defense");
+		pd.type = "defense";
 		pd.SetDefenderId (pd.GetPlayerId ());
 
 		Application.LoadLevel ("ClashShop");
@@ -93,7 +82,7 @@ public class ClashMainController : MonoBehaviour {
 
 	public void AttackPlayer() {
 		if (selectedPlayer != "") {
-			pd.SetSceneType("offense");
+			pd.type = "offense";
 			pd.SetDefenderName(selectedPlayer);
 			pd.SetDefenderTerrain(defendingTerrain);
 			//Debug.Log(atkData.getDefenderName());
