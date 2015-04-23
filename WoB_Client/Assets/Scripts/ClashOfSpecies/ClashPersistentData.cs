@@ -159,7 +159,7 @@ public class ClashPersistentData : MonoBehaviour {
 		this.defenderInfo.terrain = terrain;
 	}
 
-	public List<UnitData> GetDefenseTeam(){
+	public List<ClashUnitData> GetDefenseTeam(){
 		return this.defenderInfo.defense;
 	}
 
@@ -187,7 +187,7 @@ public class ClashPersistentData : MonoBehaviour {
 	public void SetAttackerId(int player_id) {
 		this.attackerInfo.player_id = player_id;
 	}
-	public List<UnitData> GetAttackTeam(){
+	public List<ClashUnitData> GetAttackTeam(){
 		return this.attackerInfo.offense;
 	}
 	public void ClearAttackerData() {
