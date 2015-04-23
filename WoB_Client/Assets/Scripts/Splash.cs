@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Net.Sockets;
+using Test = System.Diagnostics.Debug;
 
 public class Splash : MonoBehaviour {
 	
@@ -15,7 +16,10 @@ public class Splash : MonoBehaviour {
 	
 	void Awake() {
 		mainObject = GameObject.Find("MainObject");
-		
+		NetworkManager.Send(ClashEntryProtocol.Prepare(1), (response) => {
+			var x = response as ResponseClashEntry;;
+			Debug.Log(x.firstTime);
+		});
 		//mainObject.GetComponent<MessageQueue>().AddCallback(Constants.SMSG_AUTH, ResponseLogin);
 	}
 	

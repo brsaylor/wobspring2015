@@ -35,12 +35,12 @@ public class Login : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
-		//StartCoroutine("AutoLogin");
+		StartCoroutine("AutoLogin");
 	}
 	
 	// Update is called once per frame
 	void Update() {
-		
+
 	}
 	
 	void OnDestroy() {
@@ -125,13 +125,10 @@ public class Login : MonoBehaviour {
 	}
 	
 	public IEnumerator AutoLogin() {
-		while (true) {
-			user_id = "1";
-			password = "1";
-			Submit();
-			
-			yield return new WaitForSeconds(1.0f);
-		}
+		user_id = "1";
+		password = "1";
+		Submit();
+		yield return new WaitForSeconds(1.0f);
 	}
 	
 	public void ProcessLogin(NetworkResponse response) {
