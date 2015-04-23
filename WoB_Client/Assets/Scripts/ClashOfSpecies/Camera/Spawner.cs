@@ -1,47 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Spawner : MonoBehaviour {
-	GameObject loadedInvader;
-	bool prefabLoaded;
-	bool toggleTxt;
+
+//
+//	void OnMouseDown(){
+//		Debug.Log ("1111");
+//	}
+
+
+
+	void OnMouseUpAsButton() {
+		// Is there something to build?
+
+		//Instantiate(, transform.position, Quaternion.identity);
+
+	}
 
 	// Use this for initialization
 	void Start () {
-		prefabLoaded = false;
-		toggleTxt = false;
-		loadedInvader = null;
+		
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
-		if (prefabLoaded) {
-			SpawnInvader ();
-		} else {
-			LoadPrefab();
-		}
+		
 	}
+	
 
-	void OnGUI() {
+	
 
-	}
-
-	void LoadPrefab() {
-		loadedInvader = Resources.Load ("Herbivore", typeof(GameObject)) as GameObject;
-		prefabLoaded = true;
-	}
-
-	private void SpawnInvader() {
-		if(Input.GetButtonDown("Fire1") && GUIUtility.hotControl == 0) {	//mouse 1 pressed
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out hit, 1000.0f))
-			{
-				print (hit.collider.gameObject.tag);
-				if (hit.collider.gameObject.tag == "Terrain") {
-					Instantiate (loadedInvader, hit.point, Quaternion.identity);
-				}
-			}
-		}
-	}
 }
