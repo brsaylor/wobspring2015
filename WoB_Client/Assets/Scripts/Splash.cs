@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 using System;
 using System.Collections;
@@ -77,7 +77,8 @@ public class Splash : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
-		
+		//sleep 5 seconds
+		sleepMethod ();
 	}
 	
 	void OnGUI() {
@@ -99,5 +100,16 @@ public class Splash : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
+	}
+
+	//method to make splash screen wait 5 seconds
+	void sleepMethod(){
+		StartCoroutine ("waitTime");
+	}
+	
+	IEnumerator waitTime(){
+		//Debug.Log ("before");
+		yield return new WaitForSeconds(5);
+		//Debug.Log ("after");
 	}
 }
