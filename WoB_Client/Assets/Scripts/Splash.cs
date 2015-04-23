@@ -77,6 +77,7 @@ public class Splash : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
+		//sleep 5 seconds
 		sleepMethod ();
 	}
 	
@@ -101,13 +102,14 @@ public class Splash : MonoBehaviour {
 	void Update() {
 	}
 
+	//method to make splash screen wait 5 seconds
 	void sleepMethod(){
 		StartCoroutine ("waitTime");
 	}
-
+	
 	IEnumerator waitTime(){
-		Debug.Log ("before");
+		//Debug.Log ("before");
 		yield return new WaitForSeconds(5);
-		Debug.Log ("after");
+		//Debug.Log ("after");
 	}
 }
