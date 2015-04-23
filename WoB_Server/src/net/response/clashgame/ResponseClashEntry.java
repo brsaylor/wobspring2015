@@ -34,7 +34,7 @@ public class ResponseClashEntry extends GameResponse{
 
     }
     
-    public void addNewSpecies(int speciesId, Vector2<Float> position){
+    public void addSpecies(int speciesId, Vector2<Float> position){
         this.configMap.put(speciesId, position);
     }
     

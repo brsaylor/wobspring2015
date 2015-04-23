@@ -1,21 +1,17 @@
 package model.clashgame;
-
-import java.util.List;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- *
- * @author Abhijit, Ben
- */
-public class AttackConfig {
+*
+* @author Abhijit
+*/
 
-    public int attackConfigId;
+public class AttackConfig {
+    public int id;
+    public List<Integer> speciesIds = Arrays.asList(new Integer[5]);
     public int playerId;
     public int terrainId;
-    public ArrayList<Integer> speciesList;
-    public Date dateCreated;
-
-    public AttackConfig() {
-    }
 }
