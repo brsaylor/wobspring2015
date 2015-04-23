@@ -7,11 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 // Other Imports
 
 import model.clashgame.DefenseConfig;
+import org.datacontract.schemas._2004._07.System_Data_Objects_DataClasses.StructuralObject;
 import util.Log;
 
 /**
@@ -129,7 +131,29 @@ public final class DefenseConfigDAO {
             return DC;
         }
 
-    
+    public static ArrayList<Integer> allPlayersWithDefenseConfigs(){
+        String query = "SELECT `player_id` FROM `clash_defense_config";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                res.add(rs.getInt("player_id"));
+            }
+        }catch(SQLException ex){
+            Log.println_e(ex.getMessage());
+        }finally {
+            GameDB.closeConnection(con, pstmt, rs);
+        }
+
+        return res;
+    }
         
     public static DefenseConfig getConfig(int player_id) {
         
@@ -165,24 +189,24 @@ public final class DefenseConfigDAO {
                 DC.setTerrain_id(rs.getInt("terrain_id"));
                 
                 DC.setSpecies_1(rs.getInt("species_1"));
-                DC.setSpecies_1_loc_x(rs.getInt("species_1_loc_x"));
-                DC.setSpecies_1_loc_y(rs.getInt("species_1_loc_y"));
+                DC.setSpecies_1_loc_x(rs.getFloat("species_1_loc_x"));
+                DC.setSpecies_1_loc_y(rs.getFloat("species_1_loc_y"));
                 
                 DC.setSpecies_2(rs.getInt("species_2"));
-                DC.setSpecies_2_loc_x(rs.getInt("species_2_loc_x"));
-                DC.setSpecies_2_loc_y(rs.getInt("species_2_loc_y"));
+                DC.setSpecies_2_loc_x(rs.getFloat("species_2_loc_x"));
+                DC.setSpecies_2_loc_y(rs.getFloat("species_2_loc_y"));
                 
                 DC.setSpecies_3(rs.getInt("species_3"));
-                DC.setSpecies_3_loc_x(rs.getInt("species_3_loc_x"));
-                DC.setSpecies_3_loc_y(rs.getInt("species_3_loc_y"));
+                DC.setSpecies_3_loc_x(rs.getFloat("species_3_loc_x"));
+                DC.setSpecies_3_loc_y(rs.getFloat("species_3_loc_y"));
                 
                 DC.setSpecies_4(rs.getInt("species_4"));
-                DC.setSpecies_4_loc_x(rs.getInt("species_4_loc_x"));
-                DC.setSpecies_4_loc_y(rs.getInt("species_4_loc_y"));
+                DC.setSpecies_4_loc_x(rs.getFloat("species_4_loc_x"));
+                DC.setSpecies_4_loc_y(rs.getFloat("species_4_loc_y"));
                 
                 DC.setSpecies_5(rs.getInt("species_5"));
-                DC.setSpecies_5_loc_x(rs.getInt("species_5_loc_x"));
-                DC.setSpecies_5_loc_y(rs.getInt("species_5_loc_y"));
+                DC.setSpecies_5_loc_x(rs.getFloat("species_5_loc_x"));
+                DC.setSpecies_5_loc_y(rs.getFloat("species_5_loc_y"));
             }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
