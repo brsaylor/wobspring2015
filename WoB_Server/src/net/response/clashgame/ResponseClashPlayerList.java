@@ -20,7 +20,7 @@ import java.util.Map;
  * @author lev
  */
 public class ResponseClashPlayerList extends GameResponse{
-    private List<Player> players = new ArrayList<>();
+    private List<Player> players = new ArrayList<Player>();
 
     public ResponseClashPlayerList(){
         response_id = NetworkCode.CLASH_PLAYER_LIST;
