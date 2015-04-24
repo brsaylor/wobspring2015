@@ -17,6 +17,7 @@ public class ClashSpeciesListProtocol{
 		for(int i = 0; i < count; i++){
 			ClashSpeciesData spec = new ClashSpeciesData();
 			spec.species_id = DataReader.ReadInt(dataStream);
+			spec.species_name = DataReader.ReadString(dataStream);
 			spec.species_price = DataReader.ReadInt(dataStream);
 			spec.species_type = DataReader.ReadInt(dataStream);
 			spec.description = DataReader.ReadString(dataStream);

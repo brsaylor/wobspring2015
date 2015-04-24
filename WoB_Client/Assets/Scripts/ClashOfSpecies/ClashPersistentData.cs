@@ -37,11 +37,19 @@ public class ClashAttacker {
 	public List<ClashUnitData> offense;
 }
 
+enum SpeciesType{
+	PLANT = 0,
+	CARNIVORE,
+	HERBIVORE,
+	OMNIVORE
+}
+
 [System.Serializable]
 public class ClashSpeciesData{
 	public int species_id;
+	public string species_name;
 	public int species_price;
-	public int species_type;
+	public SpeciesType species_type;
 	public string description;
 	public int attack_points;
 	public int hit_points;
