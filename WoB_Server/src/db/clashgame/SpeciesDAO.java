@@ -26,13 +26,15 @@ public final class SpeciesDAO {
     private SpeciesDAO() {}
 
     public static List<Species> getList() {
-        List<Species> result = new ArrayList<>();
-        try (
-          Connection con = GameDB.getConnection();
-          PreparedStatement pstmt = con.prepareStatement(LIST_QUERY);
-        ) {
-            ResultSet rs = pstmt.executeQuery();
-            while(rs.next()) {
+        List<Species> result = new ArrayList<Species>();
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(LIST_QUERY);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
                 Species sp = new Species();
                 sp.speciesId = rs.getInt("species_id");
                 // NOTE: This is the existing cost from the existing species table.
@@ -47,6 +49,8 @@ public final class SpeciesDAO {
             }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
+        } finally {
+            GameDB.closeConnection(con, pstmt, rs);
         }
         return result;
     }

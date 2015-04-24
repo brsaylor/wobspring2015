@@ -6,7 +6,7 @@ using System.Collections;
 
 public class ClashDefenseSpawner : MonoBehaviour {
 	public ClashDefenseController cdc;
-	GameObject required_object;
+	GameObject required_object, unit;
 	ClashPersistentData pd;
 
 	void Awake() {
@@ -34,13 +34,17 @@ public class ClashDefenseSpawner : MonoBehaviour {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit, 1000.0f) && hit.collider.gameObject.tag == "Terrain") {
-				int list_index = cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().list_index;
-				bool isDeployed = pd.defenderInfo.defense[list_index].isDeployed;
-				if(!isDeployed) { 
-					if(pd.defenderInfo.defense[list_index].prefab_id == 0) {
-						Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/unit1", typeof(GameObject)), hit.point, Quaternion.identity);
-						pd.defenderInfo.defense[list_index].isDeployed = true;
-						cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.interactable = false;
+				Toggle active_toggle = cdc.toggleGroup.GetActiveToggle();
+				if(active_toggle != null) {
+					int list_index = active_toggle.GetComponent<ClashDefenseToggle>().list_index;
+					bool isDeployed = pd.defenderInfo.defense[list_index].isDeployed;
+					if(!isDeployed) { 
+						if(pd.defenderInfo.defense[list_index].prefab_id == 0) {
+							unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/unit1", typeof(GameObject)), hit.point, Quaternion.identity) as GameObject;
+							unit.tag = "Ally";
+							pd.defenderInfo.defense[list_index].isDeployed = true;
+							cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.interactable = false;
+						}
 					}
 				}
             }
