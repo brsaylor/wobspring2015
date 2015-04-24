@@ -216,7 +216,7 @@ public class GameServer {
             server.configure();
             server.run();
         } catch (IOException ex) {
-            Log.printf_e("Port %d is in use", server.getPort());
+            Log.printf_e("Port is in use");
         } catch (ConfigureException ex) {
             Log.printf_e(ex.getMessage());
         } catch (Exception ex) {
