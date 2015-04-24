@@ -17,6 +17,7 @@ public class ResponseClashInitiateBattle extends GameResponse{
 
     public final static short INITIATED = 0;
     public final static short ALREADY_IN_BATTLE = 1;
+    public final static short INVALID_ATTACK_CONFIG = 2;
     
     private short status;
 
