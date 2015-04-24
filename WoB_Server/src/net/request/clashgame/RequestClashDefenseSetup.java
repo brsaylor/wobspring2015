@@ -33,17 +33,13 @@ public class RequestClashDefenseSetup extends GameRequest {
             float x = DataReader.readFloat(dataInput);
             float y = DataReader.readFloat(dataInput);
             
-            configMap.put(speciesId, new Vector2<Float>(x, y));
+            configMap.put(speciesId, new Vector2(x, y));
         }
     }
 
     @Override
     public void process() throws Exception {
-        Log.println("received data ");
-        
         boolean valid = configMap.size() <= 5; //more checks in the future
-        
-        //TODO: process data, add to DB
         
         ResponseClashDefenseSetup response = new ResponseClashDefenseSetup();
         response.setValidSetup(valid);

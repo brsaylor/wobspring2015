@@ -45,7 +45,7 @@ public class NetworkManager : MonoBehaviour {
 			if (cManager.Send(packet.GetBytes())) {
 				requests.Dequeue();
 
-				Debug.Log("Sent Request No. " + packet.GetID() + " [" +  NetworkProtocolTable.Get(packet.GetID()).ToString() + "]");
+				// Debug.Log("Sent Request No. " + packet.GetID() + " [" +  NetworkProtocolTable.Get(packet.GetID()).ToString() + "]");
 			}
 		}
 
