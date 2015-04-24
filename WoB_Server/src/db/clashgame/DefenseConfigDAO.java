@@ -31,6 +31,11 @@ public final class DefenseConfigDAO {
         + " `player_id`, `terrain_id`, `created_at`) "
         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+    private static final String FIND_BY_PLAYER_QUERY = "SELECT * FROM `clash_defense_config`"
+        + " WHERE `player_id` = ?"
+        + " ORDER BY `created_at` DESC"
+        + " LIMIT 1";
+
     private DefenseConfigDAO() {}
 
     public static DefenseConfig create(DefenseConfig dc) {
@@ -69,7 +74,38 @@ public final class DefenseConfigDAO {
     }
 
     public static DefenseConfig findByPlayerId(int playerId) {
-        return null;
+        DefenseConfig result = new DefenseConfig();
+
+        try (
+            Connection con = GameDB.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(FIND_BY_PLAYER_QUERY);
+        ) {
+            pstmt.setInt(1, playerId);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                result.createdAt = rs.getDate("created_at");
+                result.id = rs.getInt("clash_defense_config_id");
+                result.playerId = rs.getInt("player_id");
+                result.terrainId = rs.getInt("terrain_id");
+                result.layout = new HashMap<>();
+
+                for (int i = 0; i < 5; i++) {
+                    String label = "species" + (i + 1);
+                    Vector2<Float> pos = new Vector2<>();
+
+                    int speciesId = rs.getInt(label);
+                    pos.setX(rs.getFloat(label + "_x"));
+                    pos.setY(rs.getFloat(label + "_y"));
+                    result.layout.put(speciesId, pos);
+                }
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            Log.println_e(ex.getMessage());
+        }
+        return result;
     }
 }
 

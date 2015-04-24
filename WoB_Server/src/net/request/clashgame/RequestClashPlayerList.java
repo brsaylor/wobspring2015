@@ -9,11 +9,13 @@ import core.GameServer;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import db.clashgame.ClashPlayerDAO;
 import db.clashgame.DefenseConfigDAO;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashPlayerList;
-import model.Player;
+import model.clashgame.Player;
 
 /**
  *
@@ -29,15 +31,11 @@ public class RequestClashPlayerList extends GameRequest{
     public void process() throws Exception {
         ResponseClashPlayerList response = new ResponseClashPlayerList();
 
-        ArrayList<Integer> playerIDs = DefenseConfigDAO.allPlayersWithDefenseConfigs();
-        for(int pid : playerIDs){
-            Player p = GameServer.getInstance().getActivePlayer(pid);
-            response.addPlayer(pid, p.getName());
+        List<Player> eligible = ClashPlayerDAO.findEligiblePlayers();
+        for(Player pl : eligible){
+            // Players don't need to be active to initialize a battle.
+            response.addPlayer(pl);
         }
-
-        //need to identify the clash players
-        //response.setPlayers(GameServer.getInstance().getActivePlayers());
-        
         client.add(response);
     }
     
