@@ -53,5 +53,24 @@ public class ClashDefenseController : MonoBehaviour {
 	void SelectUnit(ClashDefenseToggle cdt) {
 		selected = cdt;
 	}
-	
+
+	public void ReturnToShop() {
+		Application.LoadLevel ("ClashShop");
+	}
+
+	public void ConfirmDefense() {
+		bool allDeployed = true;
+		foreach (ClashUnitData cud in pd.defenderInfo.defense) {
+			allDeployed = (cud.isDeployed) ? allDeployed : false;
+		}
+		if (allDeployed) {
+			SendDefenseToServer ();
+			Application.LoadLevel ("ClashMain");
+		}
+	}
+
+	public void SendDefenseToServer() {
+
+	}
+
 }

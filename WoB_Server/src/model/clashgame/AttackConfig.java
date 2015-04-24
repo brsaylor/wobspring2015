@@ -3,6 +3,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Date;
 
 /**
 *
@@ -13,5 +14,5 @@ public class AttackConfig {
     public int id;
     public List<Integer> speciesIds = Arrays.asList(new Integer[5]);
     public int playerId;
-    public int terrainId;
+    public Date createdAt;
 }

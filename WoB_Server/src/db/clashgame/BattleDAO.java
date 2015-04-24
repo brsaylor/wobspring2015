@@ -26,25 +26,27 @@ public final class BattleDAO {
 
     public static Battle create(Battle battle) {
 
-        try (
-            Connection con = GameDB.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
-        ) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
             pstmt.setInt(1, battle.attackConfigId);
             pstmt.setInt(2, battle.defenseConfigId);
             pstmt.setDate(3, battle.battleStart);
 
             pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
 
-            try (ResultSet rs = pstmt.getGeneratedKeys();) {
-                if (rs.next()) {
-                    battle.id = rs.getInt(1);
-                } else {
-                    throw new SQLException("Failed to create Battle.");
-                }
+            if (rs.next()) {
+                battle.id = rs.getInt(1);
+            } else {
+                throw new SQLException("Failed to create Battle.");
             }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
+        } finally {
+            GameDB.closeConnection(con, pstmt, rs);
         }
 
         return battle;

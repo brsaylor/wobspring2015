@@ -6,10 +6,13 @@
 package net.response.clashgame;
 
 import metadata.NetworkCode;
+import model.clashgame.Player;
 import net.response.GameResponse;
 import util.GamePacket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,26 +20,25 @@ import java.util.Map;
  * @author lev
  */
 public class ResponseClashPlayerList extends GameResponse{
-    private HashMap<Integer, String> playerNames;
+    private List<Player> players = new ArrayList<Player>();
 
     public ResponseClashPlayerList(){
         response_id = NetworkCode.CLASH_PLAYER_LIST;
-        playerNames = new HashMap<Integer, String>();
     }
 
-    public void addPlayer(int _id, String _name){
-        playerNames.put(_id, _name);
+    public void addPlayer(Player pl) {
+        players.add(pl);
     }
 
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
-        packet.addInt32(playerNames.size());
-        for(Map.Entry<Integer, String> p : playerNames.entrySet()){
-            packet.addInt32(p.getKey());
-            packet.addString(p.getValue());
+        packet.addInt32(players.size());
+        for(Player pl : players) {
+            packet.addInt32(pl.id);
+            packet.addString(pl.name);
+            // Also add level?
         }
-
         return packet.getBytes();
     }
 }

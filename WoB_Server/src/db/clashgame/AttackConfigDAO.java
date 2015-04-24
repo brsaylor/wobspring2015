@@ -16,8 +16,6 @@ import util.Log;
  *
  * The AccountDAO class hold methods that can execute a variety of different
  * queries for very specific purposes.
- *
- * @author Abhijit
  */
 
 public final class AttackConfigDAO {
@@ -29,11 +27,14 @@ public final class AttackConfigDAO {
     private AttackConfigDAO() {}
 
     public static AttackConfig create(AttackConfig ac) {
+        
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-        try (
-                Connection con = GameDB.getConnection();
-                PreparedStatement pstmt = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
-        ) {
+        try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < 5; i++) {
                 pstmt.setInt(i + 1, ac.speciesIds.get(i));
             }
@@ -42,18 +43,18 @@ public final class AttackConfigDAO {
 
             pstmt.executeUpdate();
 
-            try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    ac.id = rs.getInt(1);
-                } else {
-                    throw new SQLException("Failed to create AttackConfig.");
-                }
+            rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                ac.id = rs.getInt(1);
+            } else {
+                throw new SQLException("Failed to create AttackConfig.");
             }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
+        } finally {
+            GameDB.closeConnection(con, pstmt, rs);
         }
 
         return ac;
     }
 }
-
