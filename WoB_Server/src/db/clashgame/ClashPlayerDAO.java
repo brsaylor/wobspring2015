@@ -20,13 +20,17 @@ public class ClashPlayerDAO {
     private ClashPlayerDAO() {}
 
     public static List<Player> findEligiblePlayers() {
-         List<Player> result = new ArrayList<>();
-        try (
-          Connection con = GameDB.getConnection();
-          PreparedStatement pstmt = con.prepareStatement(FIND_ELIGIBLE_QUERY);
-        ) {
-            ResultSet rs = pstmt.executeQuery();
-            while(rs.next()) {
+        List<Player> result = new ArrayList<Player>();
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(FIND_ELIGIBLE_QUERY);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
                 Player pl = new Player();
                 pl.id = rs.getInt("player_id");
                 pl.name = rs.getString("name");
@@ -35,6 +39,8 @@ public class ClashPlayerDAO {
             }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
+        } finally {
+            GameDB.closeConnection(con, pstmt, rs);
         }
         return result;
     }
