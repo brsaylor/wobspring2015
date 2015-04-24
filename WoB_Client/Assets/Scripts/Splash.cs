@@ -8,7 +8,9 @@ using System.Net.Sockets;
 using Test = System.Diagnostics.Debug;
 
 public class Splash : MonoBehaviour {
-	
+
+	GameObject required_object;
+	ClashPersistentData pd;
 	private GameObject mainObject;
 	// Other
 	public Texture animals;
@@ -17,13 +19,25 @@ public class Splash : MonoBehaviour {
 	
 	void Awake() {
 		mainObject = GameObject.Find("MainObject");
-		//mainObject.GetComponent<MessageQueue>().AddCallback(Constants.SMSG_AUTH, ResponseLogin);
+		required_object = GameObject.Find ("Persistent Object");
+		if (required_object == null) {
+			//return to lobby because error
+			Debug.Log("Error re-enter game from lobby");
+		}
 	}
 	
 	// Use this for initialization
-	void Start() {
+	IEnumerator Start() {
 		//sleep 5 seconds
-		sleepMethod ();
+		yield return new WaitForSeconds(5);
+		//sleepMethod ();
+
+		pd = required_object.GetComponent<ClashPersistentData> ();
+		pd.SetPlayerName ("Player Name");
+		pd.SetPlayerId (2);
+
+		defenseRequest ();
+
 	}
 	
 	void OnGUI() {
@@ -48,13 +62,29 @@ public class Splash : MonoBehaviour {
 	}
 
 	//method to make splash screen wait 5 seconds
-	void sleepMethod(){
-		StartCoroutine ("waitTime");
-	}
-	
 	IEnumerator waitTime(){
 		//Debug.Log ("before");
 		yield return new WaitForSeconds(5);
 		//Debug.Log ("after");
+	}
+	
+
+	void defenseRequest(){
+		//request server to check if defense map is in database table
+		//bool b = RequestResult();
+		//if(b) {
+		NetworkManager.Send (ClashEntryProtocol.Prepare (pd.GetPlayerId()), (res) => {
+			Debug.Log ("got clash entry response from server");
+			var response = res as ResponseClashEntry;
+
+			if(response.firstTime){
+				pd.type = "defense";
+				Application.LoadLevel("ClashShop");
+			}else{
+				pd.type = "offense";
+				Application.LoadLevel("ClashMain");
+			}
+		});
+
 	}
 }

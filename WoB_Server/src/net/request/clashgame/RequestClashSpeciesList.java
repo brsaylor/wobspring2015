@@ -8,6 +8,8 @@ package net.request.clashgame;
 import db.ShopDAO;
 import java.io.DataInputStream;
 import java.io.IOException;
+
+import db.clashgame.SpeciesDAO;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashSpeciesList;
 
@@ -25,7 +27,7 @@ public class RequestClashSpeciesList extends GameRequest{
     public void process() throws Exception {
         //
         ResponseClashSpeciesList response = new ResponseClashSpeciesList();
-        response.setSpeciesList(ShopDAO.getItems("level:0,99"));
+        response.setSpeciesList(SpeciesDAO.getList());
         client.add(response);
     }
     
