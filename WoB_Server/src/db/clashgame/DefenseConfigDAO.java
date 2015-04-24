@@ -82,6 +82,8 @@ public final class DefenseConfigDAO {
         PreparedStatement pstmt = null;
 
         try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(FIND_BY_PLAYER_QUERY);
             pstmt.setInt(1, playerId);
 
             rs = pstmt.executeQuery();

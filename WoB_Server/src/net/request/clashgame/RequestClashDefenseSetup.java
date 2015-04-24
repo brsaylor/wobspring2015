@@ -22,8 +22,9 @@ import util.Vector2;
 public class RequestClashDefenseSetup extends GameRequest {
 
     private int setupTerrainID;
-    private HashMap<Integer, Vector2<Float>> configMap;
-    
+    private HashMap<Integer, Vector2<Float>> configMap
+             = new HashMap<Integer, Vector2<Float>>();
+   
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         setupTerrainID = DataReader.readInt(dataInput);
