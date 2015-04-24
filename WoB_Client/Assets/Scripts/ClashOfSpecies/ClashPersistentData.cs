@@ -37,7 +37,7 @@ public class ClashAttacker {
 	public List<ClashUnitData> offense;
 }
 
-enum SpeciesType{
+public enum SpeciesType{
 	PLANT = 0,
 	CARNIVORE,
 	HERBIVORE,

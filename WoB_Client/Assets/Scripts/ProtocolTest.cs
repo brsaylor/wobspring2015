@@ -20,7 +20,7 @@ public class ProtocolTest : MonoBehaviour {
 		yield return StartCoroutine(Execute(ClashSpeciesListProtocol.Prepare(), (res) => {
 			var response = res as ResponseSpeciesList;
 			Test.Assert(response.speciesList != null);
-			Test.Assert(response.speciesList.Count != 0);
+			Test.Assert(response.speciesList.Count == 12);
 		}));
 
 		// Invalid defense config setup.

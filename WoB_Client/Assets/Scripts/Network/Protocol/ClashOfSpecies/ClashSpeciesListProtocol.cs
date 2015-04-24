@@ -19,7 +19,7 @@ public class ClashSpeciesListProtocol{
 			spec.species_id = DataReader.ReadInt(dataStream);
 			spec.species_name = DataReader.ReadString(dataStream);
 			spec.species_price = DataReader.ReadInt(dataStream);
-			spec.species_type = DataReader.ReadInt(dataStream);
+			spec.species_type = (SpeciesType)DataReader.ReadInt(dataStream);
 			spec.description = DataReader.ReadString(dataStream);
 			spec.attack_points = DataReader.ReadInt(dataStream);
 			spec.hit_points = DataReader.ReadInt(dataStream);
