@@ -15,14 +15,10 @@ import util.GamePacket;
  */
 public class ResponseClashInitiateBattle extends GameResponse{
 
-    public final static short INITIATED = 0;
-    public final static short ALREADY_IN_BATTLE = 1;
-    public final static short INVALID_ATTACK_CONFIG = 2;
-    
-    private short status;
+    private boolean valid;
 
-    public void setStatus(short status) {
-        this.status = status;
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
     
     public ResponseClashInitiateBattle(){
@@ -32,8 +28,7 @@ public class ResponseClashInitiateBattle extends GameResponse{
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
-        packet.addShort16(status);
-        
+        packet.addBoolean(valid);
         return packet.getBytes();
     }
     

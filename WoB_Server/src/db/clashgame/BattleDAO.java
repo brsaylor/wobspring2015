@@ -31,11 +31,15 @@ public final class BattleDAO {
         ResultSet rs = null;
 
         try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
+
             pstmt.setInt(1, battle.attackConfigId);
             pstmt.setInt(2, battle.defenseConfigId);
-            pstmt.setDate(3, battle.battleStart);
+            pstmt.setTimestamp(3, new Timestamp(battle.battleStart.getTime()));
 
             pstmt.executeUpdate();
+
             rs = pstmt.getGeneratedKeys();
 
             if (rs.next()) {

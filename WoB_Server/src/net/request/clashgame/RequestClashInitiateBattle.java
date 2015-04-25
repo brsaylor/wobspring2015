@@ -8,6 +8,14 @@ package net.request.clashgame;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+
+import db.clashgame.AttackConfigDAO;
+import db.clashgame.BattleDAO;
+import db.clashgame.DefenseConfigDAO;
+import model.clashgame.AttackConfig;
+import model.clashgame.Battle;
+import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashInitiateBattle;
 import util.DataReader;
@@ -35,17 +43,25 @@ public class RequestClashInitiateBattle extends GameRequest{
     public void process() throws Exception {
         ResponseClashInitiateBattle response = new ResponseClashInitiateBattle();
 
-        if(attackConfig.size() > 5){
-            response.setStatus(ResponseClashInitiateBattle.INVALID_ATTACK_CONFIG);
-        }else{
-            //check if player is already engaged in battle, if so
-            //reponse.setStatus(ResponseClashInitiateBattle.ALREADY_IN_BATTLE);
+        if (attackConfig.size() > 5) {
+            response.setValid(false);
+        } else {
+            response.setValid(true);
 
-            response.setStatus(ResponseClashInitiateBattle.INITIATED);
-            //record battle in db
+            DefenseConfig target = DefenseConfigDAO.findByPlayerId(playerToAttack);
 
+            AttackConfig atk = new AttackConfig();
+            atk.createdAt = new Date();
+            atk.playerId = this.client.getPlayer().getID();
+            atk.speciesIds = attackConfig;
+            AttackConfigDAO.create(atk);
+
+            Battle battle = new Battle();
+            battle.defenseConfigId = target.id;
+            battle.attackConfigId = atk.id;
+            battle.battleStart = new Date();
+            BattleDAO.create(battle);
         }
-
         client.add(response);
     }
     
