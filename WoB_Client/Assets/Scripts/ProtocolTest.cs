@@ -68,7 +68,7 @@ public class ProtocolTest : MonoBehaviour {
 		}));
 
 		//initiate failure
-		request = ClashInitiateBattleProtocol.Prepare(3, new List<int> {
+		request = ClashInitiateBattleProtocol.Prepare(126, new List<int> {
 			4, 5, 8, 10, 11, 9
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
@@ -76,8 +76,8 @@ public class ProtocolTest : MonoBehaviour {
 		}));
 
 		//initiate success
-		request = ClashInitiateBattleProtocol.Prepare(3, new List<int> {
-			4, 5, 8, 10, 11
+		request = ClashInitiateBattleProtocol.Prepare(126, new List<int> {
+			4, 7, 55, 58, 11
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
 			var response = res as ResponseClashInitiateBattle;

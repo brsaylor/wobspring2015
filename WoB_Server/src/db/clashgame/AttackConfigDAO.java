@@ -22,7 +22,7 @@ public final class AttackConfigDAO {
 
     private static final String INSERT_QUERY = "INSERT INTO `clash_attack_config`"
             + "(`species1`, `species2`, `species3`, `species4`, `species5`, `player_id`, `created_at`) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private AttackConfigDAO() {}
 
