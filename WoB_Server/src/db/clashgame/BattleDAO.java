@@ -45,7 +45,7 @@ public final class BattleDAO {
 
             pstmt.setInt(1, battle.attackConfigId);
             pstmt.setInt(2, battle.defenseConfigId);
-            pstmt.setTimestamp(3, new Timestamp(battle.battleStart.getTime()));
+            pstmt.setTimestamp(3, new Timestamp(battle.timeStarted.getTime()));
 
             pstmt.executeUpdate();
 
@@ -83,7 +83,8 @@ public final class BattleDAO {
                 result.id = rs.getInt("clash_battle_id");
                 result.attackConfigId = rs.getInt("clash_attack_config_id");
                 result.defenseConfigId = rs.getInt("clash_defense_config_id");
-                result.battleStart = rs.getDate("time_started");
+                result.timeStarted = rs.getDate("time_started");
+                result.timeEnded = rs.getTimestamp("time_ended");
             } else {
                 throw new SQLException("Failed to create Battle.");
             }
@@ -109,25 +110,17 @@ public final class BattleDAO {
             con = GameDB.getConnection();
             pstmt = con.prepareStatement(UPDATE_QUERY);
 
-            pstmt.setInt(1, updated.outcome);
-            pstmt.setInt(2, battle.defenseConfigId);
-            pstmt.setTimestamp(3, new Timestamp(battle.battleStart.getTime()));
+            pstmt.setInt(1, updated.outcome.getValue());
+            pstmt.setTimestamp(2, new Timestamp(updated.timeEnded.getTime()));
+            pstmt.setInt(3, updated.id);
 
             pstmt.executeUpdate();
-
-            rs = pstmt.getGeneratedKeys();
-
-            if (rs.next()) {
-                battle.id = rs.getInt(1);
-            } else {
-                throw new SQLException("Failed to create Battle.");
-            }
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
         } finally {
             GameDB.closeConnection(con, pstmt, rs);
         }
 
-        return delta;
+        return updated;
     }
 }

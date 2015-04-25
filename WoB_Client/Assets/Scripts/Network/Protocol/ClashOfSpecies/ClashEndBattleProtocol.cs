@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 
 public class ClashEndBattleProtocol {
+
+	public enum BattleResult{
+		WIN = 0,
+		LOSS,
+		DRAW
+	}
 	
-	public static NetworkRequest Prepare(bool won) {
+	public static NetworkRequest Prepare(BattleResult res) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_END_BATTLE);
-		request.AddBool(won);
+		request.AddInt32((int)res);
+
 		
 		return request;
 	}

@@ -59,7 +59,7 @@ public class RequestClashInitiateBattle extends GameRequest{
             Battle battle = new Battle();
             battle.defenseConfigId = target.id;
             battle.attackConfigId = atk.id;
-            battle.battleStart = new Date();
+            battle.timeStarted = new Date();
             BattleDAO.create(battle);
         }
         client.add(response);
