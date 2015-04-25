@@ -22,7 +22,7 @@ public class Login : MonoBehaviour {
 	private bool isInitial = true;
 	
 	void Awake() {
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 		
 		left = (Screen.width - width) / 2;
 		top = (Screen.height - height) / 2;
@@ -35,7 +35,7 @@ public class Login : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
-		StartCoroutine("AutoLogin");
+		//StartCoroutine("AutoLogin");
 	}
 	
 	// Update is called once per frame
@@ -152,7 +152,8 @@ public class Login : MonoBehaviour {
 		
 		if (args.status == 0) {
 			GameState.player = args.player;
-			Game.SwitchScene("Converge"); //"World");
+			//Game.SwitchScene("Converge"); //"World");
+			Application.LoadLevel ("ClashSplash");
 		}
 	}
 	
