@@ -7,7 +7,7 @@ using System.IO;
 using System.Net.Sockets;
 using Test = System.Diagnostics.Debug;
 
-public class Splash : MonoBehaviour {
+public class ClashSplash : MonoBehaviour {
 
 	GameObject required_object;
 	ClashPersistentData pd;
