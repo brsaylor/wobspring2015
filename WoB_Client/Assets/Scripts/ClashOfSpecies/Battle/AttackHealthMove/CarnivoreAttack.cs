@@ -5,22 +5,42 @@ public class CarnivoreAttack : MonoBehaviour {
 
 	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
 	public int attackDamage = 10;               // The amount of health taken away per attack.
-	
+
 	
 	Animator anim;                              // Reference to the animator component.
-	GameObject player;                          // Reference to the player GameObject.
-	HerbivoreHealth playerHealth;                  // Reference to the player's health.
-	//EnemyHealth enemyHealth;                    // Reference to this enemy's health.
-	bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
+	bool inRange;                        	 // Whether player is within the trigger collider and can be attacked.
 	float timer;                                // Timer for counting up to the next attack.
-	
-	
+
+
+	GameObject[] herbivoreList;                          // List of herbivores
+	GameObject herbivore;                          // List of herbivores
+
+	GameObject[] omnivoreList;                          // List of Omnivores
+	GameObject omnivore;                          // List of herbivores
+
+	GameObject currentlyAttacking;
+	Health currentEnemyHealth;                  // Reference to the player's health.
+
+
+	//EnemyHealth enemyHealth;                    // Reference to this enemy's health.
+
+
+
+
+
 	void Awake ()
 	{
 		// Setting up the references.
-		player = GameObject.FindGameObjectWithTag ("Herbivore");
-		playerHealth = player.GetComponent <HerbivoreHealth> ();
+		herbivoreList = GameObject.FindGameObjectsWithTag ("Herbivore");
+		omnivoreList = GameObject.FindGameObjectsWithTag ("Omnivore");
+
+
+
+		//HEALTH
+		//playerHealth = player.GetComponent <HerbivoreHealth> ();
 		//enemyHealth = GetComponent<EnemyHealth>();
+
+
 		anim = GetComponent <Animator> ();
 	}
 	
@@ -28,10 +48,15 @@ public class CarnivoreAttack : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		// If the entering collider is the player...
-		if(other.gameObject == player)
-		{
-			// ... the player is in range.
-			playerInRange = true;
+		foreach(GameObject herbivore in herbivoreList){
+			if(herbivore==other.gameObject)
+			{
+				// ... the player is in range.
+				inRange = true;
+				currentlyAttacking = other.gameObject;
+				currentEnemyHealth = currentlyAttacking.GetComponent <Health> ();
+
+			}
 		}
 	}
 	
@@ -39,12 +64,11 @@ public class CarnivoreAttack : MonoBehaviour {
 	void OnTriggerExit (Collider other)
 	{
 		// If the exiting collider is the player...
-		if(other.gameObject == player)
+		if(other.gameObject == currentlyAttacking)
 		{
 			// ... the player is no longer in range.
-			playerInRange = false;
-
-				anim.SetBool("PredatorAttack",false);
+			inRange = false;
+			anim.SetBool("Attacking",false);
 
 		}
 	}
@@ -56,18 +80,19 @@ public class CarnivoreAttack : MonoBehaviour {
 		timer += Time.deltaTime;
 		
 		// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-		if (timer >= timeBetweenAttacks && playerInRange /*&& enemyHealth.currentHealth > 0*/) {
+		if (timer >= timeBetweenAttacks && inRange && currentEnemyHealth.currentHealth > 0) {
 						// ... attack.
 						Attack ();
-						anim.SetBool ("PredatorAttack", true);
+						anim.SetBool ("Attacking", true);
 
 				} 
 		
 		// If the player has zero or less health...
-		if(playerHealth.currentHealth <= 0)
+		if(currentEnemyHealth.currentHealth <= 0)
 		{
 			// ... tell the animator the player is dead.
-			anim.SetTrigger ("PlayerDead");
+			//anim.SetTrigger ("AllEnemiesDead");
+			anim.SetBool ("Attacking", false);
 		}
 	}
 	
@@ -78,10 +103,10 @@ public class CarnivoreAttack : MonoBehaviour {
 		timer = 0f;
 		
 		// If the player has health to lose...
-		if(playerHealth.currentHealth > 0)
+		if(currentEnemyHealth.currentHealth > 0)
 		{
 			// ... damage the player.
-			playerHealth.TakeDamage (attackDamage);
+			currentEnemyHealth.TakeDamage (attackDamage);
 		}
 	}
 }

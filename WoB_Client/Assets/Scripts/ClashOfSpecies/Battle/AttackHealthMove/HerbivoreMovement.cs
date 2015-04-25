@@ -5,7 +5,7 @@ public class HerbivoreMovement : MonoBehaviour {
 
 	Animator anim;    
 	Transform player;               // Reference to the player's position.
-	HerbivoreHealth playerHealth;      // Reference to the player's health.
+	Health playerHealth;      // Reference to the player's health.
 	//EnemyHealth enemyHealth;        // Reference to this enemy's health.
 	NavMeshAgent nav;               // Reference to the nav mesh agent.
 	
@@ -14,7 +14,7 @@ public class HerbivoreMovement : MonoBehaviour {
 	{
 		// Set up the references.
 		player = GameObject.FindGameObjectWithTag ("Plants").transform;
-		playerHealth = player.GetComponent <HerbivoreHealth> ();
+		playerHealth = player.GetComponent <Health> ();
 		//enemyHealth = GetComponent <EnemyHealth> ();
 		nav = GetComponent <NavMeshAgent> ();
 		anim = GetComponent <Animator> ();

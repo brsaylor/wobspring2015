@@ -10,7 +10,7 @@ public class HerbivoreAttack : MonoBehaviour {
 	
 	Animator anim;                              // Reference to the animator component.
 	GameObject player;                          // Reference to the player GameObject.
-	HerbivoreHealth playerHealth;                  // Reference to the player's health.
+	Health playerHealth;                  // Reference to the player's health.
 	//EnemyHealth enemyHealth;                    // Reference to this enemy's health.
 	bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
 	float timer;                                // Timer for counting up to the next attack.
@@ -19,8 +19,8 @@ public class HerbivoreAttack : MonoBehaviour {
 	void Awake ()
 	{
 		// Setting up the references.
-		player = GameObject.FindGameObjectWithTag ("Plants");
-		playerHealth = player.GetComponent <HerbivoreHealth> ();
+		player = GameObject.FindGameObjectWithTag ("Plant");
+		playerHealth = player.GetComponent <Health> ();
 		//enemyHealth = GetComponent<EnemyHealth>();
 		anim = GetComponent <Animator> ();
 	}
