@@ -43,6 +43,7 @@ public class RequestClashEntry extends GameRequest{
         response.setNewClashPlayer(isNewClashPlayer);
         if(!isNewClashPlayer){
             //add existing defense setup
+            response.setDefenseTerrainID(defense.terrainId);
             for (HashMap.Entry<Integer, Vector2<Float>> en : defense.layout.entrySet()) {
                 response.addSpecies(en.getKey(), en.getValue());
             }

@@ -20,7 +20,7 @@ public class ProtocolTest : MonoBehaviour {
 		yield return StartCoroutine(Execute(ClashSpeciesListProtocol.Prepare(), (res) => {
 			var response = res as ResponseSpeciesList;
 			Test.Assert(response.speciesList != null);
-			Test.Assert(response.speciesList.Count != 0);
+			Test.Assert(response.speciesList.Count == 12);
 		}));
 
 		// Invalid defense config setup.
@@ -50,6 +50,38 @@ public class ProtocolTest : MonoBehaviour {
 		yield return StartCoroutine(Execute(ClashPlayerListProtocol.Prepare(), (res) => {
 			var response = res as ResponseClashPlayerList;
 			Test.Assert(response.players.Count != 0);
+		}));
+
+		//Player view request
+		yield return StartCoroutine(Execute(ClashPlayerViewProtocol.Prepare(2), (res) => {
+			var response = res as ResponseClashPlayerView;
+			Test.Assert(response.TerrainID != 0);
+			Test.Assert(response.defenseSpecies != null);
+			Test.Assert(response.defenseSpecies.Count != 0);
+		}));
+
+		//initiate failure
+		request = ClashInitiateBattleProtocol.Prepare(3, new List<int> {
+			4, 5, 8, 10, 11, 9
+		});
+		yield return StartCoroutine(Execute(request, (res) => {
+			var response = res as ResponseClashInitiateBattle;
+			Test.Assert(response.status == 2);
+		}));
+
+		//initiate success
+		request = ClashInitiateBattleProtocol.Prepare(3, new List<int> {
+			4, 5, 8, 10, 11
+		});
+		yield return StartCoroutine(Execute(request, (res) => {
+			var response = res as ResponseClashInitiateBattle;
+			Test.Assert(response.status == 0);
+		}));
+
+		//battle end
+		yield return StartCoroutine(Execute(ClashEndBattleProtocol.Prepare(true), (res) => {
+			var response = res as ResponseClashEndBattle;
+			Test.Assert(response != null);
 		}));
 	}
 

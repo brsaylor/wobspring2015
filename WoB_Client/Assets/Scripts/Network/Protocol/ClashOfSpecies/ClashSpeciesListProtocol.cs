@@ -11,20 +11,33 @@ public class ClashSpeciesListProtocol{
 	}
 
 	public static NetworkResponse Parse(MemoryStream dataStream) {
-
-		//Ugly code. Better idea to have ClashSpeciesListProtocol subclass
-		//SpeciesListProtocol, but that requires refactoring, splitting up 
-		//puttin parse code into helper method
-		ResponseSpeciesList sl = (ResponseSpeciesList) SpeciesListProtocol.Parse(dataStream);
 		ResponseClashSpeciesList response = new ResponseClashSpeciesList();
-		response.speciesList = sl.speciesList;
+
+		int count = DataReader.ReadInt(dataStream);
+		for(int i = 0; i < count; i++){
+			ClashSpeciesData spec = new ClashSpeciesData();
+			spec.species_id = DataReader.ReadInt(dataStream);
+			spec.species_name = DataReader.ReadString(dataStream);
+			spec.species_price = DataReader.ReadInt(dataStream);
+			spec.species_type = (SpeciesType)DataReader.ReadInt(dataStream);
+			spec.description = DataReader.ReadString(dataStream);
+			spec.attack_points = DataReader.ReadInt(dataStream);
+			spec.hit_points = DataReader.ReadInt(dataStream);
+			spec.movement_speed = DataReader.ReadInt(dataStream);
+			spec.attack_speed = DataReader.ReadInt(dataStream);
+
+			response.speciesList.Add(spec);
+		}
+
 		return response;
 	}
 }
 
-public class ResponseClashSpeciesList : ResponseSpeciesList {
-	
+public class ResponseClashSpeciesList : NetworkResponse {
+	public List<ClashSpeciesData> speciesList;
+
 	public ResponseClashSpeciesList() {
 		protocol_id = NetworkCode.CLASH_SPECIES_LIST;
+		speciesList = new List<ClashSpeciesData>();
 	}
 }

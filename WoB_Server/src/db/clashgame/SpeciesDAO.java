@@ -43,7 +43,26 @@ public final class SpeciesDAO {
                 sp.attackSpeed = rs.getInt("attack_speed");
                 sp.attackPoints = rs.getInt("attack_points");
                 sp.hitPoints = rs.getInt("hit_points");
-                sp.type = rs.getInt("organism_type");
+
+                int org = rs.getInt("organism_type");
+                if (org == 1) {
+                    sp.type = Species.Type.PLANT;
+                } else {
+                    switch(rs.getInt("diet_type")) {
+                        case 0:
+                            sp.type = Species.Type.OMNIVORE;
+                            break;
+                        case 1:
+                            sp.type = Species.Type.CARNIVORE;
+                            break;
+                        case 2:
+                            sp.type = Species.Type.HERBIVORE;
+                            break;
+                        default: break;
+                    }
+                }
+
+                sp.name = rs.getString("name");
                 sp.description = rs.getString("description");
                 result.add(sp);
             }

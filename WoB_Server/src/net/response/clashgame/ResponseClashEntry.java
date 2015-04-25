@@ -5,11 +5,9 @@
  */
 package net.response.clashgame;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.util.Pair;
 import metadata.NetworkCode;
 import net.response.GameResponse;
 import util.GamePacket;

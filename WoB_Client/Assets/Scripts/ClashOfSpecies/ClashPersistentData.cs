@@ -37,6 +37,26 @@ public class ClashAttacker {
 	public List<ClashUnitData> offense;
 }
 
+public enum SpeciesType{
+	PLANT = 0,
+	CARNIVORE,
+	HERBIVORE,
+	OMNIVORE
+}
+
+[System.Serializable]
+public class ClashSpeciesData{
+	public int species_id;
+	public string species_name;
+	public int species_price;
+	public SpeciesType species_type;
+	public string description;
+	public int attack_points;
+	public int hit_points;
+	public int movement_speed;
+	public int attack_speed;
+}
+
 /***************************
 	 * If type == offense, defender is the enemy and attacker is the player
 	 * If type == defense, defender is the player, no attacker

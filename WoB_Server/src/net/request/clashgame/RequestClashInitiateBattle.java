@@ -34,12 +34,18 @@ public class RequestClashInitiateBattle extends GameRequest{
     @Override
     public void process() throws Exception {
         ResponseClashInitiateBattle response = new ResponseClashInitiateBattle();
-        //check if player is already engaged in battle, if so
-        //reponse.setStatus(ResponseClashInitiateBattle.ALREADY_IN_BATTLE);
-        
-        //record battle in db
-        response.setStatus(ResponseClashInitiateBattle.INITIATED);
-        
+
+        if(attackConfig.size() > 5){
+            response.setStatus(ResponseClashInitiateBattle.INVALID_ATTACK_CONFIG);
+        }else{
+            //check if player is already engaged in battle, if so
+            //reponse.setStatus(ResponseClashInitiateBattle.ALREADY_IN_BATTLE);
+
+            response.setStatus(ResponseClashInitiateBattle.INITIATED);
+            //record battle in db
+
+        }
+
         client.add(response);
     }
     

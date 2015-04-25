@@ -40,7 +40,7 @@ public class RequestClashDefenseSetup extends GameRequest {
 
     @Override
     public void process() throws Exception {
-        boolean valid = configMap.size() <= 5; //more checks in the future
+        boolean valid = configMap.size() == 5; //more checks in the future
         
         ResponseClashDefenseSetup response = new ResponseClashDefenseSetup();
         response.setValidSetup(valid);
