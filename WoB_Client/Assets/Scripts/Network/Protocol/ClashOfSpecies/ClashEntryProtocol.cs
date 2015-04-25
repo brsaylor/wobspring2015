@@ -5,10 +5,9 @@ using System.IO;
 
 public class ClashEntryProtocol {
 	
-	public static NetworkRequest Prepare(int user_id) {
+	public static NetworkRequest Prepare() {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_ENTRY);
-		request.AddInt32(user_id);
-		
+
 		return request;
 	}
 	
