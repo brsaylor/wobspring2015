@@ -12,7 +12,7 @@ public class ClashEndBattleProtocol {
 	
 	public static NetworkRequest Prepare(BattleResult res) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_END_BATTLE);
-		request.AddInt32(res);
+		request.AddInt32((int)res);
 
 		
 		return request;
