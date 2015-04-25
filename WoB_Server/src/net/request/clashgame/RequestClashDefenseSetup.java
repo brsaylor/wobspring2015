@@ -46,15 +46,18 @@ public class RequestClashDefenseSetup extends GameRequest {
     public void process() throws Exception {
         boolean valid = configMap.size() == 5; //more checks in the future
 
-        DefenseConfig config = new DefenseConfig();
-        config.createdAt = new Date();
-        config.playerId = client.getPlayer().getID();
-        config.terrainId = setupTerrainID;
-        config.layout = configMap;
-
-        DefenseConfigDAO.create(config);
         ResponseClashDefenseSetup response = new ResponseClashDefenseSetup();
         response.setValidSetup(valid);
+
+        if (valid) {
+            DefenseConfig config = new DefenseConfig();
+            config.createdAt = new Date();
+            config.playerId = client.getPlayer().getID();
+            config.terrainId = setupTerrainID;
+            config.layout = configMap;
+            DefenseConfigDAO.create(config);
+        }
+
         client.add(response);
     }
     

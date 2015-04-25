@@ -44,16 +44,17 @@ public final class DefenseConfigDAO {
         ResultSet rs = null;
 
         try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
 
             // Parameter indices 1-15 are occupied by the species layout.
             ArrayList<Integer> keys = new ArrayList(dc.layout.keySet());
-            for (int i = 0; i < keys.size(); i++) {
-                System.out.println(i);
-                pstmt.setInt(i + 1, keys.get(i));
+            for (int i = 0, j = 1; i < keys.size(); i++, j += 3) {
+                pstmt.setInt(j, keys.get(i));
 
                 Vector2<Float> pos = dc.layout.get(keys.get(i));
-                pstmt.setFloat(i + 2, pos.getX());
-                pstmt.setFloat(i + 3, pos.getY());
+                pstmt.setFloat(j + 1, pos.getX());
+                pstmt.setFloat(j + 2, pos.getY());
             }
 
             pstmt.setInt(16, dc.playerId);
@@ -62,6 +63,7 @@ public final class DefenseConfigDAO {
 
             pstmt.executeUpdate();
 
+            rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 dc.id = rs.getInt(1);
             } else {

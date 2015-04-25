@@ -36,9 +36,6 @@ public class RequestClashPlayerView extends GameRequest{
 
         Player target = ClashPlayerDAO.findById(playerID);
         DefenseConfig defcon = DefenseConfigDAO.findByPlayerId(playerID);
-        System.out.println(playerID);
-        System.out.println(target);
-        System.out.println(defcon);
         if (target != null) {
             response.setDefenseConfig(defcon);
             response.setPlayer(target);

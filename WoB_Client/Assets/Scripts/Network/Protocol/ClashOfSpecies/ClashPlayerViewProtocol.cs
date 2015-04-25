@@ -21,7 +21,10 @@ public class ClashPlayerViewProtocol {
 		response.PlayerID = DataReader.ReadInt(dataStream);
 
 		string timeString = DataReader.ReadString(dataStream);
-		long timeLong = long.TryParse(timeString);
+
+		long timeLong = 0;
+		long.TryParse(timeString, out timeLong);
+
 		DateTime time = JavaLongToCSharpLong(timeLong);
 
 		response.Timestamp = time;

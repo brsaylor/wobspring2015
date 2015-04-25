@@ -27,12 +27,11 @@ public class RequestClashEntry extends GameRequest{
 
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
-        playerID = DataReader.readInt(dataInput);
     }
 
     @Override
     public void process() throws Exception {
-        DefenseConfig defense = DefenseConfigDAO.findByPlayerId(playerID);
+        DefenseConfig defense = DefenseConfigDAO.findByPlayerId(this.client.getPlayer().getID());
         if(defense == null){
             isNewClashPlayer = true;
         }else{
