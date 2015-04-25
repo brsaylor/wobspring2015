@@ -73,7 +73,7 @@ public class ClashSplash : MonoBehaviour {
 		//request server to check if defense map is in database table
 		//bool b = RequestResult();
 		//if(b) {
-		NetworkManager.Send (ClashEntryProtocol.Prepare (pd.GetPlayerId()), (res) => {
+		NetworkManager.Send (ClashEntryProtocol.Prepare (), (res) => {
 			Debug.Log ("got clash entry response from server");
 			var response = res as ResponseClashEntry;
 
