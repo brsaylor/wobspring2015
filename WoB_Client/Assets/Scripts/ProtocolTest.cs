@@ -61,9 +61,10 @@ public class ProtocolTest : MonoBehaviour {
 			var response = res as ResponseClashPlayerView;
 			Debug.Log(response.TerrainID);
 			var passed = (response.TerrainID != 0 &&
-			              response.defenseSpecies.Count != 0);
+			              response.defenseSpecies.Count == 5);
 
 			TestResult("Player View", passed);
+			Debug.Log("config created at " + response.Timestamp);
 		}));
 
 		//initiate failure

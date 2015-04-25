@@ -44,6 +44,7 @@ public class ResponseClashPlayerView extends GameResponse{
             packet.addInt32(defenseConfig.id);
             packet.addInt32(defenseConfig.terrainId);
             packet.addInt32(defenseConfig.playerId);
+            System.out.println("xxx " + defenseConfig.createdAt.getTime());
             packet.addString("" + defenseConfig.createdAt.getTime());
             packet.addInt32(defenseConfig.layout.size());
             for (HashMap.Entry<Integer, Vector2<Float>> ent : defenseConfig.layout.entrySet()) {

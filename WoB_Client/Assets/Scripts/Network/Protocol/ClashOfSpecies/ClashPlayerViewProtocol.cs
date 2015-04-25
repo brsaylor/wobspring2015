@@ -46,7 +46,7 @@ public class ClashPlayerViewProtocol {
 
 	static DateTime JavaLongToCSharpLong(long javaLong)
 	{
-		TimeSpan ss = TimeSpan.FromMilliseconds(javaLong*1000);
+		TimeSpan ss = TimeSpan.FromMilliseconds(javaLong);
 		DateTime Jan1st1970 = 
 			new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 		DateTime ddd = Jan1st1970.Add(ss);

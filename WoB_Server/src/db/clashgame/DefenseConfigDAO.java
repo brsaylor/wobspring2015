@@ -92,7 +92,8 @@ public final class DefenseConfigDAO {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                result.createdAt = rs.getDate("created_at");
+                Timestamp ts = rs.getTimestamp("created_at");
+                result.createdAt = new Date(ts.getTime());
                 result.id = rs.getInt("clash_defense_config_id");
                 result.playerId = rs.getInt("player_id");
                 result.terrainId = rs.getInt("terrain_id");
