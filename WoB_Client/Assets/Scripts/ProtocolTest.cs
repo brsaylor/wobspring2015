@@ -13,7 +13,7 @@ public class ProtocolTest : MonoBehaviour {
 	IEnumerator Start() {
 
 		// Appropriately detecting a new user.
-		yield return StartCoroutine(Execute(ClashEntryProtocol.Prepare(2), (res) => {
+		yield return StartCoroutine(Execute(ClashEntryProtocol.Prepare(), (res) => {
 			var response = res as ResponseClashEntry;
 			var passed = response.firstTime;
 			TestResult("New User", passed);
