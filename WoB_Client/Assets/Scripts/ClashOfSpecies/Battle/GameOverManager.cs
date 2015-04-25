@@ -4,7 +4,7 @@ using System.Collections;
 public class GameOverManager : MonoBehaviour {
 
 	
-	public PlayerHealth playerHealth;       // Reference to the player's health.
+	public HerbivoreHealth playerHealth;       // Reference to the player's health.
 	public float restartDelay = 5f;         // Time to wait before restarting the level
 	
 	
@@ -17,7 +17,7 @@ public class GameOverManager : MonoBehaviour {
 		// Set up the reference.
 
 		player = GameObject.FindGameObjectWithTag ("Prey");
-		playerHealth = player.GetComponent <PlayerHealth> ();
+		playerHealth = player.GetComponent <HerbivoreHealth> ();
 		anim = GetComponent <Animator> ();
 	}
 	

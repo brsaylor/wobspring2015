@@ -3,7 +3,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerHealth : MonoBehaviour {
+public class HerbivoreHealth : MonoBehaviour {
 
 	
 	public int startingHealth = 100;                            // The amount of health the player starts the game with.
