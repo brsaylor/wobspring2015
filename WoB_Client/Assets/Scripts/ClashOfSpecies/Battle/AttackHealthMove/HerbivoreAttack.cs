@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HerbivoreAttack : MonoBehaviour {
-
+	/*
 	
 	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
 	public int attackDamage = 10;               // The amount of health taken away per attack.
@@ -57,7 +57,7 @@ public class HerbivoreAttack : MonoBehaviour {
 		timer += Time.deltaTime;
 		
 		// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-		if (timer >= timeBetweenAttacks && playerInRange /*&& enemyHealth.currentHealth > 0*/) {
+		if (timer >= timeBetweenAttacks && playerInRange /*&& enemyHealth.currentHealth > 0*//*) {
 			// ... attack.
 			Attack ();
 			anim.SetBool ("PredatorAttack", true);
@@ -84,5 +84,5 @@ public class HerbivoreAttack : MonoBehaviour {
 			// ... damage the player.
 			playerHealth.TakeDamage (attackDamage);
 		}
-	}
+	}*/
 }

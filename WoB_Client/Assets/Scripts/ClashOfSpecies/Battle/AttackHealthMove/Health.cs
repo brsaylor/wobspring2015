@@ -14,7 +14,8 @@ public class Health : MonoBehaviour {
 	public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 	NavMeshAgent nav;
-	
+	NavMeshObstacle navObj;
+	Collider col;
 	Animator anim;                                              // Reference to the Animator component.
 	AudioSource playerAudio;                                    // Reference to the AudioSource component.
 	HerbivoreMovement Movement;                              // Reference to the player's movement.
@@ -34,6 +35,8 @@ public class Health : MonoBehaviour {
 		// Set the initial health of the player.
 		currentHealth = startingHealth;
 		nav = GetComponent <NavMeshAgent> (); 
+		navObj = GetComponent < NavMeshObstacle> ();
+		col = GetComponent <CapsuleCollider> ();
 	}
 	
 	
@@ -99,6 +102,9 @@ public class Health : MonoBehaviour {
 		Movement.enabled = false;
 		//playerShooting.enabled = false;
 		this.gameObject.isStatic = true;
+		nav.enabled = false;
+		navObj.enabled = true;
+		col.enabled = false;
 
 	}       
 }

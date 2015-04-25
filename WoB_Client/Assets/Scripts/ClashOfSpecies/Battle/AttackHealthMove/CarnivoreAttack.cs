@@ -85,7 +85,7 @@ public class CarnivoreAttack : MonoBehaviour {
 						Attack ();
 						anim.SetBool ("Attacking", true);
 
-				} 
+				}
 		
 		// If the player has zero or less health...
 		if(currentEnemyHealth.currentHealth <= 0)
