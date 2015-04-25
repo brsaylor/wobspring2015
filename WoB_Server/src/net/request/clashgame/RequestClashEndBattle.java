@@ -21,6 +21,7 @@ public class RequestClashEndBattle extends GameRequest{
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         won = DataReader.readBoolean(dataInput);
+        
     }
 
     @Override
