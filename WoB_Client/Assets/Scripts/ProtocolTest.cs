@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using BattleResult = ClashEndBattleProtocol.BattleResult;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -85,7 +86,7 @@ public class ProtocolTest : MonoBehaviour {
 		}));
 
 		//battle end
-		yield return StartCoroutine(Execute(ClashEndBattleProtocol.Prepare(true), (res) => {
+		yield return StartCoroutine(Execute(ClashEndBattleProtocol.Prepare(BattleResult.WIN), (res) => {
 			var response = res as ResponseClashEndBattle;
 		}));
 	}

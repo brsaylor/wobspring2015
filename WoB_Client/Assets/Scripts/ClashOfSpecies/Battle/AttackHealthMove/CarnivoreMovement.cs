@@ -3,37 +3,75 @@ using System.Collections;
 
 public class CarnivoreMovement : MonoBehaviour {
 	Animator anim;    
-	Transform player;               // Reference to the player's position.
-	HerbivoreHealth playerHealth;      // Reference to the player's health.
-	//EnemyHealth enemyHealth;        // Reference to this enemy's health.
+
 	NavMeshAgent nav;               // Reference to the nav mesh agent.
 	
+	GameObject[] herbivoreList;                          // List of herbivores
+	GameObject herbivore;                          // List of herbivores
+	
+	GameObject[] omnivoreList;                          // List of Omnivores
+	GameObject omnivore;                          // List of herbivores
+	
+	GameObject currentlyAttacking;
+	Health currentEnemyHealth;                  // Reference to the player's health.	
+	bool allEnemiesDead = false;
 	
 	void Awake ()
 	{
 		// Set up the references.
-		player = GameObject.FindGameObjectWithTag ("Prey").transform;
+		//Debug.Log ("in awake");
+
+
+		herbivoreList = GameObject.FindGameObjectsWithTag ("Herbivore");
+		//omnivoreList = GameObject.FindGameObjectsWithTag ("Omnivore");
+		/*
+		player = GameObject.FindGameObjectWithTag ("Herbivore").transform;
 		playerHealth = player.GetComponent <HerbivoreHealth> ();
 		//enemyHealth = GetComponent <EnemyHealth> ();
+		*/
 		nav = GetComponent <NavMeshAgent> ();
 		anim = GetComponent <Animator> ();
 	}
-	
+	void findEnemy(){
+		//Debug.Log ("in Find enemy");
+		GameObject enemy = new GameObject("temp");
+		allEnemiesDead = true;
+		foreach (GameObject herbivore in herbivoreList) {
+			currentEnemyHealth = herbivore.GetComponent <Health> ();
+			if(currentEnemyHealth.currentHealth > 0)
+				{
+				Debug.Log ("Found enemy");
+				enemy = herbivore;
+				allEnemiesDead = false;
+				break;
+
+				}
+
+				}
+
+
+		if (!allEnemiesDead) {
+						nav.SetDestination (enemy.transform.position);
+						anim.SetTrigger ("Walking");
+				}
+		}
 	
 	void Update ()
 	{
-		// If the enemy and the player have health left...
-		if(/*enemyHealth.currentHealth > 0 &&*/ playerHealth.currentHealth > 0)
+
+			if(!allEnemiesDead)
 		{
+			//Debug.Log ("in Update");
 			// ... set the destination of the nav mesh agent to the player.
-			nav.SetDestination (player.position);
-			anim.SetTrigger("PredatorWalking");
+			
+				findEnemy();
 		}
 		// Otherwise...
 		else
 		{
 			// ... disable the nav mesh agent.
 			nav.enabled = false;
+			anim.SetTrigger ("AllEnemiesDead");
 		}
 }
 }

@@ -25,9 +25,9 @@ public class Battle {
         }
     }
 
-    public int id;
-    public int attackConfigId;
-    public int defenseConfigId;
+    public Integer id;
+    public Integer attackConfigId;
+    public Integer defenseConfigId;
     public Date timeStarted;
     public Date timeEnded;
     public Outcome outcome;

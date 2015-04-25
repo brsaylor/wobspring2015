@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HerbivoreMovemen : MonoBehaviour {
+public class HerbivoreMovement : MonoBehaviour {
 
 	Animator anim;    
-	Transform player;               // Reference to the player's position.
-	HerbivoreHealth playerHealth;      // Reference to the player's health.
+	GameObject player;               // Reference to the player's position.
+	Health playerHealth;      // Reference to the player's health.
 	//EnemyHealth enemyHealth;        // Reference to this enemy's health.
 	NavMeshAgent nav;               // Reference to the nav mesh agent.
 	
@@ -13,8 +13,8 @@ public class HerbivoreMovemen : MonoBehaviour {
 	void Awake ()
 	{
 		// Set up the references.
-		player = GameObject.FindGameObjectWithTag ("Plants").transform;
-		playerHealth = player.GetComponent <HerbivoreHealth> ();
+		player = GameObject.FindGameObjectWithTag ("Plant");
+		playerHealth = player.GetComponent <Health> ();
 		//enemyHealth = GetComponent <EnemyHealth> ();
 		nav = GetComponent <NavMeshAgent> ();
 		anim = GetComponent <Animator> ();
@@ -27,8 +27,8 @@ public class HerbivoreMovemen : MonoBehaviour {
 		if(/*enemyHealth.currentHealth > 0 &&*/ playerHealth.currentHealth > 0)
 		{
 			// ... set the destination of the nav mesh agent to the player.
-			nav.SetDestination (player.position);
-			anim.SetTrigger("PredatorWalking");
+			nav.SetDestination (player.transform.position);
+			anim.SetTrigger("Walking");
 		}
 		// Otherwise...
 		else

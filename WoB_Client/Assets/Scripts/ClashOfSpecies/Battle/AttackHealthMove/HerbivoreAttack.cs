@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HerbivoreAttack : MonoBehaviour {
-
+	/*
 	
 	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
 	public int attackDamage = 10;               // The amount of health taken away per attack.
@@ -10,7 +10,7 @@ public class HerbivoreAttack : MonoBehaviour {
 	
 	Animator anim;                              // Reference to the animator component.
 	GameObject player;                          // Reference to the player GameObject.
-	HerbivoreHealth playerHealth;                  // Reference to the player's health.
+	Health playerHealth;                  // Reference to the player's health.
 	//EnemyHealth enemyHealth;                    // Reference to this enemy's health.
 	bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
 	float timer;                                // Timer for counting up to the next attack.
@@ -19,8 +19,8 @@ public class HerbivoreAttack : MonoBehaviour {
 	void Awake ()
 	{
 		// Setting up the references.
-		player = GameObject.FindGameObjectWithTag ("Plants");
-		playerHealth = player.GetComponent <HerbivoreHealth> ();
+		player = GameObject.FindGameObjectWithTag ("Plant");
+		playerHealth = player.GetComponent <Health> ();
 		//enemyHealth = GetComponent<EnemyHealth>();
 		anim = GetComponent <Animator> ();
 	}
@@ -57,7 +57,7 @@ public class HerbivoreAttack : MonoBehaviour {
 		timer += Time.deltaTime;
 		
 		// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-		if (timer >= timeBetweenAttacks && playerInRange /*&& enemyHealth.currentHealth > 0*/) {
+		if (timer >= timeBetweenAttacks && playerInRange /*&& enemyHealth.currentHealth > 0*//*) {
 			// ... attack.
 			Attack ();
 			anim.SetBool ("PredatorAttack", true);
@@ -84,5 +84,5 @@ public class HerbivoreAttack : MonoBehaviour {
 			// ... damage the player.
 			playerHealth.TakeDamage (attackDamage);
 		}
-	}
+	}*/
 }
