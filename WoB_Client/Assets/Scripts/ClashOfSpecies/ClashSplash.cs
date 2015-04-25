@@ -33,8 +33,10 @@ public class ClashSplash : MonoBehaviour {
 		//sleepMethod ();
 
 		pd = required_object.GetComponent<ClashPersistentData> ();
-		pd.SetPlayerName ("Player Name");
-		pd.SetPlayerId (2);
+		Debug.Log("Setting player name to " + GameState.player.name);
+		pd.SetPlayerName (GameState.player.name);
+		Debug.Log("Setting player id to " + GameState.player.GetID());
+		pd.SetPlayerId (GameState.player.GetID());
 
 		defenseRequest ();
 
