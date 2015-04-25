@@ -16,7 +16,7 @@ public class GameOverManager : MonoBehaviour {
 	{
 		// Set up the reference.
 
-		player = GameObject.FindGameObjectWithTag ("Prey");
+		player = GameObject.FindGameObjectWithTag ("Herbivore");
 		playerHealth = player.GetComponent <HerbivoreHealth> ();
 		anim = GetComponent <Animator> ();
 	}

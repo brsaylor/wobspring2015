@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HerbivoreMovemen : MonoBehaviour {
+public class HerbivoreMovement : MonoBehaviour {
 
 	Animator anim;    
 	Transform player;               // Reference to the player's position.
@@ -22,10 +22,10 @@ public class HerbivoreMovemen : MonoBehaviour {
 	
 	
 	void Update ()
-	{
+	{/*
 		// If the enemy and the player have health left...
-		if(/*enemyHealth.currentHealth > 0 &&*/ playerHealth.currentHealth > 0)
-		{
+		if(/*enemyHealth.currentHealth > 0 &&*/ /*playerHealth.currentHealth > 0)
+	/*	{
 			// ... set the destination of the nav mesh agent to the player.
 			nav.SetDestination (player.position);
 			anim.SetTrigger("PredatorWalking");
@@ -36,5 +36,5 @@ public class HerbivoreMovemen : MonoBehaviour {
 			// ... disable the nav mesh agent.
 			nav.enabled = false;
 		}
-	}
+	*/}
 }

@@ -95,7 +95,7 @@ public class HerbivoreHealth : MonoBehaviour {
 		//playerAudio.Play ();
 		
 		// Turn off the movement and shooting scripts.
-		playerMovement.enabled = false;
+		HerbivoreMovement.enabled = false;
 		//playerShooting.enabled = false;
 	}       
 }

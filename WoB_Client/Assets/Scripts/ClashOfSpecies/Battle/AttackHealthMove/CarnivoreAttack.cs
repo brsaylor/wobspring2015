@@ -18,7 +18,7 @@ public class CarnivoreAttack : MonoBehaviour {
 	void Awake ()
 	{
 		// Setting up the references.
-		player = GameObject.FindGameObjectWithTag ("Prey");
+		player = GameObject.FindGameObjectWithTag ("Herbivore");
 		playerHealth = player.GetComponent <HerbivoreHealth> ();
 		//enemyHealth = GetComponent<EnemyHealth>();
 		anim = GetComponent <Animator> ();

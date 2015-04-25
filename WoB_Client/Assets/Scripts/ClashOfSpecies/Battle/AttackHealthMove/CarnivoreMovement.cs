@@ -12,7 +12,7 @@ public class CarnivoreMovement : MonoBehaviour {
 	void Awake ()
 	{
 		// Set up the references.
-		player = GameObject.FindGameObjectWithTag ("Prey").transform;
+		player = GameObject.FindGameObjectWithTag ("Herbivore").transform;
 		playerHealth = player.GetComponent <HerbivoreHealth> ();
 		//enemyHealth = GetComponent <EnemyHealth> ();
 		nav = GetComponent <NavMeshAgent> ();
