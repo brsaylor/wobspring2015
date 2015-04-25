@@ -19,7 +19,7 @@ public class CarnivoreMovement : MonoBehaviour {
 	void Awake ()
 	{
 		// Set up the references.
-		Debug.Log ("in awake");
+		//Debug.Log ("in awake");
 
 
 		herbivoreList = GameObject.FindGameObjectsWithTag ("Herbivore");
@@ -33,7 +33,7 @@ public class CarnivoreMovement : MonoBehaviour {
 		anim = GetComponent <Animator> ();
 	}
 	void findEnemy(){
-		Debug.Log ("in Find enemy");
+		//Debug.Log ("in Find enemy");
 		GameObject enemy = new GameObject("temp");
 		allEnemiesDead = true;
 		foreach (GameObject herbivore in herbivoreList) {
@@ -60,7 +60,8 @@ public class CarnivoreMovement : MonoBehaviour {
 	{
 
 			if(!allEnemiesDead)
-		{Debug.Log ("in Update");
+		{
+			//Debug.Log ("in Update");
 			// ... set the destination of the nav mesh agent to the player.
 			
 				findEnemy();
@@ -70,6 +71,7 @@ public class CarnivoreMovement : MonoBehaviour {
 		{
 			// ... disable the nav mesh agent.
 			nav.enabled = false;
+			anim.SetTrigger ("AllEnemiesDead");
 		}
 }
 }
