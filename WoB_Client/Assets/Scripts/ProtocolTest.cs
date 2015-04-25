@@ -57,8 +57,9 @@ public class ProtocolTest : MonoBehaviour {
 		}));
 
 		//Player view request
-		yield return StartCoroutine(Execute(ClashPlayerViewProtocol.Prepare(2), (res) => {
+		yield return StartCoroutine(Execute(ClashPlayerViewProtocol.Prepare(1), (res) => {
 			var response = res as ResponseClashPlayerView;
+			Debug.Log(response.TerrainID);
 			var passed = (response.TerrainID != 0 &&
 			              response.defenseSpecies.Count != 0);
 
