@@ -81,6 +81,7 @@ public class ProtocolTest : MonoBehaviour {
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
 			var response = res as ResponseClashInitiateBattle;
+			TestResult("Initiate Battle", response.valid);
 		}));
 
 		//battle end
