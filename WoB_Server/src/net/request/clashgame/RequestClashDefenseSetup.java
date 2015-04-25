@@ -7,8 +7,12 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
+import core.GameServer;
+import db.clashgame.DefenseConfigDAO;
+import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashDefenseSetup;
 import util.DataReader;
@@ -41,7 +45,14 @@ public class RequestClashDefenseSetup extends GameRequest {
     @Override
     public void process() throws Exception {
         boolean valid = configMap.size() == 5; //more checks in the future
-        
+
+        DefenseConfig config = new DefenseConfig();
+        config.createdAt = new Date();
+        config.playerId = client.getPlayer().getID();
+        config.terrainId = setupTerrainID;
+        config.layout = configMap;
+
+        DefenseConfigDAO.create(config);
         ResponseClashDefenseSetup response = new ResponseClashDefenseSetup();
         response.setValidSetup(valid);
         client.add(response);

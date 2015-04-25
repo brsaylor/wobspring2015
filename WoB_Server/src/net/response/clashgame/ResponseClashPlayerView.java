@@ -10,6 +10,8 @@ import java.util.Map;
 
 
 import metadata.NetworkCode;
+import model.clashgame.DefenseConfig;
+import model.clashgame.Player;
 import net.response.GameResponse;
 import util.GamePacket;
 import util.Vector2;
@@ -20,37 +22,35 @@ import util.Vector2;
  */
 public class ResponseClashPlayerView extends GameResponse{
 
-    private int defenseConfigID;
-    private int terrainID;
-    private HashMap<Integer, Vector2<Float>> configMap;
+    private DefenseConfig defenseConfig = null;
+    private Player player = null;
 
     public ResponseClashPlayerView(){
         response_id = NetworkCode.CLASH_PLAYER_VIEW;
-        configMap = new HashMap<Integer, Vector2<Float>>();
     }
 
-    public void setDefenseConfigID(int defenseConfigID) {
-        this.defenseConfigID = defenseConfigID;
+    public void setDefenseConfig(DefenseConfig dc) {
+        this.defenseConfig = dc;
     }
 
-    public void setTerrainID(int terrainID) {
-        this.terrainID = terrainID;
-    }
-
-    public void addNewDefenseSpecies(int speciesId, Vector2<Float> position){
-        configMap.put(speciesId, position);
+    public void setPlayer(Player pl) {
+        this.player = pl;
     }
 
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
-        packet.addInt32(defenseConfigID);
-        packet.addInt32(terrainID);
-        packet.addInt32(configMap.size());
-        for(Map.Entry<Integer, Vector2<Float>> bed : configMap.entrySet()) {
-            packet.addInt32(bed.getKey());
-            packet.addFloat(bed.getValue().getX());
-            packet.addFloat(bed.getValue().getY());
+        if (defenseConfig != null) {
+            packet.addInt32(defenseConfig.id);
+            packet.addInt32(defenseConfig.terrainId);
+            packet.addInt32(defenseConfig.playerId);
+            packet.addString("" + defenseConfig.createdAt.getTime());
+            packet.addInt32(defenseConfig.layout.size());
+            for (HashMap.Entry<Integer, Vector2<Float>> ent : defenseConfig.layout.entrySet()) {
+                packet.addInt32(ent.getKey());
+                packet.addFloat(ent.getValue().getX());
+                packet.addFloat(ent.getValue().getY());
+            }
         }
         return packet.getBytes();
     }

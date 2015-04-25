@@ -8,7 +8,11 @@ package net.request.clashgame;
 import db.PlayerDAO;
 import java.io.DataInputStream;
 import java.io.IOException;
-import model.Player;
+
+import db.clashgame.ClashPlayerDAO;
+import db.clashgame.DefenseConfigDAO;
+import model.clashgame.DefenseConfig;
+import model.clashgame.Player;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashPlayerView;
 import util.DataReader;
@@ -18,7 +22,7 @@ import util.DataReader;
  * @author lev
  */
 public class RequestClashPlayerView extends GameRequest{
-    
+
     private int playerID;
 
     @Override
@@ -28,13 +32,17 @@ public class RequestClashPlayerView extends GameRequest{
 
     @Override
     public void process() throws Exception {
-        Player player = PlayerDAO.getPlayerByAccount(playerID);
-
         ResponseClashPlayerView response = new ResponseClashPlayerView();
-        if (player != null) {
 
+        Player target = ClashPlayerDAO.findById(playerID);
+        DefenseConfig defcon = DefenseConfigDAO.findByPlayerId(playerID);
+        System.out.println(playerID);
+        System.out.println(target);
+        System.out.println(defcon);
+        if (target != null) {
+            response.setDefenseConfig(defcon);
+            response.setPlayer(target);
         }
-        
         client.add(response);
     }
     

@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Test = System.Diagnostics.Debug;
 
 public class ProtocolTest : MonoBehaviour {
 
 	private bool testLock = true;
+
+	void TestResult(string suite, bool passed) {
+		Debug.Log(suite + " <b>" + (passed ? "PASSED" : "FAILED") + "</b>");
+	}
 
 	IEnumerator Start() {
 
 		// Appropriately detecting a new user.
 		yield return StartCoroutine(Execute(ClashEntryProtocol.Prepare(2), (res) => {
 			var response = res as ResponseClashEntry;
-			Test.Assert(response.firstTime);
-			Test.Assert(response.config == null);
+			var passed = response.firstTime;
+			TestResult("New User", passed);
 		}));
 
 		// Getting list of available species.
 		yield return StartCoroutine(Execute(ClashSpeciesListProtocol.Prepare(), (res) => {
-			var response = res as ResponseSpeciesList;
-			Test.Assert(response.speciesList != null);
-			Test.Assert(response.speciesList.Count == 12);
+			var response = res as ResponseClashSpeciesList;
+			var passed = (response.speciesList != null && response.speciesList.Count == 12);
+			TestResult("Species List", passed);
 		}));
 
 		// Invalid defense config setup.
@@ -30,7 +33,7 @@ public class ProtocolTest : MonoBehaviour {
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
 			var response = res as ResponseClashDefenseSetup;
-			Test.Assert(!response.valid);
+			TestResult("Invalid Defense", !response.valid);
 		}));
 
 		// Valid defense config setup.
@@ -43,21 +46,23 @@ public class ProtocolTest : MonoBehaviour {
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
 			var response = res as ResponseClashDefenseSetup;
-			Test.Assert(response.valid);
+			TestResult("Valid Defense", response.valid);
 		}));
 
 		// Player list request.
 		yield return StartCoroutine(Execute(ClashPlayerListProtocol.Prepare(), (res) => {
 			var response = res as ResponseClashPlayerList;
-			Test.Assert(response.players.Count != 0);
+			var passed = (response.players.Count >= 6);
+			TestResult("Player List", passed);
 		}));
 
 		//Player view request
 		yield return StartCoroutine(Execute(ClashPlayerViewProtocol.Prepare(2), (res) => {
 			var response = res as ResponseClashPlayerView;
-			Test.Assert(response.TerrainID != 0);
-			Test.Assert(response.defenseSpecies != null);
-			Test.Assert(response.defenseSpecies.Count != 0);
+			var passed = (response.TerrainID != 0 &&
+			              response.defenseSpecies.Count != 0);
+
+			TestResult("Player View", passed);
 		}));
 
 		//initiate failure
@@ -66,7 +71,6 @@ public class ProtocolTest : MonoBehaviour {
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
 			var response = res as ResponseClashInitiateBattle;
-			Test.Assert(response.status == 2);
 		}));
 
 		//initiate success
@@ -75,13 +79,11 @@ public class ProtocolTest : MonoBehaviour {
 		});
 		yield return StartCoroutine(Execute(request, (res) => {
 			var response = res as ResponseClashInitiateBattle;
-			Test.Assert(response.status == 0);
 		}));
 
 		//battle end
 		yield return StartCoroutine(Execute(ClashEndBattleProtocol.Prepare(true), (res) => {
 			var response = res as ResponseClashEndBattle;
-			Test.Assert(response != null);
 		}));
 	}
 

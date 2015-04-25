@@ -14,6 +14,7 @@ public class Species {
         private Type(int value) {
             this.value = value;
         }
+
         public int getValue() {
             return this.value;
         }

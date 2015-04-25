@@ -48,6 +48,7 @@ public final class DefenseConfigDAO {
             // Parameter indices 1-15 are occupied by the species layout.
             ArrayList<Integer> keys = new ArrayList(dc.layout.keySet());
             for (int i = 0; i < keys.size(); i++) {
+                System.out.println(i);
                 pstmt.setInt(i + 1, keys.get(i));
 
                 Vector2<Float> pos = dc.layout.get(keys.get(i));
