@@ -55,7 +55,7 @@ public class CarnivoreMovement : MonoBehaviour
 						foreach (GameObject carnivore in carnivoreList) {
 								currentEnemyHealth = carnivore.GetComponent <Health> ();
 								if (currentEnemyHealth.currentHealth > 0 && carnivore != this.gameObject) {
-										Debug.Log ("Found Carnivore");
+										//Debug.Log ("Found Carnivore");
 										enemy = carnivore;
 										allEnemiesDead = false;
 										break;
@@ -82,6 +82,7 @@ public class CarnivoreMovement : MonoBehaviour
 				if (!allEnemiesDead) {
 						nav.SetDestination (enemy.transform.position);
 						anim.SetTrigger ("Walking");
+
 				}
 		}
 		

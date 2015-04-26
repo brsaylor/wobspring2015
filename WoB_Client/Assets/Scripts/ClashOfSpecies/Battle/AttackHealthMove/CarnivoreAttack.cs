@@ -95,17 +95,7 @@ public class CarnivoreAttack : MonoBehaviour {
 
 		}
 	}
-	void OnTriggerStay (Collider other)
-	{
-		// If the exiting collider is the player...
-		if(other.gameObject == currentlyAttacking)
-		{
-			// ... the player is no longer in range.
-			inRange = true;
-			anim.SetBool("Attacking",true);
-			
-		}
-	}
+
 	
 	
 	void Update ()

@@ -90,11 +90,14 @@ public class Health : MonoBehaviour {
 
 		// Tell the animator that the player is dead.
 		anim.SetTrigger ("Dead");
-
-		this.gameObject.isStatic = true;
 		nav.enabled = false;
+		col.enabled = false;
+		/*
+		this.gameObject.isStatic = true;
+
 		navObj.enabled = true;
 		col.enabled = false;
+		*/
 
 	}       
 }

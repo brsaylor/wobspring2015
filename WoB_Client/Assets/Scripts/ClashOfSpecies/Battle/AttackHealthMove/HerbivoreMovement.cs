@@ -3,8 +3,9 @@ using System.Collections;
 
 public class HerbivoreMovement : MonoBehaviour {
 
-	Animator anim;    
-	GameObject player;               // Reference to the player's position.
+	Animator anim;  
+	GameObject[] bushes;
+	GameObject bush;               // Reference to the player's position.
 	Health myHealth;      // Reference to the player's health.
 	//EnemyHealth enemyHealth;        // Reference to this enemy's health.
 	NavMeshAgent nav;               // Reference to the nav mesh agent.
@@ -13,21 +14,22 @@ public class HerbivoreMovement : MonoBehaviour {
 	void Awake ()
 	{
 		// Set up the references.
-		player = GameObject.FindGameObjectWithTag ("Plant");
+		bushes = GameObject.FindGameObjectsWithTag ("Plant");
 		myHealth = this.gameObject.GetComponent <Health> ();
-		//enemyHealth = GetComponent <EnemyHealth> ();
+
+		int randomIndex = Random.Range(0, 3);
 		nav = GetComponent <NavMeshAgent> ();
 		anim = GetComponent <Animator> ();
+		bush = bushes [randomIndex];
 	}
 	
 	
 	void Update ()
 	{
-		// If the enemy and the player have health left...
-		if(/*enemyHealth.currentHealth > 0 &&*/ myHealth.currentHealth > 0)
+		if( myHealth.currentHealth > 0)
 		{
 			// ... set the destination of the nav mesh agent to the player.
-			nav.SetDestination (player.transform.position);
+			nav.SetDestination (bush.transform.position);
 			anim.SetTrigger("Walking");
 		}
 		// Otherwise...
