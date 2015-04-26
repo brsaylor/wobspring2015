@@ -42,7 +42,7 @@ public class CarnivoreMovement : MonoBehaviour
 						foreach (GameObject herbivore in herbivoreList) {
 								currentEnemyHealth = herbivore.GetComponent <Health> ();
 								if (currentEnemyHealth.currentHealth > 0 && herbivore != this.gameObject) {
-										Debug.Log ("Found Herbivore");
+										//Debug.Log ("Found Herbivore");
 										enemy = herbivore;
 										allEnemiesDead = false;
 										break;
