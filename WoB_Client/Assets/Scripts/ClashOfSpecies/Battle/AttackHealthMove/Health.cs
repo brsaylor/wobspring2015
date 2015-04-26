@@ -18,7 +18,7 @@ public class Health : MonoBehaviour {
 	Collider col;
 	Animator anim;                                              // Reference to the Animator component.
 	AudioSource playerAudio;                                    // Reference to the AudioSource component.
-	HerbivoreMovement Movement;                              // Reference to the player's movement.
+	//HerbivoreMovement Movement;                              // Reference to the player's movement.
 	//PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
 	bool isDead;                                                // Whether the player is dead.
 	bool damaged;                                               // True when the player gets damaged.
@@ -29,7 +29,7 @@ public class Health : MonoBehaviour {
 		// Setting up the references.
 		anim = GetComponent <Animator> ();
 		//playerAudio = GetComponent <AudioSource> ();
-		Movement = GetComponent <HerbivoreMovement> ();
+		//Movement = GetComponent <HerbivoreMovement> ();
 		//playerShooting = GetComponentInChildren <PlayerShooting> ();
 		
 		// Set the initial health of the player.
@@ -87,20 +87,10 @@ public class Health : MonoBehaviour {
 	{
 		// Set the death flag so this function won't be called again.
 		isDead = true;
-		
-		// Turn off any remaining shooting effects.
-		//playerShooting.DisableEffects ();
-		
+
 		// Tell the animator that the player is dead.
 		anim.SetTrigger ("Dead");
-		
-		// Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
-		//playerAudio.clip = deathClip;
-		//playerAudio.Play ();
-		
-		// Turn off the movement and shooting scripts.
-		Movement.enabled = false;
-		//playerShooting.enabled = false;
+
 		this.gameObject.isStatic = true;
 		nav.enabled = false;
 		navObj.enabled = true;
