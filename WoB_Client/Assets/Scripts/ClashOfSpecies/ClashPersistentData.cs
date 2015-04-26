@@ -5,9 +5,11 @@ using System.Collections.Generic;
 [System.Serializable]
 public class ClashUnitData {
 	public string species_name;
+	public string description;
 	public int species_id;
 	public int prefab_id; //carnivore, herbi, omni, plant1, plant2, etc (type)
-	public int hp, attack, attackSpeed, movementSpeed;
+	public int cost;
+	public int hp, attack, attack_speed, movement_speed;
 	public Vector3 location;
 	public bool isDeployed;
 

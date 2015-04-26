@@ -69,7 +69,6 @@ public class ClashSplash : MonoBehaviour {
 		yield return new WaitForSeconds(5);
 		//Debug.Log ("after");
 	}
-	
 
 	void defenseRequest(){
 		//request server to check if defense map is in database table
@@ -87,6 +86,26 @@ public class ClashSplash : MonoBehaviour {
 				Application.LoadLevel("ClashMain");
 			}
 		});
+	}
 
+	void GetSpeciesList() {
+		NetworkManager.Send(ClashSpeciesListProtocol.Prepare(), (res) => {
+			var response = res as ResponseClashSpeciesList;
+			if(response.speciesList != null && response.speciesList.Count == 12) {
+				foreach(ClashSpeciesData spd in response.speciesList) {
+					ClashUnitData cud = new ClashUnitData();
+					cud.species_name = spd.species_name;
+					cud.species_id = spd.species_id;
+					cud.hp = spd.hit_points;
+					cud.cost = spd.species_price;
+					cud.prefab_id = (int)spd.species_type;
+					cud.attack = spd.attack_points;
+					cud.attack_speed = spd.attack_speed;
+					cud.movement_speed = spd.movement_speed;
+					cud.description = spd.description;
+					pd.species_list.Add(cud);
+				}
+			}
+		});
 	}
 }
