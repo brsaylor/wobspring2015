@@ -78,6 +78,7 @@ ModelImporter:
     2300024: Mesh7
     2300026: Mesh8
     2300028: Mesh9
+    2300030: //RootNode
     3300000: Mesh1
     3300002: Mesh10
     3300004: Mesh11
@@ -93,6 +94,7 @@ ModelImporter:
     3300024: Mesh7
     3300026: Mesh8
     3300028: Mesh9
+    3300030: //RootNode
     4300000: Mesh1
     4300002: Mesh2
     4300004: Mesh3

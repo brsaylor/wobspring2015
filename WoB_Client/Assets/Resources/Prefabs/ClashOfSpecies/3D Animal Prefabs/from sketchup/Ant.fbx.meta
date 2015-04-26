@@ -380,6 +380,7 @@ ModelImporter:
     2300128: Mesh7
     2300130: Mesh8
     2300132: Mesh9
+    2300134: //RootNode
     3300000: Mesh1
     3300002: Mesh10
     3300004: Mesh11
@@ -447,6 +448,7 @@ ModelImporter:
     3300128: Mesh7
     3300130: Mesh8
     3300132: Mesh9
+    3300134: //RootNode
     4300000: Mesh1
     4300002: Mesh2
     4300004: Mesh3
@@ -514,6 +516,7 @@ ModelImporter:
     4300128: Mesh65
     4300130: Mesh66
     4300132: Mesh67
+    4300134: Ant
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -534,7 +537,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .200000003
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
