@@ -28,15 +28,15 @@ public class ClashMainController : MonoBehaviour {
 		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
 		}
-
-		//	playerList = RetrievePlayerList ();
 	}
 
 	void Start () {
 		pd = required_object.GetComponent<ClashPersistentData> ();
         toggleGroup = contentPanel.GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<ClashPreviewController> ();
-		PopulateScrollView ();
+		//PopulateScrollView ();
+		playerList = new List<ClashPlayerElement>();
+		RetrievePlayerList ();
 	}
 
 	void Update() {
@@ -45,8 +45,18 @@ public class ClashMainController : MonoBehaviour {
 
 	//protocol does this
 	//gets only the player name and terrain name from the valid defense table
-	List<ClashPlayerElement> RetrievePlayerList() {
-		return new List<ClashPlayerElement>();
+	void RetrievePlayerList() {
+		NetworkManager.Send (ClashPlayerListProtocol.Prepare (), (res) => {
+			var response = res as ResponseClashPlayerList;
+			foreach (var pair in response.players) {
+				ClashPlayerElement element = new ClashPlayerElement();
+				element.id = pair.Key;
+				element.name = pair.Value;
+				element.isSelected = false;
+				playerList.Add (element);
+			}
+			PopulateScrollView();
+		});
 	}
 
 	void PopulateScrollView() {
