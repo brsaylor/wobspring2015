@@ -75,7 +75,6 @@ public class ClashMainController : MonoBehaviour {
 	//load the defense shop scene
 	public void EditDefense() {
 		pd.type = "defense";
-		pd.SetDefenderId (pd.GetPlayerId ());
 
 		Application.LoadLevel ("ClashShop");
 	}

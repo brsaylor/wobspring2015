@@ -38,7 +38,10 @@ public class ClashSplash : MonoBehaviour {
 		Debug.Log("Setting player id to " + GameState.player.GetID());
 		pd.SetPlayerId (GameState.player.GetID());
 
+		GetSpeciesList ();
+
 		defenseRequest ();
+
 
 	}
 	

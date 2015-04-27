@@ -32,7 +32,6 @@ public class ClashShopController : MonoBehaviour {
 	public GameObject selectedTerrainPrefab;
 
 	void Awake() {
-		Screen.SetResolution (800, 600, true);
 
 		required_object = GameObject.Find ("Persistent Object");
 		
@@ -71,9 +70,15 @@ public class ClashShopController : MonoBehaviour {
 			GameObject element = Instantiate(shopElementPrefab) as GameObject;
 			ClashShopElementPrefab e = element.GetComponent<ClashShopElementPrefab>();
 			e.label.text = species.species_name;	//species name for display
-			e.name = species.species_name;			//species name
-			e.id = species.species_id;				//species id
+			e.item_name = species.species_name;			//species name
+			e.species_id = species.species_id;				//species id
 			e.prefab_id = species.prefab_id;		//prefab id
+			e.attack = species.attack;
+			e.attack_speed = species.attack_speed;
+			e.cost = species.cost;
+			e.description = species.description;
+			e.hp = species.hp;
+			e.movement_speed = species.movement_speed;
 			//e.image = ;						//set sprite
 			e.preview.onClick.AddListener(() => DisplayPreview(e));
 			e.add.onClick.AddListener(() => AddToSelectedUnits(e));
@@ -94,7 +99,7 @@ public class ClashShopController : MonoBehaviour {
 				panel = null;
 				break;
 			}
-			if(panel == null) Debug.Log("ERROR IN PANEL SELECTION");
+			if(panel == null) Destroy(element);
 			else element.transform.SetParent(panel);
 		}
 	}
@@ -115,13 +120,12 @@ public class ClashShopController : MonoBehaviour {
 	}
 
 	void AddToSelectedUnits(ClashShopElementPrefab se) {
-		GameObject selected = Instantiate (selectedUnitPrefab) as GameObject;
-		ClashSelectedUnit e = selected.GetComponent<ClashSelectedUnit> ();
-
-		if (selectedUnits.childCount < 5 && !CheckIfUnitExists(se.id)) {
+		if (selectedUnits.childCount < 5 && !CheckIfUnitExists(se.species_id)) {
+			GameObject selected = Instantiate (selectedUnitPrefab) as GameObject;
+			ClashSelectedUnit e = selected.GetComponent<ClashSelectedUnit> ();
 			e.label.text = se.label.text;	//species name
 			e.prefab_id = se.prefab_id;		//prefab name
-			e.species_id = se.id;					//species id
+			e.species_id = se.species_id;					//species id
 			//e.image =;
 			e.remove.onClick.AddListener (() => RemoveFromSelected (selected));
 			selected.transform.SetParent (selectedUnits);
