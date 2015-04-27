@@ -83,7 +83,17 @@ public class CarnivoreAttack : MonoBehaviour {
 				}
 	}
 	
-	
+	void onTriggerStay (Collider other)
+	{
+		// If the exiting collider is the player...
+		if(other.gameObject == currentlyAttacking)
+		{
+			// ... the player is no longer in range.
+			inRange = true;
+			//anim.SetBool("Attacking",true);
+			
+		}
+	}
 	void OnTriggerExit (Collider other)
 	{
 		// If the exiting collider is the player...
@@ -111,12 +121,13 @@ public class CarnivoreAttack : MonoBehaviour {
 						
 
 				}
-		
+		/*
 		// If the player has zero or less health...
 		if(currentEnemyHealth.currentHealth <= 0)
 		{
 			anim.SetBool ("Attacking", false);
 		}
+		*/
 	}
 	
 	

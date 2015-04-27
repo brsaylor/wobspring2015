@@ -79,9 +79,12 @@ public class CarnivoreMovement : MonoBehaviour
 							break;
 				}
 
-				if (!allEnemiesDead) {
-						nav.SetDestination (enemy.transform.position);
-						anim.SetTrigger ("Walking");
+		if (!allEnemiesDead && nav.enabled) {
+						if(nav.SetDestination(enemy.transform.position)){
+				nav.SetDestination(enemy.transform.position);
+				anim.SetTrigger ("Walking");		
+			}
+						
 
 				}
 		}

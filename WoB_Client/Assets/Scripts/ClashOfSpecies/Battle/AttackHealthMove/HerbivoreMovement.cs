@@ -10,11 +10,13 @@ public class HerbivoreMovement : MonoBehaviour {
 	//EnemyHealth enemyHealth;        // Reference to this enemy's health.
 	NavMeshAgent nav;               // Reference to the nav mesh agent.
 	
-	
+	bool isbush = false;
 	void Awake ()
 	{
 		// Set up the references.
 		bushes = GameObject.FindGameObjectsWithTag ("Plant");
+		if (bushes != null)
+						isbush = true;
 		myHealth = this.gameObject.GetComponent <Health> ();
 
 		int randomIndex = Random.Range(0, 3);
@@ -26,7 +28,7 @@ public class HerbivoreMovement : MonoBehaviour {
 	
 	void Update ()
 	{
-		if( myHealth.currentHealth > 0)
+		if( myHealth.currentHealth > 0 && isbush && nav.enabled)
 		{
 			// ... set the destination of the nav mesh agent to the player.
 			nav.SetDestination (bush.transform.position);

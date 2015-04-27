@@ -80,9 +80,9 @@ public class OmnivoreMovement : MonoBehaviour {
 			break;
 		}
 		
-		if (!allEnemiesDead) {
+		if (!allEnemiesDead && nav.enabled) {
 			nav.SetDestination (enemy.transform.position);
-			anim.SetTrigger ("Walking");
+			//anim.SetTrigger ("Walking");
 			
 		}
 	}
@@ -95,7 +95,7 @@ public class OmnivoreMovement : MonoBehaviour {
 		} else {
 			// ... disable the nav mesh agent.
 			nav.enabled = false;
-			anim.SetTrigger ("AllEnemiesDead");
+			//anim.SetTrigger ("AllEnemiesDead");
 		}
 	}
 }

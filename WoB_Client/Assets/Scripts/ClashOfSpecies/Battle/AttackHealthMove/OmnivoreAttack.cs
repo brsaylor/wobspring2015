@@ -90,7 +90,7 @@ public class OmnivoreAttack : MonoBehaviour {
 		{
 			// ... the player is no longer in range.
 			inRange = false;
-			anim.SetBool("Attacking",false);
+			//anim.SetBool("Attacking",false);
 			
 		}
 	}
@@ -104,17 +104,18 @@ public class OmnivoreAttack : MonoBehaviour {
 		// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
 		if (timer >= timeBetweenAttacks && inRange && currentEnemyHealth.currentHealth > 0 && myHealth.currentHealth>0) {
 			// ... attack.
-			anim.SetBool ("Attacking", true);
+			//anim.SetBool ("Attacking", true);
 			Attack ();
 			
 			
 		}
-		
+		/*
 		// If the player has zero or less health...
 		if(currentEnemyHealth.currentHealth <= 0)
 		{
-			anim.SetBool ("Attacking", false);
+			//anim.SetBool ("Attacking", false);
 		}
+		*/
 	}
 	
 	
