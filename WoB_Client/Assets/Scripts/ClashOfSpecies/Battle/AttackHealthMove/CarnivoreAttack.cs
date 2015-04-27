@@ -18,13 +18,13 @@ public class CarnivoreAttack : MonoBehaviour {
 	GameObject[] omnivoreList;                          // List of Omnivores
 	GameObject omnivore;                          // List of herbivores
 
+	GameObject[] carnivoreList;                          // List of carnivoreList
+	GameObject carnivore;                          // List of carnivoreList
+	
+
 	GameObject currentlyAttacking;
 	Health currentEnemyHealth;                  // Reference to the player's health.
-
-
-	//EnemyHealth enemyHealth;                    // Reference to this enemy's health.
-
-
+	Health myHealth;
 
 
 
@@ -33,12 +33,8 @@ public class CarnivoreAttack : MonoBehaviour {
 		// Setting up the references.
 		herbivoreList = GameObject.FindGameObjectsWithTag ("Herbivore");
 		omnivoreList = GameObject.FindGameObjectsWithTag ("Omnivore");
-
-
-
-		//HEALTH
-		//playerHealth = player.GetComponent <HerbivoreHealth> ();
-		//enemyHealth = GetComponent<EnemyHealth>();
+		carnivoreList = GameObject.FindGameObjectsWithTag ("Carnivore");
+		myHealth = this.gameObject.GetComponent<Health> ();
 
 
 		anim = GetComponent <Animator> ();
@@ -47,9 +43,11 @@ public class CarnivoreAttack : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider other)
 	{
+		inRange = false;
 		// If the entering collider is the player...
 		foreach(GameObject herbivore in herbivoreList){
-			if(herbivore==other.gameObject)
+			if (inRange)	break;
+			if(herbivore==other.gameObject && herbivore != this.gameObject)
 			{
 				// ... the player is in range.
 				inRange = true;
@@ -58,9 +56,44 @@ public class CarnivoreAttack : MonoBehaviour {
 
 			}
 		}
+		if (!inRange) {
+						foreach (GameObject carnivore in carnivoreList) {
+								if (inRange)
+										break;
+								if (carnivore == other.gameObject && carnivore != this.gameObject) {
+										// ... the player is in range.
+										inRange = true;
+										currentlyAttacking = other.gameObject;
+										currentEnemyHealth = currentlyAttacking.GetComponent <Health> ();
+				
+								}
+						}
+		}if (!inRange) {
+						foreach (GameObject omnivore in omnivoreList) {
+							if (inRange)
+								break;
+								if (omnivore == other.gameObject && omnivore != this.gameObject) {
+										// ... the player is in range.
+										inRange = true;
+										currentlyAttacking = other.gameObject;
+										currentEnemyHealth = currentlyAttacking.GetComponent <Health> ();
+				
+								}
+						}
+				}
 	}
 	
-	
+	void onTriggerStay (Collider other)
+	{
+		// If the exiting collider is the player...
+		if(other.gameObject == currentlyAttacking)
+		{
+			// ... the player is no longer in range.
+			inRange = true;
+			//anim.SetBool("Attacking",true);
+			
+		}
+	}
 	void OnTriggerExit (Collider other)
 	{
 		// If the exiting collider is the player...
@@ -72,6 +105,7 @@ public class CarnivoreAttack : MonoBehaviour {
 
 		}
 	}
+
 	
 	
 	void Update ()
@@ -80,20 +114,20 @@ public class CarnivoreAttack : MonoBehaviour {
 		timer += Time.deltaTime;
 		
 		// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-		if (timer >= timeBetweenAttacks && inRange && currentEnemyHealth.currentHealth > 0) {
+		if (timer >= timeBetweenAttacks && inRange && currentEnemyHealth.currentHealth > 0 && myHealth.currentHealth>0) {
 						// ... attack.
-						Attack ();
 						anim.SetBool ("Attacking", true);
+						Attack ();
+						
 
 				}
-		
+		/*
 		// If the player has zero or less health...
 		if(currentEnemyHealth.currentHealth <= 0)
 		{
-			// ... tell the animator the player is dead.
-			//anim.SetTrigger ("AllEnemiesDead");
 			anim.SetBool ("Attacking", false);
 		}
+		*/
 	}
 	
 	

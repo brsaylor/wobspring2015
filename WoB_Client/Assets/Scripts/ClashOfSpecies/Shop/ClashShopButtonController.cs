@@ -12,14 +12,15 @@ public class ClashShopButtonController : MonoBehaviour {
 	public Transform selectedUnits;
 	public Transform selectedTerrain;
 
-	// Use this for initialization
-	void Start () {
+	void Awake() {
 		required_object = GameObject.Find ("Persistent Object");
-		/*	//ShopController.cs handles this; not needed here
 		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
 		}
-		*/
+	}
+
+	// Use this for initialization
+	void Start () {
 		pd = required_object.GetComponent<ClashPersistentData> ();
 
 		if (pd.type == "defense") {

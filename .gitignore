@@ -53,4 +53,5 @@ WoB_Server/.idea/workspace.xml
 WoB_Server/.idea/workspace.xml
 *.sln
 *.iml
-*.meta
+/dist/
+/WoB_Server/dist/

@@ -15,10 +15,11 @@ public class GameOverManager : MonoBehaviour {
 	void Awake ()
 	{
 		// Set up the reference.
-
+		/*
 		player = GameObject.FindGameObjectWithTag ("Herbivore");
 		playerHealth = player.GetComponent <Health> ();
 		anim = GetComponent <Animator> ();
+		*/
 	}
 	
 	
