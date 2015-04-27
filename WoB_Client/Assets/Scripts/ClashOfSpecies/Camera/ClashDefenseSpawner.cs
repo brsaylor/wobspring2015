@@ -38,13 +38,25 @@ public class ClashDefenseSpawner : MonoBehaviour {
 				if(active_toggle != null) {
 					int list_index = active_toggle.GetComponent<ClashDefenseToggle>().list_index;
 					bool isDeployed = pd.defenderInfo.defense[list_index].isDeployed;
-					if(!isDeployed) { 
-						if(pd.defenderInfo.defense[list_index].prefab_id == 0) {
-							unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/unit1", typeof(GameObject)), hit.point, Quaternion.identity) as GameObject;
-							unit.tag = "Ally";
-							pd.defenderInfo.defense[list_index].isDeployed = true;
-							cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.interactable = false;
+					if(!isDeployed) {
+						switch(pd.defenderInfo.defense[list_index].prefab_id) {
+						case 0:
+							unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Plant", typeof(GameObject)), hit.point, Quaternion.identity) as GameObject;
+							break;
+						case 1:
+							unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Carnivore", typeof(GameObject)), hit.point, Quaternion.identity) as GameObject;
+							break;
+						case 2:
+							unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Herbivore", typeof(GameObject)), hit.point, Quaternion.identity) as GameObject;
+							break;
+						case 3:
+							unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Omnivore", typeof(GameObject)), hit.point, Quaternion.identity) as GameObject;
+							break;
 						}
+						unit.tag = "Ally";
+						pd.defenderInfo.defense[list_index].isDeployed = true;
+						cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.isOn = false;
+						cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.interactable = false;
 					}
 				}
             }
