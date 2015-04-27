@@ -51,7 +51,7 @@ public class pauseMenu : MonoBehaviour
 
         if (GUILayout.Button("Quit"))
         {
-			Application.LoadLevel("Main Menu");
+			Application.LoadLevel("ClashMain");
         }
     }
 }
