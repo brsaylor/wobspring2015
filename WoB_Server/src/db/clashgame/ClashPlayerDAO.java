@@ -13,8 +13,8 @@ import java.util.List;
  * Created by dkush_000 on 4/23/2015.
  */
 public class ClashPlayerDAO {
-    private static final String FIND_ELIGIBLE_QUERY = "SELECT `player`.* FROM `player`"
-        + " INNER JOIN `clash_defense_config`"
+    private static final String FIND_ELIGIBLE_QUERY = "SELECT DISTINCT `player`.* FROM `player`"
+        + " INNER JOIN `clash_defense_config` ON `clash_defense_config`.`player_id` = `player`.`player_id`"
         + " GROUP BY `player`.`player_id`";
 
     private static final String FIND_BY_ID = "SELECT `player`.* FROM `player`"
