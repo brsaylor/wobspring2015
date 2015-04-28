@@ -115,8 +115,9 @@ public class ClashMainController : MonoBehaviour {
 	public void AttackPlayer() {
 		if (selectedPlayer != -1) {
 			pd.type = "offense";
-			//pd.SetDefenderID(selectedPlayer);
+			pd.SetDefenderId(selectedPlayer);
 			pd.SetDefenderTerrain(defendingTerrain);
+			pd.defenderInfo.defense = defenseSpecies;
 			//Debug.Log(atkData.getDefenderName());
 			//Debug.Log(atkData.getDefenderTerrain());
 

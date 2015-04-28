@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class ClashDefenseController : MonoBehaviour {
 	GameObject required_object;
 	ClashPersistentData pd;
-	string terrain_prefab;
 	public Transform unit_display;
 	public ToggleGroup toggleGroup = null;
 	public GameObject unit_display_toggle;
