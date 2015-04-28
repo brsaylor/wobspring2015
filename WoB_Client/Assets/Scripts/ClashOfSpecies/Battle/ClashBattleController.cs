@@ -1,71 +1,53 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentData data;
-	GameObject t, go;
-	string terrain_prefab;
-	public GameObject terrain;
-	public GameObject Model,Model2,Model3,Model4,Model5;
-	public float xMin = 30F;
-	public float xMax = 70F;
-	public float zMin = 40F;
-	public float zMax = 60F;
-	//public  button1;
-	//public Button button2;
+	ClashPersistentData pd;
+	public Transform unit_display;
+	public ToggleGroup toggleGroup = null;
+	public GameObject unit_display_toggle;
 
 	void Awake() {
 		required_object = GameObject.Find ("Persistent Object");
+		
 		if (required_object == null) {
-
-			//Application.LoadLevel ("ClashSplash");
-			
+			Application.LoadLevel ("ClashSplash");
 		}
 	}
+
 	// Use this for initialization
 	void Start () {
+		pd = required_object.GetComponent<ClashPersistentData> ();
+		toggleGroup = unit_display.GetComponent<ToggleGroup>();
 
-			data = required_object.GetComponent<ClashPersistentData>();
-			SpawnTe (data.terrain_list[data.defenderInfo.terrain_id]);
-			//InstantiateEnemyUnits ();
-			//button2 = (Texture)Resources.Load("Images/African Elephant");
+		Instantiate (pd.terrain_list[pd.defenderInfo.terrain_id], new Vector3(0,0,0), Quaternion.identity);
 
+		PopulateUnitDisplay ();
+		SpawnEnemies ();
 	}
-
-
 	
 	// Update is called once per frame
 	void Update () {
-		//if (InvokeRepeating (IsGameOver (), 2, 5)) {
-
-		//}
-	}
-
-	GameObject CreateUnit() {
-
-		GameObject go = null ;
-		return null;
-	}
-
-	public bool IsEnemyDefeated() {
-		List<GameObject> enemies = new List<GameObject> ();
-
-		GameObject[] animals = GameObject.FindGameObjectsWithTag ("EnemyAnimal");
-		foreach (GameObject enemy in animals)
-			enemies.Add (enemy);
-
-		GameObject[] plants = GameObject.FindGameObjectsWithTag ("EnemyPlant");
-		foreach (GameObject enemy in plants)
-			enemies.Add (enemy);
-
-		return(enemies.Count == 0);
 
 	}
 
+	void PopulateUnitDisplay() {
+		int i = 0;
+		foreach (ClashUnitData ud in pd.attackerInfo.offense) {
+			GameObject element = Instantiate(unit_display_toggle) as GameObject;
+			ClashBattleToggle cdt = element.GetComponent<ClashBattleToggle>();
+			cdt.list_index = i;
+			//cdt.unit_image = ;
+			cdt.toggle.group = toggleGroup;
+			cdt.transform.SetParent(unit_display);
+			i++;
+		}
+	}
+	
 	public bool IsAllUnitsDeployed() {
-		foreach (ClashUnitData ud in data.attackerInfo.offense) {
+		foreach (ClashUnitData ud in pd.attackerInfo.offense) {
 			if (!ud.isDeployed) {
 				return false;
 			}
@@ -73,18 +55,16 @@ public class ClashBattleController : MonoBehaviour {
 		return true;
 	}
 
+	public bool IsEnemyDefeated() {
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+		
+		return(enemies.Length == 0);
+	}
+
 	public bool IsAllyDefeated() {
-		List<GameObject> allies = new List<GameObject> ();
+		GameObject[] allies = GameObject.FindGameObjectsWithTag ("Ally");
 		
-		GameObject[] animals = GameObject.FindGameObjectsWithTag ("AllyAnimal");
-		foreach (GameObject enemy in animals)
-			allies.Add (enemy);
-		
-		GameObject[] plants = GameObject.FindGameObjectsWithTag ("AllyPlant");
-		foreach (GameObject enemy in plants)
-			allies.Add (enemy);
-		
-		return(allies.Count == 0);
+		return(allies.Length == 0);
 	}
 
 	public bool IsGameOver() {
@@ -95,44 +75,35 @@ public class ClashBattleController : MonoBehaviour {
 
 	}
 
-	public void InstantiateEnemyUnits() {
-
-		foreach (ClashUnitData ud in data.defenderInfo.defense) {
-			if(ud.species_id == 1) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/CARNIVORE_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-			else if(ud.species_id == 2) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/HERBIVORE_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-			else if(ud.species_id == 3) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/OMNIVORE_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-			else if(ud.species_id == 0) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/PLANT_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-
-			go.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Animations/" + ud.species_name + "Animator") as RuntimeAnimatorController;
-			go.GetComponent<Animator>().avatar = Resources.Load("Prefabs/ClashOfSpecies/3D Animal Prefabs" + ud.species_name + "Animator")as RuntimeAnimatorController;
+	public void SpawnEnemies() {
+		GameObject unit;
+		Vector3 loc;
+		foreach (ClashUnitData ud in pd.defenderInfo.defense) {
+			loc = new Vector3(ud.location.x, something, ud.location.y);
+			switch(ud.prefab_id) {
+			case 0:
+				unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Plant", typeof(GameObject)), loc, Quaternion.identity) as GameObject;
+				break;
+			case 1:
+				unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Carnivore", typeof(GameObject)), loc, Quaternion.identity) as GameObject;
+				break;
+			case 2:
+				unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Herbivore", typeof(GameObject)), loc, Quaternion.identity) as GameObject;
+				break;
+			case 3:
+				unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Omnivore", typeof(GameObject)), loc, Quaternion.identity) as GameObject;
+				break;
+			}
+			unit.tag = "Enemy";
+			unit.GetComponent<ClashUnitAttributes>().species_id = ud.species_id;
+			unit.GetComponent<ClashUnitAttributes>().species_name = ud.species_name;
+			unit.GetComponent<ClashUnitAttributes>().prefab_id = ud.prefab_id;
+			unit.GetComponent<ClashUnitAttributes>().hp = ud.hp;
+			unit.GetComponent<ClashUnitAttributes>().attack = ud.attack;
+			unit.GetComponent<ClashUnitAttributes>().attack_speed = ud.attack_speed;
+			unit.GetComponent<ClashUnitAttributes>().movement_speed = ud.movement_speed;
+			ud.isDeployed = true;
 
 		}
-		//hardcode of instantiate defense team
-		/*
-		Vector3 newPos = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
-		Vector3 newPos2 = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
-		Vector3 newPos3 = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
-		Vector3 newPos4 = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
-		Vector3 newPos5 = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
-		Instantiate (Model, newPos, Quaternion.identity);
-		Instantiate (Model2, newPos2, Quaternion.identity);
-		Instantiate (Model3, newPos3, Quaternion.identity);
-		Instantiate (Model4, newPos4, Quaternion.identity);
-		Instantiate (Model5, newPos5, Quaternion.identity);
-		*/
-	} 
-
-	void SpawnTe (GameObject go)
-	{
-		
-		Instantiate (go, new Vector3 (0, 0, 0), Quaternion.identity);
-		
 	}
-
-	
-
 }
