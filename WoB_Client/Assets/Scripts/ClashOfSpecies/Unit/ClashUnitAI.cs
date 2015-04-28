@@ -23,13 +23,13 @@ public class ClashUnitAI : MonoBehaviour {
 		if (hasEnemy && enemy != null) {
 			//attack if it has an enemy
 			enemyDistance = Vector3.Distance (enemy.transform.position, transform.position);
-			if (enemyDistance <= attr.GetAttackRange()) {
+			if (enemyDistance <= attr.attack_range) {
 				if (!attacking) {
-					Invoke ("ApplyDamage", attr.GetAttackSpeed());	//do damage every attackInt seconds
+					Invoke ("ApplyDamage", attr.attack_speed);	//do damage every attackInt seconds
 					attacking = true;
 				}
 			}
-			if(enemy.GetComponent<ClashUnitAttributes>().GetUnitHP() <= 0) {
+			if(enemy.GetComponent<ClashUnitAttributes>().hp <= 0) {
 				Destroy(enemy);
 				ai.SetTarget(null);
 				enemy = null;
@@ -50,7 +50,7 @@ public class ClashUnitAI : MonoBehaviour {
 	public void ApplyDamage() {
 		//call the method on the enemy to take damage
 		if (enemy != null) {
-			enemy.SendMessage ("TakeDamage", attr.GetUnitAttack (), SendMessageOptions.RequireReceiver);
+			enemy.SendMessage ("TakeDamage", attr.attack, SendMessageOptions.RequireReceiver);
 		}
 		attacking = false;
 
