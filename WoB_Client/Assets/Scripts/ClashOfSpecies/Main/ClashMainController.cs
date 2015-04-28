@@ -98,8 +98,8 @@ public class ClashMainController : MonoBehaviour {
 			defenseSpecies = response.defenseSpecies;
 			Debug.Log (selectedPlayer);
 			Debug.Log (defendingTerrain);
-			Debug.Log (pd.terrain_list[defendingTerrain].name);
-			//pctrl.display = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name, typeof(Sprite)) as Sprite;
+			Debug.Log ("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name);
+			pctrl.display.sprite = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name) as Sprite;
 		});
 	}
 
