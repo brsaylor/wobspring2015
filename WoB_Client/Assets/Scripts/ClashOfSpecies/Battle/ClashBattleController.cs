@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
 	ClashPersistentData data;
-	GameObject t, go;
+	GameObject t, goo;
 	string terrain_prefab;
 	public GameObject terrain;
 	public GameObject Model,Model2,Model3,Model4,Model5;
@@ -20,7 +20,7 @@ public class ClashBattleController : MonoBehaviour {
 		required_object = GameObject.Find ("Persistent Object");
 		if (required_object == null) {
 
-			//Application.LoadLevel ("ClashSplash");
+			Application.LoadLevel ("ClashSplash");
 			
 		}
 	}
@@ -31,7 +31,8 @@ public class ClashBattleController : MonoBehaviour {
 			SpawnTe (data.terrain_list[data.defenderInfo.terrain_id]);
 			//InstantiateEnemyUnits ();
 			//button2 = (Texture)Resources.Load("Images/African Elephant");
-
+		//SpawnTe ("The DryLands");
+		//InstantiateEnemyUnits();
 	}
 
 
@@ -98,21 +99,27 @@ public class ClashBattleController : MonoBehaviour {
 	public void InstantiateEnemyUnits() {
 
 		foreach (ClashUnitData ud in data.defenderInfo.defense) {
-			if(ud.species_id == 1) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/CARNIVORE_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-			else if(ud.species_id == 2) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/HERBIVORE_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-			else if(ud.species_id == 3) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/OMNIVORE_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
-			else if(ud.species_id == 0) 
-				go = Instantiate(Resources.Load("Prefabs/3dModels/Setted models/PLANT_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);
 
-			go.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Animations/" + ud.species_name + "Animator") as RuntimeAnimatorController;
-			go.GetComponent<Animator>().avatar = Resources.Load("Prefabs/ClashOfSpecies/3D Animal Prefabs" + ud.species_name + "Animator")as RuntimeAnimatorController;
+		switch (ud.species_id)
+			{
 
+			case 58: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/caracal_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 11: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/ant_prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 1001: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/bush1_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 1009: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/bush2_prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 1008: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/bush3_prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 55: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/bushbaby_prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 59: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/elephant_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 4: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/fox_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 61: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/tortoise_prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 7: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/wildbeast_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 75: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/zebra_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			case 86: Instantiate(Resources.Load("Prefabs/3dModels/Setted models/cheetah_Prefab",typeof(GameObject)), ud.location, Quaternion.identity);break;
+			default: break; 
+			}
 		}
 		//hardcode of instantiate defense team
-		/*
+	/*
 		Vector3 newPos = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
 		Vector3 newPos2 = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
 		Vector3 newPos3 = new Vector3(Random.Range(xMin, xMax), 1, Random.Range(zMin, zMax));
@@ -123,13 +130,14 @@ public class ClashBattleController : MonoBehaviour {
 		Instantiate (Model3, newPos3, Quaternion.identity);
 		Instantiate (Model4, newPos4, Quaternion.identity);
 		Instantiate (Model5, newPos5, Quaternion.identity);
-		*/
+	*/
 	} 
 
 	void SpawnTe (GameObject go)
 	{
 		
 		Instantiate (go, new Vector3 (0, 0, 0), Quaternion.identity);
+		//Instantiate(Resources.Load("Prefabs/ClashOfSpecies/Terrains/"), new Vector3 (0, 0, 0), Quaternion.identity);
 		
 	}
 
