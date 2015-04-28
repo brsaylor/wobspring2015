@@ -2,37 +2,66 @@
 using System.Collections;
 
 public class HerbivoreAttack : MonoBehaviour {
-	/*
+
 	
 	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
 	public int attackDamage = 10;               // The amount of health taken away per attack.
-	
-	
+
+		
 	Animator anim;                              // Reference to the animator component.
-	GameObject player;                          // Reference to the player GameObject.
-	Health playerHealth;                  // Reference to the player's health.
-	//EnemyHealth enemyHealth;                    // Reference to this enemy's health.
-	bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
+	bool inRange;                        	 // Whether player is within the trigger collider and can be attacked.
 	float timer;                                // Timer for counting up to the next attack.
 	
 	
+	GameObject[] herbivoreList;                          // List of herbivores
+	GameObject herbivore;                          // List of herbivores
+
+	
+	GameObject[] bushes;
+	GameObject bush;               // Reference to the player's position.
+	
+	GameObject currentlyAttacking;
+	Health currentEnemyHealth;                  // Reference to the player's health.
+	Health myHealth;
 	void Awake ()
 	{
 		// Setting up the references.
-		player = GameObject.FindGameObjectWithTag ("Plant");
-		playerHealth = player.GetComponent <Health> ();
-		//enemyHealth = GetComponent<EnemyHealth>();
+		herbivoreList = GameObject.FindGameObjectsWithTag ("Herbivore");
+		bushes = GameObject.FindGameObjectsWithTag ("Plant");
+		myHealth = this.gameObject.GetComponent<Health> ();
+		
+		
 		anim = GetComponent <Animator> ();
 	}
 	
 	
 	void OnTriggerEnter (Collider other)
 	{
+		inRange = false;
 		// If the entering collider is the player...
-		if(other.gameObject == player)
-		{
-			// ... the player is in range.
-			playerInRange = true;
+		foreach(GameObject herbivore in herbivoreList){
+			if (inRange)	break;
+			if(herbivore==other.gameObject && herbivore != this.gameObject)
+			{
+				// ... the player is in range.
+				inRange = true;
+				currentlyAttacking = other.gameObject;
+				currentEnemyHealth = currentlyAttacking.GetComponent <Health> ();
+				
+			}
+		}
+		if (!inRange) {
+			foreach (GameObject bush in bushes) {
+				if (inRange)
+					break;
+				if (bush == other.gameObject && bush != this.gameObject) {
+					// ... the player is in range.
+					inRange = true;
+					currentlyAttacking = other.gameObject;
+					currentEnemyHealth = currentlyAttacking.GetComponent <Health> ();
+					
+				}
+			}
 		}
 	}
 	
@@ -40,12 +69,11 @@ public class HerbivoreAttack : MonoBehaviour {
 	void OnTriggerExit (Collider other)
 	{
 		// If the exiting collider is the player...
-		if(other.gameObject == player)
+		if(other.gameObject == currentlyAttacking)
 		{
 			// ... the player is no longer in range.
-			playerInRange = false;
-			
-			anim.SetBool("PredatorAttack",false);
+			inRange = false;
+			//anim.SetBool("Attacking",false);
 			
 		}
 	}
@@ -57,19 +85,20 @@ public class HerbivoreAttack : MonoBehaviour {
 		timer += Time.deltaTime;
 		
 		// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-		if (timer >= timeBetweenAttacks && playerInRange /*&& enemyHealth.currentHealth > 0*//*) {
+		if (timer >= timeBetweenAttacks && inRange && currentEnemyHealth.currentHealth > 0 && myHealth.currentHealth>0) {
 			// ... attack.
+			//anim.SetBool ("Attacking", true);
 			Attack ();
-			anim.SetBool ("PredatorAttack", true);
 			
-		} 
-		
-		// If the player has zero or less health...
-		if(playerHealth.currentHealth <= 0)
-		{
-			// ... tell the animator the player is dead.
-			anim.SetTrigger ("PlayerDead");
+			
 		}
+		/*
+		// If the player has zero or less health...
+		if(currentEnemyHealth.currentHealth <= 0)
+		{
+			//anim.SetBool ("Attacking", false);
+		}
+		*/
 	}
 	
 	
@@ -79,10 +108,10 @@ public class HerbivoreAttack : MonoBehaviour {
 		timer = 0f;
 		
 		// If the player has health to lose...
-		if(playerHealth.currentHealth > 0)
+		if(currentEnemyHealth.currentHealth > 0)
 		{
 			// ... damage the player.
-			playerHealth.TakeDamage (attackDamage);
+			currentEnemyHealth.TakeDamage (attackDamage);
 		}
-	}*/
+	}
 }
