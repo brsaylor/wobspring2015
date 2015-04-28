@@ -107,5 +107,4 @@ public class ClashBattleController : MonoBehaviour {
 
 		}
 	}
-
 }
