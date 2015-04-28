@@ -15,8 +15,9 @@ public class ClashMainController : MonoBehaviour {
 	public GameObject playerToggle;
 	public List<ClashPlayerElement> playerList;
 	public Transform contentPanel;
-	string selectedPlayer = "";
+	int selectedPlayer = -1;
 	int defendingTerrain = -1;
+	public List<ClashUnitData> defenseSpecies;
     ToggleGroup toggleGroup = null;
 	ClashPreviewController pctrl;
 	GameObject required_object;
@@ -28,15 +29,16 @@ public class ClashMainController : MonoBehaviour {
 		if (required_object == null) {
 			Application.LoadLevel ("ClashSplash");
 		}
-
-		//	playerList = RetrievePlayerList ();
 	}
 
 	void Start () {
 		pd = required_object.GetComponent<ClashPersistentData> ();
         toggleGroup = contentPanel.GetComponent<ToggleGroup>();
 		pctrl = gameObject.GetComponent<ClashPreviewController> ();
-		PopulateScrollView ();
+		//PopulateScrollView ();
+		playerList = new List<ClashPlayerElement>();
+		defenseSpecies = new List<ClashUnitData>();
+		RetrievePlayerList ();
 	}
 
 	void Update() {
@@ -45,8 +47,19 @@ public class ClashMainController : MonoBehaviour {
 
 	//protocol does this
 	//gets only the player name and terrain name from the valid defense table
-	List<ClashPlayerElement> RetrievePlayerList() {
-		return new List<ClashPlayerElement>();
+	void RetrievePlayerList() {
+		NetworkManager.Send (ClashPlayerListProtocol.Prepare (), (res) => {
+			var response = res as ResponseClashPlayerList;
+			foreach (var pair in response.players) {
+				ClashPlayerElement element = new ClashPlayerElement();
+				element.id = pair.Key;
+				element.name = pair.Value;
+				element.isSelected = false;
+				playerList.Add (element);
+			}
+			Debug.Log ("playerList.Count = " + playerList.Count);
+			PopulateScrollView();
+		});
 	}
 
 	void PopulateScrollView() {
@@ -64,12 +77,32 @@ public class ClashMainController : MonoBehaviour {
 	}
 
 	public void ToggleAction(ClashPlayerToggle toggle, bool state) {
-		selectedPlayer = state ? toggle.name : "";
-		defendingTerrain = state ? toggle.terrain_id : -1;
+		if (state) {
+			GetDefenseConfig(toggle.player_id);
+		} else {
+			selectedPlayer = -1;
+			defendingTerrain = -1;
+		}
 		pctrl.text.enabled = !state;
+
 		//pctrl.display = state ? Resources.Load("", typeof(Sprite)) : null;
 		//Debug.Log (selectedPlayer);
 		//Debug.Log (defendingTerrain);
+	}
+
+	public void GetDefenseConfig(int player_id) {
+		NetworkManager.Send (ClashPlayerViewProtocol.Prepare (player_id), (res) => {
+			var response = res as ResponseClashPlayerView;
+			selectedPlayer = response.PlayerID;
+			defendingTerrain = response.TerrainID;
+			defenseSpecies = response.defenseSpecies;
+			Debug.Log (selectedPlayer);
+			Debug.Log (defendingTerrain);
+			Debug.Log ("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name);
+			Texture s = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name) as Texture;
+			if(s == null) Debug.Log("Texture is null");
+			else pctrl.display.texture = s;
+		});
 	}
 
 	//load the defense shop scene
@@ -80,9 +113,9 @@ public class ClashMainController : MonoBehaviour {
 	}
 
 	public void AttackPlayer() {
-		if (selectedPlayer != "") {
+		if (selectedPlayer != -1) {
 			pd.type = "offense";
-			pd.SetDefenderName(selectedPlayer);
+			//pd.SetDefenderID(selectedPlayer);
 			pd.SetDefenderTerrain(defendingTerrain);
 			//Debug.Log(atkData.getDefenderName());
 			//Debug.Log(atkData.getDefenderTerrain());

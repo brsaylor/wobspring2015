@@ -54,9 +54,18 @@ public class ClashDefenseSpawner : MonoBehaviour {
 							break;
 						}
 						unit.tag = "Ally";
+						unit.GetComponent<ClashUnitAttributes>().species_id = pd.defenderInfo.defense[list_index].species_id;
+						unit.GetComponent<ClashUnitAttributes>().species_name = pd.defenderInfo.defense[list_index].species_name;
+						unit.GetComponent<ClashUnitAttributes>().prefab_id = pd.defenderInfo.defense[list_index].prefab_id;
+						unit.GetComponent<ClashUnitAttributes>().hp = pd.defenderInfo.defense[list_index].hp;
+						unit.GetComponent<ClashUnitAttributes>().attack = pd.defenderInfo.defense[list_index].attack;
+						unit.GetComponent<ClashUnitAttributes>().attack_speed = pd.defenderInfo.defense[list_index].attack_speed;
+						unit.GetComponent<ClashUnitAttributes>().movement_speed = pd.defenderInfo.defense[list_index].movement_speed;
 						pd.defenderInfo.defense[list_index].isDeployed = true;
 						cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.isOn = false;
-						cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.interactable = false;
+						//cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.interactable = false;
+						//cdc.toggleGroup.GetActiveToggle().GetComponent<ClashDefenseToggle>().toggle.enabled = false;
+
 					}
 				}
             }

@@ -3,6 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ClashPreviewController : MonoBehaviour {
-	public Image display;
+	public RawImage display;
 	public Text text;
 }

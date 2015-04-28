@@ -10,7 +10,6 @@ public class ClashDefenseController : MonoBehaviour {
 	public Transform unit_display;
 	public ToggleGroup toggleGroup = null;
 	public GameObject unit_display_toggle;
-	ClashDefenseToggle selected;
 
 	void Awake() {
 		required_object = GameObject.Find ("Persistent Object");
@@ -43,15 +42,10 @@ public class ClashDefenseController : MonoBehaviour {
 			ClashDefenseToggle cdt = element.GetComponent<ClashDefenseToggle>();
 			cdt.list_index = i;
 			//cdt.unit_image = ;
-			//cdt.toggle.onValueChanged.AddListener((value) => SelectUnit(cdt));
 			cdt.toggle.group = toggleGroup;
 			cdt.transform.SetParent(unit_display);
 			i++;
 		}
-	}
-
-	void SelectUnit(ClashDefenseToggle cdt) {
-		selected = cdt;
 	}
 
 	public void ReturnToShop() {
@@ -63,14 +57,28 @@ public class ClashDefenseController : MonoBehaviour {
 		foreach (ClashUnitData cud in pd.defenderInfo.defense) {
 			allDeployed = (cud.isDeployed) ? allDeployed : false;
 		}
+
 		if (allDeployed) {
 			SendDefenseToServer ();
+
 			Application.LoadLevel ("ClashMain");
 		}
 	}
 
 	public void SendDefenseToServer() {
+		Terrain t = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<Terrain>();
+		float terrainX = t.terrainData.size.x;
+		float terrainZ = t.terrainData.size.z;
+		Dictionary<int, Vector2> species_loc = new Dictionary<int, Vector2> ();
 
+		foreach(GameObject go in GameObject.FindGameObjectsWithTag("Ally")) {
+			species_loc.Add(go.GetComponent<ClashUnitAttributes>().species_id, new Vector2(go.transform.position.x/terrainX, go.transform.position.z/terrainZ));
+		}
+
+		NetworkManager.Send(ClashDefenseSetupProtocol.Prepare(pd.defenderInfo.terrain_id, species_loc), (res) => {
+			var response = res as ResponseClashDefenseSetup;
+			Debug.Log("Valid Defense" + response.valid);
+		});
 	}
 
 }
