@@ -19,6 +19,7 @@ public class ClashShopElement {
 public class ClashShopController : MonoBehaviour {
 	GameObject required_object;
 	ClashPersistentData pd;
+	public Transform preview;
 	public Transform terrainPanel;
 	public Transform carnivorePanel;
 	public Transform herbivorePanel;
@@ -79,7 +80,7 @@ public class ClashShopController : MonoBehaviour {
 			e.description = species.description;
 			e.hp = species.hp;
 			e.movement_speed = species.movement_speed;
-			//e.image = ;						//set sprite
+			e.image.texture = Resources.Load("Images/" + species.species_name) as Texture;						//set sprite
 			e.preview.onClick.AddListener(() => DisplayPreview(e));
 			e.add.onClick.AddListener(() => AddToSelectedUnits(e));
 			switch(e.prefab_id) {
@@ -112,8 +113,9 @@ public class ClashShopController : MonoBehaviour {
 			e.label.text = go.name;	//terrain name for display
 			e.item_name = go.name;		//terrain name
 			e.prefab_id = id;		//prefab id
-			//e.image = ;						//set sprite
+			e.image.texture = Resources.Load("Images/ClashOfSpecies/" + go.name) as Texture;						//set sprite
 			e.add.onClick.AddListener(() => AddToSelectedTerrain(e));
+			e.preview.onClick.AddListener(() => DisplayPreview(e));
 			element.transform.SetParent(terrainPanel);
 			id++;
 		}
@@ -126,7 +128,7 @@ public class ClashShopController : MonoBehaviour {
 			e.label.text = se.label.text;	//species name
 			e.prefab_id = se.prefab_id;		//prefab name
 			e.species_id = se.species_id;					//species id
-			//e.image =;
+			e.image.texture = se.image.texture;
 			e.remove.onClick.AddListener (() => RemoveFromSelected (selected));
 			selected.transform.SetParent (selectedUnits);
 		} else {
@@ -140,7 +142,7 @@ public class ClashShopController : MonoBehaviour {
 			ClashSelectedTerrain e = selected.GetComponent<ClashSelectedTerrain> ();
 			e.label.text = se.label.text;
 			e.terrain_id = se.prefab_id;
-			//e.image = ;
+			e.image.texture = se.image.texture;
 			e.remove.onClick.AddListener (() => RemoveFromSelected (selected));
 			selected.transform.SetParent (selectedTerrain);
 		} else {
@@ -158,7 +160,8 @@ public class ClashShopController : MonoBehaviour {
 	}
 
 	void DisplayPreview(ClashShopElementPrefab se) {
-
+		preview.Find ("Image").GetComponent<RawImage> ().texture = se.image.texture;
+		preview.Find ("Text").GetComponent<Text> ().text = se.description;
 	}
 
 	void DisplayErrorMessage(string s) {

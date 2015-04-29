@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 
 public class ClashBattleSpawner : MonoBehaviour {
-	public ClashDefenseController cdc;
+	public ClashBattleController cbc;
 	GameObject required_object, unit;
 	ClashPersistentData pd;
 	
@@ -33,7 +33,7 @@ public class ClashBattleSpawner : MonoBehaviour {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit, 1000.0f) && hit.collider.gameObject.tag == "Terrain") {
-				Toggle active_toggle = cdc.toggleGroup.GetActiveToggle();
+				Toggle active_toggle = cbc.toggleGroup.GetActiveToggle();
 				if(active_toggle != null) {
 					int list_index = active_toggle.GetComponent<ClashBattleToggle>().list_index;
 					bool isDeployed = pd.attackerInfo.offense[list_index].isDeployed;
@@ -61,7 +61,7 @@ public class ClashBattleSpawner : MonoBehaviour {
 						unit.GetComponent<ClashUnitAttributes>().attack_speed = pd.attackerInfo.offense[list_index].attack_speed;
 						unit.GetComponent<ClashUnitAttributes>().movement_speed = pd.attackerInfo.offense[list_index].movement_speed;
 						pd.attackerInfo.offense[list_index].isDeployed = true;
-						cdc.toggleGroup.GetActiveToggle().GetComponent<ClashBattleToggle>().toggle.isOn = false;
+						cbc.toggleGroup.GetActiveToggle().GetComponent<ClashBattleToggle>().toggle.isOn = false;
 						//cdc.toggleGroup.GetActiveToggle().GetComponent<ClashBattleToggle>().toggle.interactable = false;
 						//cdc.toggleGroup.GetActiveToggle().GetComponent<ClashBattleToggle>().toggle.enabled = false;
 						

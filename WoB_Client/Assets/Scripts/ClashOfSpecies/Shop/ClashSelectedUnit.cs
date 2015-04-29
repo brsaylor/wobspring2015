@@ -3,9 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ClashSelectedUnit : MonoBehaviour {
-	public Image image;
+	public RawImage image;
 	public Text label;
 	public Button remove;
+	public string desc;
 	public int prefab_id;
 	public int species_id;
 	public string species_name;
