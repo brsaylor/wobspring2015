@@ -6,7 +6,7 @@ public class ClashBattleController : MonoBehaviour {
 	GameObject required_object, unit;
 	ClashPersistentData pd;
 	public Transform unit_display;
-	public ToggleGroup toggleGroup = null;
+	//public ToggleGroup toggleGroup = null;
 	public GameObject unit_display_toggle;
 	Vector3 enemy_loc;
 
@@ -21,7 +21,7 @@ public class ClashBattleController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		pd = required_object.GetComponent<ClashPersistentData> ();
-		toggleGroup = unit_display.GetComponent<ToggleGroup>();
+		//toggleGroup = unit_display.GetComponent<ToggleGroup>();
 
 		Instantiate (pd.terrain_list[pd.defenderInfo.terrain_id], new Vector3(0,0,0), Quaternion.identity);
 
@@ -41,7 +41,7 @@ public class ClashBattleController : MonoBehaviour {
 			ClashBattleToggle cbt = element.GetComponent<ClashBattleToggle>();
 			cbt.list_index = i;
 			cbt.unit_image = Resources.Load("Images/" + ud.species_name) as Texture;
-			cbt.toggle.group = toggleGroup;
+			//cbt.toggle.group = toggleGroup;
 			cbt.transform.SetParent(unit_display);
 			i++;
 		}
