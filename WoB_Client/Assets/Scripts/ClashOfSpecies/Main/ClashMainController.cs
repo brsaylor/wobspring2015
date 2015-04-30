@@ -84,7 +84,7 @@ public class ClashMainController : MonoBehaviour {
 			defendingTerrain = -1;
 		}
 		pctrl.text.enabled = !state;
-		
+
 		//pctrl.display = state ? Resources.Load("", typeof(Sprite)) : null;
 		//Debug.Log (selectedPlayer);
 		//Debug.Log (defendingTerrain);
@@ -99,7 +99,9 @@ public class ClashMainController : MonoBehaviour {
 			Debug.Log (selectedPlayer);
 			Debug.Log (defendingTerrain);
 			Debug.Log ("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name);
-			pctrl.display.sprite = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name) as Sprite;
+			Texture s = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name) as Texture;
+			if(s == null) Debug.Log("Texture is null");
+			else pctrl.display.texture = s;
 		});
 	}
 
@@ -113,8 +115,9 @@ public class ClashMainController : MonoBehaviour {
 	public void AttackPlayer() {
 		if (selectedPlayer != -1) {
 			pd.type = "offense";
-			//pd.SetDefenderID(selectedPlayer);
+			pd.SetDefenderId(selectedPlayer);
 			pd.SetDefenderTerrain(defendingTerrain);
+			pd.defenderInfo.defense = defenseSpecies;
 			//Debug.Log(atkData.getDefenderName());
 			//Debug.Log(atkData.getDefenderTerrain());
 

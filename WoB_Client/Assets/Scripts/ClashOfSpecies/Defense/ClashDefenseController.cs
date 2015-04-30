@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class ClashDefenseController : MonoBehaviour {
 	GameObject required_object;
 	ClashPersistentData pd;
-	string terrain_prefab;
 	public Transform unit_display;
 	public ToggleGroup toggleGroup = null;
 	public GameObject unit_display_toggle;
@@ -41,7 +40,7 @@ public class ClashDefenseController : MonoBehaviour {
 			GameObject element = Instantiate(unit_display_toggle) as GameObject;
 			ClashDefenseToggle cdt = element.GetComponent<ClashDefenseToggle>();
 			cdt.list_index = i;
-			//cdt.unit_image = ;
+			cdt.unit_image = Resources.Load("Images/" + ud.species_name) as Texture;
 			cdt.toggle.group = toggleGroup;
 			cdt.transform.SetParent(unit_display);
 			i++;
