@@ -12,10 +12,9 @@ import model.clashgame.AttackConfig;
 import util.Log;
 
 /**
- * Table(s) Required: clash_attack_config
+ * Database methods for model.clashgame.AttackConfig
  *
- * The AccountDAO class hold methods that can execute a variety of different
- * queries for very specific purposes.
+ * Table(s) Required: clash_attack_config
  */
 
 public final class AttackConfigDAO {
