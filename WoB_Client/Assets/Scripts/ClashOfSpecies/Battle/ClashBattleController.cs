@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -76,10 +77,10 @@ public class ClashBattleController : MonoBehaviour {
 	}
 
 	public void SpawnEnemies() {
-		GameObject unit;
+		GameObject unit = null;
 		Vector3 loc;
 		foreach (ClashUnitData ud in pd.defenderInfo.defense) {
-			loc = new Vector3(ud.location.x, something, ud.location.y);
+			loc = new Vector3(ud.location.x, 0, ud.location.y);
 			switch(ud.prefab_id) {
 			case 0:
 				unit = Instantiate(Resources.Load ("Prefabs/ClashOfSpecies/Unit/Plant", typeof(GameObject)), loc, Quaternion.identity) as GameObject;
