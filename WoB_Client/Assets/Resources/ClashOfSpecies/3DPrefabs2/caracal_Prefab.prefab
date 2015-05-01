@@ -721,7 +721,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121130}
-  m_LocalRotation: {x: .370799989, y: -.565179229, z: .658687234, w: -.330470741}
+  m_LocalRotation: {x: .370800018, y: -.565179288, z: .658687294, w: -.330470771}
   m_LocalPosition: {x: 8.38190317e-09, y: .700655103, z: 3.53902578e-08}
   m_LocalScale: {x: 1, y: .99999994, z: .99999994}
   m_Children:
@@ -929,7 +929,7 @@ Animator:
   m_GameObject: {fileID: 121114}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 961723f40cd8c5447b65b90022f524d3, type: 3}
-  m_Controller: {fileID: 9100000, guid: ba5fbf7e94fa00d4c8aa8dea5042551d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 080e8d92852204a80b4d3d08459a05f0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
