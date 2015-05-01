@@ -20,13 +20,14 @@ public class ClashEndBattleProtocol {
 	
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashEndBattle response = new ResponseClashEndBattle();
-
+		response.credits = DataReader.ReadInt(dataStream);
 		return response;
 	}
 }
 
 public class ResponseClashEndBattle : NetworkResponse {
-	
+	public int credits {get; set;}
+
 	public ResponseClashEndBattle() {
 		protocol_id = NetworkCode.CLASH_END_BATTLE;
 	}

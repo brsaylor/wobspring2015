@@ -36,6 +36,11 @@ public final class DefenseConfigDAO {
         + " ORDER BY `created_at` DESC"
         + " LIMIT 1";
 
+    private static final String FIND_BY_DEFENSE_CONFIG_ID_QUERY = "SELECT * FROM `clash_defense_config`"
+            + " WHERE `defense_config_id` = ?"
+            + " ORDER BY `created_at` DESC"
+            + " LIMIT 1";
+
     private DefenseConfigDAO() {}
 
     public static DefenseConfig create(DefenseConfig dc) {
@@ -88,6 +93,48 @@ public final class DefenseConfigDAO {
             con = GameDB.getConnection();
             pstmt = con.prepareStatement(FIND_BY_PLAYER_QUERY);
             pstmt.setInt(1, playerId);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Timestamp ts = rs.getTimestamp("created_at");
+                result.createdAt = new Date(ts.getTime());
+                result.id = rs.getInt("clash_defense_config_id");
+                result.playerId = rs.getInt("player_id");
+                result.terrainId = rs.getInt("terrain_id");
+                result.layout = new HashMap<Integer, Vector2<Float>>();
+
+                for (int i = 0; i < 5; i++) {
+                    String label = "species" + (i + 1);
+                    Vector2<Float> pos = new Vector2<Float>();
+
+                    int speciesId = rs.getInt(label);
+                    pos.setX(rs.getFloat(label + "_x"));
+                    pos.setY(rs.getFloat(label + "_y"));
+                    result.layout.put(speciesId, pos);
+                }
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            Log.println_e(ex.getMessage());
+        } finally {
+            GameDB.closeConnection(con, pstmt, rs);
+        }
+        return result;
+    }
+
+    public static DefenseConfig findByDefenseConfigId(int defenseConfigID) {
+        DefenseConfig result = new DefenseConfig();
+
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = GameDB.getConnection();
+            pstmt = con.prepareStatement(FIND_BY_DEFENSE_CONFIG_ID_QUERY);
+            pstmt.setInt(1, defenseConfigID);
 
             rs = pstmt.executeQuery();
 

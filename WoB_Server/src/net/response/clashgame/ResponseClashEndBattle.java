@@ -19,10 +19,18 @@ public class ResponseClashEndBattle extends GameResponse{
     public ResponseClashEndBattle(){
         response_id = NetworkCode.CLASH_END_BATTLE;
     }
-    
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    private int credits;
+
+
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
+        packet.addInt32(credits);
         return packet.getBytes();
     }
     
