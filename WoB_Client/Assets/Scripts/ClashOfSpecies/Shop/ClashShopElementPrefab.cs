@@ -5,7 +5,7 @@ using System.Collections;
 public class ClashShopElementPrefab : MonoBehaviour {
 	public Button preview;
 	public Button add;
-	public RawImage image;
+	public Image image;
 	public Text label;
 	public int prefab_id;
 	public int species_id;
