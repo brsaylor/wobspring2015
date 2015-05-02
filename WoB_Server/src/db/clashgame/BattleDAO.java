@@ -9,12 +9,9 @@ import util.Log;
 import db.GameDB;
 
 /**
+ * Database methods for model.clashgame.Battle
+ *
  * Table(s) Required: clash_battle
- *
- * The BattleDAO class hold methods that can execute a variety of different
- * queries for very specific purposes.
- *
- * @author Abhijit
  */
 public final class BattleDAO {
 
