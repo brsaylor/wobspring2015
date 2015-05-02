@@ -4,15 +4,26 @@ using System.IO;
 
 using UnityEngine;
 
+/// <summary>
+/// Gets detailed data about a specific player relevant to Clash of Species
+/// </summary>
 public class ClashPlayerViewProtocol {
-	
+
+	/// <summary>
+	/// Creates a request for the player data
+	/// </summary>
+	/// <param name="player_id">The id of the player requested.</param>
 	public static NetworkRequest Prepare(int player_id) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_PLAYER_VIEW);
 		request.AddInt32(player_id);
 		
 		return request;
 	}
-	
+
+	/// <summary>
+	/// Fills the response object with data about the player
+	/// </summary>
+	/// <param name="dataStream">The input stream</param>
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashPlayerView response = new ResponseClashPlayerView();
 
@@ -44,6 +55,12 @@ public class ClashPlayerViewProtocol {
 		return response;
 	}
 
+	/// <summary>
+	/// Converts a Java timestamp (milliseconds since 00:00:00 1/1/1970)
+	/// into a C# DateTime
+	/// </summary>
+	/// <returns>The DateTime object</returns>
+	/// <param name="javaLong">milliseconds since since 00:00:00 1/1/1970</param>
 	static DateTime JavaLongToCSharpLong(long javaLong)
 	{
 		TimeSpan ss = TimeSpan.FromMilliseconds(javaLong);
@@ -56,13 +73,34 @@ public class ClashPlayerViewProtocol {
 	}
 }
 
+/// <summary>
+/// Stores data about the requested player's defense
+/// </summary>
 public class ResponseClashPlayerView : NetworkResponse {
 
-	//public Player player { get; set; }
+	/// <summary>
+	/// Defense config ID.
+	/// </summary>
 	public int DefenseConfigID {get; set;}
+
+	/// <summary>
+	/// Terrain ID
+	/// </summary>
 	public int TerrainID {get; set;}
+
+	/// <summary>
+	/// Player ID
+	/// </summary>
 	public int PlayerID {get; set;}
+
+	/// <summary>
+	/// When the defense was created
+	/// </summary>
 	public DateTime Timestamp {get; set;}
+
+	/// <summary>
+	/// Species in defense config
+	/// </summary>
 	public List<ClashUnitData> defenseSpecies {get; set;}
 
 	public ResponseClashPlayerView() {
