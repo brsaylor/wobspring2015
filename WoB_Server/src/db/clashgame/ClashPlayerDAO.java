@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.List;
 
 /**
+ * Database methods for model.clashgame.Player
+ *
  * Created by dkush_000 on 4/23/2015.
  */
 public class ClashPlayerDAO {
@@ -23,6 +25,9 @@ public class ClashPlayerDAO {
 
     private ClashPlayerDAO() {}
 
+    /**
+     * @return The list of players who have set up a defense configuration (i.e. all Clash of Species players)
+     */
     public static List<Player> findEligiblePlayers() {
         List<Player> result = new ArrayList<Player>();
 
@@ -49,6 +54,10 @@ public class ClashPlayerDAO {
         return result;
     }
 
+    /**
+     * @param playerId corresponds to player_id in the player table
+     * @return The Player with the given ID
+     */
     public static Player findById(int playerId) {
         Player result = null;
         Connection con = null;
