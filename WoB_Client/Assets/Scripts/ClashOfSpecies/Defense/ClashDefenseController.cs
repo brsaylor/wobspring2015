@@ -5,21 +5,15 @@ using System.Collections.Generic;
 
 public class ClashDefenseController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentData pd;
 	public Transform unit_display;
 	public ToggleGroup toggleGroup = null;
 	public GameObject unit_display_toggle;
 
-	void Awake() {
-		required_object = GameObject.Find ("Persistent Object");
-		
-		if (required_object == null) {
-			Application.LoadLevel ("ClashSplash");
-		}
-	}
+	void Awake() {}
 
 	// Use this for initialization
 	void Start () {
+        /*
 
 		pd = required_object.GetComponent<ClashPersistentData> ();
 		toggleGroup = unit_display.GetComponent<ToggleGroup>();
@@ -27,14 +21,14 @@ public class ClashDefenseController : MonoBehaviour {
 		Instantiate (pd.terrain_list[pd.defenderInfo.terrain_id], new Vector3(0,0,0), Quaternion.identity);
 
 		PopulateUnitDisplay ();
+        */
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update () {}
 
 	void PopulateUnitDisplay() {
+        /*
 		int i = 0;
 		foreach (ClashUnitData ud in pd.defenderInfo.defense) {
 			GameObject element = Instantiate(unit_display_toggle) as GameObject;
@@ -45,6 +39,7 @@ public class ClashDefenseController : MonoBehaviour {
 			cdt.transform.SetParent(unit_display);
 			i++;
 		}
+        */
 	}
 
 	public void ReturnToShop() {
@@ -52,6 +47,7 @@ public class ClashDefenseController : MonoBehaviour {
 	}
 
 	public void ConfirmDefense() {
+        /*
 		bool allDeployed = true;
 		foreach (ClashUnitData cud in pd.defenderInfo.defense) {
 			allDeployed = (cud.isDeployed) ? allDeployed : false;
@@ -62,9 +58,11 @@ public class ClashDefenseController : MonoBehaviour {
 
 			Application.LoadLevel ("ClashMain");
 		}
+        */
 	}
 
 	public void SendDefenseToServer() {
+        /*
 		Terrain t = GameObject.FindGameObjectWithTag ("Terrain").GetComponent<Terrain>();
 		float terrainX = t.terrainData.size.x;
 		float terrainZ = t.terrainData.size.z;
@@ -78,6 +76,7 @@ public class ClashDefenseController : MonoBehaviour {
 			var response = res as ResponseClashDefenseSetup;
 			Debug.Log("Valid Defense" + response.valid);
 		});
+        */
 	}
 
 }

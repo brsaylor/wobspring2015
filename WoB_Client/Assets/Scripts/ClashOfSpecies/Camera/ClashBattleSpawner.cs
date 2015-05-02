@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 using System.Collections;
 
 public class ClashBattleSpawner : MonoBehaviour {
+    /*
 	public ClashDefenseController cdc;
 	GameObject required_object, unit;
-	ClashPersistentData pd;
 	
 	void Awake() {
 		required_object = GameObject.Find ("Persistent Object");
@@ -70,4 +70,5 @@ public class ClashBattleSpawner : MonoBehaviour {
 			}
 		}
 	}
+    */
 }
