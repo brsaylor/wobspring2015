@@ -12,8 +12,8 @@ public class ClashPlayerViewProtocol {
 	/// <summary>
 	/// Creates a request for the player data
 	/// </summary>
-	/// <param name="player_id">The id of the player requested.</param>
-	public static NetworkRequest Prepare(int player_id) {
+	/// <param name="playerId">The id of the player requested.</param>
+	public static NetworkRequest Prepare(int playerId) {
 
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_PLAYER_VIEW);
 		request.AddInt32(playerId);
@@ -28,7 +28,7 @@ public class ClashPlayerViewProtocol {
 		ResponseClashPlayerView response = new ResponseClashPlayerView();
 
 		var defenseId = DataReader.ReadInt(dataStream);
-		response.terrain = DataReader.ReadInt(dataStream);
+		response.terrain = DataReader.ReadString(dataStream);
         response.playerId = DataReader.ReadInt(dataStream);
 
 		string timeString = DataReader.ReadString(dataStream);

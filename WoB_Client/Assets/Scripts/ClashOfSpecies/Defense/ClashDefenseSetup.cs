@@ -9,24 +9,26 @@ public class ClashDefenseSetup : MonoBehaviour {
     private Terrain terrain;
 
     public HorizontalLayoutGroup unitList;
+    public GameObject defenseItemPrefab;
     public GameObject defenseUnitPrefab;
 
 	void Awake() {
-        //manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
+        manager = GameObject.Find("Global Object").GetComponent<ClashGameManager>();
     }
     
 	// Use this for initialization
 	void Start () {
-        //terrain = (Instantiate(Resources.Load<Terrain>("Terrains/" + manager.pendingDefenseConfig.terrain)) as GameObject).GetComponent<Terrain>();
-        terrain = (Instantiate(Resources.Load("Prefabs/ClashOfSpecies/Terrains/Grasslands")) as GameObject).GetComponent<Terrain>();
+        terrain = (Instantiate(Resources.Load<Terrain>("Terrains/" + manager.pendingDefenseConfig.terrain)) as GameObject).GetComponent<Terrain>();
         foreach (var species in manager.pendingDefenseConfig.layout.Keys) {
             var item = Instantiate(defenseUnitPrefab) as GameObject;
             item.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Images/" + species.name);
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = species;
+                    item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
+                    item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
                 }
             });
         }
@@ -36,10 +38,9 @@ public class ClashDefenseSetup : MonoBehaviour {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (terrain.GetComponent<TerrainCollider>().Raycast(ray, out hit, 100000)) {
-            /* 
-             * TODO: Make a prefab that simply renders the mesh in the scene. Note that this is not the same
-             * as the ClashUnit prefab that is used during battle.
-             */
+            if (selected != null) {
+                Instantiate(defenseUnitPrefab, hit.point, Quaternion.identity);
+            }
         }
     }
 
