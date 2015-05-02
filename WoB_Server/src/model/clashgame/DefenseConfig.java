@@ -16,7 +16,7 @@ public class DefenseConfig {
     //integer ID of the player
     public int playerId;
     //integer ID of player's chosen terrain
-    public int terrainId;
+    public String terrain;
     //stores the ID of each species and it's position on the terrain
     public HashMap<Integer, Vector2<Float>> layout = new HashMap<Integer, Vector2<Float>>();
     //date that the player created or modified their defense

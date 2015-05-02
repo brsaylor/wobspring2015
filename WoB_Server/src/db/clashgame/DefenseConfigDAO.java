@@ -63,7 +63,7 @@ public final class DefenseConfigDAO {
             }
 
             pstmt.setInt(16, dc.playerId);
-            pstmt.setInt(17, dc.terrainId);
+            pstmt.setString(17, dc.terrain);
             pstmt.setTimestamp(18, new Timestamp(new Date().getTime()));
 
             pstmt.executeUpdate();
@@ -101,7 +101,7 @@ public final class DefenseConfigDAO {
                 result.createdAt = new Date(ts.getTime());
                 result.id = rs.getInt("clash_defense_config_id");
                 result.playerId = rs.getInt("player_id");
-                result.terrainId = rs.getInt("terrain_id");
+                result.terrain = rs.getString("terrain");
                 result.layout = new HashMap<Integer, Vector2<Float>>();
 
                 for (int i = 0; i < 5; i++) {
@@ -143,7 +143,7 @@ public final class DefenseConfigDAO {
                 result.createdAt = new Date(ts.getTime());
                 result.id = rs.getInt("clash_defense_config_id");
                 result.playerId = rs.getInt("player_id");
-                result.terrainId = rs.getInt("terrain_id");
+                result.terrain = rs.getString("terrain");
                 result.layout = new HashMap<Integer, Vector2<Float>>();
 
                 for (int i = 0; i < 5; i++) {

@@ -47,6 +47,7 @@ public class ResponseClashPlayerView extends GameResponse{
      * Generates a byte array in the following format:
      *  id of this response (short)
      *  id of defense config (int)
+     *  name of terrain in defense config (string)
      *  id of player requested (int)
      *  timestamp for the defense config (string)
      *  # of species in config (int)
@@ -61,7 +62,7 @@ public class ResponseClashPlayerView extends GameResponse{
         GamePacket packet = new GamePacket(response_id);
         if (defenseConfig != null) {
             packet.addInt32(defenseConfig.id);
-            packet.addInt32(defenseConfig.terrainId);
+            packet.addString(defenseConfig.terrain);
             packet.addInt32(defenseConfig.playerId);
             //System.out.println("xxx " + defenseConfig.createdAt.getTime());
             packet.addString("" + defenseConfig.createdAt.getTime());
