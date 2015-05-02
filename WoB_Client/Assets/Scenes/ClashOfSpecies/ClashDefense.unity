@@ -308,7 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitList: {fileID: 1204116611}
-  defenseUnitPrefab: {fileID: 0}
+  defenseItemPrefab: {fileID: 148256, guid: 7c72c06390693934daced8bbd0af0e77, type: 2}
+  defenseUnitPrefab: {fileID: 110862, guid: b2aa4e5eaf63c074a988cbaa4e59279a, type: 2}
 --- !u!1 &1204116606
 GameObject:
   m_ObjectHideFlags: 0

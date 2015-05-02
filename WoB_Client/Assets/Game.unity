@@ -170,7 +170,7 @@ GameObject:
   - 114: {fileID: 1868365396}
   - 114: {fileID: 1868365397}
   m_Layer: 0
-  m_Name: Global Object
+  m_Name: MainObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

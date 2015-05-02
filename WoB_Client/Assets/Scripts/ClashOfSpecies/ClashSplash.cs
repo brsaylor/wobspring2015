@@ -16,8 +16,7 @@ public class ClashSplash : MonoBehaviour {
 	private Rect windowRect;
 	
 	void Awake() {
-		var main = GameObject.Find("MainObject");
-        manager = main.AddComponent<ClashGameManager>();
+		manager = GameObject.Find("MainObject").AddComponent<ClashGameManager>();
 	}
 	
 	// Use this for initialization
