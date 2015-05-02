@@ -8,4 +8,5 @@ public class ClashShopItem : MonoBehaviour {
     public Button previewButton;
     public Image displayImage;
     public Text displayText;
+    public int listIndex;
 }

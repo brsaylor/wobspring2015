@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using SpeciesType = ClashSpecies.SpeciesType;
@@ -25,8 +26,8 @@ public class ClashDefenseShop : MonoBehaviour {
 	public GameObject selectedTerrainPrefab;
 
 	void Awake() {
-        DontDestroyOnLoad(this);
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
+;
         foreach (var species in manager.availableSpecies) {
             var item = (Instantiate(shopElementPrefab) as GameObject).GetComponent<ClashShopItem>();
             item.displayText.text = species.name;
@@ -70,6 +71,7 @@ public class ClashDefenseShop : MonoBehaviour {
                     break;
                 default: break;
             }
+
         }
 
         // Setup the terrain items list.
@@ -112,10 +114,21 @@ public class ClashDefenseShop : MonoBehaviour {
         }
 	}
 
-    void SaveDefense() {
+    void PlaceDefense() {
         if (selectedTerrain.transform.childCount == 1 && selectedGroup.transform.childCount == 5) {
-            var terrainUnit = selectedTerrain.GetComponentInChildren<ClashSelectedUnit>();
-            var speciesUnits = new List<ClashSelectedUnit>(selectedGroup.GetComponentsInChildren<ClashSelectedUnit>());
+            manager.pendingDefenseConfig.owner = manager.currentPlayer;
+            manager.pendingDefenseConfig.terrain = selectedTerrain.GetComponentInChildren<ClashSelectedUnit>().label.name;
+            manager.pendingDefenseConfig.layout = new Dictionary<ClashSpecies, Vector2>();
+            foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
+                var species = manager.availableSpecies.Single(x => x.name == csu.label.text);
+                manager.pendingDefenseConfig.layout.Add(species, new Vector2());
+            }
+            Game.LoadScene("ClashDefense");
         }
+    }
+
+    void BackToLobby() {
+        Destroy(manager); 
+        //TODO: Talk to lobby about which scene to load.
     }
 }

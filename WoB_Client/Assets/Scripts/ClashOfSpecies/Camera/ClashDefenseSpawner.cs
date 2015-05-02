@@ -5,6 +5,7 @@ using System.Collections;
 
 
 public class ClashDefenseSpawner : MonoBehaviour {
+    /*
 	public ClashDefenseController cdc;
 	GameObject required_object, unit;
 
@@ -21,7 +22,6 @@ public class ClashDefenseSpawner : MonoBehaviour {
 	}
 
     private void SpawnInvader() {
-        /*
 		if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {	//mouse 1 pressed
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -62,6 +62,6 @@ public class ClashDefenseSpawner : MonoBehaviour {
 				}
             }
         }
-        */
     }
+    */
 }
