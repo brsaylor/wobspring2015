@@ -18,7 +18,10 @@ import net.response.clashgame.ResponseClashPlayerList;
 import model.clashgame.Player;
 
 /**
- *
+ * Request for a list of players of Clash of Species
+ * Sent when the user has been confirmed to possess a defense config
+ * and is entering the Clash game main menu, where a list of players
+ * to challenge is displayed
  * @author lev
  */
 public class RequestClashPlayerList extends GameRequest{
@@ -27,6 +30,11 @@ public class RequestClashPlayerList extends GameRequest{
     public void parse(DataInputStream dataInput) throws IOException {
     }
 
+    /**
+     * Generates a response containing a list of players of
+     * Clash of Species
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         ResponseClashPlayerList response = new ResponseClashPlayerList();
@@ -34,7 +42,10 @@ public class RequestClashPlayerList extends GameRequest{
         List<Player> eligible = ClashPlayerDAO.findEligiblePlayers();
         for(Player pl : eligible){
             // Players don't need to be active to initialize a battle.
-            response.addPlayer(pl);
+            // Don't display yourself in the list of potential opponents
+            if(pl.id != client.getPlayer().getID()) {
+                response.addPlayer(pl);
+            }
         }
         client.add(response);
     }

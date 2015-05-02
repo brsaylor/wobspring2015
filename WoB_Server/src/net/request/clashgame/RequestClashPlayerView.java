@@ -18,18 +18,33 @@ import net.response.clashgame.ResponseClashPlayerView;
 import util.DataReader;
 
 /**
- *
+ * Request for data on a specific Clash of Species player
+ * sent when the user clicks on a player in the main menu of the
+ * game to go into the detail view and potentially initiate a battle
  * @author lev
  */
 public class RequestClashPlayerView extends GameRequest{
 
+    /**
+     * The id of the player for which the data is requested
+     */
     private int playerID;
 
+    /**
+     * Reads in the id into the instance variable from the input stream
+     * @param dataInput the input stream
+     * @throws IOException
+     */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         playerID = DataReader.readInt(dataInput);
     }
 
+    /**
+     * Generates a response containing the Clash of Species-related data
+     * for the requested player
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         ResponseClashPlayerView response = new ResponseClashPlayerView();
@@ -39,7 +54,7 @@ public class RequestClashPlayerView extends GameRequest{
 
         if (target != null) {
             response.setDefenseConfig(defcon);
-            response.setPlayer(target);
+            //response.setPlayer(target);
         }
         client.add(response);
     }

@@ -16,20 +16,35 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Container for the list of players of Clash of Species game
  * @author lev
  */
 public class ResponseClashPlayerList extends GameResponse{
+    /**
+     * List of players
+     */
     private List<Player> players = new ArrayList<Player>();
 
     public ResponseClashPlayerList(){
         response_id = NetworkCode.CLASH_PLAYER_LIST;
     }
 
+    /**
+     * Adds a player to the stored list
+     * @param pl the player to add
+     */
     public void addPlayer(Player pl) {
         players.add(pl);
     }
 
+    /**
+     * Generates a byte array in the following format:
+     *  id of this response (short)
+     *  # of players returned (int)
+     *  for each player: id (int)
+     *                  name (string)
+     * @return the byte array
+     */
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);

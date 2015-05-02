@@ -10,7 +10,8 @@ import net.response.GameResponse;
 import util.GamePacket;
 
 /**
- *
+ * Container for the new virtual currency balance to be sent back
+ * to the client upon finishing a battle
  * @author lev
  */
 public class ResponseClashEndBattle extends GameResponse{
@@ -20,13 +21,24 @@ public class ResponseClashEndBattle extends GameResponse{
         response_id = NetworkCode.CLASH_END_BATTLE;
     }
 
+    /**
+     * Sets the balance to be sent
+     * @param credits the new balance
+     */
     public void setCredits(int credits) {
         this.credits = credits;
     }
 
+    /**
+     * Stores the balance to be sent
+     */
     private int credits;
 
-
+    /**
+     * Generates a byte array containing the new virtual currency
+     * balance
+     * @return the byte array
+     */
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);

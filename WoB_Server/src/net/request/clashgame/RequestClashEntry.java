@@ -7,31 +7,39 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashEntry;
-import util.DataReader;
 import db.clashgame.DefenseConfigDAO;
 import util.Vector2;
 
 /**
- *
  * @author lev
+ * Network request called when user enters the 'Clash of Species'
+ * game from the lobby
+ * Responds with the user's current defense configuration, if he or
+ * she has one
  */
-public class RequestClashEntry extends GameRequest{
-    private int playerID;
-    boolean isNewClashPlayer;
 
+public class RequestClashEntry extends GameRequest{
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
     }
 
+    /**
+     * Generates an appropriate NetworkResponse
+     * Determines if the user already has a Clash of Species defense
+     * set up
+     * Adds data about the defense setup to the response if it exists
+     * Puts the response into the queue to be sent back to the client
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         DefenseConfig defense = DefenseConfigDAO.findByPlayerId(this.client.getPlayer().getID());
+        boolean isNewClashPlayer;
         if(defense == null){
             isNewClashPlayer = true;
         }else{

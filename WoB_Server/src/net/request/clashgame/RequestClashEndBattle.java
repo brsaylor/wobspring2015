@@ -22,13 +22,22 @@ import db.clashgame.BattleDAO;
 import model.clashgame.Battle;
 
 /**
- *
+ * Sent when the client has finished a battle
  * @author lev
  */
 public class RequestClashEndBattle extends GameRequest {
-    
+
+    /**
+     * The result of the battle: win, lose or draw
+     */
     Battle.Outcome outcome;
-    
+
+    /**
+     * Reads the result from the input stream and fills the outcome
+     * instance variable appropriately
+     * @param dataInput the input stream
+     * @throws IOException
+     */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         int value = DataReader.readInt(dataInput);
@@ -42,6 +51,14 @@ public class RequestClashEndBattle extends GameRequest {
         }
     }
 
+    /**
+     * Saves battle result in database
+     * Awards the winner with virtual currency
+     * Punishes the loser (attacker only) with fines in
+     * virtual currency
+     * Sends back the player's new virtual currency balance
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         Player p = client.getPlayer();

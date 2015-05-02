@@ -10,13 +10,22 @@ import net.response.GameResponse;
 import util.GamePacket;
 
 /**
- *
+ * Stores a flag to sent back to the client for whether
+ * the attack configuration with which the player tried to initiate
+ * a battle was valid
  * @author lev
  */
 public class ResponseClashInitiateBattle extends GameResponse{
 
+    /**
+     * Whether the attack config was valid
+     */
     private boolean valid;
 
+    /**
+     * Sets the validity flag
+     * @param valid the valididity value
+     */
     public void setValid(boolean valid) {
         this.valid = valid;
     }
@@ -24,7 +33,11 @@ public class ResponseClashInitiateBattle extends GameResponse{
     public ResponseClashInitiateBattle(){
         response_id = NetworkCode.CLASH_INITIATE_BATTLE;
     }
-    
+
+    /**
+     * Generates a byte array containing the validity flag
+     * @return the byte array
+     */
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
