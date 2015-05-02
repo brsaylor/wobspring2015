@@ -14,9 +14,9 @@ public class ClashPlayerViewProtocol {
 	/// </summary>
 	/// <param name="player_id">The id of the player requested.</param>
 	public static NetworkRequest Prepare(int player_id) {
+
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_PLAYER_VIEW);
-		request.AddInt32(player_id);
-		
+		request.AddInt32(playerId);
 		return request;
 	}
 
@@ -27,18 +27,16 @@ public class ClashPlayerViewProtocol {
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashPlayerView response = new ResponseClashPlayerView();
 
-		response.DefenseConfigID = DataReader.ReadInt(dataStream);
-		response.TerrainID = DataReader.ReadInt(dataStream);
-		response.PlayerID = DataReader.ReadInt(dataStream);
+		var defenseId = DataReader.ReadInt(dataStream);
+		response.terrain = DataReader.ReadInt(dataStream);
+        response.playerId = DataReader.ReadInt(dataStream);
 
 		string timeString = DataReader.ReadString(dataStream);
-
 		long timeLong = 0;
 		long.TryParse(timeString, out timeLong);
-
-		DateTime time = JavaLongToCSharpLong(timeLong);
-
-		response.Timestamp = time;
+        TimeSpan ts = TimeSpan.FromMilliseconds(timeLong);
+		DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+		response.createdAt = epoch.Add(ts).ToUniversalTime();
 
 		int count = DataReader.ReadInt(dataStream);
 		for(int i = 0; i < count; i++){
@@ -46,30 +44,10 @@ public class ClashPlayerViewProtocol {
 			float x = DataReader.ReadFloat(dataStream);
 			float y = DataReader.ReadFloat(dataStream);
 
-			ClashUnitData unit = new ClashUnitData();
-			unit.species_id = species; //weird, but UnitData expects string type
-			unit.location = new Vector3(x, y, 0); //
-			response.defenseSpecies.Add(unit);
+            response.layout.Add(species, new Vector2(x, y));
 		}
 
 		return response;
-	}
-
-	/// <summary>
-	/// Converts a Java timestamp (milliseconds since 00:00:00 1/1/1970)
-	/// into a C# DateTime
-	/// </summary>
-	/// <returns>The DateTime object</returns>
-	/// <param name="javaLong">milliseconds since since 00:00:00 1/1/1970</param>
-	static DateTime JavaLongToCSharpLong(long javaLong)
-	{
-		TimeSpan ss = TimeSpan.FromMilliseconds(javaLong);
-		DateTime Jan1st1970 = 
-			new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-		DateTime ddd = Jan1st1970.Add(ss);
-		DateTime final = ddd.ToUniversalTime();
-		
-		return final;
 	}
 }
 
@@ -77,34 +55,27 @@ public class ClashPlayerViewProtocol {
 /// Stores data about the requested player's defense
 /// </summary>
 public class ResponseClashPlayerView : NetworkResponse {
-
 	/// <summary>
-	/// Defense config ID.
+	/// Terrain
 	/// </summary>
-	public int DefenseConfigID {get; set;}
-
-	/// <summary>
-	/// Terrain ID
-	/// </summary>
-	public int TerrainID {get; set;}
+	public string terrain {get; set;}
 
 	/// <summary>
 	/// Player ID
 	/// </summary>
-	public int PlayerID {get; set;}
+	public int playerId {get; set;}
 
 	/// <summary>
 	/// When the defense was created
 	/// </summary>
-	public DateTime Timestamp {get; set;}
+	public DateTime createdAt {get; set;}
 
 	/// <summary>
 	/// Species in defense config
 	/// </summary>
-	public List<ClashUnitData> defenseSpecies {get; set;}
+	public Dictionary<int, Vector2> layout = new Dictionary<int,Vector2>();
 
 	public ResponseClashPlayerView() {
 		protocol_id = NetworkCode.CLASH_PLAYER_VIEW;
-		defenseSpecies = new List<ClashUnitData>();
 	}
 }

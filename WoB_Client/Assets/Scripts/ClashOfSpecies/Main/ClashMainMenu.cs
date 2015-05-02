@@ -11,39 +11,21 @@ public class ClashPlayerElement {
 	public bool isSelected;
 }
 
-public class ClashMainController : MonoBehaviour {
+public class ClashMainMenu : MonoBehaviour {
 	public GameObject playerToggle;
 	public List<ClashPlayerElement> playerList;
 	public Transform contentPanel;
 	int selectedPlayer = -1;
 	int defendingTerrain = -1;
-	public List<ClashUnitData> defenseSpecies;
     ToggleGroup toggleGroup = null;
 	ClashPreviewController pctrl;
 	GameObject required_object;
-	ClashPersistentData pd;
 
+	void Awake() {}
 
-	void Awake() {
-		required_object = GameObject.Find ("Persistent Object");
-		if (required_object == null) {
-			Application.LoadLevel ("ClashSplash");
-		}
-	}
+	void Start () {}
 
-	void Start () {
-		pd = required_object.GetComponent<ClashPersistentData> ();
-        toggleGroup = contentPanel.GetComponent<ToggleGroup>();
-		pctrl = gameObject.GetComponent<ClashPreviewController> ();
-		//PopulateScrollView ();
-		playerList = new List<ClashPlayerElement>();
-		defenseSpecies = new List<ClashUnitData>();
-		RetrievePlayerList ();
-	}
-
-	void Update() {
-
-	}
+	void Update() {}
 
 	//protocol does this
 	//gets only the player name and terrain name from the valid defense table
@@ -93,48 +75,17 @@ public class ClashMainController : MonoBehaviour {
 	public void GetDefenseConfig(int player_id) {
 		NetworkManager.Send (ClashPlayerViewProtocol.Prepare (player_id), (res) => {
 			var response = res as ResponseClashPlayerView;
-			selectedPlayer = response.PlayerID;
-			defendingTerrain = response.TerrainID;
-			defenseSpecies = response.defenseSpecies;
+            /*
+			selectedPlayer = response.playerId;
+			defendingTerrain = response.terrain;
+            defenseSpecies = response.layout;
 			Debug.Log (selectedPlayer);
 			Debug.Log (defendingTerrain);
 			Debug.Log ("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name);
 			Texture s = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name) as Texture;
 			if(s == null) Debug.Log("Texture is null");
 			else pctrl.display.texture = s;
+            */
 		});
-	}
-
-	//load the defense shop scene
-	public void EditDefense() {
-		pd.type = "defense";
-
-		Application.LoadLevel ("ClashShop");
-	}
-
-	public void AttackPlayer() {
-		if (selectedPlayer != -1) {
-			pd.type = "offense";
-			pd.SetDefenderId(selectedPlayer);
-			pd.SetDefenderTerrain(defendingTerrain);
-			pd.defenderInfo.defense = defenseSpecies;
-			//Debug.Log(atkData.getDefenderName());
-			//Debug.Log(atkData.getDefenderTerrain());
-
-			pd.SetAttackerName(pd.GetPlayerName());
-			pd.SetAttackerId(pd.GetPlayerId());
-
-			Application.LoadLevel ("ClashShop");
-		}
-	}
-
-	public void ReturnToLobby() {
-		GameObject go = GameObject.Find ("Attack Data");
-
-		if (go != null) {
-			Destroy(go);
-		}
-
-		//Application.LoadScene ("Lobby");	//lobby scene
 	}
 }

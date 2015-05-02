@@ -158,64 +158,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!1 &1289703191
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1289703193}
-  - 114: {fileID: 1289703192}
-  m_Layer: 0
-  m_Name: Persistent Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1289703192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1289703191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46282f10a63abe04680ed72c33f49948, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_name: 
-  player_id: 0
-  defenderInfo:
-    player_name: 
-    player_id: 0
-    terrain_id: 0
-    defense: []
-  attackerInfo:
-    player_name: 
-    player_id: 0
-    offense: []
-  species_list: []
-  terrain_list:
-  - {fileID: 145948, guid: cc6fe1e46f12c4ceab9471bd038eb8fd, type: 2}
-  - {fileID: 107550, guid: 8a01345eca22244d495e831ebe0bfb50, type: 2}
-  - {fileID: 104384, guid: 42c73af067d0746f0958682abe26a3a9, type: 2}
-  - {fileID: 171276, guid: dd20a536e0aa94c9eaeabf18e4765b9b, type: 2}
-  - {fileID: 183480, guid: c9990b1fc9d1a43f89bd1afed0cb82d3, type: 2}
-  type: 
---- !u!4 &1289703193
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1289703191}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 531, y: -240, z: 1202}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
 --- !u!1 &1620973404
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,9 +168,8 @@ GameObject:
   - 4: {fileID: 1620973406}
   - 114: {fileID: 1620973405}
   - 114: {fileID: 1620973407}
-  - 114: {fileID: 1620973408}
   m_Layer: 0
-  m_Name: SplashObject
+  m_Name: Splash Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,16 +208,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4ec581375fdb4b84adf234233e455ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1620973408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1620973404}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8104115b24fbbed44825d84d0f6068fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

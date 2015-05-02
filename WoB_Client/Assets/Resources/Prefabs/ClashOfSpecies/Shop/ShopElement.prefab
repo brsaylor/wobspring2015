@@ -115,7 +115,7 @@ GameObject:
   - 222: {fileID: 22235136}
   - 114: {fileID: 11435138}
   - 114: {fileID: 11440172}
-  - 114: {fileID: 11477322}
+  - 114: {fileID: 11404478}
   m_Layer: 5
   m_Name: ShopElement
   m_TagString: Untagged
@@ -123,6 +123,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11404478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e3fd7df60b8d543a774dabb4d66106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addButton: {fileID: 11435134}
+  previewButton: {fileID: 11430228}
+  displayImage: {fileID: 11435130}
+  displayText: {fileID: 11435128}
 --- !u!114 &11430226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -385,30 +400,6 @@ MonoBehaviour:
   m_PreferredHeight: 150
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
---- !u!114 &11477322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 135136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fea3c8c5525684b87f1c0f2647741c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preview: {fileID: 11430228}
-  add: {fileID: 11435134}
-  image: {fileID: 11435130}
-  label: {fileID: 11435128}
-  prefab_id: 0
-  species_id: 0
-  item_name: 
-  cost: 0
-  hp: 0
-  attack: 0
-  attack_speed: 0
-  movement_speed: 0
-  description: 
 --- !u!222 &22230226
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -562,7 +553,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1211.56787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22435130}
@@ -573,7 +564,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 74.6817474, y: -60.4155426}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000

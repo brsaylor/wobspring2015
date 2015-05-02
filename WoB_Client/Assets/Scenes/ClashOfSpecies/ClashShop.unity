@@ -225,80 +225,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 122559091}
---- !u!1 &151126053
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 151126055}
-  - 114: {fileID: 151126054}
-  - 114: {fileID: 151126056}
-  m_Layer: 5
-  m_Name: Local Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &151126054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 151126053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891a6effb41805e4eb238e59b8e40297, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  terrainPanel: {fileID: 69251911}
-  carnivorePanel: {fileID: 1627278746}
-  herbivorePanel: {fileID: 505518748}
-  omnivorePanel: {fileID: 1138958395}
-  plantPanel: {fileID: 251594368}
-  selectedUnits: {fileID: 1229063074}
-  selectedTerrain: {fileID: 1725088479}
-  terrainTab: {fileID: 753871947}
-  shopElementPrefab: {fileID: 135136, guid: 28ab8ee1d2c24794688d2447f59156d2, type: 2}
-  selectedUnitPrefab: {fileID: 190230, guid: 5645ab0d3a01a1a4991ee4461750f973, type: 2}
-  selectedTerrainPrefab: {fileID: 190230, guid: 30c5df5e9b091e34ab8820048612c235,
-    type: 2}
---- !u!224 &151126055
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 151126053}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 16, y: 330}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: .5, y: .5}
---- !u!114 &151126056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 151126053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c693371fbca92ef4e9741634c9a21f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cancel: {fileID: 666395868}
-  cancelLabel: {fileID: 1311553048}
-  accept: {fileID: 850599364}
-  acceptLabel: {fileID: 2091018775}
-  selectedUnits: {fileID: 1229063074}
-  selectedTerrain: {fileID: 1725088479}
 --- !u!1 &251594367
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +571,7 @@ GameObject:
   - 114: {fileID: 570316006}
   - 114: {fileID: 570316008}
   m_Layer: 5
-  m_Name: SpeciesPanel
+  m_Name: Species
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,7 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -789,7 +715,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &666395866
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +728,7 @@ GameObject:
   - 114: {fileID: 666395869}
   - 114: {fileID: 666395868}
   m_Layer: 5
-  m_Name: CancelButton
+  m_Name: Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,7 +899,7 @@ GameObject:
   - 114: {fileID: 753871949}
   - 114: {fileID: 753871952}
   m_Layer: 5
-  m_Name: TerrainTab
+  m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,7 +963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 753871950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1982882202}
+        m_MethodName: SetAsFirstSibling
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &753871950
@@ -1173,7 +1111,7 @@ GameObject:
   - 222: {fileID: 783945878}
   - 114: {fileID: 783945877}
   m_Layer: 5
-  m_Name: ButtonArea
+  m_Name: Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1323,7 +1261,7 @@ GameObject:
   - 114: {fileID: 850599365}
   - 114: {fileID: 850599364}
   m_Layer: 5
-  m_Name: ConfirmButton
+  m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1926,8 +1864,9 @@ GameObject:
   - 223: {fileID: 1185129792}
   - 114: {fileID: 1185129791}
   - 114: {fileID: 1185129790}
+  - 114: {fileID: 1185129793}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Shop Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1949,7 +1888,7 @@ RectTransform:
   - {fileID: 1725088479}
   - {fileID: 783945875}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2009,6 +1948,29 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &1185129793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1185129788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891a6effb41805e4eb238e59b8e40297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carnivoreGroup: {fileID: 1627278749}
+  herbivoreGroup: {fileID: 505518751}
+  omnivoreGroup: {fileID: 1138958398}
+  plantGroup: {fileID: 251594371}
+  selectedGroup: {fileID: 1229063075}
+  selectedTerrain: {fileID: 1725088480}
+  previewImage: {fileID: 2135618057}
+  previewText: {fileID: 122559093}
+  shopElementPrefab: {fileID: 135136, guid: 28ab8ee1d2c24794688d2447f59156d2, type: 2}
+  selectedUnitPrefab: {fileID: 190230, guid: 5645ab0d3a01a1a4991ee4461750f973, type: 2}
+  selectedTerrainPrefab: {fileID: 190230, guid: 30c5df5e9b091e34ab8820048612c235,
+    type: 2}
 --- !u!1 &1229063073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2456,7 +2418,7 @@ GameObject:
   - 114: {fileID: 1336259741}
   - 114: {fileID: 1336259742}
   m_Layer: 5
-  m_Name: ShopControl
+  m_Name: 'Main '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2939,7 +2901,7 @@ GameObject:
   - 222: {fileID: 1725088482}
   - 114: {fileID: 1725088481}
   m_Layer: 5
-  m_Name: SelectedTerrain
+  m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3081,7 +3043,7 @@ GameObject:
   - 222: {fileID: 1841799225}
   - 114: {fileID: 1841799224}
   m_Layer: 5
-  m_Name: SelectedUnits
+  m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3168,7 +3130,7 @@ GameObject:
   - 224: {fileID: 1982882202}
   - 114: {fileID: 1982882206}
   m_Layer: 5
-  m_Name: TerrainPanel
+  m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3232,7 +3194,7 @@ GameObject:
   - 114: {fileID: 2023253096}
   - 114: {fileID: 2023253099}
   m_Layer: 5
-  m_Name: SpeciesTab
+  m_Name: Species
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3296,7 +3258,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2023253097}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 570316005}
+        m_MethodName: SetAsFirstSibling
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2023253097

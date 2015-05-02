@@ -8,23 +8,23 @@ using System.IO;
 /// valid
 /// </summary>
 public class ClashDefenseSetupProtocol {
-
 	/// <summary>
 	/// Creates the network request in the format
 	/// 	id of this protocol (short)
-	/// 	terrain id (int)
+	/// 	terrain name (string)
 	/// 	# of species in config (int)
 	/// 	for each species in config
 	/// 		species id (int)
 	/// 		x-coordinate (float)
 	/// 		y-coordinate (float)
 	/// </summary>
-	/// <param name="The terrain id">Terrain I.</param>
+	/// <param name="terrainName">the terain name</param>
 	/// <param name="config">The species in the config, with species id's as keys
 	/// and Vector2's of x- & y-coordinates as values.</param>
-	public static NetworkRequest Prepare(int terrainID, Dictionary<int, Vector2> config) {
+	
+	public static NetworkRequest Prepare(string terrainName, Dictionary<int, Vector2> config) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_DEFENSE_SETUP);
-		request.AddInt32(terrainID);
+		request.AddString(terrainName);
 		request.AddInt32(config.Count);
 		foreach(var pair in config){
 			request.AddInt32(pair.Key);
@@ -40,9 +40,7 @@ public class ClashDefenseSetupProtocol {
 	/// <param name="dataStream">The input stream.</param>
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashDefenseSetup response = new ResponseClashDefenseSetup();
-
 		response.valid = DataReader.ReadBool(dataStream);
-
 		return response;
 	}
 }
@@ -51,7 +49,6 @@ public class ClashDefenseSetupProtocol {
 /// Stores whether the requested config was valid
 /// </summary>
 public class ResponseClashDefenseSetup : NetworkResponse {
-
 	/// <summary>
 	/// Gets or sets the validity flag
 	/// </summary>

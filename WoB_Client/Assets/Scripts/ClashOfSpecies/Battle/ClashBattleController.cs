@@ -5,28 +5,22 @@ using System.Collections.Generic;
 
 public class ClashBattleController : MonoBehaviour {
 	GameObject required_object;
-	ClashPersistentData pd;
 	public Transform unit_display;
 	public ToggleGroup toggleGroup = null;
 	public GameObject unit_display_toggle;
 
-	void Awake() {
-		required_object = GameObject.Find ("Persistent Object");
-		
-		if (required_object == null) {
-			Application.LoadLevel ("ClashSplash");
-		}
-	}
+	void Awake() {}
 
 	// Use this for initialization
 	void Start () {
-		pd = required_object.GetComponent<ClashPersistentData> ();
+        /*
 		toggleGroup = unit_display.GetComponent<ToggleGroup>();
 
 		Instantiate (pd.terrain_list[pd.defenderInfo.terrain_id], new Vector3(0,0,0), Quaternion.identity);
 
 		PopulateUnitDisplay ();
 		SpawnEnemies ();
+        */
 	}
 	
 	// Update is called once per frame
@@ -36,6 +30,7 @@ public class ClashBattleController : MonoBehaviour {
 
 	void PopulateUnitDisplay() {
 		int i = 0;
+        /*
 		foreach (ClashUnitData ud in pd.attackerInfo.offense) {
 			GameObject element = Instantiate(unit_display_toggle) as GameObject;
 			ClashBattleToggle cdt = element.GetComponent<ClashBattleToggle>();
@@ -45,15 +40,19 @@ public class ClashBattleController : MonoBehaviour {
 			cdt.transform.SetParent(unit_display);
 			i++;
 		}
+        */
 	}
 	
 	public bool IsAllUnitsDeployed() {
+        return false;
+        /*
 		foreach (ClashUnitData ud in pd.attackerInfo.offense) {
 			if (!ud.isDeployed) {
 				return false;
 			}
 		}
 		return true;
+        */
 	}
 
 	public bool IsEnemyDefeated() {
@@ -77,6 +76,7 @@ public class ClashBattleController : MonoBehaviour {
 	}
 
 	public void SpawnEnemies() {
+        /*
 		GameObject unit = null;
 		Vector3 loc;
 		foreach (ClashUnitData ud in pd.defenderInfo.defense) {
@@ -106,5 +106,6 @@ public class ClashBattleController : MonoBehaviour {
 			ud.isDeployed = true;
 
 		}
+        */
 	}
 }
