@@ -35,11 +35,11 @@ public class ResponseClashEntry extends GameResponse{
     /**
      * Stores the terrain of hte defense, if it exists
      */
-    private int defenseTerrainID;
+    private String defenseTerrain;
 
 
-    public void setDefenseTerrainID(int defenseTerrainID) {
-        this.defenseTerrainID = defenseTerrainID;
+    public void setDefenseTerrain(String defenseTerrain) {
+        this.defenseTerrain = defenseTerrain;
     }
 
     /**
@@ -79,7 +79,7 @@ public class ResponseClashEntry extends GameResponse{
         GamePacket packet = new GamePacket(response_id);
         packet.addBoolean(isNewClashPlayer);
         if(!isNewClashPlayer){
-            packet.addInt32(defenseTerrainID);
+            packet.addString(defenseTerrain);
             packet.addInt32(configMap.size());
             for(Map.Entry<Integer, Vector2<Float>> d : configMap.entrySet()){
                 packet.addInt32(d.getKey());

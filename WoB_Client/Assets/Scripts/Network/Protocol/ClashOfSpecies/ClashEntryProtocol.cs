@@ -3,13 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// Used on first entering the Clash of Species game from lobby
+/// </summary>
+
 public class ClashEntryProtocol {
-	
+	/// <summary>
+	/// Prepares the request to send
+	/// </summary>
 	public static NetworkRequest Prepare() {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_ENTRY);
 		return request;
 	}
-	
+
+	/// <summary>
+	/// Creates a response object containg the data from the server
+	/// </summary>
+	/// <param name="dataStream">The input stream</param>
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashEntry response = new ResponseClashEntry();
 
@@ -18,7 +28,7 @@ public class ClashEntryProtocol {
             response.config = new Dictionary<int, Vector2>();
 
 			//read in data on own defense setup
-			response.terrain = DataReader.ReadInt(dataStream);
+			response.terrain = DataReader.ReadString(dataStream);
 			int count = DataReader.ReadInt(dataStream);
 			for (int i = 0; i < count; i++) {
 				int id = DataReader.ReadInt(dataStream);
@@ -33,11 +43,28 @@ public class ClashEntryProtocol {
 	}
 }
 
+/// <summary>
+/// Container for data sent by the server
+/// </summary>
 public class ResponseClashEntry : NetworkResponse {
 
-	public bool isNew;
-    public int terrain;
-    public Dictionary<int, Vector2> config = null;
+	/// <summary>
+	/// Whether the player has a defense set up for Clash of Species
+	/// </summary>
+	/// <value><c>true</c> if no defense; otherwise, <c>false</c>.</value>
+	public bool isNew {get; set;}
+
+	/// <summary>
+	/// Gets and sets the terrain
+	/// </summary>
+	/// <value>the terrain in the defense setup, if one exists</value>
+	public string terrain {get; set;}
+
+	/// <summary>
+	/// Gets and sets the list of species
+	/// </summary>
+	/// <value>The list of species in the defense setup, if one exists</value>
+	public Dictionary<int, Vector2> config = null;
 
 	public ResponseClashEntry() {
 		protocol_id = NetworkCode.CLASH_ENTRY;

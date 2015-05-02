@@ -2,13 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public class ClashSpeciesListProtocol {
+/// <summary>
+/// Get the list of species available for the Clash of Specis game
+/// </summary>
+public class ClashSpeciesListProtocol{
+
 	
 	public static NetworkRequest Prepare() {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_SPECIES_LIST);
 		return request;
 	}
 
+	/// <summary>
+	/// Fill the Response object with data from the server
+	/// </summary>
+	/// <param name="dataStream">The input stream</param>
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashSpeciesList response = new ResponseClashSpeciesList();
 
@@ -31,7 +39,13 @@ public class ClashSpeciesListProtocol {
 	}
 }
 
+/// <summary>
+/// Stores species list sent from server
+/// </summary>
 public class ResponseClashSpeciesList : NetworkResponse {
+	/// <summary>
+	/// The species list.
+	/// </summary>
 	public List<ClashSpecies> speciesList = new List<ClashSpecies>();
 
 	public ResponseClashSpeciesList() {

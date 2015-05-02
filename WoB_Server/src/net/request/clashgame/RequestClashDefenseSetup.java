@@ -16,7 +16,6 @@ import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashDefenseSetup;
 import util.DataReader;
-import util.Log;
 import util.Vector2;
 
 /**
@@ -29,7 +28,7 @@ public class RequestClashDefenseSetup extends GameRequest {
     /**
      * Stores the terrain ID for the new defense setup
      */
-    private int setupTerrainID;
+    private String setupTerrain;
 
     /**
      * Stores the species and positions for the new defense setup
@@ -46,7 +45,7 @@ public class RequestClashDefenseSetup extends GameRequest {
      */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
-        setupTerrainID = DataReader.readInt(dataInput);
+        setupTerrain = DataReader.readString(dataInput);
         int defenseSpeciesCount = DataReader.readInt(dataInput);
         for(int i = 0; i < defenseSpeciesCount; i++){
             int speciesId = DataReader.readInt(dataInput);
@@ -75,7 +74,7 @@ public class RequestClashDefenseSetup extends GameRequest {
             DefenseConfig config = new DefenseConfig();
             config.createdAt = new Date();
             config.playerId = client.getPlayer().getID();
-            config.terrainId = setupTerrainID;
+            config.terrain = setupTerrain;
             config.layout = configMap;
             DefenseConfigDAO.create(config);
         }

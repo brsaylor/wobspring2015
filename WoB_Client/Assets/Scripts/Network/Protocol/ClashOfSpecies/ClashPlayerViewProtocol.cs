@@ -4,14 +4,26 @@ using System.IO;
 
 using UnityEngine;
 
+/// <summary>
+/// Gets detailed data about a specific player relevant to Clash of Species
+/// </summary>
 public class ClashPlayerViewProtocol {
-	
-	public static NetworkRequest Prepare(int playerId) {
+
+	/// <summary>
+	/// Creates a request for the player data
+	/// </summary>
+	/// <param name="player_id">The id of the player requested.</param>
+	public static NetworkRequest Prepare(int player_id) {
+
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_PLAYER_VIEW);
 		request.AddInt32(playerId);
 		return request;
 	}
-	
+
+	/// <summary>
+	/// Fills the response object with data about the player
+	/// </summary>
+	/// <param name="dataStream">The input stream</param>
 	public static NetworkResponse Parse(MemoryStream dataStream) {
 		ResponseClashPlayerView response = new ResponseClashPlayerView();
 
@@ -39,12 +51,29 @@ public class ClashPlayerViewProtocol {
 	}
 }
 
+/// <summary>
+/// Stores data about the requested player's defense
+/// </summary>
 public class ResponseClashPlayerView : NetworkResponse {
-	//public Player player { get; set; }
-    public int playerId;
-    public int terrain;
-    public DateTime createdAt;
-    public Dictionary<int, Vector2> layout = new Dictionary<int,Vector2>();
+	/// <summary>
+	/// Terrain
+	/// </summary>
+	public string terrain {get; set;}
+
+	/// <summary>
+	/// Player ID
+	/// </summary>
+	public int playerId {get; set;}
+
+	/// <summary>
+	/// When the defense was created
+	/// </summary>
+	public DateTime createdAt {get; set;}
+
+	/// <summary>
+	/// Species in defense config
+	/// </summary>
+	public Dictionary<int, Vector2> layout = new Dictionary<int,Vector2>();
 
 	public ResponseClashPlayerView() {
 		protocol_id = NetworkCode.CLASH_PLAYER_VIEW;
