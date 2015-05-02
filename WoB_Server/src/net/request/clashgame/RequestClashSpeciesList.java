@@ -5,7 +5,6 @@
  */
 package net.request.clashgame;
 
-import db.ShopDAO;
 import java.io.DataInputStream;
 import java.io.IOException;
 
@@ -14,7 +13,9 @@ import net.request.GameRequest;
 import net.response.clashgame.ResponseClashSpeciesList;
 
 /**
- *
+ * Sent immediately after entry into the Clash of Species game
+ * Returns a list of species available for use as defending or
+ * attacking elements in the game
  * @author lev
  */
 public class RequestClashSpeciesList extends GameRequest{
@@ -23,6 +24,11 @@ public class RequestClashSpeciesList extends GameRequest{
     public void parse(DataInputStream dataInput) throws IOException {
     }
 
+    /**
+     * Generates a response containing a list of species available
+     * for Clash of Species
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         //

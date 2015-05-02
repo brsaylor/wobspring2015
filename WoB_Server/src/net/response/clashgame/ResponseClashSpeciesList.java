@@ -8,17 +8,20 @@ package net.response.clashgame;
 import metadata.NetworkCode;
 import model.clashgame.Species;
 import net.response.GameResponse;
-import net.response.ResponseSpeciesList;
 import util.GamePacket;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Stores the list of species in Clash of Species to be sent back
+ * to the client
  * @author lev
  */
 public class ResponseClashSpeciesList extends GameResponse {
+    /**
+     * The list of species
+     */
     private List<Species> speciesList;
 
     public ResponseClashSpeciesList() {
@@ -26,10 +29,29 @@ public class ResponseClashSpeciesList extends GameResponse {
         speciesList = new ArrayList<Species>();
     }
 
+    /**
+     * Sets the list of species
+     * @param list
+     */
     public void setSpeciesList(List<Species> list) {
         speciesList = list;
     }
 
+    /**
+     * Generates a byte array in the following format:
+     *  id of this response (short)
+     *  # of species returned (int)
+     *  for each species: id (int)
+     *                  name (string)
+     *                  price (int)
+     *                  type (int, from a predetermined set)
+     *                  description (string)
+     *                  attack points, i.e. damage (int)
+     *                  hit points (int)
+     *                  movement speed (int)
+     *                  attack speed (int)
+     * @return the byte array
+     */
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);

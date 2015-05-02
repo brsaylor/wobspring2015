@@ -3,11 +3,16 @@ package model.clashgame;
 import java.util.Date;
 
 /**
- *
- * @author Abhijit
+ * A record of a battle between two players. The attacking player is the one
+ * associated with the AttackConfig identified by attackConfigId, and the
+ * defending player is the one associated with the DefenseConfig identified
+ * by defenseConfigId.
  */
 public class Battle {
 
+    /**
+     * The outcome of the battle from the perspective of the attacking player.
+     */
     public static enum Outcome {
 
         WIN(0),

@@ -21,14 +21,27 @@ import net.response.clashgame.ResponseClashInitiateBattle;
 import util.DataReader;
 
 /**
- *
+ * Sent when the player initiates a battle on the client
  * @author lev
  */
 public class RequestClashInitiateBattle extends GameRequest{
 
+    /**
+     * The id of the player attacked
+     */
     private int playerToAttack;
+
+    /**
+     * The list of species with which the attack is made
+     */
     private ArrayList<Integer> attackConfig;
-    
+
+    /**
+     * Reads in the data about the attack from the input sent by the
+     * client
+     * @param dataInput the input stream
+     * @throws IOException
+     */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         playerToAttack = DataReader.readInt(dataInput);
@@ -39,6 +52,13 @@ public class RequestClashInitiateBattle extends GameRequest{
         }
     }
 
+    /**
+     * Checks if the attack configuration sent is valid
+     * Adds the validity flag to the response
+     * if valid, saves the battle to the database
+     * adds the response to the queue to be sent back to the client
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         ResponseClashInitiateBattle response = new ResponseClashInitiateBattle();

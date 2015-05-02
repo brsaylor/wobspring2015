@@ -20,15 +20,30 @@ import util.Log;
 import util.Vector2;
 
 /**
- *
+ * Network request called when user wants to create or update
+ * his or her defense configuration for the Clash of Species game
  * @author lev
  */
 public class RequestClashDefenseSetup extends GameRequest {
 
+    /**
+     * Stores the terrain ID for the new defense setup
+     */
     private int setupTerrainID;
+
+    /**
+     * Stores the species and positions for the new defense setup
+     */
     private HashMap<Integer, Vector2<Float>> configMap
              = new HashMap<Integer, Vector2<Float>>();
-   
+
+    /**
+     * Fills the instance variables with data received over the
+     * network
+     * @param dataInput the input stream containg data sent by the
+     *                  client
+     * @throws IOException
+     */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
         setupTerrainID = DataReader.readInt(dataInput);
@@ -42,6 +57,13 @@ public class RequestClashDefenseSetup extends GameRequest {
         }
     }
 
+    /**
+     * Checks the validity of the sent defense configuration
+     * If configuration was valid, saves the config in the
+     * database
+     * Sends the validity inside the response back to the client
+     * @throws Exception
+     */
     @Override
     public void process() throws Exception {
         boolean valid = configMap.size() == 5; //more checks in the future

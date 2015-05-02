@@ -10,11 +10,15 @@ import net.response.GameResponse;
 import util.GamePacket;
 
 /**
- *
+ * Sent back after the user has sent a defense configuration for the
+ * Clash of Species game
  * @author lev
  */
 public class ResponseClashDefenseSetup extends GameResponse{
 
+    /**
+     * whether the configuration sent by the user was valid
+     */
     private boolean validSetup;
 
     public void setValidSetup(boolean validSetup) {
@@ -24,7 +28,12 @@ public class ResponseClashDefenseSetup extends GameResponse{
     public ResponseClashDefenseSetup(){
         response_id = NetworkCode.CLASH_DEFENSE_SETUP;
     }
-    
+
+    /**
+     * Generates the byte array for sending the data back to the
+     * client
+     * @return the byte array
+     */
     @Override
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
