@@ -14,6 +14,7 @@ public class ClashDefenseShop : MonoBehaviour {
     public GridLayoutGroup herbivoreGroup;
 	public GridLayoutGroup omnivoreGroup;
 	public GridLayoutGroup plantGroup;
+    public GridLayoutGroup terrainGroup;
 
 	public HorizontalLayoutGroup selectedGroup;
 	public HorizontalLayoutGroup selectedTerrain;
@@ -31,7 +32,9 @@ public class ClashDefenseShop : MonoBehaviour {
         foreach (var species in manager.availableSpecies) {
             var item = (Instantiate(shopElementPrefab) as GameObject).GetComponent<ClashShopItem>();
             item.displayText.text = species.name;
-            item.displayImage.sprite = Resources.Load<Sprite>("Images/" + species.name);
+
+            var texture = Resources.Load<Texture2D>("Images/" + species.name);
+            item.displayImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
             item.addButton.onClick.AddListener(() => {
                 // If item exists in the list already, don't add.
@@ -45,15 +48,17 @@ public class ClashDefenseShop : MonoBehaviour {
                 var selected = (Instantiate(selectedUnitPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
                 selected.transform.SetParent(selectedGroup.transform);
                 selected.image.sprite = item.displayImage.sprite;
+                selected.transform.localScale = Vector3.one;
                 selected.label.text = item.displayText.text;
                 selected.remove.onClick.AddListener(() => {
                     Destroy(selected.gameObject);
                 });
             });
 
+            var description = species.description;
             item.previewButton.onClick.AddListener(() => {
                 previewImage.sprite = item.displayImage.sprite;
-                previewText.text = species.description;
+                previewText.text = description;
             }); 
 
             switch (species.type) {
@@ -72,13 +77,17 @@ public class ClashDefenseShop : MonoBehaviour {
                 default: break;
             }
 
+            item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
+            item.transform.localScale = Vector3.one;
         }
 
         // Setup the terrain items list.
-        List<Terrain> terrains = new List<Terrain>(Resources.LoadAll<Terrain>("Terrains"));
-        foreach (Terrain t in terrains) {
+        List<GameObject> terrains = new List<GameObject>(Resources.LoadAll<GameObject>("Prefabs/ClashOfSpecies/Terrains"));
+        foreach (GameObject t in terrains) {
             var item = (Instantiate(shopElementPrefab) as GameObject).GetComponent<ClashShopItem>();
-            item.displayImage.sprite = Resources.Load<Sprite>("Images/ClashOfSpecies/" + t.name);
+            
+            var texture = Resources.Load<Texture2D>("Images/ClashOfSpecies/" + t.name);
+            item.displayImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             item.displayText.text = t.name;
 
             item.addButton.onClick.AddListener(() => {
@@ -89,8 +98,10 @@ public class ClashDefenseShop : MonoBehaviour {
                 }
 
                 // Add the newly selected terrain object.
-                var selected = (Instantiate(selectedTerrainPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
-                selected.transform.SetParent(selectedGroup.transform);
+                var selected = (Instantiate(selectedUnitPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
+                selected.transform.SetParent(selectedTerrain.transform);
+                selected.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
+                selected.transform.localScale = Vector3.one;
                 selected.image.sprite = item.displayImage.sprite;
                 selected.label.text = item.displayText.text;
                 selected.remove.onClick.AddListener(() => {
@@ -103,7 +114,9 @@ public class ClashDefenseShop : MonoBehaviour {
                 previewText.text = "Terrain";
             });
 
-            item.transform.SetParent(selectedTerrain.transform);
+            item.transform.SetParent(terrainGroup.transform);
+            item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
+            item.transform.localScale = Vector3.one;
         }
 	}
 
