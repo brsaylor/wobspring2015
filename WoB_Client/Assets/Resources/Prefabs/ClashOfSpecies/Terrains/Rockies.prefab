@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 471276}
   - 114: {fileID: 11471276}
   - 154: {fileID: 15471276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rockies
   m_TagString: Terrain
   m_Icon: {fileID: 0}

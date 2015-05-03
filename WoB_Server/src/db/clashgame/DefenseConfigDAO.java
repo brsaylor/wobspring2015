@@ -28,7 +28,7 @@ public final class DefenseConfigDAO {
         + " `species3`, `species3_x`, `species3_y`, "
         + " `species4`, `species4_x`, `species4_y`, "
         + " `species5`, `species5_x`, `species5_y`, "
-        + " `player_id`, `terrain_id`, `created_at`) "
+        + " `player_id`, `terrain`, `created_at`) "
         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String FIND_BY_PLAYER_QUERY = "SELECT * FROM `clash_defense_config`"

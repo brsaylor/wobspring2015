@@ -127,10 +127,11 @@ public class ClashDefenseShop : MonoBehaviour {
         }
 	}
 
-    void PlaceDefense() {
+    public void PlaceDefense() {
         if (selectedTerrain.transform.childCount == 1 && selectedGroup.transform.childCount == 5) {
+            manager.pendingDefenseConfig = new ClashDefenseConfig();
             manager.pendingDefenseConfig.owner = manager.currentPlayer;
-            manager.pendingDefenseConfig.terrain = selectedTerrain.GetComponentInChildren<ClashSelectedUnit>().label.name;
+            manager.pendingDefenseConfig.terrain = selectedTerrain.GetComponentInChildren<ClashSelectedUnit>().label.text;
             manager.pendingDefenseConfig.layout = new Dictionary<ClashSpecies, Vector2>();
             foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
                 var species = manager.availableSpecies.Single(x => x.name == csu.label.text);

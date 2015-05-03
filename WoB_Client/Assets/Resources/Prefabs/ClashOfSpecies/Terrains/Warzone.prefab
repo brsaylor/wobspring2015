@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 483480}
   - 114: {fileID: 11483480}
   - 154: {fileID: 15483480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Warzone
   m_TagString: Terrain
   m_Icon: {fileID: 0}

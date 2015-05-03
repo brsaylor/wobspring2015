@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 445948}
   - 114: {fileID: 11445948}
   - 154: {fileID: 15445948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drylands
   m_TagString: Terrain
   m_Icon: {fileID: 0}

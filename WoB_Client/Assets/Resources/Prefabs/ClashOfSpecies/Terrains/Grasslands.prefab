@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 404384}
   - 114: {fileID: 11404384}
   - 154: {fileID: 15404384}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grasslands
   m_TagString: Terrain
   m_Icon: {fileID: 0}
