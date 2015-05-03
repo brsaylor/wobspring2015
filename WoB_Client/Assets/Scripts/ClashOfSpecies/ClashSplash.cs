@@ -31,8 +31,8 @@ public class ClashSplash : MonoBehaviour {
         yield return StartCoroutine(Execute(ClashEntryProtocol.Prepare(), (res) => {
             var response = res as ResponseClashEntry;
             if (response.config != null) {
-                Debug.Log(manager.availableSpecies);
                 foreach (var pair in response.config) {
+                    manager.lastDefenseConfig = new ClashDefenseConfig();
                     var species = manager.availableSpecies.Single((el) => el.id == pair.Key);
                     manager.lastDefenseConfig.layout.Add(species, pair.Value);
                 }
