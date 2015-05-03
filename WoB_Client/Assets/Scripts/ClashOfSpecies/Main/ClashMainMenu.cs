@@ -4,88 +4,67 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class ClashPlayerElement {
-	public int id;
-	public string name;
-	public bool isSelected;
-}
-
 public class ClashMainMenu : MonoBehaviour {
-	public GameObject playerToggle;
-	public List<ClashPlayerElement> playerList;
+    private ClashGameManager manager;
+
+	public VerticalLayoutGroup playerListGroup;
+	public List<Player> playerList = new List<Player>();
 	public Transform contentPanel;
-	int selectedPlayer = -1;
-	int defendingTerrain = -1;
-    ToggleGroup toggleGroup = null;
-	ClashPreviewController pctrl;
-	GameObject required_object;
+    public GameObject playerItemPrefab;
 
-	void Awake() {}
+    private Player selectedPlayer = null;
+    private ToggleGroup toggleGroup;
 
-	void Start () {}
+	void Awake() {
+        manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
+    }
+
+	void Start() {
+        NetworkManager.Send(ClashPlayerListProtocol.Prepare(), (res) => {
+            var response = res as ResponseClashPlayerList;
+
+            foreach (var pair in response.players) {
+                Player player = new Player(pair.Key);
+                player.name = pair.Value;
+                playerList.Add(player);
+
+                var item = Instantiate(playerItemPrefab) as GameObject;
+                item.transform.SetParent(playerListGroup.transform);
+                item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
+                item.transform.localScale = Vector3.zero;
+
+                var toggleComp = item.GetComponent<ClashPlayerToggle>();
+                toggleComp.id = player.GetID();
+                toggleComp.label.text = player.name;
+                toggleComp.toggle.onValueChanged.AddListener((val) => {
+                    if (val) {
+                        selectedPlayer = player;
+                    }
+                    else {
+                        selectedPlayer = null;
+                    }
+                });
+            }
+        });
+    }
 
 	void Update() {}
 
 	//protocol does this
 	//gets only the player name and terrain name from the valid defense table
-	void RetrievePlayerList() {
-		NetworkManager.Send (ClashPlayerListProtocol.Prepare (), (res) => {
-			var response = res as ResponseClashPlayerList;
-			foreach (var pair in response.players) {
-				ClashPlayerElement element = new ClashPlayerElement();
-				element.id = pair.Key;
-				element.name = pair.Value;
-				element.isSelected = false;
-				playerList.Add (element);
-			}
-			Debug.Log ("playerList.Count = " + playerList.Count);
-			PopulateScrollView();
-		});
+	IEnumerator RetrievePlayerList() {
+        bool done = false;
+
+        while (!done) yield return null;
 	}
 
-	void PopulateScrollView() {
-		foreach (var playerElement in playerList) {
-			GameObject newToggle = Instantiate(playerToggle) as GameObject;
-			ClashPlayerToggle toggle = newToggle.GetComponent<ClashPlayerToggle>();
-			toggle.label.text = playerElement.name;
-			toggle.player_name = playerElement.name;
-			toggle.player_id = playerElement.id;
-			toggle.toggle.isOn = playerElement.isSelected;
-			toggle.toggle.onValueChanged.AddListener((value) => ToggleAction(toggle, value));
-			toggle.toggle.group = toggleGroup;
-			newToggle.transform.SetParent(contentPanel);
-		}
-	}
+    public void ReturnToLobby() {
+        // TODO: Find where this should go.
+        // Game.LoadScene("Lobby");
+    }
 
-	public void ToggleAction(ClashPlayerToggle toggle, bool state) {
-		if (state) {
-			GetDefenseConfig(toggle.player_id);
-		} else {
-			selectedPlayer = -1;
-			defendingTerrain = -1;
-		}
-		pctrl.text.enabled = !state;
+    public void EditDefense() {
+        Game.LoadScene("ClashShop");
+    }
 
-		//pctrl.display = state ? Resources.Load("", typeof(Sprite)) : null;
-		//Debug.Log (selectedPlayer);
-		//Debug.Log (defendingTerrain);
-	}
-
-	public void GetDefenseConfig(int player_id) {
-		NetworkManager.Send (ClashPlayerViewProtocol.Prepare (player_id), (res) => {
-			var response = res as ResponseClashPlayerView;
-            /*
-			selectedPlayer = response.playerId;
-			defendingTerrain = response.terrain;
-            defenseSpecies = response.layout;
-			Debug.Log (selectedPlayer);
-			Debug.Log (defendingTerrain);
-			Debug.Log ("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name);
-			Texture s = Resources.Load("Images/ClashOfSpecies/" + pd.terrain_list[defendingTerrain].name) as Texture;
-			if(s == null) Debug.Log("Texture is null");
-			else pctrl.display.texture = s;
-            */
-		});
-	}
 }

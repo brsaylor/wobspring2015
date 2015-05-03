@@ -5,7 +5,10 @@ using System.Collections;
 public class ClashPlayerToggle : MonoBehaviour {
 	public Toggle toggle;
 	public Text label;
-	public string player_name;
-	public int player_id;
-	public int terrain_id;
+	public int id;
+
+    void Awake() {
+        toggle = GetComponent<Toggle>();
+        label = GetComponent<Text>();
+    }
 }
