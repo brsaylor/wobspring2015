@@ -1160,13 +1160,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1185129793}
-        m_MethodName: PlaceDefense
+      - m_Target: {fileID: 1185129788}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1699,8 +1698,8 @@ GameObject:
   - 223: {fileID: 1185129792}
   - 114: {fileID: 1185129791}
   - 114: {fileID: 1185129790}
-  - 114: {fileID: 1185129793}
   - 114: {fileID: 1185129794}
+  - 114: {fileID: 1185129793}
   m_Layer: 5
   m_Name: Shop Menu
   m_TagString: Untagged
@@ -1789,22 +1788,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1185129788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891a6effb41805e4eb238e59b8e40297, type: 3}
+  m_Script: {fileID: 11500000, guid: f0a1b277b28a182419533e6666644278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   carnivoreGroup: {fileID: 1627278749}
   herbivoreGroup: {fileID: 505518751}
   omnivoreGroup: {fileID: 1138958398}
   plantGroup: {fileID: 251594371}
-  terrainGroup: {fileID: 0}
   selectedGroup: {fileID: 1229063075}
-  selectedTerrain: {fileID: 0}
   previewImage: {fileID: 2135618057}
   previewText: {fileID: 122559093}
   shopElementPrefab: {fileID: 135136, guid: 28ab8ee1d2c24794688d2447f59156d2, type: 2}
   selectedUnitPrefab: {fileID: 190230, guid: 5645ab0d3a01a1a4991ee4461750f973, type: 2}
-  selectedTerrainPrefab: {fileID: 190230, guid: 30c5df5e9b091e34ab8820048612c235,
-    type: 2}
 --- !u!114 &1185129794
 MonoBehaviour:
   m_ObjectHideFlags: 0
