@@ -42,9 +42,9 @@ public class ClashPlayerViewProtocol {
 		for(int i = 0; i < count; i++){
 			int species = DataReader.ReadInt(dataStream);
 			float x = DataReader.ReadFloat(dataStream);
-			float y = DataReader.ReadFloat(dataStream);
+			float z = DataReader.ReadFloat(dataStream);
 
-            response.layout.Add(species, new Vector2(x, y));
+            response.layout.Add(species, new Vector2(x, z));
 		}
 
 		return response;
