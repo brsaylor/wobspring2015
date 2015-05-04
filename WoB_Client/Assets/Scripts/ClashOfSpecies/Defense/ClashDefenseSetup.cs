@@ -69,7 +69,7 @@ public class ClashDefenseSetup : MonoBehaviour {
     }
 
 	public void ReturnToShop() {
-		Application.LoadLevel("ClashShop");
+		Game.LoadScene("ClashDefenseShop");
 	}
 
 	public void ConfirmDefense() {

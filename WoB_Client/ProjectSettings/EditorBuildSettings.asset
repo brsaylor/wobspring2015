@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ClashOfSpecies/ClashSplash.unity
   - enabled: 1
-    path: Assets/Scenes/ClashOfSpecies/ClashShop.unity
+    path: Assets/Scenes/ClashOfSpecies/ClashDefenseShop.unity
   - enabled: 1
     path: Assets/Scenes/ClashOfSpecies/ClashBattle.unity
   - enabled: 1

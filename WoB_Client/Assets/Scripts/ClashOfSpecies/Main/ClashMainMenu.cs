@@ -31,16 +31,15 @@ public class ClashMainMenu : MonoBehaviour {
                 var item = Instantiate(playerItemPrefab) as GameObject;
                 item.transform.SetParent(playerListGroup.transform);
                 item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
-                item.transform.localScale = Vector3.zero;
+                item.transform.localScale = Vector3.one;
 
-                var toggleComp = item.GetComponent<ClashPlayerToggle>();
-                toggleComp.id = player.GetID();
-                toggleComp.label.text = player.name;
-                toggleComp.toggle.onValueChanged.AddListener((val) => {
+                item.GetComponentInChildren<Text>().text = player.name;
+
+                var toggle = item.GetComponentInChildren<Toggle>().group = playerListGroup.GetComponent<ToggleGroup>();
+                item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                     if (val) {
                         selectedPlayer = player;
-                    }
-                    else {
+                    } else {
                         selectedPlayer = null;
                     }
                 });
