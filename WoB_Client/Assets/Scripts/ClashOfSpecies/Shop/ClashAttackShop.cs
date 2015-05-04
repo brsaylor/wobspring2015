@@ -100,8 +100,7 @@ public class ClashAttackShop : MonoBehaviour {
         }
     }
 
-    void BackToLobby() {
-        Destroy(manager); 
-        //TODO: Talk to lobby about which scene to load.
+    public void BackToMain() {
+		Game.LoadScene ("ClashMain");
     }
 }
