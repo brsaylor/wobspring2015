@@ -80,7 +80,7 @@ public class ClashDefenseSetup : MonoBehaviour {
         NetworkManager.Send(request, (res) => {
             var response = res as ResponseClashDefenseSetup;
             if (response.valid) {
-                manager.lastDefenseConfig = manager.pendingDefenseConfig;
+                manager.defenseConfig = manager.pendingDefenseConfig;
                 manager.pendingDefenseConfig = null;
                 Game.LoadScene("ClashMain");
             }

@@ -38,10 +38,12 @@ public class ClashAttackConfig {
 
 public class ClashGameManager : MonoBehaviour {
     public Player currentPlayer;
-	public ClashAttackConfig lastAttackConfig;
-	public ClashDefenseConfig lastDefenseConfig;
+	public ClashAttackConfig attackConfig;
+	public ClashDefenseConfig defenseConfig;
     public ClashDefenseConfig pendingDefenseConfig;
     public List<ClashSpecies> availableSpecies;
+
+    public ClashDefenseConfig currentTarget;
 
 	void Awake() {
 		DontDestroyOnLoad(this);

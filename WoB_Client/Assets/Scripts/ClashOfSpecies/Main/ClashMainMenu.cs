@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 public class ClashMainMenu : MonoBehaviour {
@@ -37,10 +38,27 @@ public class ClashMainMenu : MonoBehaviour {
 
                 var toggle = item.GetComponentInChildren<Toggle>().group = playerListGroup.GetComponent<ToggleGroup>();
                 item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
+                    contentPanel.GetComponentInChildren<Text>().enabled = !val;
                     if (val) {
                         selectedPlayer = player;
+                        manager.currentTarget = new ClashDefenseConfig();
+                        NetworkManager.Send(ClashPlayerViewProtocol.Prepare(player.GetID()), (resView) => {
+                            var responseView = resView as ResponseClashPlayerView;
+                            Debug.Log(responseView.terrain);
+                            contentPanel.GetComponent<RawImage>().texture = Resources.Load("Images/ClashOfSpecies/" + responseView.terrain) as Texture;
+                            manager.currentTarget.owner = player;
+                            manager.currentTarget.terrain = responseView.terrain;
+                            manager.currentTarget.layout = responseView.layout.Select(x => {
+                                var species = manager.availableSpecies.Single(s => s.id == x.Key);
+                                return new { 
+                                    species,
+                                    x.Value
+                                };
+                            }).ToDictionary(p => p.species, p => p.Value);
+                        });
                     } else {
                         selectedPlayer = null;
+                        contentPanel.GetComponent<RawImage>().texture = null;
                     }
                 });
             }
@@ -63,7 +81,12 @@ public class ClashMainMenu : MonoBehaviour {
     }
 
     public void EditDefense() {
-        Game.LoadScene("ClashShop");
+        Game.LoadScene("ClashDefenseShop");
     }
 
+    public void Attack() {
+        if (manager.currentTarget != null) {
+            Game.LoadScene("ClashAttackShop");
+        }
+    }
 }

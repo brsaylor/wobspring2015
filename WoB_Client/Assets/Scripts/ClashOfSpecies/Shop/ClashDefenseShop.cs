@@ -28,7 +28,6 @@ public class ClashDefenseShop : MonoBehaviour {
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
-;
         foreach (var species in manager.availableSpecies) {
             var item = (Instantiate(shopElementPrefab) as GameObject).GetComponent<ClashShopItem>();
             item.displayText.text = species.name;
@@ -42,6 +41,11 @@ public class ClashDefenseShop : MonoBehaviour {
                     if (existing.label.text == item.displayText.text) {
                         return;
                     }
+                }
+
+                // If the user has already selected 5 species, don't add.
+                if (selectedGroup.transform.childCount == 5) {
+                    return;
                 }
 
                 // Instantiated a selected item prefab and configure it.
@@ -118,14 +122,43 @@ public class ClashDefenseShop : MonoBehaviour {
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
         }
+
+        // Populate the selected unit and terrain lists if the user has a pending or existing defense configuration.
+        var existingConfig = (manager.pendingDefenseConfig == null) ? 
+            (manager.defenseConfig == null) ? null : manager.defenseConfig : manager.pendingDefenseConfig;
+
+        if (existingConfig != null) {
+            foreach (var pair in existingConfig.layout) {
+                var selected = (Instantiate(selectedUnitPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
+                var texture = Resources.Load<Texture2D>("Images/" + pair.Key.name);
+
+                selected.transform.SetParent(selectedGroup.transform);
+                selected.image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                selected.transform.localScale = Vector3.one;
+                selected.label.text = pair.Key.name;
+                selected.remove.onClick.AddListener(() => {
+                    Destroy(selected.gameObject);
+                });
+            }
+
+            if (existingConfig.terrain != null) {
+                var terrainItem = (Instantiate(selectedUnitPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
+                var terrainTexture = Resources.Load<Texture2D>("Images/ClashOfSpecies/" + existingConfig.terrain);
+
+                terrainItem.transform.SetParent(selectedTerrain.transform);
+                terrainItem.transform.position = new Vector3(terrainItem.transform.position.x, terrainItem.transform.position.y, 0.0f);
+                terrainItem.transform.localScale = Vector3.one;
+                terrainItem.image.sprite = Sprite.Create(terrainTexture, new Rect(0, 0, terrainTexture.width, terrainTexture.height), Vector2.one * 0.5f);
+                terrainItem.label.text = existingConfig.terrain;
+                terrainItem.remove.onClick.AddListener(() => {
+                    Destroy(terrainItem.gameObject);
+                });
+            }
+        }
 	}
 
     // Use this for initialization
-    void Start() {
-        if (manager.lastDefenseConfig != null) {
-            // Populate with the last defense setup.
-        }
-	}
+    void Start() {}
 
     public void PlaceDefense() {
         if (selectedTerrain.transform.childCount == 1 && selectedGroup.transform.childCount == 5) {

@@ -31,14 +31,15 @@ public class ClashSplash : MonoBehaviour {
         yield return StartCoroutine(Execute(ClashEntryProtocol.Prepare(), (res) => {
             var response = res as ResponseClashEntry;
             if (response.config != null) {
+                manager.defenseConfig = new ClashDefenseConfig();
                 foreach (var pair in response.config) {
-                    manager.lastDefenseConfig = new ClashDefenseConfig();
                     var species = manager.availableSpecies.Single((el) => el.id == pair.Key);
-                    manager.lastDefenseConfig.layout.Add(species, pair.Value);
+                    manager.defenseConfig.layout.Add(species, pair.Value);
                 }
+                manager.defenseConfig.terrain = response.terrain;
                 Game.LoadScene("ClashMain");
             } else {
-                Game.LoadScene("ClashShop");
+                Game.LoadScene("ClashDefenseShop");
             }
         }));
 	}

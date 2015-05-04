@@ -41,6 +41,11 @@ public class ClashAttackShop : MonoBehaviour {
                     }
                 }
 
+                // If the selected list already contains 5 units, don't add.
+                if (selectedGroup.transform.childCount == 5) {
+                    return;
+                }
+
                 // Instantiated a selected item prefab and configure it.
                 var selected = (Instantiate(selectedUnitPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
                 selected.transform.SetParent(selectedGroup.transform);
@@ -78,23 +83,35 @@ public class ClashAttackShop : MonoBehaviour {
             item.transform.localScale = Vector3.one;
         }
 
-	}
-
-    // Use this for initialization
-    void Start() {
-        if (manager.lastAttackConfig != null) {
-            // Populate with the last attack setup.
+        // If the player has an existing attack configuration, populate the selected unit panel.
+        if (manager.attackConfig != null) {
+            foreach (var species in manager.attackConfig.layout) {
+                var selected = (Instantiate(selectedUnitPrefab) as GameObject).GetComponent<ClashSelectedUnit>();
+                var texture = Resources.Load<Texture2D>("Images/" + species.name);
+                selected.transform.SetParent(selectedGroup.transform);
+                selected.image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+                selected.transform.localScale = Vector3.one;
+                selected.label.text = species.name;
+                selected.remove.onClick.AddListener(() => {
+                    Destroy(selected.gameObject);
+                });
+            }
         }
 	}
 
+    // Use this for initialization
+    void Start() {}
+
     public void Engage() {
         if (selectedGroup.transform.childCount == 5) {
-            manager.lastAttackConfig = new ClashAttackConfig();
-			manager.lastAttackConfig.owner = manager.currentPlayer;
-			manager.lastAttackConfig.layout = new List<ClashSpecies>();
+            if (manager.attackConfig == null) {
+                manager.attackConfig = new ClashAttackConfig();
+            }
+			manager.attackConfig.owner = manager.currentPlayer;
+			manager.attackConfig.layout = new List<ClashSpecies>();
             foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
                 var species = manager.availableSpecies.Single(x => x.name == csu.label.text);
-				manager.lastAttackConfig.layout.Add(species);
+				manager.attackConfig.layout.Add(species);
             }
             Game.LoadScene("ClashBattle");
         }

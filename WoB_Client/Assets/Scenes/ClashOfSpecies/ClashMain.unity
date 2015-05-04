@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerListGroup: {fileID: 1356966273}
-  contentPanel: {fileID: 947523598}
+  contentPanel: {fileID: 793835206}
   playerItemPrefab: {fileID: 179984, guid: a95bc9e61a638404db44b1487459980a, type: 2}
 --- !u!1 &622898553
 GameObject:
@@ -342,8 +342,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: AttackPlayer
+      - m_Target: {fileID: 179522898}
+        m_MethodName: Attack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -393,6 +393,7 @@ GameObject:
   - 224: {fileID: 793835206}
   - 222: {fileID: 793835208}
   - 114: {fileID: 793835207}
+  - 114: {fileID: 793835209}
   m_Layer: 5
   m_Name: TerrainPreviewPanel
   m_TagString: Untagged
@@ -442,6 +443,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 793835205}
+--- !u!114 &793835209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 793835205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -98529514, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &861613096
 GameObject:
   m_ObjectHideFlags: 0
