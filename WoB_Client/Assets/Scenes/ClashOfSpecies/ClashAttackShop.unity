@@ -1804,6 +1804,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4fc0a731356464480271fc8cac10fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carnivoreGroup: {fileID: 1627278749}
+  herbivoreGroup: {fileID: 505518751}
+  omnivoreGroup: {fileID: 1138958398}
+  plantGroup: {fileID: 251594371}
+  selectedGroup: {fileID: 1229063075}
+  previewImage: {fileID: 2135618057}
+  previewText: {fileID: 122559093}
+  shopElementPrefab: {fileID: 135136, guid: 28ab8ee1d2c24794688d2447f59156d2, type: 2}
+  selectedUnitPrefab: {fileID: 190230, guid: 5645ab0d3a01a1a4991ee4461750f973, type: 2}
 --- !u!114 &1185129794
 MonoBehaviour:
   m_ObjectHideFlags: 0

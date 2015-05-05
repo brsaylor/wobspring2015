@@ -10,17 +10,18 @@ public class ClashBattleUnit : MonoBehaviour {
 
     public ClashBattleUnit target;
     public ClashSpecies species;
+    public ClashStatusText status;
     public int currentHealth;
 
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
+        status = GetComponentInChildren<ClashStatusText>();
     }
 
 	void Start() {
         // Set current health depending on the species data.
         currentHealth = species.hp;
-        agent.speed = 0.0f;
-        //agent.speed = species.moveSpeed / 100.0f;
+        agent.speed = species.moveSpeed / 100.0f;
 	}
 	
 	void Update () {
@@ -39,6 +40,7 @@ public class ClashBattleUnit : MonoBehaviour {
         if (agent.remainingDistance < 1.0f) {
             // TODO: Attack animation.
             // TODO: Deliver damage.
+            target.TakeDamage(species.attack);
         }
     }
 

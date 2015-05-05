@@ -4,10 +4,39 @@ ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Mesh1
+    100004: Mesh1 1
+    100006: Mesh1_1
+    100008: Mesh1_1_2
+    100010: Mesh1_2
+    100012: Mesh1_2_3
+    100014: Mesh2
+    100016: Mesh3
+    100018: Model1
+    100020: SimLab1
     400000: //RootNode
+    400002: Mesh1
+    400004: Mesh1 1
+    400006: Mesh1_1
+    400008: Mesh1_1_2
+    400010: Mesh1_2
+    400012: Mesh1_2_3
+    400014: Mesh2
+    400016: Mesh3
+    400018: Model1
+    400020: SimLab1
     2300000: //RootNode
+    2300002: Mesh1 1
+    2300004: Mesh2
+    2300006: Mesh3
     3300000: //RootNode
+    3300002: Mesh1 1
+    3300004: Mesh2
+    3300006: Mesh3
     4300000: polySurface7
+    4300002: Mesh1
+    4300004: Mesh2
+    4300006: Mesh3
     9500000: //RootNode
   materials:
     importMaterials: 1
