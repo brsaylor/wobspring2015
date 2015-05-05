@@ -26,6 +26,8 @@ public class ClashDefenseShop : MonoBehaviour {
 	public GameObject selectedUnitPrefab;
 	public GameObject selectedTerrainPrefab;
 
+	public Text cancelButton;
+
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
         foreach (var species in manager.availableSpecies) {
@@ -154,6 +156,8 @@ public class ClashDefenseShop : MonoBehaviour {
                     Destroy(terrainItem.gameObject);
                 });
             }
+
+			cancelButton.text = "Return to Main\n(Cancel)";
         }
 	}
 
@@ -174,8 +178,12 @@ public class ClashDefenseShop : MonoBehaviour {
         }
     }
 
-    void BackToLobby() {
-        Destroy(manager); 
-        //TODO: Talk to lobby about which scene to load.
+    public void BackToPreviousScene() {
+		if (manager.defenseConfig == null || manager.defenseConfig.layout.Count != 5) {
+			Destroy (manager); 
+			//TODO: Talk to lobby about which scene to load.
+		} else {
+			Game.LoadScene ("ClashMain");
+		}
     }
 }
