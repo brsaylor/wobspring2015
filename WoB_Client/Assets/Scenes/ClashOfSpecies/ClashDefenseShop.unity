@@ -2044,7 +2044,7 @@ MonoBehaviour:
   selectedUnitPrefab: {fileID: 190230, guid: 5645ab0d3a01a1a4991ee4461750f973, type: 2}
   selectedTerrainPrefab: {fileID: 190230, guid: 30c5df5e9b091e34ab8820048612c235,
     type: 2}
-  cancelButton: {fileID: 2091018775}
+  cancelButton: {fileID: 1311553048}
 --- !u!114 &1185129794
 MonoBehaviour:
   m_ObjectHideFlags: 0
