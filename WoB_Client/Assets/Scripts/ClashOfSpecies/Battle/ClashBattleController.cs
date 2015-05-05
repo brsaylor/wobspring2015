@@ -33,13 +33,8 @@ public class ClashBattleController : MonoBehaviour {
 
         foreach (var pair in manager.currentTarget.layout) {
             var species = pair.Key;
-            var speciesObject = Instantiate(attackUnitPrefab) as GameObject;
+            var speciesObject = Instantiate(Resources.Load<GameObject>("Models/" + species.name)) as GameObject;
             speciesObject.tag = "Enemy";
-
-            var speciesPrefab = Instantiate(Resources.Load<GameObject>("Models/" + species.name)) as GameObject;
-            speciesPrefab.transform.SetParent(speciesObject.transform);
-            speciesPrefab.transform.localPosition = Vector3.zero;
-            //speciesPrefab.transform.localScale = Vector3.one;
 
             // Place navmesh agent.
             var speciesPos = new Vector3(pair.Value.x * terrain.terrainData.size.x, 0.0f, pair.Value.y * terrain.terrainData.size.z);
@@ -87,13 +82,11 @@ public class ClashBattleController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100000, LayerMask.GetMask("Terrain"))) {
                 NavMeshHit placement;
                 if (NavMesh.SamplePosition(hit.point, out placement, 1000, 1)) {
-                    var allyObject = Instantiate(attackUnitPrefab, placement.position, Quaternion.identity) as GameObject;
+                    var allyObject = Instantiate(Resources.Load<GameObject>("Models/" + selected.name)) as GameObject;
+                    allyObject.transform.position = placement.position;
+                    allyObject.transform.rotation = Quaternion.identity;
                     allyObject.AddComponent<NavMeshAgent>();
                     allyObject.tag = "Ally";
-
-                    var speciesPrefab = Instantiate(Resources.Load<GameObject>("Models/" + selected.name)) as GameObject;
-                    speciesPrefab.transform.SetParent(allyObject.transform);
-                    speciesPrefab.transform.localPosition = Vector3.zero;
 
                     var unit = allyObject.AddComponent<ClashBattleUnit>();
                     alliesList.Add(unit);
