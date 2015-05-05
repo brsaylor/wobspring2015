@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using SpeciesType = ClashSpecies.SpeciesType;
 
 /// <summary>
 /// Get the list of species available for the Clash of Specis game
@@ -26,7 +27,7 @@ public class ClashSpeciesListProtocol{
             s.id = DataReader.ReadInt(dataStream);
             s.name = DataReader.ReadString(dataStream);
 			s.cost = DataReader.ReadInt(dataStream);
-			s.type = (ClashSpecies.SpeciesType)DataReader.ReadInt(dataStream);
+			s.type = (SpeciesType)DataReader.ReadInt(dataStream);
 			s.description = DataReader.ReadString(dataStream);
 			s.attack = DataReader.ReadInt(dataStream);
 			s.hp = DataReader.ReadInt(dataStream);

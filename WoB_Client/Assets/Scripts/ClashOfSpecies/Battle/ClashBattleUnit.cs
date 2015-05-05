@@ -1,22 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 public class ClashBattleUnit : MonoBehaviour {
 
-    private List<GameObject> enemies;
+    private NavMeshAgent agent;
+    private ClashBattleController controller;
 
+    public ClashBattleUnit target;
     public ClashSpecies species;
+    public int currentHealth;
 
-	void Start () {
-        if (tag == "Ally") {
-            enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-        } else {
-            enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Ally"));
-        }
+    void Awake() {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+	void Start() {
+        // Set current health depending on the species data.
+        currentHealth = species.hp;
+        agent.speed = species.moveSpeed;
 	}
 	
 	void Update () {
-	
+        if (!target) {
+            Idle();
+        } else {
+            Attack();
+        }
 	}
+
+    void Idle() { }
+
+    void Attack() {
+        agent.destination = target.transform.position;
+
+        if (agent.remainingDistance < 1.0f) {
+            // TODO: Attack animation.
+            // TODO: Deliver damage.
+        }
+    }
+
+    void TakeDamage(int damage, ClashBattleUnit source = null) {
+        currentHealth = Mathf.Min(0, currentHealth - damage);
+        Debug.Log(species.name + " took " + damage + "damage.", source);
+    }
 }
