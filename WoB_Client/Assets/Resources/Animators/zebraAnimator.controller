@@ -127,7 +127,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400004, guid: 616943c209dbf764a9ee6275c46b47f6, type: 3}
+  - {fileID: 7400010, guid: ab75736decc761d4c83bee7f4617c1ae, type: 3}
   m_ParentStateMachine: {fileID: 110764906}
   m_Position: {x: -84, y: 72, z: 0}
   m_IKOnFeet: 0
@@ -142,7 +142,7 @@ State:
   m_Speed: .200000003
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400002, guid: 616943c209dbf764a9ee6275c46b47f6, type: 3}
+  - {fileID: 7400008, guid: ab75736decc761d4c83bee7f4617c1ae, type: 3}
   m_ParentStateMachine: {fileID: 110764906}
   m_Position: {x: -84, y: 0, z: 0}
   m_IKOnFeet: 0
@@ -157,7 +157,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 616943c209dbf764a9ee6275c46b47f6, type: 3}
+  - {fileID: 7400006, guid: ab75736decc761d4c83bee7f4617c1ae, type: 3}
   m_ParentStateMachine: {fileID: 110764906}
   m_Position: {x: 240, y: 72, z: 0}
   m_IKOnFeet: 0
@@ -184,16 +184,16 @@ StateMachine:
       - {fileID: 110179532}
       - {fileID: 110135300}
     data:
+      first: {fileID: 110206454}
+      second:
+      - {fileID: 110182292}
+    data:
       first: {fileID: 110283154}
       second:
       - {fileID: 110135120}
     data:
       first: {fileID: 110298006}
       second: []
-    data:
-      first: {fileID: 110206454}
-      second:
-      - {fileID: 110182292}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 240, y: -24, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

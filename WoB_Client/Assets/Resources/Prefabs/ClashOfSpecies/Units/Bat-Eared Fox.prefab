@@ -550,7 +550,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 471620}
   - 95: {fileID: 9571620}
-  - 54: {fileID: 5421442}
   - 136: {fileID: 13672528}
   - 195: {fileID: 19542194}
   - 208: {fileID: 20899648}
@@ -1041,21 +1040,6 @@ Transform:
   - {fileID: 471616}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!54 &5421442
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171620}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!95 &9571620
 Animator:
   serializedVersion: 3
@@ -1078,7 +1062,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171620}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 2
   m_Height: 6
