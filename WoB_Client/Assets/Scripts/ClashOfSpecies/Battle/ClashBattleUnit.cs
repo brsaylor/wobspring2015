@@ -20,7 +20,6 @@ public class ClashBattleUnit : MonoBehaviour {
 
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
-        status = GetComponentInChildren<ClashStatusText>();
     }
 
 	void Start() {
