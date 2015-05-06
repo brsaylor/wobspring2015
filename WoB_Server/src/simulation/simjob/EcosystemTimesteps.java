@@ -104,7 +104,7 @@ public class EcosystemTimesteps {
         for (NodeTimesteps nts : timestepMap.values()) {
             sortedBMs.add(nts.getAvgBiomass());
         }
-        sortedBMs.sort(null);
+        //sortedBMs.sort(null);
         int order = 0;
         double targetBM = timestepMap.get(node).getAvgBiomass();
         for (Double bm : sortedBMs) {

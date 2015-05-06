@@ -13,6 +13,11 @@ public class ClashBattleUnit : MonoBehaviour {
     public ClashStatusText status;
     public int currentHealth;
 
+
+
+    //Added by Omar
+    Animator anim;
+
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
     }
@@ -21,6 +26,11 @@ public class ClashBattleUnit : MonoBehaviour {
         // Set current health depending on the species data.
         currentHealth = species.hp;
         agent.speed = species.moveSpeed / 100.0f;
+
+        // TODO: assign animator controller to individual prefabs (../Animation/foxController to the fox prefab
+
+        //Added by Omar - finds the animator component This command assumes the Animator is already assigned
+        anim = GetComponent<Animator>();
 	}
 	
 	void Update () {
@@ -31,13 +41,19 @@ public class ClashBattleUnit : MonoBehaviour {
         }
 	}
 
-    void Idle() { }
+    void Idle() {
+        //Added by Omar triggers eating animation
+        anim.SetTrigger("Eating");
+    }
 
     void Attack() {
         agent.destination = target.transform.position;
 
         if (agent.remainingDistance < 1.0f) {
             // TODO: Attack animation.
+            //Added by Omar triggers Attacking animation
+            anim.SetTrigger("Attacking");
+
             // TODO: Deliver damage.
             target.TakeDamage(species.attack);
         }
