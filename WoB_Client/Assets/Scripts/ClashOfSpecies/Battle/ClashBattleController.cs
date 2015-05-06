@@ -33,19 +33,21 @@ public class ClashBattleController : MonoBehaviour {
 
         foreach (var pair in manager.currentTarget.layout) {
             var species = pair.Key;
-            var speciesObject = Instantiate(Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + species.name)) as GameObject;
-            speciesObject.tag = "Enemy";
+            
 
             // Place navmesh agent.
             var speciesPos = new Vector3(pair.Value.x * terrain.terrainData.size.x, 0.0f, pair.Value.y * terrain.terrainData.size.z);
             NavMeshHit placement;
             if (NavMesh.SamplePosition(speciesPos, out placement, 1000, 1)) {
-                speciesObject.transform.position = placement.position;
+                var speciesResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + species.name);
+                var speciesObject = Instantiate(speciesResource, placement.position, Quaternion.identity) as GameObject;
+                speciesObject.tag = "Enemy";
+
                 var unit = speciesObject.AddComponent<ClashBattleUnit>();
                 enemiesList.Add(unit);
                 unit.species = species;
             } else {
-                Debug.LogWarning("Failed to place unit.", speciesObject);
+                Debug.LogWarning("Failed to place unit: " + species.name);
             }
         }
 
@@ -81,7 +83,7 @@ public class ClashBattleController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100000, LayerMask.GetMask("Terrain"))) {
                 NavMeshHit placement;
                 if (NavMesh.SamplePosition(hit.point, out placement, 1000, 1)) {
-                    var allyObject = Instantiate(Resources.Load<GameObject>("Resources/Prefabs/ClashOfSpecies/Units" + selected.name)) as GameObject;
+                    var allyObject = Instantiate(Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name)) as GameObject;
                     allyObject.transform.position = placement.position;
                     allyObject.transform.rotation = Quaternion.identity;
                     allyObject.tag = "Ally";
