@@ -550,7 +550,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 471620}
   - 95: {fileID: 9571620}
-  - 136: {fileID: 13672528}
   - 195: {fileID: 19542194}
   - 208: {fileID: 20899648}
   m_Layer: 0
@@ -1055,19 +1054,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!136 &13672528
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 2
-  m_Height: 6
-  m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!137 &13771620
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1137,7 +1123,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 10
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
