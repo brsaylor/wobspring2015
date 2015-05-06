@@ -67,7 +67,7 @@ public class ResponseClashPlayerView extends GameResponse{
             //System.out.println("xxx " + defenseConfig.createdAt.getTime());
             packet.addString("" + defenseConfig.createdAt.getTime());
             packet.addInt32(defenseConfig.layout.size());
-            for (HashMap.Entry<Integer, Vector2<Float>> ent : defenseConfig.layout.entrySet()) {
+            for (Map.Entry<Integer, Vector2<Float>> ent : defenseConfig.layout.entrySet()) {
                 packet.addInt32(ent.getKey());
                 packet.addFloat(ent.getValue().getX());
                 packet.addFloat(ent.getValue().getY());
