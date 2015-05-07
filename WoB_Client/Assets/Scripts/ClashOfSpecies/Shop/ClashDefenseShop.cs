@@ -8,7 +8,6 @@ using SpeciesType = ClashSpecies.SpeciesType;
 public class ClashDefenseShop : MonoBehaviour {
 
 	private ClashGameManager manager;
-    private ClashDefenseConfig pending = new ClashDefenseConfig();
 
 	public GridLayoutGroup carnivoreGroup;
     public GridLayoutGroup herbivoreGroup;
@@ -27,6 +26,8 @@ public class ClashDefenseShop : MonoBehaviour {
 	public GameObject selectedTerrainPrefab;
 
 	public Text cancelButton;
+	public GameObject errorCanvas;
+	public Text errorMessage;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -41,12 +42,15 @@ public class ClashDefenseShop : MonoBehaviour {
                 // If item exists in the list already, don't add.
                 foreach (ClashSelectedUnit existing in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
                     if (existing.label.text == item.displayText.text) {
+
                         return;
                     }
                 }
 
                 // If the user has already selected 5 species, don't add.
                 if (selectedGroup.transform.childCount == 5) {
+					errorCanvas.SetActive(true);
+					errorMessage.text = "A total of 5 units can be selected";
                     return;
                 }
 
@@ -166,24 +170,37 @@ public class ClashDefenseShop : MonoBehaviour {
 
     public void PlaceDefense() {
         if (selectedTerrain.transform.childCount == 1 && selectedGroup.transform.childCount == 5) {
-            manager.pendingDefenseConfig = new ClashDefenseConfig();
-            manager.pendingDefenseConfig.owner = manager.currentPlayer;
-            manager.pendingDefenseConfig.terrain = selectedTerrain.GetComponentInChildren<ClashSelectedUnit>().label.text;
-            manager.pendingDefenseConfig.layout = new Dictionary<ClashSpecies, Vector2>();
-            foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
-                var species = manager.availableSpecies.Single(x => x.name == csu.label.text);
-                manager.pendingDefenseConfig.layout.Add(species, new Vector2());
-            }
-            Game.LoadScene("ClashDefense");
-        }
+			manager.pendingDefenseConfig = new ClashDefenseConfig ();
+			manager.pendingDefenseConfig.owner = manager.currentPlayer;
+			manager.pendingDefenseConfig.terrain = selectedTerrain.GetComponentInChildren<ClashSelectedUnit> ().label.text;
+			manager.pendingDefenseConfig.layout = new Dictionary<ClashSpecies, Vector2> ();
+			foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
+				var species = manager.availableSpecies.Single (x => x.name == csu.label.text);
+				manager.pendingDefenseConfig.layout.Add (species, new Vector2 ());
+			}
+			Game.LoadScene ("ClashDefense");
+		} else {
+			errorCanvas.SetActive(true);
+			if(selectedTerrain.transform.childCount != 1) {
+				errorMessage.text += "A terrain needs to be selected\n\n";
+			}
+			if(selectedGroup.transform.childCount != 5) {
+				errorMessage.text += "5 unique units needs to be selected";
+			}
+		}
     }
 
     public void BackToPreviousScene() {
 		if (manager.defenseConfig == null || manager.defenseConfig.layout.Count != 5) {
 			Destroy (manager); 
-			//TODO: Talk to lobby about which scene to load.
+			Game.LoadScene("World");
 		} else {
 			Game.LoadScene ("ClashMain");
 		}
     }
+
+	public void ConfirmError() {
+		errorMessage.text = "";
+		errorCanvas.SetActive (false);
+	}
 }
