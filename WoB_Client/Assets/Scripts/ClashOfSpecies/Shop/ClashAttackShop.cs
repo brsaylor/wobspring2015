@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using SpeciesType = ClashSpecies.SpeciesType;
 
 public class ClashAttackShop : MonoBehaviour {
-
 	private ClashGameManager manager;
-    private ClashDefenseConfig pending = new ClashDefenseConfig();
 
 	public GridLayoutGroup carnivoreGroup;
     public GridLayoutGroup herbivoreGroup;
@@ -22,6 +20,9 @@ public class ClashAttackShop : MonoBehaviour {
 
 	public GameObject shopElementPrefab;
 	public GameObject selectedUnitPrefab;
+
+	public GameObject errorCanvas;
+	public Text errorMessage;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -43,6 +44,8 @@ public class ClashAttackShop : MonoBehaviour {
 
                 // If the selected list already contains 5 units, don't add.
                 if (selectedGroup.transform.childCount == 5) {
+					errorCanvas.SetActive(true);
+					errorMessage.text += "Only a total of 5 unique units can be selected";
                     return;
                 }
 
@@ -104,20 +107,28 @@ public class ClashAttackShop : MonoBehaviour {
 
     public void Engage() {
         if (selectedGroup.transform.childCount == 5) {
-            if (manager.attackConfig == null) {
-                manager.attackConfig = new ClashAttackConfig();
-            }
+			if (manager.attackConfig == null) {
+				manager.attackConfig = new ClashAttackConfig ();
+			}
 			manager.attackConfig.owner = manager.currentPlayer;
-			manager.attackConfig.layout = new List<ClashSpecies>();
-            foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
-                var species = manager.availableSpecies.Single(x => x.name == csu.label.text);
-				manager.attackConfig.layout.Add(species);
-            }
-            Game.LoadScene("ClashBattle");
-        }
+			manager.attackConfig.layout = new List<ClashSpecies> ();
+			foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
+				var species = manager.availableSpecies.Single (x => x.name == csu.label.text);
+				manager.attackConfig.layout.Add (species);
+			}
+			Game.LoadScene ("ClashBattle");
+		} else {
+			errorCanvas.SetActive(true);
+			errorMessage.text += "Select 5 units for your attacking party";
+		}
     }
 
     public void BackToMain() {
 		Game.LoadScene ("ClashMain");
     }
+
+	public void ConfirmError() {
+		errorMessage.text = "";
+		errorCanvas.SetActive(false);
+	}
 }

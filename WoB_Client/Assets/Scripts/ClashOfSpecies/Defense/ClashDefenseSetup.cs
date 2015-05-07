@@ -16,6 +16,9 @@ public class ClashDefenseSetup : MonoBehaviour {
     public GameObject defenseItemPrefab;
     public GameObject defenseUnitPrefab;
 
+	public GameObject errorCanvas;
+	public Text errorMessage;
+
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
         toggle = unitList.GetComponent<ToggleGroup>();
@@ -83,8 +86,15 @@ public class ClashDefenseSetup : MonoBehaviour {
                 manager.defenseConfig = manager.pendingDefenseConfig;
                 manager.pendingDefenseConfig = null;
                 Game.LoadScene("ClashMain");
-            }
+            } else {
+				errorCanvas.SetActive(true);
+				errorMessage.text = "Place all your units down before confirming";
+			}
         });
+	}
 
+	public void ConfirmError() {
+		errorMessage.text = ""; 
+		errorCanvas.SetActive (false);
 	}
 }

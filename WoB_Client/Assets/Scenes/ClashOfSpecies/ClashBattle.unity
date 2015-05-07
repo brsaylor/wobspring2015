@@ -524,7 +524,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: .5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -560,6 +560,8 @@ MonoBehaviour:
   unitList: {fileID: 1204116611}
   attackItemPrefab: {fileID: 148256, guid: 7c72c06390693934daced8bbd0af0e77, type: 2}
   attackUnitPrefab: {fileID: 116310, guid: 44108a8217d851f4194dc2c86733c63f, type: 2}
+  enemiesList: []
+  alliesList: []
 --- !u!114 &309677810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,7 +576,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 300
+    m_Top: 450
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0

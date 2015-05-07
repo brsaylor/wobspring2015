@@ -67,17 +67,8 @@ public class ClashMainMenu : MonoBehaviour {
 
 	void Update() {}
 
-	//protocol does this
-	//gets only the player name and terrain name from the valid defense table
-	IEnumerator RetrievePlayerList() {
-        bool done = false;
-
-        while (!done) yield return null;
-	}
-
     public void ReturnToLobby() {
-        // TODO: Find where this should go.
-        // Game.LoadScene("Lobby");
+         Game.LoadScene("World");
     }
 
     public void EditDefense() {
