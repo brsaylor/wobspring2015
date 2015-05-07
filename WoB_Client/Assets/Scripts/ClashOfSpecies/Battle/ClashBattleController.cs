@@ -83,9 +83,15 @@ public class ClashBattleController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100000, LayerMask.GetMask("Terrain"))) {
                 NavMeshHit placement;
                 if (NavMesh.SamplePosition(hit.point, out placement, 1000, 1)) {
+                    //Added by Omar
+                    var allyResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name);
+                    var allyObject = Instantiate(allyResource, placement.position, Quaternion.identity) as GameObject;
+                    /*
                     var allyObject = Instantiate(Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name)) as GameObject;
                     allyObject.transform.position = placement.position;
                     allyObject.transform.rotation = Quaternion.identity;
+                    */
+
                     allyObject.tag = "Ally";
 
                     var unit = allyObject.AddComponent<ClashBattleUnit>();
