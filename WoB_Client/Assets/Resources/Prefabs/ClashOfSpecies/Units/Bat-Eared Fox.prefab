@@ -1049,7 +1049,7 @@ Animator:
   m_GameObject: {fileID: 171620}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0241927f5767e427298628f0e728f4e2, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21222d4c0ba34495d9757b997acc1e5e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1150,7 +1150,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .5
   m_Height: 2
   m_MoveThreshold: 0
