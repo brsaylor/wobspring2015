@@ -32,6 +32,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Eating
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -58,6 +64,10 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: Attacking
+    m_EventTreshold: 0
+    m_ExitTime: .739130437
+  - m_ConditionMode: 1
+    m_ConditionEvent: Eating
     m_EventTreshold: 0
     m_ExitTime: .739130437
   m_Atomic: 1
@@ -98,6 +108,10 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: AllEnemiesDead
+    m_EventTreshold: 0
+    m_ExitTime: .75
+  - m_ConditionMode: 1
+    m_ConditionEvent: Eating
     m_EventTreshold: 0
     m_ExitTime: .75
   m_Atomic: 1
