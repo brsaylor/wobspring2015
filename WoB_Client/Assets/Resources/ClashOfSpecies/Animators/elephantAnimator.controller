@@ -14,6 +14,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Attacking
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   - m_Name: Eating
     m_Type: 9
     m_DefaultFloat: 0
@@ -21,7 +27,7 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Walking
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -51,7 +57,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Walking
+    m_ConditionEvent: Eating
     m_EventTreshold: 0
     m_ExitTime: .791666687
   m_Atomic: 1
@@ -144,7 +150,7 @@ State:
   m_Motions:
   - {fileID: 7400004, guid: f3d9bd7f14f14894e97e9164bb5b848e, type: 3}
   m_ParentStateMachine: {fileID: 110704128}
-  m_Position: {x: -204, y: 36, z: 0}
+  m_Position: {x: -60, y: 72, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -159,7 +165,7 @@ State:
   m_Motions:
   - {fileID: 7400002, guid: f3d9bd7f14f14894e97e9164bb5b848e, type: 3}
   m_ParentStateMachine: {fileID: 110704128}
-  m_Position: {x: -204, y: -60, z: 0}
+  m_Position: {x: -60, y: -84, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -181,8 +187,11 @@ StateMachine:
     data:
       first: {fileID: 0}
       second:
-      - {fileID: 110198952}
       - {fileID: 110155692}
+    data:
+      first: {fileID: 110289894}
+      second:
+      - {fileID: 110196764}
     data:
       first: {fileID: 110232540}
       second: []
@@ -190,10 +199,6 @@ StateMachine:
       first: {fileID: 110287140}
       second:
       - {fileID: 110107264}
-    data:
-      first: {fileID: 110289894}
-      second:
-      - {fileID: 110196764}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: 132, y: 0, z: 0}
+  m_AnyStatePosition: {x: 228, y: 36, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
