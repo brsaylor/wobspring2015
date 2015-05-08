@@ -168,9 +168,10 @@ public class ClashBattleController : MonoBehaviour {
 
         if (totalAllyHealth == 0 && alliesList.Count > 0) {
             // ENEMIES HAVE WON!
+			/*
 			messageCanvas.SetActive(true);
 			messageText.text = "You Lost!\n\nTry again next time!";
-
+*/
 			//TODO: Tell server you lost
         }
     }

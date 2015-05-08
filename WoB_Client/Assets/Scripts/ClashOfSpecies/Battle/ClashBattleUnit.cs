@@ -13,6 +13,8 @@ public class ClashBattleUnit : MonoBehaviour {
     public ClashSpecies species;
     public ClashStatusText status;
     public int currentHealth;
+	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
+	float timer;                                // Timer for counting up to the next attack.
 
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
@@ -28,11 +30,17 @@ public class ClashBattleUnit : MonoBehaviour {
 	}
 	
 	void Update () {
+		timer += Time.deltaTime;
+		if (currentHealth <= 0.0f) {
+			Die();		
+		}
         if (!target) {
-            Idle();
-        } else {
-            Attack();
-        }
+						Idle ();
+				} else if ((target.currentHealth >= 0) && (timer >= timeBetweenAttacks) && (currentHealth >= 0.0f)) {
+						Attack ();
+				} else if (target.currentHealth <= 0) {
+			target=null;		
+		}
 	}
 
     void Idle() {
@@ -43,6 +51,7 @@ public class ClashBattleUnit : MonoBehaviour {
     }
 
     void Attack() {
+		timer = 0f;
         if (agent) {
             agent.destination = target.transform.position;
 
@@ -54,11 +63,21 @@ public class ClashBattleUnit : MonoBehaviour {
                 }
                 // TODO: Deliver damage.
                 target.TakeDamage(species.attack);
-            }
+            }else{
+				if (anim != null) {
+					anim.SetTrigger("Walking");
+				}
+			}
         }
     }
+	void Die(){
+		//Disable all functions here
+		if (anim != null) {
+			anim.SetTrigger("Dead");
+		}
+	}
 
     void TakeDamage(int damage, ClashBattleUnit source = null) {
-        currentHealth = Mathf.Min(0, currentHealth - damage);
+        currentHealth = Mathf.Max(0, currentHealth - damage);
     }
 }
