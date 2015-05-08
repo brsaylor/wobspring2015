@@ -15,10 +15,12 @@ public class ClashBattleController : MonoBehaviour {
 
     public HorizontalLayoutGroup unitList;
     public GameObject attackItemPrefab;
-    public GameObject attackUnitPrefab;
 
     public List<ClashBattleUnit> enemiesList = new List<ClashBattleUnit>();
     public List<ClashBattleUnit> alliesList = new List<ClashBattleUnit>();
+
+	public GameObject messageCanvas;
+	public Text messageText;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -132,6 +134,10 @@ public class ClashBattleController : MonoBehaviour {
 
         if (totalEnemyHealth == 0 && enemiesList.Count > 0) {
             // ALLIES HAVE WON!
+			messageCanvas.SetActive(true);
+			messageText.text = "You Won!\n\nKeep on fighting!";
+
+			//TODO: Tell server you won
         }
 
         int totalAllyHealth = 0;
@@ -161,6 +167,14 @@ public class ClashBattleController : MonoBehaviour {
 
         if (totalAllyHealth == 0 && alliesList.Count > 0) {
             // ENEMIES HAVE WON!
+			messageCanvas.SetActive(true);
+			messageText.text = "You Lost!\n\nTry again next time!";
+
+			//TODO: Tell server you lost
         }
     }
+
+	public void ConfirmResult() {
+		Game.LoadScene ("ClashMain");
+	}
 }
