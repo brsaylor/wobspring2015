@@ -83,7 +83,343 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|attack
+      takeName: Armature|attack
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/head
+        weight: 1
+      - path: Armature/Master/head/head_end
+        weight: 1
+      - path: Armature/Master/leg.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk/leg3.Bk_end
+        weight: 1
+      - path: Armature/Master/leg.Bk.002
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001/leg3.Bk.001_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr/leg3.Fr_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001/leg3.Fr.001_end
+        weight: 1
+      - path: Armature/Master/spine1.Fr
+        weight: 1
+      - path: Armature/Master/spine1.Fr/spine1.Fr_end
+        weight: 1
+      - path: Armature/Master/spine2.Bk
+        weight: 1
+      - path: Armature/Master/spine2.Bk/spine2.Bk_end
+        weight: 1
+      - path: Armature/Master/tail1
+        weight: 1
+      - path: Armature/Master/tail1/tail2
+        weight: 1
+      - path: Armature/Master/tail1/tail2/tail2_end
+        weight: 1
+      - path: lionbody
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|die
+      takeName: Armature|die
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/head
+        weight: 1
+      - path: Armature/Master/head/head_end
+        weight: 1
+      - path: Armature/Master/leg.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk/leg3.Bk_end
+        weight: 1
+      - path: Armature/Master/leg.Bk.002
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001/leg3.Bk.001_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr/leg3.Fr_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001/leg3.Fr.001_end
+        weight: 1
+      - path: Armature/Master/spine1.Fr
+        weight: 1
+      - path: Armature/Master/spine1.Fr/spine1.Fr_end
+        weight: 1
+      - path: Armature/Master/spine2.Bk
+        weight: 1
+      - path: Armature/Master/spine2.Bk/spine2.Bk_end
+        weight: 1
+      - path: Armature/Master/tail1
+        weight: 1
+      - path: Armature/Master/tail1/tail2
+        weight: 1
+      - path: Armature/Master/tail1/tail2/tail2_end
+        weight: 1
+      - path: lionbody
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|eat
+      takeName: Armature|eat
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/head
+        weight: 1
+      - path: Armature/Master/head/head_end
+        weight: 1
+      - path: Armature/Master/leg.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk/leg3.Bk_end
+        weight: 1
+      - path: Armature/Master/leg.Bk.002
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001/leg3.Bk.001_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr/leg3.Fr_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001/leg3.Fr.001_end
+        weight: 1
+      - path: Armature/Master/spine1.Fr
+        weight: 1
+      - path: Armature/Master/spine1.Fr/spine1.Fr_end
+        weight: 1
+      - path: Armature/Master/spine2.Bk
+        weight: 1
+      - path: Armature/Master/spine2.Bk/spine2.Bk_end
+        weight: 1
+      - path: Armature/Master/tail1
+        weight: 1
+      - path: Armature/Master/tail1/tail2
+        weight: 1
+      - path: Armature/Master/tail1/tail2/tail2_end
+        weight: 1
+      - path: lionbody
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|walk
+      takeName: Armature|walk
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Master
+        weight: 1
+      - path: Armature/Master/head
+        weight: 1
+      - path: Armature/Master/head/head_end
+        weight: 1
+      - path: Armature/Master/leg.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk
+        weight: 1
+      - path: Armature/Master/leg.Bk/leg.Bk.001/leg3.Bk/leg3.Bk_end
+        weight: 1
+      - path: Armature/Master/leg.Bk.002
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001
+        weight: 1
+      - path: Armature/Master/leg.Bk.002/leg.Bk.003/leg3.Bk.001/leg3.Bk.001_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr
+        weight: 1
+      - path: Armature/Master/leg1.Fr/leg2.Fr/leg3.Fr/leg3.Fr_end
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001
+        weight: 1
+      - path: Armature/Master/leg1.Fr.001/leg2.Fr.001/leg3.Fr.001/leg3.Fr.001_end
+        weight: 1
+      - path: Armature/Master/spine1.Fr
+        weight: 1
+      - path: Armature/Master/spine1.Fr/spine1.Fr_end
+        weight: 1
+      - path: Armature/Master/spine2.Bk
+        weight: 1
+      - path: Armature/Master/spine2.Bk/spine2.Bk_end
+        weight: 1
+      - path: Armature/Master/tail1
+        weight: 1
+      - path: Armature/Master/tail1/tail2
+        weight: 1
+      - path: Armature/Master/tail1/tail2/tail2_end
+        weight: 1
+      - path: lionbody
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

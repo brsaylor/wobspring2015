@@ -131,7 +131,385 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Armature|Armature|Die|Armature|Die
+      takeName: Armature|Armature|Armature|Die|Armature|Die
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/LFleg1
+        weight: 1
+      - path: Armature/LFleg1/LFleg2
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont/LFlegCont_end
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont/LFlegCont_end/LFlegCont_end_end
+        weight: 1
+      - path: Armature/LRleg1
+        weight: 1
+      - path: Armature/LRleg1/LRleg2
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont/LRlegCont_end
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont/LRlegCont_end/LRlegCont_end_end
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/spine1
+        weight: 1
+      - path: Armature/master/spine1/spine2
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3/spine3_end
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3/spine3_end/spine3_end_end
+        weight: 1
+      - path: Armature/master/spine4
+        weight: 1
+      - path: Armature/master/spine4/spine4_end
+        weight: 1
+      - path: Armature/master/spine4/spine4_end/spine4_end_end
+        weight: 1
+      - path: Armature/neck3
+        weight: 1
+      - path: Armature/neck3/neck2
+        weight: 1
+      - path: Armature/neck3/neck2/neck1
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head/head_end
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head/head_end/head_end_end
+        weight: 1
+      - path: Armature/RFleg1
+        weight: 1
+      - path: Armature/RFleg1/RFleg2
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont/RFlegCont_end
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont/RFlegCont_end/RFlegCont_end_end
+        weight: 1
+      - path: Armature/RRleg1
+        weight: 1
+      - path: Armature/RRleg1/RRleg2
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont/RRlegCont_end
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont/RRlegCont_end/RRlegCont_end_end
+        weight: 1
+      - path: Armature/tail4
+        weight: 1
+      - path: Armature/tail4/tail3
+        weight: 1
+      - path: Armature/tail4/tail3/tail2
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1/tail1_end
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1/tail1_end/tail1_end_end
+        weight: 1
+      - path: Cube
+        weight: 1
+      - path: Cylinder
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Armature|Armature|Eat|Armature|Eat
+      takeName: Armature|Armature|Armature|Eat|Armature|Eat
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/LFleg1
+        weight: 1
+      - path: Armature/LFleg1/LFleg2
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont/LFlegCont_end
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont/LFlegCont_end/LFlegCont_end_end
+        weight: 1
+      - path: Armature/LRleg1
+        weight: 1
+      - path: Armature/LRleg1/LRleg2
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont/LRlegCont_end
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont/LRlegCont_end/LRlegCont_end_end
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/spine1
+        weight: 1
+      - path: Armature/master/spine1/spine2
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3/spine3_end
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3/spine3_end/spine3_end_end
+        weight: 1
+      - path: Armature/master/spine4
+        weight: 1
+      - path: Armature/master/spine4/spine4_end
+        weight: 1
+      - path: Armature/master/spine4/spine4_end/spine4_end_end
+        weight: 1
+      - path: Armature/neck3
+        weight: 1
+      - path: Armature/neck3/neck2
+        weight: 1
+      - path: Armature/neck3/neck2/neck1
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head/head_end
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head/head_end/head_end_end
+        weight: 1
+      - path: Armature/RFleg1
+        weight: 1
+      - path: Armature/RFleg1/RFleg2
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont/RFlegCont_end
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont/RFlegCont_end/RFlegCont_end_end
+        weight: 1
+      - path: Armature/RRleg1
+        weight: 1
+      - path: Armature/RRleg1/RRleg2
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont/RRlegCont_end
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont/RRlegCont_end/RRlegCont_end_end
+        weight: 1
+      - path: Armature/tail4
+        weight: 1
+      - path: Armature/tail4/tail3
+        weight: 1
+      - path: Armature/tail4/tail3/tail2
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1/tail1_end
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1/tail1_end/tail1_end_end
+        weight: 1
+      - path: Cube
+        weight: 1
+      - path: Cylinder
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Armature|Armature|Walk|Armature|Walk
+      takeName: Armature|Armature|Armature|Walk|Armature|Walk
+      firstFrame: 0
+      lastFrame: 14
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/LFleg1
+        weight: 1
+      - path: Armature/LFleg1/LFleg2
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont/LFlegCont_end
+        weight: 1
+      - path: Armature/LFleg1/LFleg2/LFleg3/LFlegCont/LFlegCont_end/LFlegCont_end_end
+        weight: 1
+      - path: Armature/LRleg1
+        weight: 1
+      - path: Armature/LRleg1/LRleg2
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont/LRlegCont_end
+        weight: 1
+      - path: Armature/LRleg1/LRleg2/LRleg3/LRlegCont/LRlegCont_end/LRlegCont_end_end
+        weight: 1
+      - path: Armature/master
+        weight: 1
+      - path: Armature/master/spine1
+        weight: 1
+      - path: Armature/master/spine1/spine2
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3/spine3_end
+        weight: 1
+      - path: Armature/master/spine1/spine2/spine3/spine3_end/spine3_end_end
+        weight: 1
+      - path: Armature/master/spine4
+        weight: 1
+      - path: Armature/master/spine4/spine4_end
+        weight: 1
+      - path: Armature/master/spine4/spine4_end/spine4_end_end
+        weight: 1
+      - path: Armature/neck3
+        weight: 1
+      - path: Armature/neck3/neck2
+        weight: 1
+      - path: Armature/neck3/neck2/neck1
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head/head_end
+        weight: 1
+      - path: Armature/neck3/neck2/neck1/head/head_end/head_end_end
+        weight: 1
+      - path: Armature/RFleg1
+        weight: 1
+      - path: Armature/RFleg1/RFleg2
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont/RFlegCont_end
+        weight: 1
+      - path: Armature/RFleg1/RFleg2/RFleg3/RFlegCont/RFlegCont_end/RFlegCont_end_end
+        weight: 1
+      - path: Armature/RRleg1
+        weight: 1
+      - path: Armature/RRleg1/RRleg2
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont/RRlegCont_end
+        weight: 1
+      - path: Armature/RRleg1/RRleg2/RRleg3/RRlegCont/RRlegCont_end/RRlegCont_end_end
+        weight: 1
+      - path: Armature/tail4
+        weight: 1
+      - path: Armature/tail4/tail3
+        weight: 1
+      - path: Armature/tail4/tail3/tail2
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1/tail1_end
+        weight: 1
+      - path: Armature/tail4/tail3/tail2/tail1/tail1_end/tail1_end_end
+        weight: 1
+      - path: Cube
+        weight: 1
+      - path: Cylinder
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
