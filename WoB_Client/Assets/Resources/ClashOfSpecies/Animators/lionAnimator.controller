@@ -21,7 +21,7 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Attacking
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -107,10 +107,6 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: AllEnemiesDead
-    m_EventTreshold: 0
-    m_ExitTime: .75
-  - m_ConditionMode: 1
     m_ConditionEvent: Eating
     m_EventTreshold: 0
     m_ExitTime: .75
@@ -158,6 +154,26 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
+--- !u!1101 &110159454
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110248380}
+  m_DstState: {fileID: 110277994}
+  m_TransitionDuration: .260869563
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Walking
+    m_EventTreshold: 0
+    m_ExitTime: .739130437
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1101 &110192436
 Transition:
   serializedVersion: 2
@@ -191,7 +207,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: AllEnemiesDead
+    m_ConditionEvent: Eating
     m_EventTreshold: 0
     m_ExitTime: .739130437
   m_Atomic: 1
@@ -224,7 +240,7 @@ State:
   m_Motions:
   - {fileID: 7400004, guid: 3bf17308ec23a485e9b75bef204dda97, type: 3}
   m_ParentStateMachine: {fileID: 110719776}
-  m_Position: {x: -168, y: 12, z: 0}
+  m_Position: {x: 48, y: 48, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -279,15 +295,15 @@ StateMachine:
       second:
       - {fileID: 110152100}
     data:
-      first: {fileID: 110248380}
-      second:
-      - {fileID: 110116874}
-      - {fileID: 110196864}
-    data:
       first: {fileID: 110257450}
       second:
       - {fileID: 110192436}
       - {fileID: 110158680}
+    data:
+      first: {fileID: 110248380}
+      second:
+      - {fileID: 110196864}
+      - {fileID: 110159454}
     data:
       first: {fileID: 110269864}
       second: []
@@ -297,5 +313,5 @@ StateMachine:
       - {fileID: 110131288}
       - {fileID: 110127718}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: 120, y: 72, z: 0}
+  m_AnyStatePosition: {x: 276, y: 72, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
