@@ -32,15 +32,11 @@ public class ClashBattleUnit : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
         if (!target) {
-			Debug.Log ("idling", gameObject);
-			Idle ();
+			Idle();
 		} else if ((target.currentHealth > 0) && (timer >= timeBetweenAttacks) && (currentHealth >= 0.0f)) {
-			Debug.Log ("attacking", gameObject);
-
-			Attack ();
+			Attack();
 		} else if (target.currentHealth <= 0) {
-			Debug.Log ("target dead", gameObject);
-			target=null;		
+			target = null;		
 		}
 	}
 

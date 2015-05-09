@@ -27,16 +27,15 @@ public class ClashBattleController : MonoBehaviour {
     }
 
 	void Start () {
-        var terrainObject = Instantiate(Resources.Load("Prefabs/ClashOfSpecies/Terrains/" + manager.currentTarget.terrain)) as GameObject;
-        terrainObject.transform.position = Vector3.zero;
-        terrainObject.transform.localScale = Vector3.one;
+        var terrainResource = Resources.Load("Prefabs/ClashOfSpecies/Terrains/" + manager.currentTarget.terrain);
+        var terrainObject = Instantiate(terrainResource, Vector3.zero, Quaternion.identity) as GameObject;
 
         var terrain = terrainObject.GetComponentInChildren<Terrain>();
+        Camera.main.GetComponent<ClashBattleCamera>().target = terrain;
 
         foreach (var pair in manager.currentTarget.layout) {
             var species = pair.Key;
             
-
             // Place navmesh agent.
             var speciesPos = new Vector3(pair.Value.x * terrain.terrainData.size.x, 0.0f, pair.Value.y * terrain.terrainData.size.z);
             NavMeshHit placement;
