@@ -10,7 +10,7 @@ public class ClashDefenseSetup : MonoBehaviour {
     private ClashGameManager manager;
     private ClashSpecies selected;
     private Terrain terrain;
-    private ToggleGroup toggle;
+    private ToggleGroup toggleGroup;
 
     public HorizontalLayoutGroup unitList;
     public GameObject defenseItemPrefab;
@@ -21,7 +21,7 @@ public class ClashDefenseSetup : MonoBehaviour {
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
-        toggle = unitList.GetComponent<ToggleGroup>();
+		toggleGroup = unitList.GetComponent<ToggleGroup>();
     }
     
 	// Use this for initialization
@@ -47,6 +47,7 @@ public class ClashDefenseSetup : MonoBehaviour {
                 }
             });
 
+			item.GetComponentInChildren<Toggle>().group = toggleGroup;
             item.transform.SetParent(unitList.transform);
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
@@ -76,6 +77,11 @@ public class ClashDefenseSetup : MonoBehaviour {
 					normPos.x = normPos.x / terrain.terrainData.size.x;
 					normPos.y = normPos.y / terrain.terrainData.size.z;
 					manager.pendingDefenseConfig.layout[selected] = normPos;
+
+					var toggle = toggleGroup.ActiveToggles ().FirstOrDefault();
+					toggle.enabled = false;
+					toggle.interactable = false;
+
 					selected = null;
 				}
 			}

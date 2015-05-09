@@ -52,14 +52,14 @@ public class ClashBattleUnit : MonoBehaviour {
         if (agent) {
             agent.destination = target.transform.position;
 			
-			Debug.Log (tag + " " + species.name +
-			           " distance to " +
-			           target.tag + " " + target.species.name +
-			           " is " + agent.remainingDistance);
-            if (agent.remainingDistance < 10.0f) {
+//			Debug.Log (tag + " " + species.name +
+//			           " distance to " +
+//			           target.tag + " " + target.species.name +
+//			           " is " + agent.remainingDistance);
+            if (agent.remainingDistance < 5.0f) {
                 // TODO: Attack animation.
                 //Added by Omar triggers Attacking animation
-				Debug.Log(species.name + " attacking " + target.species.name);
+//				Debug.Log(species.name + " attacking " + target.species.name);
                 if (anim != null) {
                 	anim.SetTrigger("Attacking");
                 }
@@ -82,7 +82,7 @@ public class ClashBattleUnit : MonoBehaviour {
 	}
 
     void TakeDamage(int damage, ClashBattleUnit source = null) {
-		Debug.Log (tag + " " + species.name + " taking " + damage + " damage from " + source.tag + " " + source.species.name);
+//		Debug.Log (tag + " " + species.name + " taking " + damage + " damage from " + source.tag + " " + source.species.name);
         currentHealth = Mathf.Max(0, currentHealth - damage);
 		if (currentHealth == 0) {
 			Die();
