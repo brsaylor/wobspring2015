@@ -11,7 +11,7 @@ public class ClashBattleController : MonoBehaviour {
 
     private ClashSpecies selected;
     private Terrain terrain;
-    private ToggleGroup toggle;
+    private ToggleGroup toggleGroup;
 
     public HorizontalLayoutGroup unitList;
     public GameObject attackItemPrefab;
@@ -24,6 +24,7 @@ public class ClashBattleController : MonoBehaviour {
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
+		toggleGroup = unitList.gameObject.GetComponent<ToggleGroup> ();
     }
 
 	void Start () {
@@ -70,6 +71,7 @@ public class ClashBattleController : MonoBehaviour {
                 }
             });
 
+			item.GetComponentInChildren<Toggle>().group = toggleGroup;
             item.transform.SetParent(unitList.transform);
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
@@ -100,6 +102,10 @@ public class ClashBattleController : MonoBehaviour {
                     alliesList.Add(unit);
                     unit.species = selected;
 
+					var toggle = toggleGroup.ActiveToggles ().FirstOrDefault();
+					toggle.enabled = false;
+					toggle.interactable = false;
+
                     selected = null;
                 }
             }
@@ -108,8 +114,11 @@ public class ClashBattleController : MonoBehaviour {
 	
 	void FixedUpdate() {
         int totalEnemyHealth = 0;
+
         foreach (var enemy in enemiesList) {
+
             totalEnemyHealth += enemy.currentHealth;
+			Debug.Log(totalEnemyHealth);
 			if (enemy.currentHealth > 0 && !enemy.target && alliesList.Count > 0) {
 				Debug.Log ("Finding Enemy Target", gameObject);
                 var target = alliesList.Where(u => {
@@ -139,10 +148,10 @@ public class ClashBattleController : MonoBehaviour {
 
         if (totalEnemyHealth == 0 && enemiesList.Count > 0) {
             // ALLIES HAVE WON!
-			/*
-			messageCanvas.SetActive(true);
-			messageText.text = "You Won!\n\nKeep on fighting!";
-			*/
+
+			//messageCanvas.SetActive(true);
+			//messageText.text = "You Won!\n\nKeep on fighting!";
+
 			//TODO: Tell server you won
         }
 
@@ -177,12 +186,12 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-        if (totalAllyHealth == 0 && alliesList.Count > 0) {
+        if (totalAllyHealth == 0 && alliesList.Count == 5) {
             // ENEMIES HAVE WON!
-			/*
+
 			messageCanvas.SetActive(true);
 			messageText.text = "You Lost!\n\nTry again next time!";
-*/
+
 			//TODO: Tell server you lost
         }
     }
