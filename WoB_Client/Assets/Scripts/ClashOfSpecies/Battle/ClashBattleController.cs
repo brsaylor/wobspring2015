@@ -110,26 +110,31 @@ public class ClashBattleController : MonoBehaviour {
         int totalEnemyHealth = 0;
         foreach (var enemy in enemiesList) {
             totalEnemyHealth += enemy.currentHealth;
-            if (enemy.currentHealth > 0 && !enemy.target && alliesList.Count > 0) {
+			if (enemy.currentHealth > 0 && !enemy.target && alliesList.Count > 0) {
+				Debug.Log ("Finding Enemy Target", gameObject);
                 var target = alliesList.Where(u => {
-                    switch (enemy.species.type) {
-                        case UnitType.CARNIVORE:
-                            return (u.species.type == UnitType.CARNIVORE) || (u.species.type == UnitType.HERBIVORE) ||
-                                                    (u.species.type == UnitType.OMNIVORE);
-                        case UnitType.HERBIVORE:
-                            return (u.species.type == UnitType.PLANT);
-                        case UnitType.OMNIVORE:
-                            return (u.species.type == UnitType.HERBIVORE) || (u.species.type == UnitType.PLANT);
-                        case UnitType.PLANT:
-                            return false;
-                        default: return false;
-                    }
-                    return false;
-                }).OrderBy(u => {
-                    return (enemy.transform.position - u.transform.position).sqrMagnitude;
-                }).FirstOrDefault();
-                enemy.target = target;
-            }
+					if(u.currentHealth<=0) 
+						return false;
+					switch (enemy.species.type) {
+					case UnitType.CARNIVORE:
+						return (u.species.type == UnitType.CARNIVORE) || (u.species.type == UnitType.HERBIVORE) ||
+							(u.species.type == UnitType.OMNIVORE);
+					case UnitType.HERBIVORE:
+						return (u.species.type == UnitType.PLANT);
+					case UnitType.OMNIVORE:
+						return (u.species.type == UnitType.HERBIVORE) || (u.species.type == UnitType.PLANT)||
+							(u.species.type == UnitType.CARNIVORE)||
+								(u.species.type == UnitType.OMNIVORE);
+					case UnitType.PLANT:
+						return false;
+					default: return false;
+					}
+					return false;
+				}).OrderBy(u => {
+					return (enemy.transform.position - u.transform.position).sqrMagnitude;
+				}).FirstOrDefault();
+				enemy.target = target;
+			}
         }
 
         if (totalEnemyHealth == 0 && enemiesList.Count > 0) {
@@ -145,7 +150,11 @@ public class ClashBattleController : MonoBehaviour {
         foreach (var ally in alliesList) {
             totalAllyHealth += ally.currentHealth;
             if (ally.currentHealth > 0 && !ally.target && enemiesList.Count > 0) {
+				Debug.Log ("Finding Ally Target", gameObject);
                 var target = enemiesList.Where(u => {
+					if(u.currentHealth<=0) 
+						return false;
+
                     switch (ally.species.type) {
                         case UnitType.CARNIVORE:
                             return (u.species.type == UnitType.CARNIVORE) || (u.species.type == UnitType.HERBIVORE) ||
@@ -153,10 +162,12 @@ public class ClashBattleController : MonoBehaviour {
                         case UnitType.HERBIVORE:
                             return (u.species.type == UnitType.PLANT);
                         case UnitType.OMNIVORE:
-                            return (u.species.type == UnitType.HERBIVORE) || (u.species.type == UnitType.PLANT);
-                        case UnitType.PLANT:
-                            return false;
-                        default: return false;
+						return (u.species.type == UnitType.HERBIVORE) || (u.species.type == UnitType.PLANT)||
+													(u.species.type == UnitType.CARNIVORE)||
+													(u.species.type == UnitType.OMNIVORE);
+					case UnitType.PLANT:
+						return false;
+					default: return false;
                     }
                     return false;
                 }).OrderBy(u => {

@@ -36,6 +36,7 @@ public class ClashBattleUnit : MonoBehaviour {
 			Idle ();
 		} else if ((target.currentHealth > 0) && (timer >= timeBetweenAttacks) && (currentHealth >= 0.0f)) {
 			Debug.Log ("attacking", gameObject);
+
 			Attack ();
 		} else if (target.currentHealth <= 0) {
 			Debug.Log ("target dead", gameObject);
@@ -54,8 +55,12 @@ public class ClashBattleUnit : MonoBehaviour {
 		timer = 0f;
         if (agent) {
             agent.destination = target.transform.position;
-
-            if (agent.remainingDistance < 1.0f) {
+			
+			Debug.Log (tag + " " + species.name +
+			           " distance to " +
+			           target.tag + " " + target.species.name +
+			           " is " + agent.remainingDistance);
+            if (agent.remainingDistance < 10.0f) {
                 // TODO: Attack animation.
                 //Added by Omar triggers Attacking animation
 				Debug.Log(species.name + " attacking " + target.species.name);
@@ -75,6 +80,9 @@ public class ClashBattleUnit : MonoBehaviour {
 		//Disable all functions here
 		if (anim != null) {
 			anim.SetTrigger("Dead");
+			target=null;
+			
+			//agent.enabled = false;
 		}
 	}
 
