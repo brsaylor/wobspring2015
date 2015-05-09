@@ -60,7 +60,7 @@ public class ClashBattleUnit : MonoBehaviour {
 			           " distance to " +
 			           target.tag + " " + target.species.name +
 			           " is " + agent.remainingDistance);
-            if (agent.remainingDistance < 10.0f) {
+            if (agent.remainingDistance < 5.0f) {
                 // TODO: Attack animation.
                 //Added by Omar triggers Attacking animation
 				Debug.Log(species.name + " attacking " + target.species.name);

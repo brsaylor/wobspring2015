@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 420768}
   - 95: {fileID: 9520768}
   - 195: {fileID: 19538038}
-  - 208: {fileID: 20867004}
   m_Layer: 0
   m_Name: Leopard Tortoise
   m_TagString: Untagged
@@ -59,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 139.814133, y: 5.44051123, z: -141.436005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 420770}
@@ -72,7 +71,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120770}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: -0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -84,7 +83,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120772}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: -0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -166,7 +165,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120768}
   m_Enabled: 1
-  m_Radius: 3
+  m_Radius: 1.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -179,17 +178,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!208 &20867004
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120768}
-  m_Enabled: 0
-  m_Radius: .5
-  m_Height: 2
-  m_MoveThreshold: 0
-  m_Carve: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

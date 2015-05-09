@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 432006}
   - 95: {fileID: 9532006}
   - 195: {fileID: 19596870}
-  - 208: {fileID: 20818202}
   m_Layer: 0
   m_Name: African Elephant
   m_TagString: Untagged
@@ -521,7 +520,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 143.259506, y: 5.44051123, z: -162.424973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432008}
@@ -1044,17 +1043,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!208 &20818202
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132006}
-  m_Enabled: 0
-  m_Radius: .5
-  m_Height: 2
-  m_MoveThreshold: 0
-  m_Carve: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
