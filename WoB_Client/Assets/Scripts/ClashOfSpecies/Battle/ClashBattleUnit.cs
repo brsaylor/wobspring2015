@@ -80,10 +80,9 @@ public class ClashBattleUnit : MonoBehaviour {
 		//Disable all functions here
 		if (anim != null) {
 			anim.SetTrigger("Dead");
-			target=null;
-			
-			//agent.enabled = false;
 		}
+		target=null;
+		agent.enabled = false;
 	}
 
     void TakeDamage(int damage, ClashBattleUnit source = null) {
