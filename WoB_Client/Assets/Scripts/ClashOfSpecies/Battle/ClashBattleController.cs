@@ -145,15 +145,6 @@ public class ClashBattleController : MonoBehaviour {
 			}
         }
 
-        if (totalEnemyHealth == 0 && enemiesList.Count > 0) {
-            // ALLIES HAVE WON!
-
-			//messageCanvas.SetActive(true);
-			//messageText.text = "You Won!\n\nKeep on fighting!";
-
-			//TODO: Tell server you won
-        }
-
         int totalAllyHealth = 0;
         foreach (var ally in alliesList) {
             totalAllyHealth += ally.currentHealth;
@@ -185,7 +176,18 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-        if (totalAllyHealth == 0 && alliesList.Count == 5) {
+		if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count > 0) {
+			// ALLIES HAVE WON!
+			
+			messageCanvas.SetActive(true);
+			messageText.text = "You Won!\n\nKeep on fighting!";
+			
+			Debug.Log (Time.timeSinceLevelLoad + " - " + totalEnemyHealth + " - " + totalAllyHealth);
+			
+			//TODO: Tell server you won
+		}
+
+        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count == 5) {
             // ENEMIES HAVE WON!
 
 			messageCanvas.SetActive(true);

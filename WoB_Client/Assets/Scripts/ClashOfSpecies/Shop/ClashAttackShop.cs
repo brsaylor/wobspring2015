@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
@@ -16,7 +16,8 @@ public class ClashAttackShop : MonoBehaviour {
 	public HorizontalLayoutGroup selectedGroup;
 
     public Image previewImage;
-    public Text previewText;
+    public Text descriptionText;
+    public Text statsText;
 
 	public GameObject shopElementPrefab;
 	public GameObject selectedUnitPrefab;
@@ -26,7 +27,7 @@ public class ClashAttackShop : MonoBehaviour {
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
-;
+
         foreach (var species in manager.availableSpecies) {
             var item = (Instantiate(shopElementPrefab) as GameObject).GetComponent<ClashShopItem>();
             item.displayText.text = species.name;
@@ -63,7 +64,8 @@ public class ClashAttackShop : MonoBehaviour {
             var description = species.description;
             item.previewButton.onClick.AddListener(() => {
                 previewImage.sprite = item.displayImage.sprite;
-                previewText.text = description;
+                descriptionText.text = description;
+                statsText.text = species.stats();
             }); 
 
             switch (species.type) {
