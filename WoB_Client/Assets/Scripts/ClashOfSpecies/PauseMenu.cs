@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class pauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
 		public GUISkin myskin;
 		public Rect windowRect;
