@@ -76,6 +76,17 @@ public class ClashBattleController : MonoBehaviour {
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
         }
+
+		// Send initiate battle request to the server
+		List<int> speciesIds = new List<int>();
+		foreach (var species in manager.attackConfig.layout) {
+			speciesIds.Add(species.id);
+		}
+		var request = ClashInitiateBattleProtocol.Prepare(manager.currentTarget.owner.GetID(), speciesIds);
+		NetworkManager.Send(request, (res) => {
+			var response = res as ResponseClashInitiateBattle;
+			Debug.Log("Received ResponseClashInitiateBattle from server. valid = " + response.valid);
+		});
 	}
 
     void Update() {
@@ -142,10 +153,7 @@ public class ClashBattleController : MonoBehaviour {
 
         if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count() > 0) {
             // ALLIES HAVE WON!
-			messageCanvas.SetActive(true);
-			messageText.text = "You Won!\n\nKeep on fighting!";
-
-			//TODO: Tell server you won
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.WIN);
         }
 
         int totalAllyHealth = 0;
@@ -181,10 +189,7 @@ public class ClashBattleController : MonoBehaviour {
 
         if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 5) {
             // ENEMIES HAVE WON!
-			messageCanvas.SetActive(true);
-			messageText.text = "You Lost!\n\nTry again next time!";
-
-			//TODO: Tell server you lost
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
         }
     }
 
@@ -203,4 +208,21 @@ public class ClashBattleController : MonoBehaviour {
   		messageCanvas.SetActive(false);
   		Time.timeScale = 1.0f;
     }
+
+	public void ReportBattleOutcome(ClashEndBattleProtocol.BattleResult outcome) {
+		if (outcome == ClashEndBattleProtocol.BattleResult.WIN) {
+			messageCanvas.SetActive(true);
+			messageText.text = "You Won!\n\nKeep on fighting!";
+		} else {
+			messageCanvas.SetActive(true);
+			messageText.text = "You Lost!\n\nTry again next time!";
+		}
+		var request = ClashEndBattleProtocol.Prepare(outcome);
+		NetworkManager.Send(request, (res) => {
+			var response = res as ResponseClashEndBattle;
+			int creditsEarned = response.credits - manager.currentPlayer.credits;
+			manager.currentPlayer.credits = response.credits;
+			Debug.Log("Received ResponseClashEndBattle from server. credits earned: " + creditsEarned);
+		});
+	}
 }
