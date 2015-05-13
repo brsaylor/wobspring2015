@@ -72,6 +72,8 @@ public class ClashDefenseSetup : MonoBehaviour {
                     allyObject.transform.position = placement.position;
                     allyObject.transform.rotation = Quaternion.identity;
                     */
+                    			allyObject.tag = "Ally";
+                    
 					Vector2 normPos = new Vector2(placement.position.x - terrain.transform.position.x,
 					                              placement.position.z - terrain.transform.position.z);
 					normPos.x = normPos.x / terrain.terrainData.size.x;
@@ -93,8 +95,14 @@ public class ClashDefenseSetup : MonoBehaviour {
 	}
 
 	public void ConfirmDefense() {
-        var pending = manager.pendingDefenseConfig;
-        var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, pending.layout.Select(p => new { p.Key.id, p.Value })
+		if(GameObject.FindGameObjectsWithTag("Ally").Count != 5) {
+            		errorCanvas.SetActive(true);
+			errorMessage.text = "Place all your units down before confirming";
+			return;
+        	}
+		
+        	var pending = manager.pendingDefenseConfig;
+        	var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, pending.layout.Select(p => new { p.Key.id, p.Value })
             .ToDictionary(p => p.id, p => p.Value));
 
         NetworkManager.Send(request, (res) => {
@@ -105,7 +113,7 @@ public class ClashDefenseSetup : MonoBehaviour {
                 Game.LoadScene("ClashMain");
             } else {
 				errorCanvas.SetActive(true);
-				errorMessage.text = "Place all your units down before confirming";
+				errorMessage.text = "Error in saving data to the DB";
 			}
         });
 	}
