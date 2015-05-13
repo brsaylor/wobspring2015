@@ -90,6 +90,16 @@ public class ClashBattleController : MonoBehaviour {
 	}
 
     void Update() {
+
+		// Cheat! FIXME: remove
+		if (Input.GetKeyDown(KeyCode.Equals)) {
+			Debug.Log ("plus");
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.WIN);
+		} else if (Input.GetKeyDown(KeyCode.Minus)) {
+			Debug.Log ("minus");
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
+		}
+
         if (selected == null) return;
 
         if (Input.GetButton("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
@@ -225,4 +235,6 @@ public class ClashBattleController : MonoBehaviour {
 			Debug.Log("Received ResponseClashEndBattle from server. credits earned: " + creditsEarned);
 		});
 	}
+
+
 }

@@ -37,7 +37,7 @@ public final class DefenseConfigDAO {
         + " LIMIT 1";
 
     private static final String FIND_BY_DEFENSE_CONFIG_ID_QUERY = "SELECT * FROM `clash_defense_config`"
-            + " WHERE `defense_config_id` = ?"
+            + " WHERE `clash_defense_config_id` = ?"
             + " ORDER BY `created_at` DESC"
             + " LIMIT 1";
 
