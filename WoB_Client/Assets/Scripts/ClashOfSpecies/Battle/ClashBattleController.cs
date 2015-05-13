@@ -20,7 +20,8 @@ public class ClashBattleController : MonoBehaviour {
     public List<ClashBattleUnit> alliesList = new List<ClashBattleUnit>();
 
 	public GameObject messageCanvas;
-	public Text messageText;
+	public GameObject messagePanel;
+	public GameObject menuPanel;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -60,13 +61,13 @@ public class ClashBattleController : MonoBehaviour {
 
             var texture = Resources.Load<Texture2D>("Images/" + species.name);
             item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            item.GetComponentInChildren<Toggle>().colors.pressedColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            item.GetComponentInChildren<Toggle>().colors.disabledColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = current;
-                    item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
-                    item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
                 }
             });
 
@@ -145,6 +146,16 @@ public class ClashBattleController : MonoBehaviour {
 			}
         }
 
+        if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count > 0) {
+            // ALLIES HAVE WON!
+            Debug(Time.timeSinceLevelLoad +": " + totalEnemyHealth);
+			messageCanvas.SetActive(true);
+			messagePanel.SetActive(true);
+			messagePanel.GetComponentInChildren<Text>().text = "You Won!\n\nKeep on fighting!";
+
+			//TODO: Tell server you won
+        }
+
         int totalAllyHealth = 0;
         foreach (var ally in alliesList) {
             totalAllyHealth += ally.currentHealth;
@@ -176,20 +187,9 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-		if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count > 0) {
-			// ALLIES HAVE WON!
-			
-			messageCanvas.SetActive(true);
-			messageText.text = "You Won!\n\nKeep on fighting!";
-			
-			Debug.Log (Time.timeSinceLevelLoad + " - " + totalEnemyHealth + " - " + totalAllyHealth);
-			
-			//TODO: Tell server you won
-		}
-
         if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count == 5) {
             // ENEMIES HAVE WON!
-
+            Debug(Time.timeSinceLevelLoad +": " + totalAllyHealth);
 			messageCanvas.SetActive(true);
 			messageText.text = "You Lost!\n\nTry again next time!";
 
@@ -200,4 +200,16 @@ public class ClashBattleController : MonoBehaviour {
 	public void ConfirmResult() {
 		Game.LoadScene ("ClashMain");
 	}
+	
+	public void PauseGame() {
+		Time.timeScale = 0.0f;
+		messageCanvas.SetActive(true);
+		menuPanel.SetActive(true);
+ 	}
+ 	
+ 	public void ResumeGame() {
+  		menuPanel.SetActive(false);
+  		messageCanvas.SetActive(false);
+  		Time.timeScale = 1.0f;
+    }
 }
