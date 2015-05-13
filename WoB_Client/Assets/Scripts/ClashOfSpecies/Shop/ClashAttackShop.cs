@@ -74,7 +74,8 @@ public class ClashAttackShop : MonoBehaviour {
 				descriptionText.gameObject.SetActive(true);
 				statsText.gameObject.SetActive(false);
 				textSwitch = true;
-				
+
+				infoButton.onClick.RemoveAllListeners();
 				infoButton.onClick.AddListener(() => {
 					textSwitch = !textSwitch;
 					if(textSwitch) {

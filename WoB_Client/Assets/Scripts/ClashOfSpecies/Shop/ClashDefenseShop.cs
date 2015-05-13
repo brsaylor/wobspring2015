@@ -81,6 +81,7 @@ public class ClashDefenseShop : MonoBehaviour {
 				infoButton.interactable = true;
 				textSwitch = true;
 
+				infoButton.onClick.RemoveAllListeners();
 				infoButton.onClick.AddListener(() => {
 					textSwitch = !textSwitch;
 					if(textSwitch) {
