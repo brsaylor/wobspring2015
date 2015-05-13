@@ -67,11 +67,6 @@ public class ClashDefenseSetup : MonoBehaviour {
 					//Added by Omar
 					var allyResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name);
 					var allyObject = Instantiate(allyResource, placement.position, Quaternion.identity) as GameObject;
-					/*
-                    var allyObject = Instantiate(Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name)) as GameObject;
-                    allyObject.transform.position = placement.position;
-                    allyObject.transform.rotation = Quaternion.identity;
-                    */
                     allyObject.tag = "Ally";
                     
 					Vector2 normPos = new Vector2(placement.position.x - terrain.transform.position.x,

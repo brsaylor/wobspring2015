@@ -90,12 +90,6 @@ public class ClashBattleController : MonoBehaviour {
                     //Added by Omar
                     var allyResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name);
                     var allyObject = Instantiate(allyResource, placement.position, Quaternion.identity) as GameObject;
-                    /*
-                    var allyObject = Instantiate(Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name)) as GameObject;
-                    allyObject.transform.position = placement.position;
-                    allyObject.transform.rotation = Quaternion.identity;
-                    */
-
                     allyObject.tag = "Ally";
 
                     var unit = allyObject.AddComponent<ClashBattleUnit>();
@@ -118,7 +112,7 @@ public class ClashBattleController : MonoBehaviour {
         foreach (var enemy in enemiesList) {
 
             totalEnemyHealth += enemy.currentHealth;
-			Debug.Log(totalEnemyHealth);
+			//Debug.Log(totalEnemyHealth);
 			if (enemy.currentHealth > 0 && !enemy.target && alliesList.Count > 0) {
 				Debug.Log ("Finding Enemy Target", gameObject);
                 var target = alliesList.Where(u => {
@@ -158,7 +152,7 @@ public class ClashBattleController : MonoBehaviour {
         foreach (var ally in alliesList) {
             totalAllyHealth += ally.currentHealth;
             if (ally.currentHealth > 0 && !ally.target && enemiesList.Count() > 0) {
-				Debug.Log ("Finding Ally Target", gameObject);
+				//Debug.Log ("Finding Ally Target", gameObject);
                 var target = enemiesList.Where(u => {
 					if(u.currentHealth<=0) 
 						return false;

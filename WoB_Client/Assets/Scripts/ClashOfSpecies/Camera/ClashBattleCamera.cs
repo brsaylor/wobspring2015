@@ -26,7 +26,7 @@ public class ClashBattleCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
         if (!reticle) return;
-        Debug.Log("HELLO");
+        //Debug.Log("HELLO");
 
         if (Input.GetMouseButtonDown(1)) {
             dragging = true;
