@@ -22,8 +22,8 @@ public class ClashSpecies {
     public float moveSpeed;
     public SpeciesType type;
     
-    public string stats() {
-    	string stats = name + 
+    public string Stats() {
+    	string stats = "Stats:\n\n" + name + 
         				"\nType: " + type + 
                         "\nCost: " + cost + 
                         "\nHealth: " + hp + 
@@ -31,7 +31,7 @@ public class ClashSpecies {
                         "\nAttack Speed: " + attackSpeed + 
                         "\nMovement Speed: " + moveSpeed;
                         
-    	return stats.ToUpper();
+    	return stats;
     }
 }
 

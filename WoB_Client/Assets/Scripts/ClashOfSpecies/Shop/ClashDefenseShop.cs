@@ -19,7 +19,10 @@ public class ClashDefenseShop : MonoBehaviour {
 	public HorizontalLayoutGroup selectedTerrain;
 
     public Image previewImage;
-    public Text previewText;
+    public Text descriptionText;
+	public Text statsText;
+	public Button infoButton;
+	public bool textSwitch;	//true for description text; false for stats text
 
 	public GameObject shopElementPrefab;
 	public GameObject selectedUnitPrefab;
@@ -66,9 +69,30 @@ public class ClashDefenseShop : MonoBehaviour {
             });
 
             var description = species.description;
+			var stats = species.Stats ();
             item.previewButton.onClick.AddListener(() => {
                 previewImage.sprite = item.displayImage.sprite;
-                previewText.text = description;
+                descriptionText.text = description;
+				statsText.text = stats;
+
+				infoButton.GetComponentInChildren<Text>().text = "Get Stat Info";
+				descriptionText.gameObject.SetActive(true);
+				statsText.gameObject.SetActive(false);
+				infoButton.interactable = true;
+				textSwitch = true;
+
+				infoButton.onClick.AddListener(() => {
+					textSwitch = !textSwitch;
+					if(textSwitch) {
+						infoButton.GetComponentInChildren<Text>().text = "Get Stat Info";
+						descriptionText.gameObject.SetActive(true);
+						statsText.gameObject.SetActive(false);
+					} else {
+						infoButton.GetComponentInChildren<Text>().text = "Get Description";
+						descriptionText.gameObject.SetActive(false);
+						statsText.gameObject.SetActive(true);
+					}
+				});
             }); 
 
             switch (species.type) {
@@ -121,7 +145,14 @@ public class ClashDefenseShop : MonoBehaviour {
 
             item.previewButton.onClick.AddListener(() => {
                 previewImage.sprite = item.displayImage.sprite;
-                previewText.text = "Terrain";
+				descriptionText.text = "Terrain";
+
+				descriptionText.gameObject.SetActive(true);
+				statsText.gameObject.SetActive(false);
+				infoButton.GetComponentInChildren<Text>().text = "Description";
+				infoButton.interactable = false;
+				textSwitch = true;
+				infoButton.GetComponentInChildren<Text>().text = "Description";
             });
 
             item.transform.SetParent(terrainGroup.transform);
