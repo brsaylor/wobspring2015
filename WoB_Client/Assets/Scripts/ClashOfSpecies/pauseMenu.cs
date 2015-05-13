@@ -34,6 +34,17 @@ public class pauseMenu : MonoBehaviour
                 waited = false;
                 Invoke("waiting",0.3f);
             }
+		if (paused) {
+				Time.timeScale = 0;
+				} 
+		else {
+		
+				Time.timeScale = 1;
+		
+				}
+
+
+
     }
 
     public void OnGUI()
@@ -54,4 +65,13 @@ public class pauseMenu : MonoBehaviour
 			Application.LoadLevel("ClashMain");
         }
     }
+	public void checkpause()
+	{
+		if (paused = true){
+			Time.timeScale = 0;
+		}
+		if(paused = false){
+			Time.timeScale = 1;
+		}
+	}
 }
