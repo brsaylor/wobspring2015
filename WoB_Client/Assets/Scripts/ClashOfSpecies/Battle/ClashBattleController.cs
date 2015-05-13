@@ -20,7 +20,7 @@ public class ClashBattleController : MonoBehaviour {
     public List<ClashBattleUnit> alliesList = new List<ClashBattleUnit>();
 
 	public GameObject messageCanvas;
-	public GameObject messagePanel;
+	public Text messageText;
 	public GameObject menuPanel;
 
 	void Awake() {
@@ -61,13 +61,13 @@ public class ClashBattleController : MonoBehaviour {
 
             var texture = Resources.Load<Texture2D>("Images/" + species.name);
             item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            item.GetComponentInChildren<Toggle>().colors.pressedColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-            item.GetComponentInChildren<Toggle>().colors.disabledColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = current;
+					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
+					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
             });
 
@@ -146,12 +146,10 @@ public class ClashBattleController : MonoBehaviour {
 			}
         }
 
-        if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count > 0) {
+        if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count() > 0) {
             // ALLIES HAVE WON!
-            Debug(Time.timeSinceLevelLoad +": " + totalEnemyHealth);
 			messageCanvas.SetActive(true);
-			messagePanel.SetActive(true);
-			messagePanel.GetComponentInChildren<Text>().text = "You Won!\n\nKeep on fighting!";
+			messageText.text = "You Won!\n\nKeep on fighting!";
 
 			//TODO: Tell server you won
         }
@@ -159,7 +157,7 @@ public class ClashBattleController : MonoBehaviour {
         int totalAllyHealth = 0;
         foreach (var ally in alliesList) {
             totalAllyHealth += ally.currentHealth;
-            if (ally.currentHealth > 0 && !ally.target && enemiesList.Count > 0) {
+            if (ally.currentHealth > 0 && !ally.target && enemiesList.Count() > 0) {
 				Debug.Log ("Finding Ally Target", gameObject);
                 var target = enemiesList.Where(u => {
 					if(u.currentHealth<=0) 
@@ -187,9 +185,8 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count == 5) {
+        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 5) {
             // ENEMIES HAVE WON!
-            Debug(Time.timeSinceLevelLoad +": " + totalAllyHealth);
 			messageCanvas.SetActive(true);
 			messageText.text = "You Lost!\n\nTry again next time!";
 
