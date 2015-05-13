@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
@@ -37,13 +37,13 @@ public class ClashDefenseSetup : MonoBehaviour {
 
             var texture = Resources.Load<Texture2D>("Images/" + currentSpecies.name);
             item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            item.GetComponentInChildren<Toggle>().colors.pressedColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            item.GetComponentInChildren<Toggle>().colors.disabledColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = currentSpecies;
-                    item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
-                    item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
                 }
             });
 
@@ -72,7 +72,7 @@ public class ClashDefenseSetup : MonoBehaviour {
                     allyObject.transform.position = placement.position;
                     allyObject.transform.rotation = Quaternion.identity;
                     */
-                    			allyObject.tag = "Ally";
+                    allyObject.tag = "Ally";
                     
 					Vector2 normPos = new Vector2(placement.position.x - terrain.transform.position.x,
 					                              placement.position.z - terrain.transform.position.z);
@@ -95,14 +95,14 @@ public class ClashDefenseSetup : MonoBehaviour {
 	}
 
 	public void ConfirmDefense() {
-		if(GameObject.FindGameObjectsWithTag("Ally").Count != 5) {
-            		errorCanvas.SetActive(true);
+ 		if(GameObject.FindGameObjectsWithTag("Ally").Count() != 5) {
+            errorCanvas.SetActive(true);
 			errorMessage.text = "Place all your units down before confirming";
 			return;
-        	}
-		
-        	var pending = manager.pendingDefenseConfig;
-        	var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, pending.layout.Select(p => new { p.Key.id, p.Value })
+        }
+        
+        var pending = manager.pendingDefenseConfig;
+        var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, pending.layout.Select(p => new { p.Key.id, p.Value })
             .ToDictionary(p => p.id, p => p.Value));
 
         NetworkManager.Send(request, (res) => {
