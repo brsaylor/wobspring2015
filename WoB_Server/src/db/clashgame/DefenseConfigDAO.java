@@ -23,13 +23,15 @@ import util.Vector2;
 public final class DefenseConfigDAO {
 
     private static final String INSERT_QUERY = "INSERT INTO `clash_defense_config`"
-        + "(`species1`, `species1_x`, `species1_y`, "
-        + " `species2`, `species2_x`, `species2_y`, "
-        + " `species3`, `species3_x`, `species3_y`, "
-        + " `species4`, `species4_x`, `species4_y`, "
-        + " `species5`, `species5_x`, `species5_y`, "
-        + " `player_id`, `terrain`, `created_at`) "
-        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + " (`player_id`, `terrain`, `created_at`) "
+        + "VALUES (?, ?, ?)";
+
+    private static final String INSERT_UNIT_QUERY = "INSERT INTO clash_defense_unit"
+            + " (clash_defense_config_id, species_id, x, y)"
+            + " VALUES (?, ?, ?, ?)";
+
+    private static final String SELECT_UNITS_QUERY = "SELECT * FROM " +
+            "clash_defense_unit where clash_defense_config_id = ?";
 
     private static final String FIND_BY_PLAYER_QUERY = "SELECT * FROM `clash_defense_config`"
         + " WHERE `player_id` = ?"
@@ -52,19 +54,9 @@ public final class DefenseConfigDAO {
             con = GameDB.getConnection();
             pstmt = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
 
-            // Parameter indices 1-15 are occupied by the species layout.
-            ArrayList<Integer> keys = new ArrayList(dc.layout.keySet());
-            for (int i = 0, j = 1; i < keys.size(); i++, j += 3) {
-                pstmt.setInt(j, keys.get(i));
-
-                Vector2<Float> pos = dc.layout.get(keys.get(i));
-                pstmt.setFloat(j + 1, pos.getX());
-                pstmt.setFloat(j + 2, pos.getY());
-            }
-
-            pstmt.setInt(16, dc.playerId);
-            pstmt.setString(17, dc.terrain);
-            pstmt.setTimestamp(18, new Timestamp(new Date().getTime()));
+            pstmt.setInt(1, dc.playerId);
+            pstmt.setString(2, dc.terrain);
+            pstmt.setTimestamp(3, new Timestamp(new Date().getTime()));
 
             pstmt.executeUpdate();
 
@@ -74,6 +66,21 @@ public final class DefenseConfigDAO {
             } else {
                 throw new SQLException("Failed to create DefenseConfiguration.");
             }
+
+            // Create the records in clash_defense_units
+            for (Map.Entry<Integer, ArrayList<Vector2<Float>>> entry : dc.layout.entrySet()) {
+                int speciesId = entry.getKey();
+                ArrayList<Vector2<Float>> positions = entry.getValue();
+                for (Vector2<Float> position : positions) {
+                    pstmt = con.prepareStatement(INSERT_UNIT_QUERY);
+                    pstmt.setInt(1, dc.id);
+                    pstmt.setInt(2, speciesId);
+                    pstmt.setFloat(3, position.getX());
+                    pstmt.setFloat(4, position.getY());
+                    pstmt.executeUpdate();
+                }
+            }
+
         } catch (SQLException ex) {
             Log.println_e(ex.getMessage());
         } finally {
@@ -83,7 +90,7 @@ public final class DefenseConfigDAO {
     }
 
     public static DefenseConfig findByPlayerId(int playerId) {
-        DefenseConfig result = new DefenseConfig();
+        DefenseConfig config = new DefenseConfig();
 
         Connection con = null;
         ResultSet rs = null;
@@ -98,21 +105,12 @@ public final class DefenseConfigDAO {
 
             if (rs.next()) {
                 Timestamp ts = rs.getTimestamp("created_at");
-                result.createdAt = new Date(ts.getTime());
-                result.id = rs.getInt("clash_defense_config_id");
-                result.playerId = rs.getInt("player_id");
-                result.terrain = rs.getString("terrain");
-                result.layout = new HashMap<Integer, Vector2<Float>>();
+                config.createdAt = new Date(ts.getTime());
+                config.id = rs.getInt("clash_defense_config_id");
+                config.playerId = rs.getInt("player_id");
+                config.terrain = rs.getString("terrain");
+                getLayout(con, config);
 
-                for (int i = 0; i < 5; i++) {
-                    String label = "species" + (i + 1);
-                    Vector2<Float> pos = new Vector2<Float>();
-
-                    int speciesId = rs.getInt(label);
-                    pos.setX(rs.getFloat(label + "_x"));
-                    pos.setY(rs.getFloat(label + "_y"));
-                    result.layout.put(speciesId, pos);
-                }
             } else {
                 return null;
             }
@@ -121,11 +119,11 @@ public final class DefenseConfigDAO {
         } finally {
             GameDB.closeConnection(con, pstmt, rs);
         }
-        return result;
+        return config;
     }
 
     public static DefenseConfig findByDefenseConfigId(int defenseConfigID) {
-        DefenseConfig result = new DefenseConfig();
+        DefenseConfig config = new DefenseConfig();
 
         Connection con = null;
         ResultSet rs = null;
@@ -140,21 +138,13 @@ public final class DefenseConfigDAO {
 
             if (rs.next()) {
                 Timestamp ts = rs.getTimestamp("created_at");
-                result.createdAt = new Date(ts.getTime());
-                result.id = rs.getInt("clash_defense_config_id");
-                result.playerId = rs.getInt("player_id");
-                result.terrain = rs.getString("terrain");
-                result.layout = new HashMap<Integer, Vector2<Float>>();
+                config.createdAt = new Date(ts.getTime());
+                config.id = rs.getInt("clash_defense_config_id");
+                config.playerId = rs.getInt("player_id");
+                config.terrain = rs.getString("terrain");
 
-                for (int i = 0; i < 5; i++) {
-                    String label = "species" + (i + 1);
-                    Vector2<Float> pos = new Vector2<Float>();
-
-                    int speciesId = rs.getInt(label);
-                    pos.setX(rs.getFloat(label + "_x"));
-                    pos.setY(rs.getFloat(label + "_y"));
-                    result.layout.put(speciesId, pos);
-                }
+                // Retrieve the unit layout
+                getLayout(con, config);
             } else {
                 return null;
             }
@@ -163,7 +153,21 @@ public final class DefenseConfigDAO {
         } finally {
             GameDB.closeConnection(con, pstmt, rs);
         }
-        return result;
+        return config;
+    }
+
+    static void getLayout(Connection con, DefenseConfig config) throws  SQLException {
+        PreparedStatement pstmt = con.prepareStatement(SELECT_UNITS_QUERY);
+        pstmt.setInt(1, config.id);
+        ResultSet rs = pstmt.executeQuery();
+        config.layout = new HashMap<>();
+        while (rs.next()) {
+            int speciesId = rs.getInt("species_id");
+            if (!config.layout.containsKey(speciesId)) {
+                config.layout.put(speciesId, new ArrayList<>());
+            }
+            config.layout.get(speciesId).add(new Vector2<>(rs.getFloat ("x"), rs.getFloat("y")));
+        }
     }
 }
 

@@ -7,10 +7,11 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
-import core.GameServer;
 import db.clashgame.DefenseConfigDAO;
 import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
@@ -75,7 +76,11 @@ public class RequestClashDefenseSetup extends GameRequest {
             config.createdAt = new Date();
             config.playerId = client.getPlayer().getID();
             config.terrain = setupTerrain;
-            config.layout = configMap;
+            for (Map.Entry<Integer, Vector2<Float>> entry : configMap.entrySet()) {
+                ArrayList<Vector2<Float>> positions = new ArrayList<>();
+                positions.add(entry.getValue());
+                config.layout.put(entry.getKey(), positions);
+            }
             DefenseConfigDAO.create(config);
         }
 

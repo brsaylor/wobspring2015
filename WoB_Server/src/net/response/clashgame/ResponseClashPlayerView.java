@@ -5,6 +5,7 @@
  */
 package net.response.clashgame;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,10 +68,10 @@ public class ResponseClashPlayerView extends GameResponse{
             //System.out.println("xxx " + defenseConfig.createdAt.getTime());
             packet.addString("" + defenseConfig.createdAt.getTime());
             packet.addInt32(defenseConfig.layout.size());
-            for (Map.Entry<Integer, Vector2<Float>> ent : defenseConfig.layout.entrySet()) {
+            for (Map.Entry<Integer, ArrayList<Vector2<Float>>> ent : defenseConfig.layout.entrySet()) {
                 packet.addInt32(ent.getKey());
-                packet.addFloat(ent.getValue().getX());
-                packet.addFloat(ent.getValue().getY());
+                packet.addFloat(ent.getValue().get(0).getX());
+                packet.addFloat(ent.getValue().get(0).getY());
             }
         }
         return packet.getBytes();
