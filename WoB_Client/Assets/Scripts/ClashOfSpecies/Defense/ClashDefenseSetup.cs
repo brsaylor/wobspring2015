@@ -1,4 +1,4 @@
-ï»¿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
@@ -37,8 +37,6 @@ public class ClashDefenseSetup : MonoBehaviour {
 
             var texture = Resources.Load<Texture2D>("Images/" + currentSpecies.name);
             item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            item.GetComponentInChildren<Toggle>().colors.pressedColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-            item.GetComponentInChildren<Toggle>().colors.disabledColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = currentSpecies;

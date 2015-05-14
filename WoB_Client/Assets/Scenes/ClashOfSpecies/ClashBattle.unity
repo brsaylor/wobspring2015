@@ -234,6 +234,7 @@ MonoBehaviour:
   lastPosition: {x: 0, y: 0, z: 0}
   yawSpeed: 5
   pitchSpeed: 5
+  moveSpeed: 5
   zoomLevel: 100
 --- !u!1 &175915204
 GameObject:
@@ -587,7 +588,8 @@ MonoBehaviour:
   enemiesList: []
   alliesList: []
   messageCanvas: {fileID: 1469604209}
-  messageText: {fileID: 1034644509}
+  messagePanel: {fileID: 0}
+  menuPanel: {fileID: 0}
 --- !u!114 &309677810
 MonoBehaviour:
   m_ObjectHideFlags: 0

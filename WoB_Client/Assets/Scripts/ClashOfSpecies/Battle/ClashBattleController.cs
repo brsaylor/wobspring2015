@@ -61,8 +61,6 @@ public class ClashBattleController : MonoBehaviour {
 
             var texture = Resources.Load<Texture2D>("Images/" + species.name);
             item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            item.GetComponentInChildren<Toggle>().colors.pressedColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-            item.GetComponentInChildren<Toggle>().colors.disabledColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = current;
@@ -148,7 +146,7 @@ public class ClashBattleController : MonoBehaviour {
 
         if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count > 0) {
             // ALLIES HAVE WON!
-            Debug(Time.timeSinceLevelLoad +": " + totalEnemyHealth);
+            Debug.Log(Time.timeSinceLevelLoad +": " + totalEnemyHealth);
 			messageCanvas.SetActive(true);
 			messagePanel.SetActive(true);
 			messagePanel.GetComponentInChildren<Text>().text = "You Won!\n\nKeep on fighting!";
@@ -189,9 +187,9 @@ public class ClashBattleController : MonoBehaviour {
 
         if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count == 5) {
             // ENEMIES HAVE WON!
-            Debug(Time.timeSinceLevelLoad +": " + totalAllyHealth);
+            Debug.Log(Time.timeSinceLevelLoad +": " + totalAllyHealth);
 			messageCanvas.SetActive(true);
-			messageText.text = "You Lost!\n\nTry again next time!";
+			messagePanel.GetComponentInChildren<Text>().text = "You Lost!\n\nTry again next time!";
 
 			//TODO: Tell server you lost
         }
