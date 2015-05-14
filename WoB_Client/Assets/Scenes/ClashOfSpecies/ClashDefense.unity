@@ -710,7 +710,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1024, y: 768}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -748,8 +748,8 @@ MonoBehaviour:
   unitList: {fileID: 1204116611}
   defenseItemPrefab: {fileID: 148256, guid: 7c72c06390693934daced8bbd0af0e77, type: 2}
   defenseUnitPrefab: {fileID: 110862, guid: b2aa4e5eaf63c074a988cbaa4e59279a, type: 2}
-  errorCanvas: {fileID: 0}
-  errorMessage: {fileID: 0}
+  errorCanvas: {fileID: 2093340915}
+  errorMessage: {fileID: 732955736}
 --- !u!114 &309677810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 450
+    m_Top: 630
     m_Bottom: 0
   m_ChildAlignment: 6
   m_Spacing: 0
@@ -781,7 +781,7 @@ GameObject:
   - 222: {fileID: 457925570}
   - 114: {fileID: 457925569}
   m_Layer: 5
-  m_Name: ErrorPanel
+  m_Name: BlockingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1210,7 +1210,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1658749402}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 309677809}
+        m_MethodName: ConfirmError
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1658749402
@@ -1406,7 +1418,7 @@ GameObject:
   - 114: {fileID: 2093340918}
   - 114: {fileID: 2093340917}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ErrorCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

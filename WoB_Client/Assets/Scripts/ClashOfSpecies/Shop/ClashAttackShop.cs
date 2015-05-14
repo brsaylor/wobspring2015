@@ -15,9 +15,11 @@ public class ClashAttackShop : MonoBehaviour {
 
 	public HorizontalLayoutGroup selectedGroup;
 
-    public Image previewImage;
-    public Text descriptionText;
-    public Text statsText;
+	public Image previewImage;
+	public Text descriptionText;
+	public Text statsText;
+	public Button infoButton;
+	bool textSwitch;	//true for description text; false for stats tex
 
 	public GameObject shopElementPrefab;
 	public GameObject selectedUnitPrefab;
@@ -62,10 +64,30 @@ public class ClashAttackShop : MonoBehaviour {
             });
 
             var description = species.description;
+			var stats = species.Stats ();
             item.previewButton.onClick.AddListener(() => {
                 previewImage.sprite = item.displayImage.sprite;
                 descriptionText.text = description;
-                statsText.text = species.stats();
+				statsText.text = stats;
+
+				infoButton.GetComponentInChildren<Text>().text = "Get Stat Info";
+				descriptionText.gameObject.SetActive(true);
+				statsText.gameObject.SetActive(false);
+				textSwitch = true;
+
+				infoButton.onClick.RemoveAllListeners();
+				infoButton.onClick.AddListener(() => {
+					textSwitch = !textSwitch;
+					if(textSwitch) {
+						infoButton.GetComponentInChildren<Text>().text = "Get Stat Info";
+						descriptionText.gameObject.SetActive(true);
+						statsText.gameObject.SetActive(false);
+					} else {
+						infoButton.GetComponentInChildren<Text>().text = "Get Description";
+						descriptionText.gameObject.SetActive(false);
+						statsText.gameObject.SetActive(true);
+					}
+				});
             }); 
 
             switch (species.type) {

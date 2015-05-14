@@ -20,7 +20,7 @@ public class ClashBattleController : MonoBehaviour {
     public List<ClashBattleUnit> alliesList = new List<ClashBattleUnit>();
 
 	public GameObject messageCanvas;
-	public GameObject messagePanel;
+	public Text messageText;
 	public GameObject menuPanel;
 
 	void Awake() {
@@ -64,8 +64,10 @@ public class ClashBattleController : MonoBehaviour {
             item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = current;
+					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
+					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
             });
 
@@ -74,9 +76,30 @@ public class ClashBattleController : MonoBehaviour {
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
         }
+
+		// Send initiate battle request to the server
+		List<int> speciesIds = new List<int>();
+		foreach (var species in manager.attackConfig.layout) {
+			speciesIds.Add(species.id);
+		}
+		var request = ClashInitiateBattleProtocol.Prepare(manager.currentTarget.owner.GetID(), speciesIds);
+		NetworkManager.Send(request, (res) => {
+			var response = res as ResponseClashInitiateBattle;
+			Debug.Log("Received ResponseClashInitiateBattle from server. valid = " + response.valid);
+		});
 	}
 
     void Update() {
+
+		// Cheat! FIXME: remove
+		if (Input.GetKeyDown(KeyCode.Equals)) {
+			Debug.Log ("plus");
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.WIN);
+		} else if (Input.GetKeyDown(KeyCode.Minus)) {
+			Debug.Log ("minus");
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
+		}
+
         if (selected == null) return;
 
         if (Input.GetButton("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
@@ -88,12 +111,6 @@ public class ClashBattleController : MonoBehaviour {
                     //Added by Omar
                     var allyResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name);
                     var allyObject = Instantiate(allyResource, placement.position, Quaternion.identity) as GameObject;
-                    /*
-                    var allyObject = Instantiate(Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name)) as GameObject;
-                    allyObject.transform.position = placement.position;
-                    allyObject.transform.rotation = Quaternion.identity;
-                    */
-
                     allyObject.tag = "Ally";
 
                     var unit = allyObject.AddComponent<ClashBattleUnit>();
@@ -116,7 +133,7 @@ public class ClashBattleController : MonoBehaviour {
         foreach (var enemy in enemiesList) {
 
             totalEnemyHealth += enemy.currentHealth;
-			Debug.Log(totalEnemyHealth);
+			//Debug.Log(totalEnemyHealth);
 			if (enemy.currentHealth > 0 && !enemy.target && alliesList.Count > 0) {
 				Debug.Log ("Finding Enemy Target", gameObject);
                 var target = alliesList.Where(u => {
@@ -144,21 +161,16 @@ public class ClashBattleController : MonoBehaviour {
 			}
         }
 
-        if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count > 0) {
+        if (Time.timeSinceLevelLoad > 5.0f && totalEnemyHealth == 0 && enemiesList.Count() > 0) {
             // ALLIES HAVE WON!
-            Debug.Log(Time.timeSinceLevelLoad +": " + totalEnemyHealth);
-			messageCanvas.SetActive(true);
-			messagePanel.SetActive(true);
-			messagePanel.GetComponentInChildren<Text>().text = "You Won!\n\nKeep on fighting!";
-
-			//TODO: Tell server you won
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.WIN);
         }
 
         int totalAllyHealth = 0;
         foreach (var ally in alliesList) {
             totalAllyHealth += ally.currentHealth;
-            if (ally.currentHealth > 0 && !ally.target && enemiesList.Count > 0) {
-				Debug.Log ("Finding Ally Target", gameObject);
+            if (ally.currentHealth > 0 && !ally.target && enemiesList.Count() > 0) {
+				//Debug.Log ("Finding Ally Target", gameObject);
                 var target = enemiesList.Where(u => {
 					if(u.currentHealth<=0) 
 						return false;
@@ -185,13 +197,9 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count == 5) {
+        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 5) {
             // ENEMIES HAVE WON!
-            Debug.Log(Time.timeSinceLevelLoad +": " + totalAllyHealth);
-			messageCanvas.SetActive(true);
-			messagePanel.GetComponentInChildren<Text>().text = "You Lost!\n\nTry again next time!";
-
-			//TODO: Tell server you lost
+			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
         }
     }
 
@@ -210,4 +218,23 @@ public class ClashBattleController : MonoBehaviour {
   		messageCanvas.SetActive(false);
   		Time.timeScale = 1.0f;
     }
+
+	public void ReportBattleOutcome(ClashEndBattleProtocol.BattleResult outcome) {
+		if (outcome == ClashEndBattleProtocol.BattleResult.WIN) {
+			messageCanvas.SetActive(true);
+			messageText.text = "You Won!\n\nKeep on fighting!";
+		} else {
+			messageCanvas.SetActive(true);
+			messageText.text = "You Lost!\n\nTry again next time!";
+		}
+		var request = ClashEndBattleProtocol.Prepare(outcome);
+		NetworkManager.Send(request, (res) => {
+			var response = res as ResponseClashEndBattle;
+			int creditsEarned = response.credits - manager.currentPlayer.credits;
+			manager.currentPlayer.credits = response.credits;
+			Debug.Log("Received ResponseClashEndBattle from server. credits earned: " + creditsEarned);
+		});
+	}
+
+
 }
