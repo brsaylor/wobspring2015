@@ -4,15 +4,16 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class ClashBattleUnit : MonoBehaviour {
-
-    private NavMeshAgent agent;
+	
     private Animator anim;
 
+	public NavMeshAgent agent;
     public ClashBattleUnit target;
     public ClashSpecies species;
     public ClashStatusText status;
     public int currentHealth;
-	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
+	public int damage;
+	public float attackSpeed;     // The time in seconds between each attack.
 	float timer;                                // Timer for counting up to the next attack.
 
     void Awake() {
@@ -23,6 +24,8 @@ public class ClashBattleUnit : MonoBehaviour {
 	void Start() {
         // Set current health depending on the species data.
         currentHealth = species.hp;
+		damage = species.attack;
+		attackSpeed = species.attackSpeed;
         if (agent != null) {
             agent.speed = species.moveSpeed / 20.0f;
         }
@@ -32,7 +35,7 @@ public class ClashBattleUnit : MonoBehaviour {
 		timer += Time.deltaTime;
         if (!target) {
 			Idle();
-		} else if ((target.currentHealth > 0) && (timer >= timeBetweenAttacks) && (currentHealth >= 0.0f)) {
+		} else if ((target.currentHealth > 0) && (timer >= attackSpeed) && (currentHealth >= 0.0f)) {
 			Attack();
 		} else if (target.currentHealth <= 0) {
 			target = null;		
@@ -63,7 +66,7 @@ public class ClashBattleUnit : MonoBehaviour {
                 	anim.SetTrigger("Attacking");
                 }
                 // TODO: Deliver damage.
-                target.TakeDamage(species.attack, this);
+                target.TakeDamage(damage, this);
             }else{
 				if (anim != null) {
 					anim.SetTrigger("Walking");
@@ -71,6 +74,7 @@ public class ClashBattleUnit : MonoBehaviour {
 			}
         }
     }
+
 	void Die(){
 		//Disable all functions here
 		if (anim != null) {

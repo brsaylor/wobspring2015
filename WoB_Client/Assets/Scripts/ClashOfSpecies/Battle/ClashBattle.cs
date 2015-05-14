@@ -21,7 +21,6 @@ public class ClashBattle : MonoBehaviour {
 
 	public GameObject messageCanvas;
 	public Text messageText;
-	public GameObject menuPanel;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -49,6 +48,11 @@ public class ClashBattle : MonoBehaviour {
                 var unit = speciesObject.AddComponent<ClashBattleUnit>();
                 enemiesList.Add(unit);
                 unit.species = species;
+
+				GetBuffs(unit, speciesObject.tag);
+				if(species.type == UnitType.PLANT) {
+					GiveBuffs(unit, speciesObject.tag);
+				}
             } else {
                 Debug.LogWarning("Failed to place unit: " + species.name);
             }
@@ -117,6 +121,12 @@ public class ClashBattle : MonoBehaviour {
                     alliesList.Add(unit);
                     unit.species = selected;
 
+					GetBuffs(unit, allyObject.tag);
+					var species = manager.availableSpecies.Single (x => x.name == selected.name);
+					if(species.type == UnitType.PLANT) {
+						GiveBuffs(unit, allyObject.tag);
+					}
+					 
 					var toggle = toggleGroup.ActiveToggles ().FirstOrDefault();
 					toggle.enabled = false;
 					toggle.interactable = false;
@@ -204,21 +214,74 @@ public class ClashBattle : MonoBehaviour {
         }
     }
 
+	public void GetBuffs(ClashBattleUnit attributes, string tag) {
+		var team = GameObject.FindGameObjectsWithTag (tag);
+
+		foreach (var teammate in team) {
+			var teammateAttribute = teammate.GetComponent<ClashBattleUnit>();
+
+			//found a plant
+			//teammate != attributes.gameObject so it doesn't get a buff from itself
+			if(teammateAttribute.species.type == UnitType.PLANT && teammate != attributes.gameObject) {
+				//find the plant_id by using the name
+				var species = manager.availableSpecies.Single (x => x.name == teammate.name);
+				var buffType = species.id % 4;
+
+				switch (buffType) {
+				case 0:	//hp buff
+					attributes.currentHealth += 100;
+					break;
+				case 1:	//damage buff
+					attributes.damage += 20;
+					break;
+				case 2:	//attack speed buff
+					attributes.attackSpeed += 3.0f;
+					break;
+				case 3:	//movement speed buff
+					attributes.agent.speed += 10.0f;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
+
+	public void GiveBuffs(ClashBattleUnit attributes, string tag) {
+		var team = GameObject.FindGameObjectsWithTag (tag);
+		
+		foreach (var teammate in team) {
+			//teammate != attributes.gameObject so it doesn't get a buff from itself
+			if(teammate != attributes.gameObject) {
+				var teammateAttribute = teammate.GetComponent<ClashBattleUnit>();
+
+				//find the plant_id by using the name of the 
+				var species = manager.availableSpecies.Single (x => x.name == attributes.gameObject.name);
+				var buffType = species.id % 4;
+				
+				switch (buffType) {
+				case 0:	//hp buff
+					teammateAttribute.currentHealth += 100;
+					break;
+				case 1:	//damage buff
+					teammateAttribute.damage += 20;
+					break;
+				case 2:	//attack speed buff
+					teammateAttribute.attackSpeed += 3.0f;
+					break;
+				case 3:	//movement speed buff
+					teammateAttribute.agent.speed += 10.0f;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
+
 	public void ConfirmResult() {
 		Game.LoadScene ("ClashMain");
 	}
-	
-	public void PauseGame() {
-		Time.timeScale = 0.0f;
-		messageCanvas.SetActive(true);
-		menuPanel.SetActive(true);
- 	}
- 	
- 	public void ResumeGame() {
-  		menuPanel.SetActive(false);
-  		messageCanvas.SetActive(false);
-  		Time.timeScale = 1.0f;
-    }
 
 	public void ReportBattleOutcome(ClashEndBattleProtocol.BattleResult outcome) {
 		if (outcome == ClashEndBattleProtocol.BattleResult.WIN) {
