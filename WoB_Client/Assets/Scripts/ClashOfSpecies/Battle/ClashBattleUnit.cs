@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class ClashBattleUnit : MonoBehaviour {
 
     private NavMeshAgent agent;
-    private ClashBattleController controller;
     private Animator anim;
 
     public ClashBattleUnit target;

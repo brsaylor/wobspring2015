@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnitType = ClashSpecies.SpeciesType;
 
-public class ClashBattleController : MonoBehaviour {
+public class ClashBattle : MonoBehaviour {
     private ClashGameManager manager;
 
     private ClashSpecies selected;
@@ -197,7 +197,8 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 5) {
+		//send result to server; lost if all ally units died or time passes 60 seconds
+        if ((Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 5) || Time.timeSinceLevelLoad > 60.0f) {
             // ENEMIES HAVE WON!
 			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
         }
