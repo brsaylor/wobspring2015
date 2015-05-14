@@ -34,7 +34,7 @@ public class ClashSplash : MonoBehaviour {
                 manager.defenseConfig = new ClashDefenseConfig();
                 foreach (var pair in response.config) {
                     var species = manager.availableSpecies.Single((el) => el.id == pair.Key);
-                    manager.defenseConfig.layout.Add(species, pair.Value);
+                    manager.defenseConfig.layout.Add(species, pair.Value[0]);
                 }
                 manager.defenseConfig.terrain = response.terrain;
                 Game.LoadScene("ClashMain");

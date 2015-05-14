@@ -54,8 +54,10 @@ public class ResponseClashPlayerView extends GameResponse{
      *  # of species in config (int)
      *  for each species in config
      *      species id (int)
-     *      x-coordinate (float)
-     *      y-coordinate (float)
+     *      instance count(int)
+     *      for each instance
+     *          x-coordinate (float)
+     *          y-coordinate (float)
      * @return the byte array
      */
     @Override
@@ -70,8 +72,12 @@ public class ResponseClashPlayerView extends GameResponse{
             packet.addInt32(defenseConfig.layout.size());
             for (Map.Entry<Integer, ArrayList<Vector2<Float>>> ent : defenseConfig.layout.entrySet()) {
                 packet.addInt32(ent.getKey());
-                packet.addFloat(ent.getValue().get(0).getX());
-                packet.addFloat(ent.getValue().get(0).getY());
+                ArrayList<Vector2<Float>> positions = ent.getValue();
+                packet.addInt32(positions.size());
+                for(Vector2<Float> v : positions) {
+                    packet.addFloat(v.getX());
+                    packet.addFloat(v.getY());
+                }
             }
         }
         return packet.getBytes();

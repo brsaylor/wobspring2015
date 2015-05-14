@@ -56,6 +56,7 @@ public class ResponseClashSpeciesList extends GameResponse {
     public byte[] getBytes() {
         GamePacket packet = new GamePacket(response_id);
         packet.addInt32(speciesList.size());
+        //System.out.println("send " + speciesList.size() + " species");
         for (Species sp : speciesList) {
             packet.addInt32(sp.speciesId);
             packet.addString(sp.name);

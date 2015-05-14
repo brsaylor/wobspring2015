@@ -15,21 +15,27 @@ public class ClashDefenseSetupProtocol {
 	/// 	# of species in config (int)
 	/// 	for each species in config
 	/// 		species id (int)
-	/// 		x-coordinate (float)
-	/// 		y-coordinate (float)
+	/// 		instance count (int)
+	/// 		for each instance
+	/// 			x-coordinate (float)
+	/// 			y-coordinate (float)
 	/// </summary>
 	/// <param name="terrainName">the terain name</param>
 	/// <param name="config">The species in the config, with species id's as keys
 	/// and Vector2's of x- & y-coordinates as values.</param>
 	
-	public static NetworkRequest Prepare(string terrainName, Dictionary<int, Vector2> config) {
+	public static NetworkRequest Prepare(string terrainName, Dictionary<int, List<Vector2>> config) {
 		NetworkRequest request = new NetworkRequest(NetworkCode.CLASH_DEFENSE_SETUP);
 		request.AddString(terrainName);
 		request.AddInt32(config.Count);
 		foreach(var pair in config){
 			request.AddInt32(pair.Key);
-			request.AddFloat(pair.Value.x);
-			request.AddFloat(pair.Value.y);
+			List<Vector2> positions = pair.Value;
+			request.AddInt32(positions.Count);
+			foreach(Vector2 v in positions){
+				request.AddFloat(v.x);
+				request.AddFloat(v.y);
+			}
 		}
 		return request;
 	}

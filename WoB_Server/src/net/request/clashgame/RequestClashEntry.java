@@ -54,7 +54,7 @@ public class RequestClashEntry extends GameRequest{
             //add existing defense setup
             response.setDefenseTerrain(defense.terrain);
             for (Map.Entry<Integer, ArrayList<Vector2<Float>>> en : defense.layout.entrySet()) {
-                response.addSpecies(en.getKey(), en.getValue().get(0));
+                response.addSpecies(en.getKey(), en.getValue());
             }
         }
         client.add(response);        
