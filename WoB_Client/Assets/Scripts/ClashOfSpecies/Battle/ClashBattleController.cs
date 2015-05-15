@@ -114,7 +114,7 @@ public class ClashBattleController : MonoBehaviour {
 
         if (selected == null) return;
 
-        if (Input.GetButton("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
+        if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100000, LayerMask.GetMask("Terrain"))) {
