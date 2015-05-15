@@ -26,10 +26,10 @@ public class ClashBattleUnit : MonoBehaviour {
 	void Start() {
         // Set current health depending on the species data.
         currentHealth += species.hp;
-		timeBetweenAttacks *= species.attackSpeed;
+		timeBetweenAttacks = species.attackSpeed;
 		damage += species.attack;
         if (agent != null) {
-            agent.speed = species.moveSpeed / 20.0f;
+            agent.speed += species.moveSpeed / 20.0f;
         }
 	}
 	
@@ -111,10 +111,11 @@ public class ClashBattleUnit : MonoBehaviour {
 					teammateAttribute.currentHealth -= 100;
 					break;
 				case "Baobab":	//damage buff
-					teammateAttribute.damage -= 20;
+					teammateAttribute.damage -= 8;
 					break;
 				case "Trees and Shrubs":	//attack speed buff
-					teammateAttribute.timeBetweenAttacks *= 2.0f;
+					if(teammateAttribute.agent != null)
+						teammateAttribute.agent.speed -= 5.0f;
 					break;
 				default:
 					break;

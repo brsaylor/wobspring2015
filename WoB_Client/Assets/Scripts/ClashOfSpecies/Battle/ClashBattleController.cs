@@ -239,10 +239,11 @@ public class ClashBattleController : MonoBehaviour {
 					attributes.currentHealth += 100;
 					break;
 				case "Baobab":	//damage buff
-					attributes.damage += 20;
+					attributes.damage += 8;
 					break;
-				case "Trees and Shrubs":	//attack speed buff
-					attributes.timeBetweenAttacks *= 0.5f;
+				case "Trees and Shrubs":	//movement speed buff
+					if(attributes.agent != null)
+						attributes.agent.speed += 5.0f;
 					break;
 				default:
 					break;
@@ -264,10 +265,11 @@ public class ClashBattleController : MonoBehaviour {
 					teammateAttribute.currentHealth += 100;
 					break;
 				case "Baobab":	//damage buff
-					teammateAttribute.damage += 20;
+					teammateAttribute.damage += 8;
 					break;
-				case "Trees and Shrubs":	//attack speed buff
-					teammateAttribute.timeBetweenAttacks *= 0.5f;
+				case "Trees and Shrubs":	//movement speed buff
+					if(teammateAttribute.agent != null)
+						teammateAttribute.agent.speed += 5.0f;
 					break;
 				default:
 					break;
