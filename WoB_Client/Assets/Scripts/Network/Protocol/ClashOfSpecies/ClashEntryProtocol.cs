@@ -25,17 +25,21 @@ public class ClashEntryProtocol {
 
 		response.isNew = DataReader.ReadBool(dataStream);
 		if (!response.isNew) {
-            response.config = new Dictionary<int, Vector2>();
+            response.config = new Dictionary<int, List<Vector2>>();
 
 			//read in data on own defense setup
 			response.terrain = DataReader.ReadString(dataStream);
 			int count = DataReader.ReadInt(dataStream);
 			for (int i = 0; i < count; i++) {
 				int id = DataReader.ReadInt(dataStream);
-				float x = DataReader.ReadFloat(dataStream);
-				float y = DataReader.ReadFloat(dataStream);
-
-                response.config.Add(id, new Vector2(x, y));
+				int instanceCount = DataReader.ReadInt(dataStream);
+				List<Vector2> positions = new List<Vector2>();
+				for(int j = 0; j < instanceCount; j++){
+					float x = DataReader.ReadFloat(dataStream);
+					float y = DataReader.ReadFloat(dataStream);
+					positions.Add(new Vector2(x, y));
+				}
+                response.config.Add(id, positions);
 			}
 		}
 
@@ -64,7 +68,7 @@ public class ResponseClashEntry : NetworkResponse {
 	/// Gets and sets the list of species
 	/// </summary>
 	/// <value>The list of species in the defense setup, if one exists</value>
-	public Dictionary<int, Vector2> config = null;
+	public Dictionary<int, List<Vector2>> config = null;
 
 	public ResponseClashEntry() {
 		protocol_id = NetworkCode.CLASH_ENTRY;

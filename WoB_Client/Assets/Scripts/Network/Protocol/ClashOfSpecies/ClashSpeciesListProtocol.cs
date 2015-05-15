@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using SpeciesType = ClashSpecies.SpeciesType;
+using UnityEngine;
 
 /// <summary>
 /// Get the list of species available for the Clash of Specis game
@@ -22,6 +23,7 @@ public class ClashSpeciesListProtocol{
 		ResponseClashSpeciesList response = new ResponseClashSpeciesList();
 
 		int count = DataReader.ReadInt(dataStream);
+		Debug.Log("received " + count + " species");
 		for(int i = 0; i < count; i++) {
             ClashSpecies s = new ClashSpecies();
             s.id = DataReader.ReadInt(dataStream);

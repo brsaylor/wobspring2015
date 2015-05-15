@@ -41,10 +41,14 @@ public class ClashPlayerViewProtocol {
 		int count = DataReader.ReadInt(dataStream);
 		for(int i = 0; i < count; i++){
 			int species = DataReader.ReadInt(dataStream);
-			float x = DataReader.ReadFloat(dataStream);
-			float z = DataReader.ReadFloat(dataStream);
-
-            response.layout.Add(species, new Vector2(x, z));
+			int instanceCount = DataReader.ReadInt(dataStream);
+			List<Vector2> positions = new List<Vector2>();
+			for(int j = 0; j < instanceCount; j++){
+				float x = DataReader.ReadFloat(dataStream);
+				float z = DataReader.ReadFloat(dataStream);
+				positions.Add(new Vector2(x,z));
+			}
+            response.layout.Add(species, positions);
 		}
 
 		return response;
@@ -73,7 +77,7 @@ public class ResponseClashPlayerView : NetworkResponse {
 	/// <summary>
 	/// Species in defense config
 	/// </summary>
-	public Dictionary<int, Vector2> layout = new Dictionary<int,Vector2>();
+	public Dictionary<int, List<Vector2>> layout = new Dictionary<int,List<Vector2>>();
 
 	public ResponseClashPlayerView() {
 		protocol_id = NetworkCode.CLASH_PLAYER_VIEW;

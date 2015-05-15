@@ -50,11 +50,12 @@ public class ClashMainMenu : MonoBehaviour {
                             manager.currentTarget.terrain = responseView.terrain;
                             manager.currentTarget.layout = responseView.layout.Select(x => {
                                 var species = manager.availableSpecies.Single(s => s.id == x.Key);
+								var pos = x.Value[0];
                                 return new { 
                                     species,
-                                    x.Value
+                                    pos
                                 };
-                            }).ToDictionary(p => p.species, p => p.Value);
+                            }).ToDictionary(p => p.species, p => p.pos);
                         });
                     } else {
                         selectedPlayer = null;

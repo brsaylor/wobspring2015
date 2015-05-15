@@ -2,6 +2,7 @@ package model.clashgame;
 
 import util.Vector2;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -17,8 +18,8 @@ public class DefenseConfig {
     public int playerId;
     //integer ID of player's chosen terrain
     public String terrain;
-    //stores the ID of each species and it's position on the terrain
-    public HashMap<Integer, Vector2<Float>> layout = new HashMap<Integer, Vector2<Float>>();
+    //stores the ID of each species and the positions of each organism on the terrain
+    public HashMap<Integer, ArrayList<Vector2<Float>>> layout = new  HashMap<>();
     //date that the player created or modified their defense
     public Date createdAt = new Date();
 }

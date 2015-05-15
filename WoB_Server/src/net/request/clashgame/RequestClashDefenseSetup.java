@@ -7,16 +7,18 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
-import core.GameServer;
 import db.clashgame.DefenseConfigDAO;
 import model.clashgame.DefenseConfig;
 import net.request.GameRequest;
 import net.response.clashgame.ResponseClashDefenseSetup;
 import util.DataReader;
 import util.Vector2;
+import java.util.List;
 
 /**
  * Network request called when user wants to create or update
@@ -33,8 +35,8 @@ public class RequestClashDefenseSetup extends GameRequest {
     /**
      * Stores the species and positions for the new defense setup
      */
-    private HashMap<Integer, Vector2<Float>> configMap
-             = new HashMap<Integer, Vector2<Float>>();
+    private HashMap<Integer, ArrayList<Vector2<Float>>> configMap
+             = new HashMap<Integer, ArrayList<Vector2<Float>>>();
 
     /**
      * Fills the instance variables with data received over the
@@ -49,10 +51,15 @@ public class RequestClashDefenseSetup extends GameRequest {
         int defenseSpeciesCount = DataReader.readInt(dataInput);
         for(int i = 0; i < defenseSpeciesCount; i++){
             int speciesId = DataReader.readInt(dataInput);
-            float x = DataReader.readFloat(dataInput);
-            float y = DataReader.readFloat(dataInput);
-            
-            configMap.put(speciesId, new Vector2(x, y));
+            int instanceCount = DataReader.readInt(dataInput);
+            ArrayList<Vector2<Float>> positions = new ArrayList<Vector2<Float>>();
+            for(int j = 0; j < instanceCount; j++){
+                float x = DataReader.readFloat(dataInput);
+                float y = DataReader.readFloat(dataInput);
+                positions.add(new Vector2(x, y));
+            }
+
+            configMap.put(speciesId, positions);
         }
     }
 
@@ -75,7 +82,9 @@ public class RequestClashDefenseSetup extends GameRequest {
             config.createdAt = new Date();
             config.playerId = client.getPlayer().getID();
             config.terrain = setupTerrain;
-            config.layout = configMap;
+            for (Map.Entry<Integer, ArrayList<Vector2<Float>>> entry : configMap.entrySet()) {
+                config.layout.put(entry.getKey(), entry.getValue());
+            }
             DefenseConfigDAO.create(config);
         }
 

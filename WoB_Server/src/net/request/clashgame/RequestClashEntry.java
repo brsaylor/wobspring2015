@@ -7,6 +7,7 @@ package net.request.clashgame;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -52,7 +53,7 @@ public class RequestClashEntry extends GameRequest{
         if(!isNewClashPlayer){
             //add existing defense setup
             response.setDefenseTerrain(defense.terrain);
-            for (Map.Entry<Integer, Vector2<Float>> en : defense.layout.entrySet()) {
+            for (Map.Entry<Integer, ArrayList<Vector2<Float>>> en : defense.layout.entrySet()) {
                 response.addSpecies(en.getKey(), en.getValue());
             }
         }

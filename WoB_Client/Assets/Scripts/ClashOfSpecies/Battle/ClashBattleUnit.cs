@@ -25,7 +25,7 @@ public class ClashBattleUnit : MonoBehaviour {
         // Set current health depending on the species data.
         currentHealth = species.hp;
         if (agent != null) {
-            agent.speed = species.moveSpeed / 100.0f;
+            agent.speed = species.moveSpeed / 20.0f;
         }
 	}
 	

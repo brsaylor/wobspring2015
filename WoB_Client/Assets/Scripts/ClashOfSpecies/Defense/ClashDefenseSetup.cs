@@ -97,8 +97,17 @@ public class ClashDefenseSetup : MonoBehaviour {
         }
         
         var pending = manager.pendingDefenseConfig;
+		Dictionary<int, List<Vector2>> allPositions = new Dictionary<int, List<Vector2>>();
+		foreach(KeyValuePair<ClashSpecies, Vector2> entry in pending.layout){
+			List<Vector2> l = new List<Vector2>();
+			l.Add(entry.Value);
+			allPositions.Add(entry.Key.id, l);
+		}
+		var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, 
+		                          allPositions);
+		/*
         var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, pending.layout.Select(p => new { p.Key.id, p.Value })
-            .ToDictionary(p => p.id, p => p.Value));
+            .ToDictionary(p => p.id, p => p.Value));//*/
 
         NetworkManager.Send(request, (res) => {
             var response = res as ResponseClashDefenseSetup;

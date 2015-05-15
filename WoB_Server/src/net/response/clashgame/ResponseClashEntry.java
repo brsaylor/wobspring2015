@@ -12,6 +12,7 @@ import metadata.NetworkCode;
 import net.response.GameResponse;
 import util.GamePacket;
 import util.Vector2;
+import java.util.List;
 
 
 /**
@@ -30,7 +31,7 @@ public class ResponseClashEntry extends GameResponse{
      * Stores the species and positions of the defense,
      * if it exists
      */
-    private HashMap<Integer, Vector2<Float>> configMap;
+    private HashMap<Integer, List<Vector2<Float>>> configMap;
 
     /**
      * Stores the terrain of hte defense, if it exists
@@ -56,17 +57,17 @@ public class ResponseClashEntry extends GameResponse{
      * Appends an element of the existing defense config: a species id
      * and its position on the terrain
      * @param speciesId the species id of the defense element
-     * @param position the vector containing x and y-coordinates of
+     * @param positions the list of vectors containing x and y-coordinates of
      *                 the defense element
      */
-    public void addSpecies(int speciesId, Vector2<Float> position){
-        this.configMap.put(speciesId, position);
+    public void addSpecies(int speciesId, List<Vector2<Float>> positions){
+        this.configMap.put(speciesId, positions);
     }
     
     //constructor as well
     public ResponseClashEntry(){
         this.response_id = NetworkCode.CLASH_ENTRY;
-        this.configMap = new HashMap<Integer, Vector2<Float>>();
+        this.configMap = new HashMap<Integer, List<Vector2<Float>>>();
     }
 
     /**
@@ -81,10 +82,15 @@ public class ResponseClashEntry extends GameResponse{
         if(!isNewClashPlayer){
             packet.addString(defenseTerrain);
             packet.addInt32(configMap.size());
-            for(Map.Entry<Integer, Vector2<Float>> d : configMap.entrySet()){
+            for(Map.Entry<Integer, List<Vector2<Float>>> d : configMap.entrySet()){
                 packet.addInt32(d.getKey());
-                packet.addFloat(d.getValue().getX());
-                packet.addFloat(d.getValue().getY());
+                List<Vector2<Float>> l = d.getValue();
+                packet.addInt32(l.size());
+                for(Vector2<Float> v : l){
+                    packet.addFloat(v.getX());
+                    packet.addFloat(v.getY());
+                }
+
             }
         }
         return packet.getBytes();
