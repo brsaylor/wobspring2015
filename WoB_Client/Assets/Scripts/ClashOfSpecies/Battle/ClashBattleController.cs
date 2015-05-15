@@ -15,6 +15,7 @@ public class ClashBattleController : MonoBehaviour {
 
     public HorizontalLayoutGroup unitList;
     public GameObject attackItemPrefab;
+	public GameObject healthBarPrefab;
 
     public List<ClashBattleUnit> enemiesList = new List<ClashBattleUnit>();
     public List<ClashBattleUnit> alliesList = new List<ClashBattleUnit>();
@@ -49,6 +50,12 @@ public class ClashBattleController : MonoBehaviour {
                 var unit = speciesObject.AddComponent<ClashBattleUnit>();
                 enemiesList.Add(unit);
                 unit.species = species;
+
+				// Create health bar
+				// TODO: make healthBar an attribute of ClashBattleUnit
+				GameObject healthBar = Instantiate(healthBarPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+				healthBar.transform.SetParent(speciesObject.transform);
+
             } else {
                 Debug.LogWarning("Failed to place unit: " + species.name);
             }

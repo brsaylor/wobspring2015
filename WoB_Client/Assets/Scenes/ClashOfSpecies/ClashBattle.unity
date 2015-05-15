@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragging: 0
-  lastPosition: {x: 0, y: 0, z: 0}
+  lastMouse: {x: 0, y: 0, z: 0}
   yawSpeed: 5
   pitchSpeed: 5
   moveSpeed: 5
@@ -585,10 +585,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitList: {fileID: 1204116611}
   attackItemPrefab: {fileID: 148256, guid: 7c72c06390693934daced8bbd0af0e77, type: 2}
+  healthBarPrefab: {fileID: 113664, guid: 9d7f74e9f2aa47740a24d340a0d5e29c, type: 2}
   enemiesList: []
   alliesList: []
   messageCanvas: {fileID: 1469604209}
-  messagePanel: {fileID: 0}
+  messageText: {fileID: 0}
   menuPanel: {fileID: 0}
 --- !u!114 &309677810
 MonoBehaviour:
