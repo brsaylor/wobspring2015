@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 224: {fileID: 22448256}
   - 114: {fileID: 11448252}
-  - 114: {fileID: 11448254}
   - 222: {fileID: 22248256}
   - 114: {fileID: 11448256}
+  - 114: {fileID: 11448254}
   m_Layer: 5
   m_Name: DefenseItem
   m_TagString: Untagged

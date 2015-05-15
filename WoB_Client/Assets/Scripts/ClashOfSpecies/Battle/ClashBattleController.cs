@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using UnitType = ClashSpecies.SpeciesType;
 
 public class ClashBattleController : MonoBehaviour {
-    private ClashGameManager manager;
 
+	private Dictionary<int, int> remaining = new Dictionary<int, int>();
+    private ClashGameManager manager;
     private ClashSpecies selected;
     private Terrain terrain;
     private ToggleGroup toggleGroup;
@@ -63,25 +64,29 @@ public class ClashBattleController : MonoBehaviour {
 
         // Populate user's selected unit panel.
         foreach (var species in manager.attackConfig.layout) {
+			var currentSpecies = species;
             var item = Instantiate(attackItemPrefab) as GameObject;
-            var current = species;
+			remaining.Add(currentSpecies.id, 5);
+            
+			var itemReference = item.GetComponent<ClashUnitListItem>();
 
             var texture = Resources.Load<Texture2D>("Images/" + species.name);
-            item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
+			itemReference.toggle.GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+			itemReference.toggle.onValueChanged.AddListener((val) => {
                 if (val) {
-                    selected = current;
-					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+					selected = currentSpecies;
+					itemReference.toggle.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
-					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+					itemReference.toggle.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
             });
 
-			item.GetComponentInChildren<Toggle>().group = toggleGroup;
+			itemReference.toggle.group = toggleGroup;
             item.transform.SetParent(unitList.transform);
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
+			itemReference.amountLabel.text = remaining[currentSpecies.id].ToString();
         }
 
 		// Send initiate battle request to the server
@@ -129,11 +134,15 @@ public class ClashBattleController : MonoBehaviour {
 						GiveBuffs(unit, allyObject.tag);
 					}
 
+					remaining[selected.id]--;
 					var toggle = toggleGroup.ActiveToggles ().FirstOrDefault();
-					toggle.enabled = false;
-					toggle.interactable = false;
-
-                    selected = null;
+					toggle.transform.parent.GetComponent<ClashUnitListItem>().amountLabel.text = remaining[selected.id].ToString();
+					
+					if (remaining[selected.id] == 0) {
+						toggle.enabled = false;
+						toggle.interactable = false;
+						selected = null;
+					} 
                 }
             }
         }

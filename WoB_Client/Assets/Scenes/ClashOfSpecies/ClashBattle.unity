@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitList: {fileID: 1204116611}
-  attackItemPrefab: {fileID: 148256, guid: 7c72c06390693934daced8bbd0af0e77, type: 2}
+  attackItemPrefab: {fileID: 188666, guid: 649153c8d37c288428f7651a92d572ab, type: 2}
   enemiesList: []
   alliesList: []
   messageCanvas: {fileID: 1469604209}
