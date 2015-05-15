@@ -12,8 +12,8 @@ public class ClashBattleUnit : MonoBehaviour {
     public ClashBattleUnit target;
     public ClashSpecies species;
     public ClashStatusText status;
-    public int currentHealth;
-	public int damage;
+    public int currentHealth = 0;
+	public int damage = 0;
 	public float timeBetweenAttacks = 1.0f;     // The time in seconds between each attack.
 	float timer;                                // Timer for counting up to the next attack.
 	float timeSinceSpawn = 0.0f;
@@ -29,7 +29,7 @@ public class ClashBattleUnit : MonoBehaviour {
 		timeBetweenAttacks *= species.attackSpeed;
 		damage += species.attack;
         if (agent != null) {
-            agent.speed += species.moveSpeed / 20.0f;
+            agent.speed = species.moveSpeed / 20.0f;
         }
 	}
 	

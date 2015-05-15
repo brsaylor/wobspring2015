@@ -114,7 +114,7 @@ public class ClashBattleController : MonoBehaviour {
 
         if (selected == null) return;
 
-        if (Input.GetButton("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
+		if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100000, LayerMask.GetMask("Terrain"))) {
@@ -233,21 +233,15 @@ public class ClashBattleController : MonoBehaviour {
 			//found a plant
 			//teammate != attributes.gameObject so it doesn't get a buff from itself
 			if(teammateAttribute.species.type == UnitType.PLANT && teammate != attributes.gameObject) {
-				//find the plant_id by using the name
-				var buffType = teammateAttribute.species.id % 4;
-				
-				switch (buffType) {
-				case 0:	//hp buff
+				switch (teammateAttribute.species.name) {
+				case "Big Tree":	//hp buff
 					attributes.currentHealth += 100;
 					break;
-				case 1:	//damage buff
+				case "Baobab":	//damage buff
 					attributes.damage += 20;
 					break;
-				case 2:	//attack speed buff 2 times the speed
+				case "Trees and Shrubs":	//attack speed buff
 					attributes.timeBetweenAttacks *= 0.5f;
-					break;
-				case 3:	//movement speed buff
-					attributes.agent.speed += 10.0f;
 					break;
 				default:
 					break;
@@ -263,21 +257,16 @@ public class ClashBattleController : MonoBehaviour {
 			//teammate != attributes.gameObject so it doesn't get a buff from itself
 			if(teammate != attributes.gameObject) {
 				var teammateAttribute = teammate.GetComponent<ClashBattleUnit>();
-	
-				var buffType = attributes.species.id % 4;
 				
-				switch (buffType) {
-				case 0:	//hp buff
+				switch (attributes.species.name) {
+				case "Big Tree":	//hp buff
 					teammateAttribute.currentHealth += 100;
 					break;
-				case 1:	//damage buff
+				case "Baobab":	//damage buff
 					teammateAttribute.damage += 20;
 					break;
-				case 2:	//attack speed buff
+				case "Trees and Shrubs":	//attack speed buff
 					teammateAttribute.timeBetweenAttacks *= 0.5f;
-					break;
-				case 3:	//movement speed buff
-					teammateAttribute.agent.speed += 10.0f;
 					break;
 				default:
 					break;
