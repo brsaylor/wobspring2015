@@ -588,8 +588,7 @@ MonoBehaviour:
   enemiesList: []
   alliesList: []
   messageCanvas: {fileID: 1469604209}
-  messageText: {fileID: 0}
-  menuPanel: {fileID: 0}
+  messageText: {fileID: 1034644509}
 --- !u!114 &309677810
 MonoBehaviour:
   m_ObjectHideFlags: 0

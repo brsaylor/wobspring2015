@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ClashBattleUnit : MonoBehaviour {
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private ClashBattleController controller;
     private Animator anim;
 
@@ -13,7 +13,9 @@ public class ClashBattleUnit : MonoBehaviour {
     public ClashSpecies species;
     public ClashStatusText status;
     public int currentHealth;
-	public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
+	public int damage;
+	public float attackSpeedModifier = 1.0f;
+	public float timeBetweenAttacks = 1.0f;     // The time in seconds between each attack.
 	float timer;                                // Timer for counting up to the next attack.
 
     void Awake() {
@@ -23,9 +25,11 @@ public class ClashBattleUnit : MonoBehaviour {
 
 	void Start() {
         // Set current health depending on the species data.
-        currentHealth = species.hp;
+        currentHealth += species.hp;
+		timeBetweenAttacks *= species.attackSpeed;
+		damage += species.attack;
         if (agent != null) {
-            agent.speed = species.moveSpeed / 20.0f;
+            agent.speed += species.moveSpeed / 20.0f;
         }
 	}
 	
@@ -64,7 +68,7 @@ public class ClashBattleUnit : MonoBehaviour {
                 	anim.SetTrigger("Attacking");
                 }
                 // TODO: Deliver damage.
-                target.TakeDamage(species.attack, this);
+                target.TakeDamage(damage, this);
             }else{
 				if (anim != null) {
 					anim.SetTrigger("Walking");
