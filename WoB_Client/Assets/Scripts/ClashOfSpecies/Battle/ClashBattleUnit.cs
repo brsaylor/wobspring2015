@@ -17,6 +17,7 @@ public class ClashBattleUnit : MonoBehaviour {
 	public float attackSpeedModifier = 1.0f;
 	public float timeBetweenAttacks = 1.0f;     // The time in seconds between each attack.
 	float timer;                                // Timer for counting up to the next attack.
+	float timeSinceSpawn = 0.0f;
 
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
@@ -35,6 +36,7 @@ public class ClashBattleUnit : MonoBehaviour {
 	
 	void Update () {
 		timer += Time.deltaTime;
+		timeSinceSpawn += Time.deltaTime;
         if (!target) {
 			Idle();
 		} else if ((target.currentHealth > 0) && (timer >= timeBetweenAttacks) && (currentHealth >= 0.0f)) {
@@ -86,6 +88,7 @@ public class ClashBattleUnit : MonoBehaviour {
 	}
 
     void TakeDamage(int damage, ClashBattleUnit source = null) {
+		if (timeSinceSpawn < 1.0) return; // Be invincible for the first second after being spawned
 //		Debug.Log (tag + " " + species.name + " taking " + damage + " damage from " + source.tag + " " + source.species.name);
         currentHealth = Mathf.Max(0, currentHealth - damage);
 		if (currentHealth == 0) {
