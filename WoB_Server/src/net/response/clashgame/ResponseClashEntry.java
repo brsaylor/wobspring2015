@@ -81,6 +81,7 @@ public class ResponseClashEntry extends GameResponse{
         packet.addBoolean(isNewClashPlayer);
         if(!isNewClashPlayer){
             packet.addString(defenseTerrain);
+            System.out.println(configMap.size());
             packet.addInt32(configMap.size());
             for(Map.Entry<Integer, List<Vector2<Float>>> d : configMap.entrySet()){
                 packet.addInt32(d.getKey());

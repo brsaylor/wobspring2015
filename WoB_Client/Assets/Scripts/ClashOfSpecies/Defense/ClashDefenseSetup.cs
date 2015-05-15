@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 public class ClashDefenseSetup : MonoBehaviour {
 
+    private Dictionary<int, int> remaining = new Dictionary<int, int>();
     private ClashGameManager manager;
     private ClashSpecies selected;
     private Terrain terrain;
@@ -31,9 +32,12 @@ public class ClashDefenseSetup : MonoBehaviour {
         terrain.transform.position = Vector3.zero;
         terrain.transform.localScale = Vector3.one;
 
+        Camera.main.GetComponent<ClashBattleCamera>().target = terrain;
+
         foreach (var species in manager.pendingDefenseConfig.layout.Keys) {
 			var currentSpecies = species;
             var item = Instantiate(defenseItemPrefab) as GameObject;
+            remaining.Add(currentSpecies.id, 5);
 
             var texture = Resources.Load<Texture2D>("Images/" + currentSpecies.name);
             item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
@@ -57,14 +61,13 @@ public class ClashDefenseSetup : MonoBehaviour {
     void Update() {
 
 		if (selected == null) return;
-		
-		if (Input.GetButton("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
+
+		if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject()) {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit, 100000, LayerMask.GetMask("Terrain"))) {
 				NavMeshHit placement;
 				if (NavMesh.SamplePosition(hit.point, out placement, 1000, 1)) {
-					//Added by Omar
 					var allyResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + selected.name);
 					var allyObject = Instantiate(allyResource, placement.position, Quaternion.identity) as GameObject;
                     allyObject.tag = "Ally";
@@ -73,13 +76,16 @@ public class ClashDefenseSetup : MonoBehaviour {
 					                              placement.position.z - terrain.transform.position.z);
 					normPos.x = normPos.x / terrain.terrainData.size.x;
 					normPos.y = normPos.y / terrain.terrainData.size.z;
-					manager.pendingDefenseConfig.layout[selected] = normPos;
 
-					var toggle = toggleGroup.ActiveToggles ().FirstOrDefault();
-					toggle.enabled = false;
-					toggle.interactable = false;
+					manager.pendingDefenseConfig.layout[selected].Add(normPos);
+                    remaining[selected.id]--;
 
-					selected = null;
+                    if (remaining[selected.id] == 0) {
+                        var toggle = toggleGroup.ActiveToggles().FirstOrDefault();
+                        toggle.enabled = false;
+                        toggle.interactable = false;
+                        selected = null;
+                    } 
 				}
 			}
 		}
@@ -90,24 +96,16 @@ public class ClashDefenseSetup : MonoBehaviour {
 	}
 
 	public void ConfirmDefense() {
- 		if(GameObject.FindGameObjectsWithTag("Ally").Count() != 5) {
+ 		if(GameObject.FindGameObjectsWithTag("Ally").Count() != 25) {
             errorCanvas.SetActive(true);
 			errorMessage.text = "Place all your units down before confirming";
 			return;
         }
         
         var pending = manager.pendingDefenseConfig;
-		Dictionary<int, List<Vector2>> allPositions = new Dictionary<int, List<Vector2>>();
-		foreach(KeyValuePair<ClashSpecies, Vector2> entry in pending.layout){
-			List<Vector2> l = new List<Vector2>();
-			l.Add(entry.Value);
-			allPositions.Add(entry.Key.id, l);
-		}
-		var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, 
-		                          allPositions);
-		/*
-        var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, pending.layout.Select(p => new { p.Key.id, p.Value })
-            .ToDictionary(p => p.id, p => p.Value));//*/
+        var mappedLayout = pending.layout.ToDictionary((el) => el.Key.id, (el) => el.Value);
+
+		var request = ClashDefenseSetupProtocol.Prepare(pending.terrain, mappedLayout);
 
         NetworkManager.Send(request, (res) => {
             var response = res as ResponseClashDefenseSetup;

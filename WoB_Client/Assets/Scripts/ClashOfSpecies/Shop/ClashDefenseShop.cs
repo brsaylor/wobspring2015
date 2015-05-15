@@ -205,10 +205,10 @@ public class ClashDefenseShop : MonoBehaviour {
 			manager.pendingDefenseConfig = new ClashDefenseConfig ();
 			manager.pendingDefenseConfig.owner = manager.currentPlayer;
 			manager.pendingDefenseConfig.terrain = selectedTerrain.GetComponentInChildren<ClashSelectedUnit> ().label.text;
-			manager.pendingDefenseConfig.layout = new Dictionary<ClashSpecies, Vector2> ();
+			manager.pendingDefenseConfig.layout = new Dictionary<ClashSpecies, List<Vector2>>();
 			foreach (ClashSelectedUnit csu in selectedGroup.GetComponentsInChildren<ClashSelectedUnit>()) {
-				var species = manager.availableSpecies.Single (x => x.name == csu.label.text);
-				manager.pendingDefenseConfig.layout.Add (species, new Vector2 ());
+				var species = manager.availableSpecies.Single(x => x.name == csu.label.text);
+                manager.pendingDefenseConfig.layout.Add(species, new List<Vector2>());
 			}
 			Game.LoadScene ("ClashDefense");
 		} else {

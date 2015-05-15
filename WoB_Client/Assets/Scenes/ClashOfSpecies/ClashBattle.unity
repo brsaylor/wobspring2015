@@ -231,10 +231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragging: 0
-  lastPosition: {x: 0, y: 0, z: 0}
-  yawSpeed: 5
-  pitchSpeed: 5
-  moveSpeed: 5
+  lastMouse: {x: 0, y: 0, z: 0}
+  yawSpeed: 2
+  pitchSpeed: 2
+  moveSpeed: 2
   zoomLevel: 100
 --- !u!1 &175915204
 GameObject:
@@ -588,7 +588,7 @@ MonoBehaviour:
   enemiesList: []
   alliesList: []
   messageCanvas: {fileID: 1469604209}
-  messagePanel: {fileID: 0}
+  messageText: {fileID: 0}
   menuPanel: {fileID: 0}
 --- !u!114 &309677810
 MonoBehaviour:

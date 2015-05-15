@@ -39,18 +39,21 @@ public class ClashBattleController : MonoBehaviour {
             var species = pair.Key;
             
             // Place navmesh agent.
-            var speciesPos = new Vector3(pair.Value.x * terrain.terrainData.size.x, 0.0f, pair.Value.y * terrain.terrainData.size.z);
-            NavMeshHit placement;
-            if (NavMesh.SamplePosition(speciesPos, out placement, 1000, 1)) {
-                var speciesResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + species.name);
-                var speciesObject = Instantiate(speciesResource, placement.position, Quaternion.identity) as GameObject;
-                speciesObject.tag = "Enemy";
+            List<Vector2> positions = pair.Value;
+            foreach (var pos in positions) {
+                var speciesPos = new Vector3(pos.x * terrain.terrainData.size.x, 0.0f, pos.y * terrain.terrainData.size.z);
+                NavMeshHit placement;
+                if (NavMesh.SamplePosition(speciesPos, out placement, 1000, 1)) {
+                    var speciesResource = Resources.Load<GameObject>("Prefabs/ClashOfSpecies/Units/" + species.name);
+                    var speciesObject = Instantiate(speciesResource, placement.position, Quaternion.identity) as GameObject;
+                    speciesObject.tag = "Enemy";
 
-                var unit = speciesObject.AddComponent<ClashBattleUnit>();
-                enemiesList.Add(unit);
-                unit.species = species;
-            } else {
-                Debug.LogWarning("Failed to place unit: " + species.name);
+                    var unit = speciesObject.AddComponent<ClashBattleUnit>();
+                    enemiesList.Add(unit);
+                    unit.species = species;
+                } else {
+                    Debug.LogWarning("Failed to place unit: " + species.name);
+                }
             }
         }
 

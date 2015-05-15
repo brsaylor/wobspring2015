@@ -160,13 +160,13 @@ public final class DefenseConfigDAO {
         PreparedStatement pstmt = con.prepareStatement(SELECT_UNITS_QUERY);
         pstmt.setInt(1, config.id);
         ResultSet rs = pstmt.executeQuery();
-        config.layout = new HashMap<>();
+        config.layout = new HashMap<Integer, ArrayList<Vector2<Float>>>();
         while (rs.next()) {
             int speciesId = rs.getInt("species_id");
             if (!config.layout.containsKey(speciesId)) {
-                config.layout.put(speciesId, new ArrayList<>());
+                config.layout.put(speciesId, new ArrayList<Vector2<Float>>());
             }
-            config.layout.get(speciesId).add(new Vector2<>(rs.getFloat ("x"), rs.getFloat("y")));
+            config.layout.get(speciesId).add(new Vector2<Float>(rs.getFloat ("x"), rs.getFloat("y")));
         }
     }
 }

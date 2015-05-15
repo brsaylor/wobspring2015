@@ -25,11 +25,12 @@ public class ClashEntryProtocol {
 
 		response.isNew = DataReader.ReadBool(dataStream);
 		if (!response.isNew) {
+            //read in data on own defense setup
+			response.terrain = DataReader.ReadString(dataStream);
             response.config = new Dictionary<int, List<Vector2>>();
 
-			//read in data on own defense setup
-			response.terrain = DataReader.ReadString(dataStream);
 			int count = DataReader.ReadInt(dataStream);
+            Debug.Log(count);
 			for (int i = 0; i < count; i++) {
 				int id = DataReader.ReadInt(dataStream);
 				int instanceCount = DataReader.ReadInt(dataStream);

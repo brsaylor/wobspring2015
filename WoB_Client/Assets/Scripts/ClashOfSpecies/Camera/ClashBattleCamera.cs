@@ -61,7 +61,7 @@ public class ClashBattleCamera : MonoBehaviour {
         if (dragging) {
             var delta = Input.mousePosition - lastMouse;
             transform.RotateAround(reticle.transform.position, Vector3.up, yawSpeed * delta.x);
-            transform.RotateAround(reticle.transform.position, tempX, pitchSpeed * delta.y);
+            transform.RotateAround(reticle.transform.position, tempX, -pitchSpeed * delta.y);
 
             // Counter-rotate to offset overpitch.
             if (transform.rotation.eulerAngles.x > 80.0f) {
@@ -91,6 +91,18 @@ public class ClashBattleCamera : MonoBehaviour {
         // If succesful, translate both the camera transform and the reticle by the same amount.
         reticle.transform.Translate(attempt);
         transform.Translate(attempt, Space.World);
+
+        // Handle zoom.
+        var zoomAxis = (transform.position - reticle.transform.position).normalized;
+        if (Input.GetKey(KeyCode.Q)) {
+            zoomLevel = Mathf.Max(20.0f, zoomLevel - 10.0f);
+        }
+
+        if (Input.GetKey(KeyCode.Z)) {
+            zoomLevel = Mathf.Min(100.0f, zoomLevel + 10.0f);
+        }
+
+        transform.position = reticle.transform.position + (zoomAxis * zoomLevel);
         transform.LookAt(reticle.transform);
 	}
 }

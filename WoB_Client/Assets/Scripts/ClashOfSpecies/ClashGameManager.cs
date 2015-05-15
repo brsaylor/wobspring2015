@@ -39,7 +39,7 @@ public class ClashSpecies {
 public class ClashDefenseConfig {
 	public Player owner;
     public string terrain;
-    public Dictionary<ClashSpecies, Vector2> layout = new Dictionary<ClashSpecies, Vector2>(); 
+    public Dictionary<ClashSpecies, List<Vector2>> layout = new Dictionary<ClashSpecies, List<Vector2>>(); 
 }
 
 [System.Serializable]
