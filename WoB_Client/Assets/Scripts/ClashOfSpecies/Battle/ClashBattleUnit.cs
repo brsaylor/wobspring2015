@@ -26,7 +26,7 @@ public class ClashBattleUnit : MonoBehaviour {
 	void Start() {
         // Set current health depending on the species data.
         currentHealth += species.hp;
-		timeBetweenAttacks = species.attackSpeed;
+		timeBetweenAttacks = 100f / species.attackSpeed;
 		damage += species.attack;
         if (agent != null) {
             agent.speed += species.moveSpeed / 20.0f;
