@@ -14,6 +14,7 @@ public class ClashBattleUnit : MonoBehaviour {
     public int currentHealth;
 	public int damage;
 	public float attackSpeed;     // The time in seconds between each attack.
+	public float movementModifier;
 	float timer;                                // Timer for counting up to the next attack.
 
     void Awake() {
@@ -22,13 +23,13 @@ public class ClashBattleUnit : MonoBehaviour {
     }
 
 	void Start() {
-        // Set current health depending on the species data.
-        currentHealth = species.hp;
-		damage = species.attack;
-		attackSpeed = species.attackSpeed;
-        if (agent != null) {
-            agent.speed = species.moveSpeed / 20.0f;
-        }
+		currentHealth += species.hp;
+		damage += species.attack;
+		attackSpeed += species.attackSpeed;
+		if (agent != null) {
+			movementModifier = (movementModifier == 0) ? 1 : movementModifier;
+			agent.speed = species.moveSpeed / 20.0f * movementModifier;
+		}
 	}
 	
 	void Update () {

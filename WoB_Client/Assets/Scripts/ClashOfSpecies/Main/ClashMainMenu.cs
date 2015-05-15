@@ -44,7 +44,7 @@ public class ClashMainMenu : MonoBehaviour {
                         manager.currentTarget = new ClashDefenseConfig();
                         NetworkManager.Send(ClashPlayerViewProtocol.Prepare(player.GetID()), (resView) => {
                             var responseView = resView as ResponseClashPlayerView;
-                            Debug.Log(responseView.terrain);
+//                            Debug.Log(responseView.terrain);
                             contentPanel.GetComponent<RawImage>().texture = Resources.Load("Images/ClashOfSpecies/" + responseView.terrain) as Texture;
                             manager.currentTarget.owner = player;
                             manager.currentTarget.terrain = responseView.terrain;
