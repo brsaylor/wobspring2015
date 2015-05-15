@@ -294,6 +294,12 @@ public class ClashBattleController : MonoBehaviour {
 		NetworkManager.Send(request, (res) => {
 			var response = res as ResponseClashEndBattle;
 			int creditsEarned = response.credits - manager.currentPlayer.credits;
+			if (creditsEarned >= 0) {
+				messageText.text += "\n\nCredits Earned: " + creditsEarned;
+			} else {
+				messageText.text += "\n\nCredits Lost: " + (-creditsEarned);
+			}
+			messageText.text += "\nTotal Credits: " + response.credits;
 			manager.currentPlayer.credits = response.credits;
 			Debug.Log("Received ResponseClashEndBattle from server. credits earned: " + creditsEarned);
 		});
