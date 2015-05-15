@@ -84,6 +84,9 @@ public class ClashBattleUnit : MonoBehaviour {
 		}
 		target=null;
 		agent.enabled = false;
+		if (species.type == ClashSpecies.SpeciesType.PLANT) {
+			RemoveBuffs(species, this.gameObject.tag);
+		}
 	}
 
     void TakeDamage(int damage, ClashBattleUnit source = null) {
@@ -94,4 +97,29 @@ public class ClashBattleUnit : MonoBehaviour {
 			Die();
 		}
     }
+
+	void RemoveBuffs(ClashSpecies cs, string tag) {
+		var team = GameObject.FindGameObjectsWithTag (tag);
+		
+		foreach (var teammate in team) {
+			//teammate != this.gameObject so it doesn't get a buff from itself
+			if(teammate != this.gameObject) {
+				var teammateAttribute = teammate.GetComponent<ClashBattleUnit>();
+
+				switch (cs.name) {
+				case "Big Tree":	//hp buff
+					teammateAttribute.currentHealth -= 100;
+					break;
+				case "Baobab":	//damage buff
+					teammateAttribute.damage -= 20;
+					break;
+				case "Trees and Shrubs":	//attack speed buff
+					teammateAttribute.timeBetweenAttacks *= 2.0f;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
 }
