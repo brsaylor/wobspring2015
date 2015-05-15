@@ -138,7 +138,7 @@ public class ClashBattleController : MonoBehaviour {
             totalEnemyHealth += enemy.currentHealth;
 			//Debug.Log(totalEnemyHealth);
 			if (enemy.currentHealth > 0 && !enemy.target && alliesList.Count > 0) {
-				Debug.Log ("Finding Enemy Target", gameObject);
+				//Debug.Log ("Finding Enemy Target", gameObject);
                 var target = alliesList.Where(u => {
 					if(u.currentHealth<=0) 
 						return false;
