@@ -72,20 +72,23 @@ public class RequestClashEndBattle extends GameRequest {
         DefenseConfig df = DefenseConfigDAO.findByDefenseConfigId(battle.defenseConfigId);
         Player defender = PlayerDAO.getPlayer(df.playerId);
 
-        int attackerCredits = p.getCredits();
+        int attackerCredits = PlayerDAO.getPlayer(p.getID()).getCredits();
         int defenderCredits = defender.getCredits();
 
         switch (outcome){
             case WIN:
                 attackerCredits += 100;
+                break;
             case LOSE:
                 attackerCredits -= 100;
                 defenderCredits += 100;
+                break;
             case DRAW:
                 break;
         }
 
         PlayerDAO.updateCredits(p.getID(), attackerCredits);
+        p.setCredits(attackerCredits);
         PlayerDAO.updateCredits(defender.getID(), defenderCredits);
 
         ResponseClashEndBattle response = new ResponseClashEndBattle();
