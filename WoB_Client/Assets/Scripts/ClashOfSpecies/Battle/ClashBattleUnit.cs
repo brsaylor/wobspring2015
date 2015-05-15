@@ -14,7 +14,6 @@ public class ClashBattleUnit : MonoBehaviour {
     public ClashStatusText status;
     public int currentHealth;
 	public int damage;
-	public float attackSpeedModifier = 1.0f;
 	public float timeBetweenAttacks = 1.0f;     // The time in seconds between each attack.
 	float timer;                                // Timer for counting up to the next attack.
 	float timeSinceSpawn = 0.0f;
