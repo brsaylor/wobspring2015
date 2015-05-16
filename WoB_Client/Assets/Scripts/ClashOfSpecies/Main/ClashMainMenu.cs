@@ -21,6 +21,8 @@ public class ClashMainMenu : MonoBehaviour {
     }
 
 	void Start() {
+		contentPanel.Find("Credit").GetComponent<Text>().text = "You have " + manager.currentPlayer.credits + " credits.";
+
         NetworkManager.Send(ClashPlayerListProtocol.Prepare(), (res) => {
             var response = res as ResponseClashPlayerList;
 
@@ -38,7 +40,7 @@ public class ClashMainMenu : MonoBehaviour {
 
                 var toggle = item.GetComponentInChildren<Toggle>().group = playerListGroup.GetComponent<ToggleGroup>();
                 item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
-                    contentPanel.GetComponentInChildren<Text>().enabled = !val;
+                    contentPanel.Find("Message").GetComponent<Text>().enabled = !val;
                     if (val) {
                         selectedPlayer = player;
                         manager.currentTarget = new ClashDefenseConfig();
