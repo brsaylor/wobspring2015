@@ -12,7 +12,6 @@ public class ClashBattleUnit : MonoBehaviour {
 
     public ClashBattleUnit target;
     public ClashSpecies species;
-    public ClashStatusText status;
     public int currentHealth = 0;
 	public int damage = 0;
 	public float timeBetweenAttacks = 1.0f;     // The time in seconds between each attack.
