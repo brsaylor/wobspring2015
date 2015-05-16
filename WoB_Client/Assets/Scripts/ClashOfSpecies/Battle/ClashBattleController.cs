@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnitType = ClashSpecies.SpeciesType;
@@ -22,6 +23,10 @@ public class ClashBattleController : MonoBehaviour {
 
 	public GameObject messageCanvas;
 	public Text messageText;
+
+	public Text hpBuffValue;
+	public Text dmgBuffValue;
+	public Text spdBuffValue;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -133,6 +138,7 @@ public class ClashBattleController : MonoBehaviour {
 					GetBuffs(unit, allyObject.tag);
 					if(unit.species.type == UnitType.PLANT) {
 						GiveBuffs(unit, allyObject.tag);
+						UpdateBuffPanel(unit);
 					}
 
 					remaining[selected.id]--;
@@ -275,6 +281,32 @@ public class ClashBattleController : MonoBehaviour {
 					break;
 				}
 			}
+		}
+	}
+
+	public void UpdateBuffPanel(ClashBattleUnit unit) {
+		int val = 0;
+		switch (unit.species.name) {
+		case "Big Tree":	//hp buff
+			if(Int32.TryParse(hpBuffValue.text, out val)) {
+				val += 100;
+			}
+			hpBuffValue.text = val.ToString();
+			break;
+		case "Baobab":	//damage buff
+			if(Int32.TryParse(hpBuffValue.text, out val)) {
+				val += 8;
+			}
+			dmgBuffValue.text = val.ToString();
+			break;
+		case "Trees and Shrubs":	//movement speed buff
+			if(Int32.TryParse(hpBuffValue.text, out val)) {
+				val += 5;
+			}
+			spdBuffValue.text = val.ToString();
+			break;
+		default:
+			break;
 		}
 	}
 
