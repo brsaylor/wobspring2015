@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
@@ -88,7 +87,8 @@ public class ClashBattleUnit : MonoBehaviour {
 			agent.enabled = false;
 		if (species.type == ClashSpecies.SpeciesType.PLANT) {
 			RemoveBuffs(species, this.gameObject.tag);
-			controller.UpdateBuffPanel(species, false);
+			if(this.gameObject.tag == "Ally")
+				controller.UpdateBuffPanel(species, false);
 		}
 	}
 

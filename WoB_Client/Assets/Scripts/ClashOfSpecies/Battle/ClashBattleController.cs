@@ -239,7 +239,8 @@ public class ClashBattleController : MonoBehaviour {
 			
 			//found a plant
 			//teammate != attributes.gameObject so it doesn't get a buff from itself
-			if(teammateAttribute.species.type == UnitType.PLANT && teammate != attributes.gameObject) {
+			if(teammateAttribute.species.type == UnitType.PLANT && teammate != attributes.gameObject 
+			   && teammateAttribute.currentHealth > 0) {
 				switch (teammateAttribute.species.name) {
 				case "Big Tree":	//hp buff
 					attributes.currentHealth += 100;
@@ -262,10 +263,9 @@ public class ClashBattleController : MonoBehaviour {
 		var team = GameObject.FindGameObjectsWithTag (tag);
 
 		foreach (var teammate in team) {
+			var teammateAttribute = teammate.GetComponent<ClashBattleUnit>();
 			//teammate != attributes.gameObject so it doesn't get a buff from itself
-			if(teammate != attributes.gameObject) {
-				var teammateAttribute = teammate.GetComponent<ClashBattleUnit>();
-				
+			if(teammate != attributes.gameObject && teammateAttribute.currentHealth > 0) {
 				switch (attributes.species.name) {
 				case "Big Tree":	//hp buff
 					teammateAttribute.currentHealth += 100;
@@ -307,6 +307,9 @@ public class ClashBattleController : MonoBehaviour {
 			spdBuffValue.text = val.ToString();
 			break;
 		default:
+			spdBuffValue.text = "0";
+			hpBuffValue.text = "0";
+			dmgBuffValue.text = "0";
 			break;
 		}
 	}
