@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3339400}
   - 23: {fileID: 2339400}
   - 95: {fileID: 9524328}
+  - 54: {fileID: 5404800}
   m_Layer: 0
   m_Name: Baobab
   m_TagString: Untagged
@@ -57,6 +58,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124328}
   m_Mesh: {fileID: 4300000, guid: 2690f8b9f97a3384d98cacf849f8b48e, type: 3}
+--- !u!54 &5404800
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124328}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &9524328
 Animator:
   serializedVersion: 3

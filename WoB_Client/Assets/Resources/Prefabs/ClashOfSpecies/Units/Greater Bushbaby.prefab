@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2358030}
   - 95: {fileID: 9558030}
   - 195: {fileID: 19586054}
+  - 54: {fileID: 5447752}
   m_Layer: 0
   m_Name: Greater Bushbaby
   m_TagString: Untagged
@@ -60,6 +61,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158030}
   m_Mesh: {fileID: 4300000, guid: b690f62526f2aaa4784137c372b93290, type: 3}
+--- !u!54 &5447752
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158030}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &9558030
 Animator:
   serializedVersion: 3

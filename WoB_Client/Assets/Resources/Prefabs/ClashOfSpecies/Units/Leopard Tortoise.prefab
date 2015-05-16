@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 420768}
   - 95: {fileID: 9520768}
   - 195: {fileID: 19538038}
+  - 54: {fileID: 5497836}
   m_Layer: 0
   m_Name: Leopard Tortoise
   m_TagString: Untagged
@@ -143,6 +144,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120772}
   m_Mesh: {fileID: 4300000, guid: afae94b8f594248adbd332eab5139575, type: 3}
+--- !u!54 &5497836
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120768}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &9520768
 Animator:
   serializedVersion: 3

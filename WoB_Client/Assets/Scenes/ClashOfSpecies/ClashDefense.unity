@@ -751,8 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitList: {fileID: 1204116611}
-  defenseItemPrefab: {fileID: 148256, guid: 7c72c06390693934daced8bbd0af0e77, type: 2}
-  defenseUnitPrefab: {fileID: 110862, guid: b2aa4e5eaf63c074a988cbaa4e59279a, type: 2}
+  defenseItemPrefab: {fileID: 188666, guid: 649153c8d37c288428f7651a92d572ab, type: 2}
   errorCanvas: {fileID: 2093340915}
   errorMessage: {fileID: 732955736}
 --- !u!114 &309677810

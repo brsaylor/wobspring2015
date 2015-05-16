@@ -140,6 +140,7 @@ public class ClashAttackShop : MonoBehaviour {
 				var species = manager.availableSpecies.Single (x => x.name == csu.label.text);
 				manager.attackConfig.layout.Add (species);
 			}
+			manager.currentPlayer.credits -= 10;
 			Game.LoadScene ("ClashBattle");
 		} else {
 			errorCanvas.SetActive(true);

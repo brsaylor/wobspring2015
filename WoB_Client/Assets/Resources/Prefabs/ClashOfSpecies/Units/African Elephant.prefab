@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 432006}
   - 95: {fileID: 9532006}
   - 195: {fileID: 19596870}
+  - 54: {fileID: 5406924}
   m_Layer: 0
   m_Name: African Elephant
   m_TagString: Untagged
@@ -954,6 +955,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 432070}
   m_RootOrder: 0
+--- !u!54 &5406924
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132006}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &9532006
 Animator:
   serializedVersion: 3

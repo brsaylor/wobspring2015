@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import db.PlayerDAO;
 import db.clashgame.AttackConfigDAO;
 import db.clashgame.BattleDAO;
 import db.clashgame.DefenseConfigDAO;
+import model.Player;
 import model.clashgame.AttackConfig;
 import model.clashgame.Battle;
 import model.clashgame.DefenseConfig;
@@ -63,10 +65,20 @@ public class RequestClashInitiateBattle extends GameRequest{
     public void process() throws Exception {
         ResponseClashInitiateBattle response = new ResponseClashInitiateBattle();
 
-        if (attackConfig.size() > 5) {
+        Player player = client.getPlayer();
+
+        // Subtract the cost of attacking from the player's credits
+        int currentCredits = PlayerDAO.getPlayer(player.getID()).getCredits();
+
+        if (attackConfig.size() > 5 || currentCredits < 10) {
             response.setValid(false);
         } else {
             response.setValid(true);
+
+            // Charge the player the cost of attacking
+            currentCredits -= 10;
+            player.setCredits(currentCredits);
+            PlayerDAO.updateCredits(player.getID(), currentCredits);
 
             DefenseConfig target = DefenseConfigDAO.findByPlayerId(playerToAttack);
 

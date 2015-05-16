@@ -15,7 +15,6 @@ public class ClashDefenseSetup : MonoBehaviour {
 
     public HorizontalLayoutGroup unitList;
     public GameObject defenseItemPrefab;
-    public GameObject defenseUnitPrefab;
 
 	public GameObject errorCanvas;
 	public Text errorMessage;
@@ -39,22 +38,25 @@ public class ClashDefenseSetup : MonoBehaviour {
             var item = Instantiate(defenseItemPrefab) as GameObject;
             remaining.Add(currentSpecies.id, 5);
 
+			var itemReference = item.GetComponent<ClashUnitListItem>();
+
             var texture = Resources.Load<Texture2D>("Images/" + currentSpecies.name);
-            item.GetComponentInChildren<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            item.GetComponentInChildren<Toggle>().onValueChanged.AddListener((val) => {
+			itemReference.toggle.GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+			itemReference.toggle.onValueChanged.AddListener((val) => {
                 if (val) {
                     selected = currentSpecies;
-					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+					itemReference.toggle.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 } else {
                     selected = null;
-					item.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+					itemReference.toggle.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
             });
 
-			item.GetComponentInChildren<Toggle>().group = toggleGroup;
+			itemReference.toggle.group = toggleGroup;
             item.transform.SetParent(unitList.transform);
             item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y, 0.0f);
             item.transform.localScale = Vector3.one;
+			itemReference.amountLabel.text = remaining[currentSpecies.id].ToString();
         }
 	}
 
@@ -80,8 +82,10 @@ public class ClashDefenseSetup : MonoBehaviour {
 					manager.pendingDefenseConfig.layout[selected].Add(normPos);
                     remaining[selected.id]--;
 
+					var toggle = toggleGroup.ActiveToggles().FirstOrDefault();
+					toggle.transform.parent.GetComponent<ClashUnitListItem>().amountLabel.text = remaining[selected.id].ToString();
+
                     if (remaining[selected.id] == 0) {
-                        var toggle = toggleGroup.ActiveToggles().FirstOrDefault();
                         toggle.enabled = false;
                         toggle.interactable = false;
                         selected = null;

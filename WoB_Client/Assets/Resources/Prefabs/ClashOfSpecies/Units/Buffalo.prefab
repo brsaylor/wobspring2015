@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 412338}
   - 95: {fileID: 9512338}
   - 195: {fileID: 19595224}
+  - 54: {fileID: 5417922}
   m_Layer: 0
   m_Name: Buffalo
   m_TagString: Untagged
@@ -1460,6 +1461,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112344}
   m_Mesh: {fileID: 4300002, guid: ab75736decc761d4c83bee7f4617c1ae, type: 3}
+--- !u!54 &5417922
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112338}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &9512338
 Animator:
   serializedVersion: 3

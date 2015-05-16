@@ -11,7 +11,9 @@ public class ClashBattleCamera : MonoBehaviour {
     public Terrain target {
         set {
             surface = value;
-            reticle = new GameObject("Reticle", typeof(SphereCollider)).GetComponent<SphereCollider>();
+            reticle = new GameObject("Reticle", typeof(SphereCollider), typeof(ClashReticle)).GetComponent<SphereCollider>();
+            reticle.GetComponent<SphereCollider>().isTrigger = true;
+            reticle.GetComponent<SphereCollider>().radius = 1.0f;
 
             // Set the reticle position to the center of the terrain.
             var reticlePos = value.transform.position + (value.terrainData.size * 0.5f);
@@ -23,6 +25,7 @@ public class ClashBattleCamera : MonoBehaviour {
             transform.position = reticle.transform.position + ((Vector3.back + Vector3.up).normalized * zoomLevel);
             offset = transform.position - reticle.transform.position;
             transform.LookAt(reticle.transform);
+
 
             bounds = new Bounds(surface.terrainData.size * 0.5f, surface.terrainData.size);
         }
