@@ -23,7 +23,7 @@ public class ClashSpeciesListProtocol{
 		ResponseClashSpeciesList response = new ResponseClashSpeciesList();
 
 		int count = DataReader.ReadInt(dataStream);
-		Debug.Log("received " + count + " species");
+//		Debug.Log("received " + count + " species");
 		for(int i = 0; i < count; i++) {
             ClashSpecies s = new ClashSpecies();
             s.id = DataReader.ReadInt(dataStream);

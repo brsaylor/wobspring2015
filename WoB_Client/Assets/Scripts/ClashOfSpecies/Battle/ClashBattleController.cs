@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
@@ -22,6 +23,10 @@ public class ClashBattleController : MonoBehaviour {
 
 	public GameObject messageCanvas;
 	public Text messageText;
+
+	public Text hpBuffValue;
+	public Text dmgBuffValue;
+	public Text spdBuffValue;
 
 	void Awake() {
         manager = GameObject.Find("MainObject").GetComponent<ClashGameManager>();
@@ -133,6 +138,7 @@ public class ClashBattleController : MonoBehaviour {
 					GetBuffs(unit, allyObject.tag);
 					if(unit.species.type == UnitType.PLANT) {
 						GiveBuffs(unit, allyObject.tag);
+						UpdateBuffPanel(unit.species, true);
 					}
 
 					remaining[selected.id]--;
@@ -219,7 +225,7 @@ public class ClashBattleController : MonoBehaviour {
             }
         }
 
-        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 5) {
+        if (Time.timeSinceLevelLoad > 5.0f && totalAllyHealth == 0 && alliesList.Count() == 25) {
             // ENEMIES HAVE WON!
 			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
         }
@@ -275,6 +281,33 @@ public class ClashBattleController : MonoBehaviour {
 					break;
 				}
 			}
+		}
+	}
+
+	//status: true if plant spawn; false if it died
+	public void UpdateBuffPanel(ClashSpecies unit, bool status) {
+		int val = 0;
+		switch (unit.name) {
+		case "Big Tree":	//hp buff
+			if(Int32.TryParse(hpBuffValue.text, out val)) {
+				val = (status) ? val + 100 : val - 100;
+			}
+			hpBuffValue.text = val.ToString();
+			break;
+		case "Baobab":	//damage buff
+			if(Int32.TryParse(dmgBuffValue.text, out val)) {
+				val = (status) ? val + 8 : val - 8;
+			}
+			dmgBuffValue.text = val.ToString();
+			break;
+		case "Trees and Shrubs":	//movement speed buff
+			if(Int32.TryParse(spdBuffValue.text, out val)) {
+				val = (status) ? val + 5 : val - 5;
+			}
+			spdBuffValue.text = val.ToString();
+			break;
+		default:
+			break;
 		}
 	}
 

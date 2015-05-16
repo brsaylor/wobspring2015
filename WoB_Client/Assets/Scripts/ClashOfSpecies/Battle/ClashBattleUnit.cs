@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ public class ClashBattleUnit : MonoBehaviour {
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+		controller = GameObject.Find ("Battle Menu").GetComponent<ClashBattleController> ();
     }
 
 	void Start() {
@@ -83,9 +85,11 @@ public class ClashBattleUnit : MonoBehaviour {
 			anim.SetTrigger("Dead");
 		}
 		target=null;
-		agent.enabled = false;
+		if(agent != null)
+			agent.enabled = false;
 		if (species.type == ClashSpecies.SpeciesType.PLANT) {
 			RemoveBuffs(species, this.gameObject.tag);
+			controller.UpdateBuffPanel(species, false);
 		}
 	}
 
