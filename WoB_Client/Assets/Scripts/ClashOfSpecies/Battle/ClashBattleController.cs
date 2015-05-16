@@ -117,7 +117,8 @@ public class ClashBattleController : MonoBehaviour {
 
     void Update() {
 
-		// Cheat! FIXME: remove
+		// Cheat!
+		/*
 		if (Input.GetKeyDown(KeyCode.Equals)) {
 			Debug.Log ("plus");
 			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.WIN);
@@ -125,6 +126,7 @@ public class ClashBattleController : MonoBehaviour {
 			Debug.Log ("minus");
 			ReportBattleOutcome(ClashEndBattleProtocol.BattleResult.LOSS);
 		}
+		*/
 
         if (selected == null) return;
 

@@ -62,13 +62,11 @@ public class ClashBattleUnit : MonoBehaviour {
 //			           target.tag + " " + target.species.name +
 //			           " is " + agent.remainingDistance);
             if (agent.remainingDistance < 5.0f) {
-                // TODO: Attack animation.
                 //Added by Omar triggers Attacking animation
 //				Debug.Log(species.name + " attacking " + target.species.name);
                 if (anim != null) {
                 	anim.SetTrigger("Attacking");
                 }
-                // TODO: Deliver damage.
                 target.TakeDamage(damage, this);
             }else{
 				if (anim != null) {
