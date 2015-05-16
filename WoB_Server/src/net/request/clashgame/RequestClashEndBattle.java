@@ -77,11 +77,10 @@ public class RequestClashEndBattle extends GameRequest {
 
         switch (outcome){
             case WIN:
-                attackerCredits += 100;
+                attackerCredits += 50;
                 break;
             case LOSE:
-                attackerCredits -= 100;
-                defenderCredits += 100;
+                defenderCredits += 25;
                 break;
             case DRAW:
                 break;
