@@ -12,6 +12,7 @@ public class ClashMainMenu : MonoBehaviour {
 	public List<Player> playerList = new List<Player>();
 	public Transform contentPanel;
     public GameObject playerItemPrefab;
+	public Button attackBtn;
 
     private Player selectedPlayer = null;
     private ToggleGroup toggleGroup;
@@ -21,6 +22,10 @@ public class ClashMainMenu : MonoBehaviour {
     }
 
 	void Start() {
+		if (manager.currentPlayer.credits < 10) {
+			attackBtn.interactable = false;
+		}
+
 		contentPanel.Find("Credit").GetComponent<Text>().text = "You have " + manager.currentPlayer.credits + " credits.";
 
         NetworkManager.Send(ClashPlayerListProtocol.Prepare(), (res) => {

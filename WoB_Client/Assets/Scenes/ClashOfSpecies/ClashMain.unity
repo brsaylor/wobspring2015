@@ -267,6 +267,7 @@ MonoBehaviour:
   playerListGroup: {fileID: 1356966273}
   contentPanel: {fileID: 793835206}
   playerItemPrefab: {fileID: 179984, guid: a95bc9e61a638404db44b1487459980a, type: 2}
+  attackBtn: {fileID: 622898555}
 --- !u!1 &622898553
 GameObject:
   m_ObjectHideFlags: 0
