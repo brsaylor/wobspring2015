@@ -40,10 +40,11 @@ public class RequestClashDefenseSetup extends GameRequest {
 
     /**
      * Fills the instance variables with data received over the
-     * network
-     * @param dataInput the input stream containg data sent by the
-     *                  client
-     * @throws IOException
+     * network.
+     * @param dataInput the input stream containing data sent by the
+     *                  client.
+     * @throws IOException if the input in the dataInput stream is
+     * in incorrect format.
      */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
@@ -64,11 +65,11 @@ public class RequestClashDefenseSetup extends GameRequest {
     }
 
     /**
-     * Checks the validity of the sent defense configuration
+     * Checks the validity of the sent defense configuration.
      * If configuration was valid, saves the config in the
-     * database
-     * Sends the validity inside the response back to the client
-     * @throws Exception
+     * database.
+     * Sends the validity inside the response back to the client.
+     * @throws Exception if database query fails
      */
     @Override
     public void process() throws Exception {

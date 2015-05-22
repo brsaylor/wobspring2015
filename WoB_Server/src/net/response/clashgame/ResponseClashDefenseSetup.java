@@ -30,8 +30,15 @@ public class ResponseClashDefenseSetup extends GameResponse{
     }
 
     /**
-     * Generates the byte array for sending the data back to the
-     * client
+     * <p>
+     * Generates the byte array for sending the data back to the client in the following format:
+     * </p>
+     * <p>
+     * id of this response (short)
+     * </p>
+     * <p>
+     * valid defense setup flag (boolean)
+     * </p>
      * @return the byte array
      */
     @Override

@@ -35,8 +35,15 @@ public class ResponseClashEndBattle extends GameResponse{
     private int credits;
 
     /**
-     * Generates a byte array containing the new virtual currency
-     * balance
+     * <p>
+     * Generates a byte array containing the new virtual currency balance in the following format:
+     * </p>
+     * <p>
+     * id of this response (short)
+     * </p>
+     * <p>
+     * new credit balance for player (int)
+     * </p>
      * @return the byte array
      */
     @Override

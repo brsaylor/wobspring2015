@@ -20,9 +20,9 @@ import util.Vector2;
 /**
  * @author lev
  * Network request called when user enters the 'Clash of Species'
- * game from the lobby
+ * game from the lobby.
  * Responds with the user's current defense configuration, if he or
- * she has one
+ * she has one.
  */
 
 public class RequestClashEntry extends GameRequest{
@@ -31,12 +31,12 @@ public class RequestClashEntry extends GameRequest{
     }
 
     /**
-     * Generates an appropriate NetworkResponse
+     * Generates an appropriate NetworkResponse.
      * Determines if the user already has a Clash of Species defense
-     * set up
-     * Adds data about the defense setup to the response if it exists
-     * Puts the response into the queue to be sent back to the client
-     * @throws Exception
+     * set up.
+     * Adds data about the defense setup to the response if it exists.
+     * Puts the response into the queue to be sent back to the client.
+     * @throws Exception if the database query fails.
      */
     @Override
     public void process() throws Exception {

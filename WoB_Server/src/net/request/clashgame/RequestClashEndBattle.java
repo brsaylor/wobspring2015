@@ -34,9 +34,9 @@ public class RequestClashEndBattle extends GameRequest {
 
     /**
      * Reads the result from the input stream and fills the outcome
-     * instance variable appropriately
+     * instance variable appropriately.
      * @param dataInput the input stream
-     * @throws IOException
+     * @throws IOException if the input is in the incorrect format.
      */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
@@ -52,12 +52,12 @@ public class RequestClashEndBattle extends GameRequest {
     }
 
     /**
-     * Saves battle result in database
-     * Awards the winner with virtual currency
+     * Saves battle result in database.
+     * Awards the winner with virtual currency.
      * Punishes the loser (attacker only) with fines in
-     * virtual currency
-     * Sends back the player's new virtual currency balance
-     * @throws Exception
+     * virtual currency.
+     * Sends back the player's new virtual currency balance.
+     * @throws Exception if any of the database queries fail.
      */
     @Override
     public void process() throws Exception {

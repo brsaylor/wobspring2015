@@ -8,12 +8,12 @@ using System.IO;
 public class ClashInitiateBattleProtocol {
 
 	/// <summary>
-	/// Generates a request with the following format:
-	/// 	id of this protocol (short)
-	/// 	id of player to be attacked (int)
-	/// 	# of species in attack config (int)
-	/// 	for each species in attack config:
-	/// 		species id (int)
+	/// Generates a request with the following format:\n
+	/// 	id of this protocol (short)\n
+	/// 	id of player to be attacked (int)\n
+	/// 	number of species in attack config (int)\n
+	/// 	for each species in attack config:\n
+	/// 		species id (int)\n
 	/// </summary>
 	/// <param name="otherPlayerID">the player to attack</param>
 	/// <param name="species">list of species ids to use in attack</param>

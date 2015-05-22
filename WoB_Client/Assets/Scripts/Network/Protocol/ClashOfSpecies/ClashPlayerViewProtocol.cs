@@ -75,7 +75,8 @@ public class ResponseClashPlayerView : NetworkResponse {
 	public DateTime createdAt {get; set;}
 
 	/// <summary>
-	/// Species in defense config
+	/// Species in defense config, with species ids as keys and lists of Vector2's of
+	/// x- and y-coordinates as values
 	/// </summary>
 	public Dictionary<int, List<Vector2>> layout = new Dictionary<int,List<Vector2>>();
 

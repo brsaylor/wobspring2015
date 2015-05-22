@@ -31,25 +31,49 @@ public class ResponseClashSpeciesList extends GameResponse {
 
     /**
      * Sets the list of species
-     * @param list
+     * @param list the list of species to be sent back to the client.
      */
     public void setSpeciesList(List<Species> list) {
         speciesList = list;
     }
 
     /**
+     * <p>
      * Generates a byte array in the following format:
-     *  id of this response (short)
+     * </p>
+     * <p>
+     * id of this response (short)
+     *  </p>
+     * <p>
      *  # of species returned (int)
+     *  </p>
+     * <p>
      *  for each species: id (int)
+     *                  </p>
+     * <p>
      *                  name (string)
+     *                  </p>
+     * <p>
      *                  price (int)
+     *                  </p>
+     * <p>
      *                  type (int, from a predetermined set)
+     *                  </p>
+     * <p>
      *                  description (string)
+     *                  </p>
+     * <p>
      *                  attack points, i.e. damage (int)
+     *                  </p>
+     * <p>
      *                  hit points (int)
+     *                  </p>
+     * <p>
      *                  movement speed (int)
+     *                  </p>
+     * <p>
      *                  attack speed (int)
+     * </p>
      * @return the byte array
      */
     @Override

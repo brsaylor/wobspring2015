@@ -15,7 +15,7 @@ import net.response.clashgame.ResponseClashSpeciesList;
 /**
  * Sent immediately after entry into the Clash of Species game
  * Returns a list of species available for use as defending or
- * attacking elements in the game
+ * attacking elements in the game.
  * @author lev
  */
 public class RequestClashSpeciesList extends GameRequest{
@@ -26,8 +26,8 @@ public class RequestClashSpeciesList extends GameRequest{
 
     /**
      * Generates a response containing a list of species available
-     * for Clash of Species
-     * @throws Exception
+     * for Clash of Species.
+     * @throws Exception if the database query fails.
      */
     @Override
     public void process() throws Exception {

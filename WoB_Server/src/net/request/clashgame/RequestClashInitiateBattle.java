@@ -42,7 +42,8 @@ public class RequestClashInitiateBattle extends GameRequest{
      * Reads in the data about the attack from the input sent by the
      * client
      * @param dataInput the input stream
-     * @throws IOException
+     * @throws IOException if the content of dataInput stream is in
+     * incorrect format.
      */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
@@ -55,11 +56,11 @@ public class RequestClashInitiateBattle extends GameRequest{
     }
 
     /**
-     * Checks if the attack configuration sent is valid
-     * Adds the validity flag to the response
-     * if valid, saves the battle to the database
-     * adds the response to the queue to be sent back to the client
-     * @throws Exception
+     * Checks if the attack configuration sent is valid.
+     * Adds the validity flag to the response,
+     * if valid, saves the battle to the database.
+     * Adds the response to the queue to be sent back to the client.
+     * @throws Exception if the database query fails.
      */
     @Override
     public void process() throws Exception {

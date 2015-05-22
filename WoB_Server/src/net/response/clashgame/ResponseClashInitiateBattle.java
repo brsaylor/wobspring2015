@@ -12,7 +12,7 @@ import util.GamePacket;
 /**
  * Stores a flag to sent back to the client for whether
  * the attack configuration with which the player tried to initiate
- * a battle was valid
+ * a battle was valid.
  * @author lev
  */
 public class ResponseClashInitiateBattle extends GameResponse{
@@ -24,7 +24,7 @@ public class ResponseClashInitiateBattle extends GameResponse{
 
     /**
      * Sets the validity flag
-     * @param valid the valididity value
+     * @param valid the validity value
      */
     public void setValid(boolean valid) {
         this.valid = valid;
@@ -35,7 +35,15 @@ public class ResponseClashInitiateBattle extends GameResponse{
     }
 
     /**
-     * Generates a byte array containing the validity flag
+     * <p>
+     * Generates a byte array in the following format:
+     * </p>
+     * <p>
+     * Id of this response (short).
+     *</p>
+     * <p>
+     * Attack configuration validity flag (boolean).
+     * </p>
      * @return the byte array
      */
     @Override

@@ -18,10 +18,10 @@ import net.response.clashgame.ResponseClashPlayerList;
 import model.clashgame.Player;
 
 /**
- * Request for a list of players of Clash of Species
+ * Request for a list of players of Clash of Species.
  * Sent when the user has been confirmed to possess a defense config
  * and is entering the Clash game main menu, where a list of players
- * to challenge is displayed
+ * to challenge is displayed.
  * @author lev
  */
 public class RequestClashPlayerList extends GameRequest{
@@ -32,8 +32,8 @@ public class RequestClashPlayerList extends GameRequest{
 
     /**
      * Generates a response containing a list of players of
-     * Clash of Species
-     * @throws Exception
+     * Clash of Species.
+     * @throws Exception if the database query fails.
      */
     @Override
     public void process() throws Exception {

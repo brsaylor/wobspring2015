@@ -20,20 +20,21 @@ import util.DataReader;
 /**
  * Request for data on a specific Clash of Species player
  * sent when the user clicks on a player in the main menu of the
- * game to go into the detail view and potentially initiate a battle
+ * game to go into the detail view and potentially initiate a battle.
  * @author lev
  */
 public class RequestClashPlayerView extends GameRequest{
 
     /**
-     * The id of the player for which the data is requested
+     * The id of the player for which the data is requested.
      */
     private int playerID;
 
     /**
-     * Reads in the id into the instance variable from the input stream
-     * @param dataInput the input stream
-     * @throws IOException
+     * Reads in the id into the instance variable from the input stream.
+     * @param dataInput the input stream.
+     * @throws IOException if the content of the dataInput stream is in
+     * incorrect format.
      */
     @Override
     public void parse(DataInputStream dataInput) throws IOException {
@@ -42,8 +43,8 @@ public class RequestClashPlayerView extends GameRequest{
 
     /**
      * Generates a response containing the Clash of Species-related data
-     * for the requested player
-     * @throws Exception
+     * for the requested player.
+     * @throws Exception if the database query fails.
      */
     @Override
     public void process() throws Exception {

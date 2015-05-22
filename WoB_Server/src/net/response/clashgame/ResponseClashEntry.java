@@ -71,8 +71,39 @@ public class ResponseClashEntry extends GameResponse{
     }
 
     /**
-     * Generates a byte array containing all the data to be sent to
-     * back to the client
+     * <p>
+     * Generates a byte array containing all the data to be sent to back to the client in the following format:
+     * </p>
+     * <p>
+     * id of this response (short)
+     * </p>
+     * <p>
+     * new player flag (boolean)
+     * </p>
+     * <p>
+     * if new player flag is false:
+     * </p>
+     * <p>
+     * terrain name in the defense configuration (string)
+     * </p>
+     * <p>
+     * # of distinct species in defense configuration (int)
+     * </p>
+     * <p>
+     * for each species:
+     * </p>
+     * <p>
+     *     instance count (int)
+     * </p>
+     * <p>
+     *     for each instance:
+     * </p>
+     * <p>
+     *      x-coordinate (float)
+     * </p>
+     * <p>
+     *      y-coordinate (float)
+     * </p>
      * @return the byte array
      */
     @Override

@@ -38,11 +38,24 @@ public class ResponseClashPlayerList extends GameResponse{
     }
 
     /**
+     * <p>
      * Generates a byte array in the following format:
+     * </p>
+     * <p>
      *  id of this response (short)
-     *  # of players returned (int)
-     *  for each player: id (int)
-     *                  name (string)
+     * </p>
+     * <p>
+     * # of players returned (int)
+     *  </p>
+     * <p>
+     *  for each player:
+     *  </p>
+     * <p>
+     *  id (int)
+     * </p>
+     * <p>
+     * name (string)
+     * </p>
      * @return the byte array
      */
     @Override

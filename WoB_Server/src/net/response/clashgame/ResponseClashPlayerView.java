@@ -45,19 +45,45 @@ public class ResponseClashPlayerView extends GameResponse{
     }//*/
 
     /**
+     * <p>
      * Generates a byte array in the following format:
-     *  id of this response (short)
-     *  id of defense config (int)
+     * </p>
+     * <p>
+     * id of this response (short)
+     * </p>
+     * <p>
+     * id of defense config (int)
+     *  </p>
+     * <p>
      *  name of terrain in defense config (string)
+     *  </p>
+     * <p>
      *  id of player requested (int)
+     *  </p>
+     * <p>
      *  timestamp for the defense config (string)
+     *  </p>
+     * <p>
      *  # of species in config (int)
-     *  for each species in config
+     *  </p>
+     * <p>
+     *     for each species in config
+     *      </p>
+     * <p>
      *      species id (int)
+     *      </p>
+     * <p>
      *      instance count(int)
+     *      </p>
+     * <p>
      *      for each instance
-     *          x-coordinate (float)
-     *          y-coordinate (float)
+     *    </p>
+     * <p>
+     *    x-coordinate (float)
+     *    </p>
+     * <p>
+     *    y-coordinate (float)
+     *    </p>
      * @return the byte array
      */
     @Override
